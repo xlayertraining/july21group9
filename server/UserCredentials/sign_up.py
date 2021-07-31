@@ -11,7 +11,6 @@ class signUpHandler(tornado.web.RequestHandler):
         try:
             try:
                 jsonBody = json.loads(self.request.body)
-                print(jsonBody)
             except:
                 code = 4732
                 status = False
@@ -55,6 +54,12 @@ class signUpHandler(tornado.web.RequestHandler):
                         message = "Email format is invalid!"
                         raise Exception
                     emailAddress = emailAddress.lower()
+                emailfind = await user_sign_up.find_one({
+                    "emailAddress": emailAddress
+                })
+                if emailfind:
+                    message = "Email is already registered!"
+                    raise Exception
             except:
                 raise Exception
             # PhoneNumber
@@ -82,7 +87,9 @@ class signUpHandler(tornado.web.RequestHandler):
             user_sign_up.insert_one({
                 "firstName": firstName,
                 "lastName": lastName,
+                "userName": firstName+lastName,
                 "phoneNumber": phoneNumber,
+                "emailAddress": emailAddress,
                 "password": usrPassword
             })
             code = 200
