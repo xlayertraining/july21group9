@@ -9,6 +9,7 @@ import time
 import datetime
 import os
 from bson import ObjectId
+from newsapi import newsapi_client
 # Creating database connection 
 db_server=motor.motor_asyncio.AsyncIOMotorClient("127.0.0.1",27017)
 db_tableName=db_server["userCredentials"]
