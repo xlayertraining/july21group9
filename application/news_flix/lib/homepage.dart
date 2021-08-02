@@ -13,72 +13,90 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
-  @override
-  class _HomePageState extends State<HomePage>
-  with SingleTickerProviderStateMixin{
-    List<Tab> tablist = [
-      Tab(child: Text("LATEST NEWS"),),
-  Tab(child: Text("NATIONAL NEWS"),),
-  Tab(child: Text("INTERNATIONAL NEWS"),),
-  Tab(child: Text("SPORTS"),),
-  Tab(child: Text("TECH"),),
-  Tab(child: Text("HEALTH"),),
-    ];
-  TabController tabController;
+class _HomePageState extends State<HomePage>
+    with SingleTickerProviderStateMixin{
+  List<Tab> tablist = [
+    Tab(child: Text("LATEST NEWS"),),
+    Tab(child: Text("NATIONAL NEWS"),),
+    Tab(child: Text("INTERNATIONAL NEWS"),),
+    Tab(child: Text("SPORTS"),),
+    Tab(child: Text("TECH"),),
+    Tab(child: Text("HEALTH"),),
+  ];
+  late TabController _tabController;
   @override
   void initState() {
-
+    super.initState();
+    _tabController = TabController(vsync: this,length: tablist.length);
   }
+  @ override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
   }
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-          backgroundColor: Colors.pink,
-          iconTheme: IconThemeData(color: Colors.white),
-          title: Text(
-            "NEWS FLIX",
-            style: TextStyle(
-                color: Colors.white,
-                fontSize: 24.0,
-                fontStyle: FontStyle.italic,
-                fontWeight: FontWeight.bold),
-          )),
-      body: TabBarView(
-      controller: TabController,
-        children: [
-          Padding(padding: EdgeInsets.all(8.0),
-            child: Container(
-              child: ListView(
+    // TODO: implement build
+    throw UnimplementedError();
+  }
+}
+Widget build(BuildContext context) {
+  return Scaffold(
+    appBar: AppBar(
+      backgroundColor: Colors.pink,
+      iconTheme: IconThemeData(color: Colors.white),
+      title: Text(
+        "NEWS FLIX",
+        style: TextStyle(
+            color: Colors.white70,
+            fontSize: 24.0,
+            fontStyle: FontStyle.italic,
+            fontWeight: FontWeight.bold),
+      ),
 
-              ),
+      bottom: PreferredSize(
+        preferredSize: Size.fromHeight(30.0),
+        child: TabBar(
+          indicatorColor: Colors.black87,
+          isScrollable: true,
+          controller: _tabController,
+          tabs:_tablist,
+        ),
+      ),
+    ),
+
+    body: TabBarView(
+      controller: _tabController,
+      children: [
+        Padding(padding: EdgeInsets.all(8.0),
+          child: Container(
+            child: ListView(
+
             ),
           ),
-      Padding(padding: EdgeInsets.all(8.0),
-    child: Container(),
+        ),
+        Padding(padding: EdgeInsets.all(8.0),
+          child: Container(),
+        ),
+        Padding(padding: EdgeInsets.all(8.0),
+          child: Container(),
+        ),
+        Padding(padding: EdgeInsets.all(8.0),
+          child: Container(),
+        ),
+        Padding(padding: EdgeInsets.all(8.0),
+          child: Container(),
+        ),
+        Padding(padding: EdgeInsets.all(8.0),
+          child: Container(),
+        ),
+      ],
     ),
-          Padding(padding: EdgeInsets.all(8.0),
-            child: Container(),
-          ),
-          Padding(padding: EdgeInsets.all(8.0),
-            child: Container(),
-          ),
-      Padding(padding: EdgeInsets.all(8.0),
-       child: Container(),
-  ),
-     Padding(padding: EdgeInsets.all(8.0),
-     child: Container(),
-  ),
-        ],
-      ),
-      drawer: Drawer(
-        // Add a ListView to the drawer. This ensures the user can scroll
-        // through the options in the drawer if there isn't enough vertical
-        // space to fit everything.
-        child: ListView(
-          // Important: Remove any padding from the ListView.
+    drawer: Drawer(
+      child: ListView(
+        // Important: Remove any padding from the ListView.
 
-          children: [
+        children: [
 
             UserAccountsDrawerHeader(
                 accountName: Text('Samyadeep'),
@@ -184,4 +202,4 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-}
+
