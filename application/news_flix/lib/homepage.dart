@@ -4,11 +4,8 @@ import 'package:flutter/widgets.dart';
 
 import 'Loginpg.dart';
 
-void main() {
-  runApp(MaterialApp(home: HomePage()));
-}
-
 class HomePage extends StatefulWidget {
+
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -23,7 +20,9 @@ class _HomePageState extends State<HomePage>
     Tab(child: Text("TECH"),),
     Tab(child: Text("HEALTH"),),
   ];
+
   late TabController _tabController;
+
   @override
   void initState() {
     super.initState();
@@ -92,6 +91,7 @@ Widget build(BuildContext context) {
         ),
       ],
     ),
+
     drawer: Drawer(
       child: ListView(
         // Important: Remove any padding from the ListView.
