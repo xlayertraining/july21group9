@@ -1,6 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:untitled2/Favourite.dart';
+import 'package:untitled2/Settings.dart';
+import 'package:untitled2/Share.dart';
 
+import 'AboutUs.dart';
 import 'Loginpg.dart';
 class HomePage extends StatefulWidget {
   @override
@@ -24,14 +28,14 @@ class _HomePageState extends State<HomePage> {
               fontSize: 24.0,
               fontStyle: FontStyle.italic,),
           ),
-          backgroundColor: Colors.redAccent,
+          backgroundColor: Colors.redAccent.shade400,
           bottom:TabBar(
             isScrollable: true,
             indicatorWeight: 3.0 ,
             indicatorSize: TabBarIndicatorSize.label,
             indicatorColor: Colors.white,
             labelPadding: EdgeInsets.symmetric(horizontal: 15),
-            tabs: <Widget>[
+            tabs: [
               Tab(text: ("Latest"),),
               Tab(text: ("National"),),
               Tab(text: ("International"),),
@@ -42,7 +46,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         body:TabBarView(
-          children: <Widget>[
+          children: [
             Container(
               color: Colors.deepOrangeAccent,
               child:Center(
@@ -107,7 +111,7 @@ class _HomePageState extends State<HomePage> {
               BottomNavigationBarItem(
                 icon:Icon(Icons.home),
                 label: "Home",
-                backgroundColor: Colors.redAccent,
+                backgroundColor: Colors.redAccent.shade400,
               ),
               BottomNavigationBarItem(
                 icon:Icon(Icons.search),
@@ -150,7 +154,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 decoration: BoxDecoration(
-                  color: Colors.pink,
+                  color: Colors.pink.shade900,
                   image: DecorationImage(
                     image: NetworkImage(
                         "https://www.wallpaperuse.com/vien/TbiJmm/"
@@ -162,33 +166,39 @@ class _HomePageState extends State<HomePage> {
 
 
               ListTile(
-                leading: Icon(Icons.favorite),
+                leading: Icon(Icons.favorite,color:Colors.pinkAccent.shade100),
                 title: const Text('Favourites'),
                 onTap: () {
                   // Update the state of the app
                   // ...
                   // Then close the drawer
-                  Navigator.pop(context);
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Favourite())
+                  );
                 },
               ),
               ListTile(
-                leading: Icon(Icons.share),
+                leading: Icon(Icons.share,color:Colors.lightBlueAccent),
                 title: const Text('Share'),
                 onTap: () {
                   // Update the state of the app
                   // ...
                   // Then close the drawer
-                  Navigator.pop(context);
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Share())
+                  );
                 },
               ),
               ListTile(
-                leading: Icon(Icons.settings),
+                leading: Icon(Icons.settings,color:Colors.black ),
                 title: const Text('Settings'),
                 onTap: () {
                   // Update the state of the app
                   // ...
                   // Then close the drawer
-                  Navigator.pop(context);
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Settings())
+                  );
                 },
               ),
               ListTile(
@@ -198,11 +208,14 @@ class _HomePageState extends State<HomePage> {
                   // Update the state of the app
                   // ...
                   // Then close the drawer
-                  Navigator.pop(context);
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => AboutUs())
+                  );
                 },
               ),
               ListTile(
-                leading: Icon(Icons.settings_power),
+                leading: Icon(Icons.settings_power,
+                  color:Colors.red ),
                 title: const Text('Sign out'),
                 onTap: () {
                   Navigator.of(context).pushReplacement(
@@ -216,7 +229,7 @@ class _HomePageState extends State<HomePage> {
               Divider(color: Colors.black),
               const SizedBox(height: 10),
               ListTile(
-                leading: Icon(Icons.notifications),
+                leading: Icon(Icons.notifications,color:Colors.red.shade600 ),
                 title: const Text('Notification'),
                 onTap: () {
                   // Update the state of the app
@@ -226,7 +239,7 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
               ListTile(
-                leading: Icon(Icons.search),
+                leading: Icon(Icons.search,color:Colors.blue.shade600 ),
                 title: const Text('Search'),
                 onTap: () {
                   // Update the state of the app

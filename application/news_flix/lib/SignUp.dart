@@ -10,7 +10,7 @@ class SignUp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'NEWS FLIX',
       theme: ThemeData(
         primarySwatch: Colors.lightBlue,
       ),
@@ -79,7 +79,19 @@ class _MyWidgetState extends State<MyWidget> {
                 ),
                 TextField(
                     decoration: InputDecoration(
-                  labelText: "Email",
+                      labelText: "Gender",
+                      labelStyle: TextStyle(color: Colors.pink),
+                      hintText: 'Male or Female or Others',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                    )),
+                SizedBox(
+                  height: 20,
+                ),
+                TextField(
+                    decoration: InputDecoration(
+                  labelText: "Email Or Phone No.",
                   labelStyle: TextStyle(color: Colors.pink),
                   suffixIcon: Icon(Icons.email),
                   border: OutlineInputBorder(
