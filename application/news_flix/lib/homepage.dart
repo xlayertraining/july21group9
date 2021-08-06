@@ -1,10 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:untitled2/Favourite.dart';
-import 'package:untitled2/Settings.dart';
-import 'package:untitled2/Share.dart';
+import 'package:untitled2/ListWidget.dart';
 
-import 'AboutUs.dart';
 import 'Loginpg.dart';
 class HomePage extends StatefulWidget {
   @override
@@ -13,6 +10,26 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _currentIndex = 0;
+  get listTiles => [
+    {
+      "newsTitle": 'Tripura News',
+      'author': 'Rahul Dravid',
+      'date': '6th August 2021',
+      'imageUrl': 'https://www.wallpaperuse.com/wallp/49-493522_m.jpg'
+    },
+    {
+      "newsTitle": 'Headlines Tripura ',
+      'author': 'Aniket Lodh',
+      'date': '5th August 2021',
+      'imageUrl': 'https://votoart.com/upload/t44f7a2a5-1385-11e4-bc57-003048cab8f4.jpg'
+    },
+    {
+      "newsTitle": 'India Today',
+      'author': 'Samyadeep Saha',
+      'date': '3rd August 2021',
+      'imageUrl': 'https://votoart.com/upload/t44f7a2a5-1385-11e4-bc57-003048cab8f4.jpg'
+    },
+  ];
   @override
   Widget build(BuildContext context) {
     textStyle() {
@@ -22,40 +39,56 @@ class _HomePageState extends State<HomePage> {
       length: 6,
       child: Scaffold(
         appBar: AppBar(
+          toolbarHeight: 110,
           title:Text("NEWS FLIX",
             style: TextStyle(
               color: Colors.white,
               fontSize: 24.0,
               fontStyle: FontStyle.italic,),
           ),
-          backgroundColor: Colors.redAccent.shade400,
+          backgroundColor: Colors.redAccent,
           bottom:TabBar(
-            isScrollable: true,
-            indicatorWeight: 3.0 ,
-            indicatorSize: TabBarIndicatorSize.label,
-            indicatorColor: Colors.white,
-            labelPadding: EdgeInsets.symmetric(horizontal: 15),
-            tabs: [
-              Tab(text: ("Latest"),),
-              Tab(text: ("National"),),
-              Tab(text: ("International"),),
-              Tab(text: ("Sports"),),
-              Tab(text: ("Tech"),),
-              Tab(text: ("Business"),),
-            ],
+              isScrollable: true,
+              indicatorWeight: 3.0 ,
+              indicatorSize: TabBarIndicatorSize.label,
+              indicatorColor: Colors.white,
+              labelPadding: EdgeInsets.symmetric(horizontal: 15),
+
+              tabs: [
+                Tab(
+                  child:Text("Latest"),
+                ),
+                Tab(
+                  child:Text ("National"),),
+                Tab(
+                  child:Text ("International"),),
+                Tab(child:Text ("Sports"),),
+                Tab(child:Text ("Tech"),),
+                Tab(
+                  child:Text ("Business"),
+                ),
+              ]
           ),
         ),
         body:TabBarView(
-          children: [
+          children: <Widget>[
             Container(
               color: Colors.deepOrangeAccent,
-              child:Center(
-                child:Text(
-                  "Latest",
-                  style: textStyle(),
+            ),
+            Padding(padding: EdgeInsets.all(8),
+              child: Container(
+                child: ListView.builder(
+                  itemCount: listTiles.length,
+                  itemBuilder: (context,index){
+                    return InkWell(
+                      onTap: (){},
+                      child: ListWidget(listTiles[index]),
+                    );
+                  },
                 ),
               ),
             ),
+
             Container(
               color: Colors.blueGrey,
               child:Center(
@@ -92,15 +125,15 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
-            Container(
-              color: Colors.tealAccent,
-              child:Center(
-                child:Text(
-                  "Business",
-                  style: textStyle(),
-                ),
-              ),
-            ),
+            // Container(
+            //   color: Colors.tealAccent,
+            //   child:Center(
+            //     child:Text(
+            //       "Business",
+            //       style: textStyle(),
+            //     ),
+            //   ),
+            // ),
           ],
         ),
 
@@ -111,7 +144,7 @@ class _HomePageState extends State<HomePage> {
               BottomNavigationBarItem(
                 icon:Icon(Icons.home),
                 label: "Home",
-                backgroundColor: Colors.redAccent.shade400,
+                backgroundColor: Colors.redAccent,
               ),
               BottomNavigationBarItem(
                 icon:Icon(Icons.search),
@@ -154,7 +187,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 decoration: BoxDecoration(
-                  color: Colors.pink.shade900,
+                  color: Colors.pink,
                   image: DecorationImage(
                     image: NetworkImage(
                         "https://www.wallpaperuse.com/vien/TbiJmm/"
@@ -166,39 +199,33 @@ class _HomePageState extends State<HomePage> {
 
 
               ListTile(
-                leading: Icon(Icons.favorite,color:Colors.pinkAccent.shade100),
+                leading: Icon(Icons.favorite),
                 title: const Text('Favourites'),
                 onTap: () {
                   // Update the state of the app
                   // ...
                   // Then close the drawer
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Favourite())
-                  );
+                  Navigator.pop(context);
                 },
               ),
               ListTile(
-                leading: Icon(Icons.share,color:Colors.lightBlueAccent),
+                leading: Icon(Icons.share),
                 title: const Text('Share'),
                 onTap: () {
                   // Update the state of the app
                   // ...
                   // Then close the drawer
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Share())
-                  );
+                  Navigator.pop(context);
                 },
               ),
               ListTile(
-                leading: Icon(Icons.settings,color:Colors.black ),
+                leading: Icon(Icons.settings),
                 title: const Text('Settings'),
                 onTap: () {
                   // Update the state of the app
                   // ...
                   // Then close the drawer
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Settings())
-                  );
+                  Navigator.pop(context);
                 },
               ),
               ListTile(
@@ -208,14 +235,11 @@ class _HomePageState extends State<HomePage> {
                   // Update the state of the app
                   // ...
                   // Then close the drawer
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => AboutUs())
-                  );
+                  Navigator.pop(context);
                 },
               ),
               ListTile(
-                leading: Icon(Icons.settings_power,
-                  color:Colors.red ),
+                leading: Icon(Icons.settings_power),
                 title: const Text('Sign out'),
                 onTap: () {
                   Navigator.of(context).pushReplacement(
@@ -229,7 +253,7 @@ class _HomePageState extends State<HomePage> {
               Divider(color: Colors.black),
               const SizedBox(height: 10),
               ListTile(
-                leading: Icon(Icons.notifications,color:Colors.red.shade600 ),
+                leading: Icon(Icons.notifications),
                 title: const Text('Notification'),
                 onTap: () {
                   // Update the state of the app
@@ -239,7 +263,7 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
               ListTile(
-                leading: Icon(Icons.search,color:Colors.blue.shade600 ),
+                leading: Icon(Icons.search),
                 title: const Text('Search'),
                 onTap: () {
                   // Update the state of the app
