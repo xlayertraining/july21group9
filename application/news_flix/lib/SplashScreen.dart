@@ -5,10 +5,6 @@ import 'package:flutter/material.dart';
 
 import 'package:untitled2/Loginpg.dart';
 
-
-
-
-
 class SplashScreen extends StatelessWidget {
   const SplashScreen({Key? key}) : super(key: key);
 
@@ -24,8 +20,15 @@ class SplashScreen extends StatelessWidget {
 
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(color: Colors.redAccent),
-        width: MediaQuery.of(context).size.width,
+          child: Container(
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    begin: Alignment.centerLeft,
+                    end: Alignment.centerRight,
+                    colors: [Colors.purple, Colors.blue]
+                )
+            ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -58,6 +61,7 @@ class SplashScreen extends StatelessWidget {
             ),
           ],
         ),
+      ),
       ),
     );
   }
