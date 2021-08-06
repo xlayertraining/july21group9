@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:untitled2/SignUp.dart';
 
 import 'homepage.dart';
-
+import 'package:lottie/lottie.dart';
 void main() {
   runApp(MaterialApp(home: Myapp()));
 }
@@ -18,15 +18,8 @@ class _MyappState extends State<Myapp> {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.pink,
-        title: Text(
-          "Hey there!",
-          style: TextStyle(
-              color: Colors.white, fontSize: 20.0, fontWeight: FontWeight.bold),
-        ),
-      ),
+        return Scaffold(
+          backgroundColor: Colors.blueAccent. withOpacity(0.3),
       body: Container(
         padding: EdgeInsets.all(10),
         height: height,
@@ -38,8 +31,8 @@ class _MyappState extends State<Myapp> {
               Container(
                 width: width,
                 height: height * 0.35,
-                child: Image.asset(
-                  'assets/breaking-news.png',
+                child: Lottie.asset(
+                  'assets/news animation.json',
                   fit: BoxFit.fill,
                 ),
               ),
@@ -49,11 +42,13 @@ class _MyappState extends State<Myapp> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Login Page',
+                      'Login',
                       style: TextStyle(
                           fontSize: 25.0,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black87),
+                          fontWeight: FontWeight.w500,
+                          color: Colors.black87,
+                        fontStyle: FontStyle.italic,
+                    ),
                     ),
                   ],
                 ),
@@ -64,7 +59,7 @@ class _MyappState extends State<Myapp> {
               TextField(
                 decoration: InputDecoration(
                   labelText: 'Email',
-                  labelStyle: TextStyle(color: Colors.pink),
+                  labelStyle: TextStyle(color: Colors.deepPurpleAccent),
                   hintText: 'Enter valid email id as abc@gmail.com',
                   suffixIcon: Icon(Icons.email),
                   border: OutlineInputBorder(
@@ -79,7 +74,7 @@ class _MyappState extends State<Myapp> {
                 obscureText: true,
                 decoration: InputDecoration(
                   labelText: 'Password',
-                  labelStyle: TextStyle(color: Colors.pink),
+                  labelStyle: TextStyle(color: Colors.deepPurpleAccent),
                   hintText: 'Enter secure password',
                   suffixIcon: Icon(Icons.visibility_off),
                   border: OutlineInputBorder(
@@ -100,7 +95,7 @@ class _MyappState extends State<Myapp> {
                       style: TextStyle(fontSize: 12.0),
                     ),
                     ElevatedButton(
-                      style: ElevatedButton.styleFrom(primary: Colors.pink),
+                      style: ElevatedButton.styleFrom(primary: Colors.deepPurpleAccent),
                       onPressed: () {
                         Navigator.push(
                           context,
@@ -125,7 +120,7 @@ class _MyappState extends State<Myapp> {
                   TextSpan(text: 'Don\'t have an account', children: [
                     TextSpan(
                       text: 'Signup',
-                      style: TextStyle(color: Color(0xffee7b23)),
+                      style: TextStyle(color:Colors.deepPurpleAccent),
                     ),
                   ]),
                 ),
