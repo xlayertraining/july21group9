@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'shared/listitem.dart';
 Widget ListWidget(item){
   return Card(
       elevation: 2.0,
@@ -16,7 +15,7 @@ Widget ListWidget(item){
                   image: NetworkImage(item['imageUrl']),
                   fit: BoxFit.cover,
                 ),
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(12),
               ),
             ),
             SizedBox(width: 5,),
