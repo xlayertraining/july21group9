@@ -19,7 +19,7 @@ class _MyappState extends State<Myapp> {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
         return Scaffold(
-          backgroundColor: Colors.blueAccent. withOpacity(0.3),
+          backgroundColor: Colors.white38. withOpacity(0.9),
       body: Container(
         padding: EdgeInsets.all(10),
         height: height,
@@ -61,9 +61,14 @@ class _MyappState extends State<Myapp> {
                   labelText: 'Email',
                   labelStyle: TextStyle(color: Colors.deepPurpleAccent),
                   hintText: 'Enter valid email id as abc@gmail.com',
-                  suffixIcon: Icon(Icons.email),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20.0),
+                  suffixIcon: Icon(Icons.email, color: Colors.black87),
+
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.deepPurpleAccent),
+                    borderRadius: BorderRadius.circular(25.0),),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color:Colors.black87),
+                    borderRadius: BorderRadius.circular(25.0),
                   ),
                 ),
               ),
@@ -76,12 +81,18 @@ class _MyappState extends State<Myapp> {
                   labelText: 'Password',
                   labelStyle: TextStyle(color: Colors.deepPurpleAccent),
                   hintText: 'Enter secure password',
-                  suffixIcon: Icon(Icons.visibility_off),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20.0),
+                  suffixIcon: Icon(Icons.visibility_off,color: Colors.black87),
+                 enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.deepPurpleAccent),
+                    borderRadius: BorderRadius.circular(25.0),),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color:Colors.black87),
+                      borderRadius: BorderRadius.circular(25.0),
+                    ),
+
                   ),
                 ),
-              ),
+
               SizedBox(
                 height: 30.0,
               ),
