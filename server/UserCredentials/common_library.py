@@ -8,9 +8,14 @@ import mimetypes
 import time
 import datetime
 import os
+import requests
 from bson import ObjectId
 from newsapi import newsapi_client
-# Creating database connection 
-db_server=motor.motor_asyncio.AsyncIOMotorClient("127.0.0.1",27017)
-db_tableName=db_server["userCredentials"]
-user_sign_up=db_tableName["SignIn"]
+imgPath = r"D:/xlayer_Tech/july21group9/server/Uploads/"
+if os.path.isdir(imgPath) == False:
+    os.makedirs(imgPath)
+# Creating database connection
+db_server = motor.motor_asyncio.AsyncIOMotorClient("127.0.0.1", 27017)
+db_tableName = db_server["userCredentials"]
+user_sign_up = db_tableName["Account"]
+user_image_folder = db_tableName["Post"]

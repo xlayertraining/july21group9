@@ -16,7 +16,7 @@ class signInHandler(tornado.web.RequestHandler):
                 raise Exception
             # Getting the fields username/emailAddress,password
 
-             # Email-Address
+            # Email-Address
             try:
                 emailAddress = jsonbody.get('emailAddress')
                 emailAddress.lower()
@@ -49,6 +49,7 @@ class signInHandler(tornado.web.RequestHandler):
                     "emailAddress": emailAddress,
                     "password": userPassword
                 })
+                print(findUser)
                 if not findUser:
                     message = "Invalid email or password!"
 
@@ -56,7 +57,10 @@ class signInHandler(tornado.web.RequestHandler):
                 else:
                     code = 200
                     status = True
-                    message = "Successfully logged in!"
+                    message = "Successfully logged in."
+                    result.append(
+                        str(findUser.get("_id"))
+                    )
 
                 response = {
                     'code': code,

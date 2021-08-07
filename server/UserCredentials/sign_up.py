@@ -15,6 +15,7 @@ class signUpHandler(tornado.web.RequestHandler):
                 code = 4732
                 status = False
                 message = "Invalid JSON Body"
+                raise Exception
 
                 # Getting Fields Named firstName,lastname,phoneNumber,emailAddress,password
             # firstName
