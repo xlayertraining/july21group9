@@ -59,12 +59,12 @@ class _MyappState extends State<Myapp> {
               TextField(
                 decoration: InputDecoration(
                   labelText: 'Email',
-                  labelStyle: TextStyle(color: Colors.deepPurpleAccent),
+                  labelStyle: TextStyle(color: Colors.deepPurple),
                   hintText: 'Enter valid email id as abc@gmail.com',
                   suffixIcon: Icon(Icons.email, color: Colors.black87),
 
                   enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.deepPurpleAccent),
+                    borderSide: BorderSide(color: Colors.deepPurple),
                     borderRadius: BorderRadius.circular(25.0),),
                   focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(color:Colors.black87),
@@ -79,11 +79,11 @@ class _MyappState extends State<Myapp> {
                 obscureText: true,
                 decoration: InputDecoration(
                   labelText: 'Password',
-                  labelStyle: TextStyle(color: Colors.deepPurpleAccent),
+                  labelStyle: TextStyle(color: Colors.deepPurple),
                   hintText: 'Enter secure password',
                   suffixIcon: Icon(Icons.visibility_off,color: Colors.black87),
                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.deepPurpleAccent),
+                    borderSide: BorderSide(color: Colors.deepPurple),
                     borderRadius: BorderRadius.circular(25.0),),
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(color:Colors.black87),
@@ -106,7 +106,7 @@ class _MyappState extends State<Myapp> {
                       style: TextStyle(fontSize: 12.0),
                     ),
                     ElevatedButton(
-                      style: ElevatedButton.styleFrom(primary: Colors.deepPurpleAccent),
+                      style: ElevatedButton.styleFrom(primary: Colors.black87),
                       onPressed: () {
                         Navigator.push(
                           context,
@@ -131,7 +131,7 @@ class _MyappState extends State<Myapp> {
                   TextSpan(text: 'Don\'t have an account', children: [
                     TextSpan(
                       text: 'Signup',
-                      style: TextStyle(color:Colors.deepPurpleAccent),
+                      style: TextStyle(color:Colors.deepPurple,fontSize: 16.0),
                     ),
                   ]),
                 ),
