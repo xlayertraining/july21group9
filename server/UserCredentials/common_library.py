@@ -9,6 +9,7 @@ import time
 import datetime
 import os
 import requests
+import jwt
 from bson import ObjectId
 from newsapi import newsapi_client
 imgPath = r"D:/xlayer_Tech/july21group9/server/Uploads/"

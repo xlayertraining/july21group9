@@ -44,6 +44,8 @@ class signInHandler(tornado.web.RequestHandler):
                     raise Exception
             except:
                 raise Exception
+
+            
             try:
                 findUser = await user_sign_up.find_one({
                     "emailAddress": emailAddress,
@@ -52,7 +54,6 @@ class signInHandler(tornado.web.RequestHandler):
                 print(findUser)
                 if not findUser:
                     message = "Invalid email or password!"
-
                     raise Exception
                 else:
                     code = 200

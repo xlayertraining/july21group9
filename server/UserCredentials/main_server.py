@@ -9,7 +9,8 @@ def app():
         (r"/web/api/sign/up", signUpHandler),
         (r"/web/api/sign/in", signInHandler),
         (r'/web/api/search', searchEngineHandler),
-        (r'/web/api/post', imageHandler)
+        (r'/web/api/post', imageHandler),
+
     ])
 
 

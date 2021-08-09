@@ -85,14 +85,28 @@ class signUpHandler(tornado.web.RequestHandler):
                     raise Exception
             except:
                 raise Exception
-            user_sign_up.insert_one({
+            # try:
+            #     encoded_jwt = str(jwt.encode(
+            #         {"userPassword": usrPassword, "userEmail": emailAddress}, "icfai", algorithm="HS256"))
+            #     print(encoded_jwt)
+            #     result.append({"User Authorization key":encoded_jwt})
+            # except:
+            #     message = "problem in jwt"
+            #     raise Exception
+            users_info = await user_sign_up.insert_one({
                 "firstName": firstName,
                 "lastName": lastName,
                 "userName": firstName+lastName,
                 "phoneNumber": phoneNumber,
                 "emailAddress": emailAddress,
-                "password": usrPassword
+                "password": usrPassword,
             })
+            account_id = str(users_info.inserted_id)
+
+            encoded_jwt = jwt.encode(
+                {"key": account_id}, "icfai", algorithm="HS256")
+            result.append({"Authorization": encoded_jwt})
+            # eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJrZXkiOiJkZXJldnczdmVhaS5vaXdmZWguMDhAZ21haWwuY29tIn0.2FwRO2wFkd9nwYjQOJdYVrmKTOo09F9U1uLxpitollE
             code = 200
             status = True
             message = "Sign-up Successfull"
