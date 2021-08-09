@@ -1,9 +1,13 @@
 from mimetypes import MimeTypes
+<<<<<<< HEAD
 from os import stat
 
 from tornado.locale import get
 from common_library import*
 from auth import SecureHeader
+=======
+from common_library import *
+>>>>>>> 6bec7f74bc224e408602ae76df1dc6d38bae1f94
 
 
 class imageHandler(tornado.web.RequestHandler):
@@ -71,7 +75,10 @@ class imageHandler(tornado.web.RequestHandler):
 
         except:
             self.write(message)
+<<<<<<< HEAD
 # /
+=======
+>>>>>>> 6bec7f74bc224e408602ae76df1dc6d38bae1f94
 
     async def get(self):
         code = 4000
@@ -79,6 +86,7 @@ class imageHandler(tornado.web.RequestHandler):
         message = ""
         result = []
         try:
+<<<<<<< HEAD
 
             account_id = await SecureHeader.decrypt(self.request.headers["Authorization"])
             if  account_id ==None:
@@ -120,10 +128,36 @@ class imageHandler(tornado.web.RequestHandler):
                 'status': status,
                 'message': message
             }
+         self.finish()
+            return
+        except:
+=======
+            imageList = user_image_folder.find()
+            async for i in imageList:
+                i['_id'] = str(i['_id'])
+                result.append(i)
+            code = 2000
+            status = True
+            message = "List of images"
+        except:
+            status = False
+            if not len(message):
+                message = 'Internal Error, Please Contact the Support Team.'
+        response = {
+            'code': code,
+            'status': status,
+            'message': message
+        }
+        try:
+            response['result'] = result
             self.write(response)
             self.finish()
             return
-        except:
+        except Exception as e:
+            status = False
+            code = 5011
+            message = 'Internal Error, Please Contact the Support Team.'
+>>>>>>> 6bec7f74bc224e408602ae76df1dc6d38bae1f94
             response = {
                 'code': code,
                 'status': status,
@@ -139,7 +173,10 @@ class imageHandler(tornado.web.RequestHandler):
         message = ""
         result = []
         try:
+<<<<<<< HEAD
             
+=======
+>>>>>>> 6bec7f74bc224e408602ae76df1dc6d38bae1f94
             try:
                 imageId = ObjectId(self.request.arguments["id"][0].decode())
             except:
@@ -180,4 +217,8 @@ class imageHandler(tornado.web.RequestHandler):
             }
             self.write(response)
             self.finish()
+<<<<<<< HEAD
             return
+=======
+            return
+>>>>>>> 6bec7f74bc224e408602ae76df1dc6d38bae1f94
