@@ -22,11 +22,18 @@ Widget ListWidget(item){
             Expanded(child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
+              
               children: [
                 Text(item['newsTitle'],
                   style: TextStyle(
                     fontSize: 18,
                   ),),
+                SizedBox(
+                  width: 20,
+                ),
+                Icon(Icons.share,
+                    size:20
+                ),
                 SizedBox(
                   height: 5,
                 ),
@@ -49,6 +56,12 @@ Widget ListWidget(item){
                         fontSize: 12,
                       ),
                     ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Icon(Icons.bookmark,
+                    size:20
+                    )
                   ],
                 )
               ],

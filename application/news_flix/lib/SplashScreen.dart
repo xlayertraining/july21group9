@@ -26,7 +26,7 @@ class SplashScreen extends StatelessWidget {
                 gradient: LinearGradient(
                     begin: Alignment.centerLeft,
                     end: Alignment.centerRight,
-                    colors: [Colors.purple, Colors.blue]
+                    colors: [Colors.white, Colors.lightBlueAccent]
                 )
             ),
         child: Column(
@@ -54,7 +54,7 @@ class SplashScreen extends StatelessWidget {
               "Unfolding The Truth",
               style: TextStyle(
                 fontSize: 20,
-                color: Colors.yellowAccent,
+                color: Colors.black,
                 fontWeight: FontWeight.bold,
                 fontStyle: FontStyle.italic,
               ),

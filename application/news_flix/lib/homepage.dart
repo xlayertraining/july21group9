@@ -17,7 +17,7 @@ class _HomePageState extends State<HomePage> {
   get listTiles1 => [
     {
       "newsTitle": 'Anime Planet',
-      'author': 'Rahul Dravid',
+      'author': 'Rahul',
       'date': '6th August 2021',
       'imageUrl': 'https://cdn.neow.in/news/images/uploaded/2019/06/1561493403_one_punch_man.jpg'
     },
@@ -29,7 +29,7 @@ class _HomePageState extends State<HomePage> {
     },
     {
       "newsTitle": 'India Today',
-      'author': 'Samyadeep Saha',
+      'author': 'Samyadeep ',
       'date': '3rd August 2021',
       'imageUrl': 'https://s3images.zee5.com/wp-content/uploads/sites/7/2021/08/india-vs-england-784x441.jpg'
     },
@@ -41,7 +41,7 @@ class _HomePageState extends State<HomePage> {
     },
     {
     "newsTitle": 'Newyork Times',
-    'author': 'Basab S.Roy',
+    'author': 'Basab',
     'date': '3rd August 2021',
     'imageUrl': 'https://images.template.net/wp-content/uploads/2019/04/Metalogic-%E2%80%93-Responsive-WordPress-Theme.jpeg'
     },
@@ -55,25 +55,25 @@ class _HomePageState extends State<HomePage> {
     },
     {
       "newsTitle": 'Ajj Tak ',
-      'author': 'Basabjit S.Roy',
+      'author': 'Basabjit',
       'date': '5th August 2021',
       'imageUrl': 'https://d2c7ipcroan06u.cloudfront.net/wp-content/uploads/2019/05/2019.jpg'
     },
     {
       "newsTitle": 'India Today',
-      'author': 'Samyadeep Saha',
+      'author': 'Samyadeep ',
       'date': '3rd August 2021',
       'imageUrl': 'https://www.epapersland.com/images/dailynews.jpg'
     },
     {
       "newsTitle": 'Asia Today',
-      'author': 'Aniket Lodh',
+      'author': 'Aniket ',
       'date': '3rd August 2021',
       'imageUrl': 'https://images.indianexpress.com/2014/01/thumb119.jpg'
     },
     {
       "newsTitle": 'Daily Planet',
-      'author': 'Rahul Dravid',
+      'author': 'Rahul ',
       'date': '6th August 2021',
       'imageUrl': 'https://dominicanewsonline.com/news/wp-content/uploads/2020/07/budget.jpg'
     },
@@ -87,25 +87,25 @@ class _HomePageState extends State<HomePage> {
     },
     {
       "newsTitle": 'London Times ',
-      'author': 'Basabjit S.Roy',
+      'author': 'Basabjit',
       'date': '5th August 2021',
       'imageUrl': 'https://simplycareer.com/wp-content/uploads/2015/04/international-affairs-jobs-1024x512.jpg'
     },
     {
       "newsTitle": 'BBC',
-      'author': 'Samyadeep Saha',
+      'author': 'Samyadeep ',
       'date': '3rd August 2021',
       'imageUrl': 'https://www.pngfacts.com/uploads/1/1/3/2/11320972/fire-australia_orig.jpg'
     },
     {
       "newsTitle": 'Newyork Times',
-      'author': 'Aniket Lodh',
+      'author': 'Aniket ',
       'date': '3rd August 2021',
       'imageUrl': 'https://cdn.pixabay.com/photo/2015/12/03/10/12/news-1074604_640.jpg'
     },
     {
       "newsTitle": 'Daily Planet',
-      'author': 'Ankit Lodh',
+      'author': 'Ankit ',
       'date': '3rd August 2021',
       'imageUrl': 'https://www.mentalhealth.org.uk/sites/default/files/Mental-Health-Awareness-Week-2021-theme.jpg'
     },
@@ -113,31 +113,31 @@ class _HomePageState extends State<HomePage> {
 get listTiles4 => [
   {
     "newsTitle": 'World News ',
-    'author': 'Nabanit Roy',
+    'author': 'Nabanit',
     'date': '6th August 2021',
     'imageUrl': 'http://static.dnaindia.com/sites/default/files/2018/04/14/671873-neeraj-chopra-gold-afp.jpg'
   },
   {
     "newsTitle": 'London Times ',
-    'author': 'Basabjit S.Roy',
+    'author': 'Basabjit',
     'date': '5th August 2021',
     'imageUrl': 'https://www.thesportsgeek.com/wp-content/uploads/2020/06/2021-Olympic-Logo-825x400.jpg'
   },
   {
     "newsTitle": 'India Today',
-    'author': 'Samyadeep Saha',
+    'author': 'Samyadeep',
     'date': '3rd August 2021',
     'imageUrl': 'https://s3images.zee5.com/wp-content/uploads/sites/7/2021/08/india-vs-england-784x441.jpg'
   },
   {
     "newsTitle": 'Newyork Times',
-    'author': 'Aniket Lodh',
+    'author': 'Aniket',
     'date': '3rd August 2021',
     'imageUrl': 'https://i.pinimg.com/originals/55/55/9c/55559cfe50a9870c3ea7dd034f0997e5.jpg'
   },
   {
     "newsTitle": 'Sports News',
-    'author': 'Samyadeep Saha',
+    'author': 'Samyadeep',
     'date': '3rd August 2021',
     'imageUrl': 'https://dehayf5mhw1h7.cloudfront.net/wp-content/uploads/sites/1363/2020/04/10080746/trials-opening-currie-885x544-1.jpg'
   },
@@ -145,30 +145,30 @@ get listTiles4 => [
 get listTiles5 => [
   {
     "newsTitle": 'World News ',
-    'author': 'Nabanit Roy',
+    'author': 'Nabanit',
     'date': '6th August 2021',
     'imageUrl': 'https://www.e-zigurat.com/news/wp-content/uploads/sites/3/2021/03/news_agorbaim_es1.jpg'
   },
   {
     "newsTitle": 'London Times ',
-    'author': 'Basabjit S.Roy',
+    'author': 'Basabjit',
     'date': '5th August 2021',
     'imageUrl': 'https://schoolofmusic.ucla.edu/app/uploads/2019/04/Final-AMOLA.png'
   },
   {
     "newsTitle": 'BBC',
-    'author': 'Samyadeep Saha',
+    'author': 'Samyadeep',
     'date': '3rd August 2021',
     'imageUrl': 'https://www.e-zigurat.com/news/wp-content/uploads/sites/3/2021/01/ited_news_1.jpg'
   },
   {
     "newsTitle": 'Newyork Times',
-    'author': 'Aniket Lodh',
+    'author': 'Aniket',
     'date': '3rd August 2021',
     'imageUrl': 'https://images.template.net/wp-content/uploads/2019/04/Metalogic-%E2%80%93-Responsive-WordPress-Theme.jpeg'
   },
   {"newsTitle": 'India Today',
-    'author': 'Sam Jhonson',
+    'author': 'Sam ',
     'date': '3rd August 2021',
     'imageUrl': 'https://www.mentalhealth.org.uk/sites/default/files/Mental-Health-Awareness-Week-2021-theme.jpg'
   },
@@ -176,31 +176,31 @@ get listTiles5 => [
 get listTiles6 => [
   {
     "newsTitle": 'World News ',
-    'author': 'Nabanit Roy',
+    'author': 'Nabanit',
     'date': '6th August 2021',
     'imageUrl': 'https://thumbs.dreamstime.com/b/year-coronavirus-illustration-particles-181596054.jpg'
   },
   {
     "newsTitle": 'London Times ',
-    'author': 'Basabjit S.Roy',
+    'author': 'Basabjit',
     'date': '5th August 2021',
     'imageUrl': 'https://i.ebayimg.com/images/g/N04AAOSwNXlfBg~2/s-l400.jpg'
   },
   {
     "newsTitle": 'BBC',
-    'author': 'Samyadeep Saha',
+    'author': 'Samyadeep',
     'date': '3rd August 2021',
     'imageUrl': 'https://www.mentalhealth.org.uk/sites/default/files/MHAW-2021-Hold-Twitter-Image.jpg'
   },
   {
     "newsTitle": 'Newyork Times',
-    'author': 'Ankit Lodh',
+    'author': 'Ankit',
     'date': '3rd August 2021',
     'imageUrl': 'https://www.mentalhealth.org.uk/sites/default/files/Mental-Health-Awareness-Week-2021-theme.jpg'
   },
   {
     "newsTitle": 'Newyork Times',
-    'author': 'Ankit Lodh',
+    'author': 'Ankit ',
     'date': '3rd August 2021',
     'imageUrl': 'https://www.tentaran.com/wp-content/uploads/2021/01/latest-india-business-news-today-23-january-2021.jpg'
   },
@@ -221,6 +221,8 @@ get listTiles6 => [
               fontSize: 24.0,
               fontStyle: FontStyle.italic,),
           ),
+
+
           backgroundColor: Colors.redAccent,
           bottom:TabBar(
               isScrollable: true,
