@@ -12,62 +12,80 @@ class imageHandler(tornado.web.RequestHandler):
         status = False
         message = ""
         result = []
-        type = ""
         try:
             account_id = await SecureHeader.decrypt(self.request.headers["Authorization"])
-            if account_id == None :
+            if account_id == None:
                 message = "You're not authorized"
                 raise Exception
+            try:
+                title = self.request.arguments["title"][0].decode()
+                if title == None or title == "" or len(title) > 100:
+                    raise Exception
+            except:
+                message = "Please enter valid title.[1-100]"
+                raise Exception
+            try:
+                body = self.request.arguments["body"][0].decode()
+                if body == None or body == "" or len(body) > 1000:
+                    raise Exception
+            except:
+                message = "Please enter valid body.[1-1000]"
+                raise Exception
+            try:
+                postTime = int(self.request.arguments["time"][0].decode())
+            except:
+                postTime = timeNow()
+
             try:
                 image = self.request.files["image"][0]
             except:
                 message = "File is not inserted"
                 raise Exception
             try:
-                imageType = str(self.request.arguments["type"][0].decode())
-                if imageType == None or imageType == "":
+                catagory = self.request.arguments["category"][0].decode()
+                catagory = eval(catagory)
+                if catagory == None or type(catagory) != list or not len(catagory):
                     raise Exception
-                type = imageType
+                # type = catagory
             except:
                 code = 8043
                 status = False
-                message = "Couldn't get the type name"
+                message = "submit valid category"
                 raise Exception
-            try:
-                postTime = str(self.request.arguments["time"][0].decode())
-                if postTime == None or postTime == '':
-                    raise Exception
-            except:
-                code = 8044
-                status = False
-                message = "Time is invalid"
-                raise Exception
+
             try:
                 fileType = str(mimetypes.guess_extension(
                     image['content_type'], strict=True))
                 if fileType in [".jpeg", ".jpg", ".png"]:
-                    unixTime = str(int(time.time()))
+                    unixTime = str(timeNow())
                     fileName = str(imgPath+unixTime+fileType)
                     imageRaw = image['body']
-                    try:
+                    # try:
 
-                        userImage = await user_image_folder.insert_one({"imageUrl": fileName})
-                        if userImage:
-                            fh = open(fileName, 'wb')
-                            fh.write(imageRaw)
-                            fh.close()
-                            message = "Image has ben saved"
-                            self.write(message)
-                        else:
-                            print("Not inserted")
-                    except:
-                        raise Exception
+                    #     if userImage:
+                    #         fh = open(fileName, 'wb')
+                    #         fh.write(imageRaw)
+                    #         fh.close()
+                    #         message = "Image has ben saved"
+                    #         self.write(message)
+                    #     else:
+                    #         print("Not inserted")
+                    # except:
+                    #     raise Exception
 
                 else:
                     message = "This file type is not supported."
 
             except:
                 raise Exception
+            user_news_folder.insert_one({
+                "title": title,
+                "body": body,
+                "publisedTime": postTime,
+                "category": catagory,
+                "image": imageRaw,
+                "AccountId": account_id
+            })
 
         except:
             self.write(message)
@@ -81,20 +99,32 @@ class imageHandler(tornado.web.RequestHandler):
         try:
 
             account_id = await SecureHeader.decrypt(self.request.headers["Authorization"])
-            if  account_id ==None:
+            if account_id == None:
                 code = 8765
                 status = False
                 message = "You're not authorized"
                 raise Exception
 
             try:
-                imageList = user_image_folder.find()
+                category_id = int(self.request.arguments["category"][0])
+            except:
+                message = "inValid category"
+                raise Exception
+            try:
+                imageList = user_news_folder.find({"category":category_id})
                 async for i in imageList:
+                    # del[i["image"]]
+                    i["image"]=str(i["image"])
+                    # i["image"]=json.loads(i["image"])
                     i['_id'] = str(i['_id'])
+                    account_find= await user_sign_up.find_one({"_id":ObjectId(i["AccountId"])})
+                    if account_find:
+                        i["author"]=account_find["userName"]
                     result.append(i)
                 code = 2000
                 status = True
                 message = "List of images"
+                
             except:
                 status = False
                 if not len(message):
@@ -139,7 +169,7 @@ class imageHandler(tornado.web.RequestHandler):
         message = ""
         result = []
         try:
-            
+
             try:
                 imageId = ObjectId(self.request.arguments["id"][0].decode())
             except:

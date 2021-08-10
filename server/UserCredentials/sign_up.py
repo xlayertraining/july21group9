@@ -96,7 +96,7 @@ class signUpHandler(tornado.web.RequestHandler):
             users_info = await user_sign_up.insert_one({
                 "firstName": firstName,
                 "lastName": lastName,
-                "userName": firstName+lastName,
+                "userName": firstName+" "+lastName,
                 "phoneNumber": phoneNumber,
                 "emailAddress": emailAddress,
                 "password": usrPassword,
