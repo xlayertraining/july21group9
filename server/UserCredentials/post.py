@@ -171,19 +171,19 @@ class imageHandler(tornado.web.RequestHandler):
         try:
 
             try:
-                imageId = ObjectId(self.request.arguments["id"][0].decode())
+                newsId = ObjectId(self.request.arguments["id"][0].decode())
             except:
                 code = 3000
                 status = False
-                message = "invalid image id"
-            proUpdate = user_image_folder.delete_one(
+                message = "invalid news id"
+            proUpdate = user_news_folder.delete_one(
                 {
-                    "_id": imageId
+                    "_id": newsId
                 },
             )
             code = 2000
             status = True
-            message = "Image has been removed"
+            message = "news has been removed"
         except:
             status = False
             if not len(message):
