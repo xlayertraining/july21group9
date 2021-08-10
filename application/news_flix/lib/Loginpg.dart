@@ -19,8 +19,15 @@ class _MyappState extends State<Myapp> {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
         return Scaffold(
-          backgroundColor: Colors.white38. withOpacity(0.9),
+          // backgroundColor: Colors.white38. withOpacity(0.9),
       body: Container(
+        decoration: BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+                colors: [Colors.white, Colors.lightBlueAccent]
+            )
+        ),
         padding: EdgeInsets.all(10),
         height: height,
         width: width,
@@ -46,7 +53,7 @@ class _MyappState extends State<Myapp> {
                       style: TextStyle(
                           fontSize: 25.0,
                           fontWeight: FontWeight.w500,
-                          color: Colors.black87,
+                          color: Colors.deepPurple,
                         fontStyle: FontStyle.italic,
                     ),
                     ),
@@ -61,7 +68,7 @@ class _MyappState extends State<Myapp> {
                   labelText: 'Email',
                   labelStyle: TextStyle(color: Colors.deepPurple),
                   hintText: 'Enter valid email id as abc@gmail.com',
-                  suffixIcon: Icon(Icons.email, color: Colors.black87),
+                  suffixIcon: Icon(Icons.email, color: Colors.black),
 
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.deepPurple),
@@ -81,7 +88,7 @@ class _MyappState extends State<Myapp> {
                   labelText: 'Password',
                   labelStyle: TextStyle(color: Colors.deepPurple),
                   hintText: 'Enter secure password',
-                  suffixIcon: Icon(Icons.visibility_off,color: Colors.black87),
+                  suffixIcon: Icon(Icons.visibility_off,color: Colors.black),
                  enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.deepPurple),
                     borderRadius: BorderRadius.circular(25.0),),
@@ -106,7 +113,7 @@ class _MyappState extends State<Myapp> {
                       style: TextStyle(fontSize: 12.0),
                     ),
                     ElevatedButton(
-                      style: ElevatedButton.styleFrom(primary: Colors.black87),
+                      style: ElevatedButton.styleFrom(primary: Colors.deepPurple.shade400),
                       onPressed: () {
                         Navigator.push(
                           context,

@@ -22,7 +22,7 @@ Widget ListWidget(item){
             Expanded(child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
-              
+
               children: [
                 Text(item['newsTitle'],
                   style: TextStyle(

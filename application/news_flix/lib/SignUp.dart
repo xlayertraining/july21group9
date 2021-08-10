@@ -28,92 +28,111 @@ class _MyWidgetState extends State<MyWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.pink,
-          iconTheme: IconThemeData(
-              color:Colors.white ),
-          title: Text(
-            "Welcome",
-            style: TextStyle(color: Colors.white),
-          ),
-        ),
+        // appBar: AppBar(
+        //   backgroundColor: Colors.pink,
+        //   iconTheme: IconThemeData(
+        //       color:Colors.black ),
+        //   title: Text(
+        //     "Welcome",
+        //     style: TextStyle(color: Colors.white),
+        //   ),
+        // ),
         body: Container(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
+                  colors: [Colors.white, Colors.purpleAccent.shade100]
+              )
+          ),
           padding: EdgeInsets.all(10),
           width: MediaQuery.of(context).size.width,
-          color: Colors.white70,
+          // color: Colors.white70,
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SizedBox(
-                  height: 10,
+                  height: 70,
                 ),
                 Text(
                   "Sign Up Form",
-                  style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 25.0,color: Colors.red.shade500, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(
-                  height: 20,
+                  height: 40,
                 ),
                 TextField(
                     decoration: InputDecoration(
                   labelText: "First name",
-                  labelStyle: TextStyle(color: Colors.pink),
+                  labelStyle: TextStyle(color: Colors.red.shade500),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20.0),
                   ),
                 )),
                 SizedBox(
-                  height: 20,
+                  height: 30,
                 ),
                 TextField(
                     decoration: InputDecoration(
                   labelText: "Last name",
-                  labelStyle: TextStyle(color: Colors.pink),
+                  labelStyle: TextStyle(color: Colors.red.shade500),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20.0),
                   ),
                 )),
                 SizedBox(
-                  height: 20,
+                  height: 30,
                 ),
                 TextField(
                     decoration: InputDecoration(
                       labelText: "Gender",
-                      labelStyle: TextStyle(color: Colors.pink),
+                      labelStyle: TextStyle(color: Colors.red.shade500),
                       hintText: 'Male or Female or Others',
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20.0),
                       ),
                     )),
                 SizedBox(
-                  height: 20,
+                  height: 30,
                 ),
                 TextField(
                     decoration: InputDecoration(
-                  labelText: "Email Or Phone No.",
-                  labelStyle: TextStyle(color: Colors.pink),
-                  suffixIcon: Icon(Icons.email),
+                      labelText: " Phone No.",
+                      labelStyle: TextStyle(color: Colors.red.shade500),
+                      suffixIcon: Icon(Icons.phone,color: Colors.black),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                    )),
+                SizedBox(
+                  height: 30,
+                ),
+                TextField(
+                    decoration: InputDecoration(
+                  labelText: "Email",
+                  labelStyle: TextStyle(color: Colors.red.shade500),
+                  suffixIcon: Icon(Icons.email,color: Colors.black),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20.0),
                   ),
                 )),
                 SizedBox(
-                  height: 20,
+                  height: 30,
                 ),
                 TextField(
                   obscureText: true,
                   decoration: InputDecoration(
                     labelText: 'Password',
-                    labelStyle: TextStyle(color: Colors.pink),
-                    suffixIcon: Icon(Icons.visibility_off),
+                    labelStyle: TextStyle(color: Colors.red.shade500),
+                    suffixIcon: Icon(Icons.visibility_off,color: Colors.black),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20.0),
                     ),
                   ),
                 ),
                 SizedBox(
-                  height: 10,
+                  height: 20,
                 ),
                 ElevatedButton(
                   onPressed: () {
@@ -123,7 +142,7 @@ class _MyWidgetState extends State<MyWidget> {
                   child: Text("Submit",style: TextStyle(
                     color: Colors.white
                   ),),
-                  style: ElevatedButton.styleFrom(primary: Colors.pink),
+                  style: ElevatedButton.styleFrom(primary: Colors.red),
                 ),
                 SizedBox(height: 20.0),
                 // GestureDetector(
