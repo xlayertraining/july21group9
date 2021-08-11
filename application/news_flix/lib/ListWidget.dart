@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 Widget ListWidget(item){
   return Card(
@@ -26,30 +28,15 @@ Widget ListWidget(item){
               children: [
                 Text(item['newsTitle'],
                   style: TextStyle(
-                    fontSize: 18,
+                    fontSize: 24,fontStyle: FontStyle.italic
                   ),),
-                SizedBox(
-                  width: 20,
-                ),
-                Icon(Icons.share,
-                    size:20
-                ),
+
                 SizedBox(
                   height: 5,
                 ),
                 Row(
                   children: [
-                    Icon(Icons.person),
-                    Text(
-                      item['author'],
-                      style: TextStyle(
-                        fontSize: 12,
-                      ),
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Icon(Icons.date_range),
+                    Icon(Icons.date_range,color: Colors.greenAccent,),
                     Text(
                       item['date'],
                       style: TextStyle(
@@ -59,15 +46,34 @@ Widget ListWidget(item){
                     SizedBox(
                       width: 10,
                     ),
-                    Icon(Icons.bookmark,
-                    size:20
-                    )
+                    Icon(Icons.bookmarks_outlined,color: Colors.lightBlueAccent,size: 20,),
+                    // SizedBox(
+                    //   width: 30,
+                    // ),
+                    // Icon(Icons.play_circle_fill,color: Colors.lightBlueAccent,size: 40,),
+
                   ],
-                )
+                ),
+                Row(
+                  children: [
+                    Icon(Icons.favorite_sharp,color: Colors.redAccent,
+                        size:20
+                    ),
+                    SizedBox(
+                      width: 30,
+                    ),
+                    Icon(Icons.comment_outlined,color: Colors.blue,
+                      size:20),
+                    SizedBox(
+                      width: 30,
+                    ),
+                    Icon(Icons.share,color: Colors.pinkAccent,size: 20,),
               ],
             )
+            ]
             )
-          ],
+            ),
+        ]
         ),
       )
   );

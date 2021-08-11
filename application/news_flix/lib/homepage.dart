@@ -5,6 +5,7 @@ import 'package:untitled2/ListWidget.dart';
 import 'AboutUs.dart';
 import 'Favourite.dart';
 import 'Loginpg.dart';
+import 'SearchPage.dart';
 import 'Settings.dart';
 import 'Share.dart';
 class HomePage extends StatefulWidget {
@@ -13,7 +14,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _currentIndex = 0;
   get listTiles1 => [
     {
       "newsTitle": 'Anime Planet',
@@ -207,23 +207,57 @@ class _HomePageState extends State<HomePage> {
   ];
   @override
   Widget build(BuildContext context) {
-    textStyle() {
-      return TextStyle(color: Colors.white, fontSize: 30.0);
-    }
     return new DefaultTabController(
       length: 6,
       child: Scaffold(
         appBar: AppBar(
-          toolbarHeight: 110,
+          toolbarOpacity: 0.5,
+          toolbarHeight: 120,
           title:Text("NEWS FLIX",
             style: TextStyle(
               color: Colors.white,
               fontSize: 24.0,
               fontStyle: FontStyle.italic,),
           ),
+          flexibleSpace: Container(
+          decoration: BoxDecoration(
+          gradient: LinearGradient(
+    begin: Alignment.centerLeft,
+    end: Alignment.centerRight,
+    colors: [Colors.cyan.shade100, Colors.blue.shade400]
+    ))),
+          // backgroundColor: Colors.redAccent,
+          //  child:Row(
+          //     mainAxisSize: MainAxisSize.min,
+          //     children: <Widget>[
+          //     Icon(Icons.search,color: Colors.grey),
+          // Expanded(
+          //   child: TextField(
+          //     // textAlign: TextAlign.center,
+          //     decoration: InputDecoration.collapsed(
+          //       hintText: ' Search by name or address',
+          //     ),
+          //     onChanged: (value) {
+          //
+          //     },
+          //   ),
+          // ),
+          actions: [
+            IconButton(color: Colors.black,iconSize: 28,splashRadius:10,
+                onPressed: () => Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (_) => SearchPage())),
+                icon: Icon(Icons.search,),),
+            SizedBox(
+              width: 10,
+            ),
+            Container(
+              width: 50,
+              child: Image.asset("assets/news.png"
+              ),
+                height: 200,
+              ),
+          ],
 
-
-          backgroundColor: Colors.redAccent,
           bottom:TabBar(
               isScrollable: true,
               indicatorWeight: 3.0 ,
@@ -255,7 +289,7 @@ class _HomePageState extends State<HomePage> {
           children: <Widget>[
             Padding(padding: EdgeInsets.all(8),
               child: Container(
-                color: Colors.pinkAccent.shade100,
+                color: Colors.lightBlue,
                 child: ListView.builder(
                    // scrollDirection: Axis.horizontal,
                   itemCount: listTiles1.length,

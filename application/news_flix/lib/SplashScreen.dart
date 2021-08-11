@@ -24,9 +24,20 @@ class SplashScreen extends StatelessWidget {
             alignment: Alignment.center,
             decoration: BoxDecoration(
                 gradient: LinearGradient(
-                    begin: Alignment.centerLeft,
-                    end: Alignment.centerRight,
-                    colors: [Colors.white, Colors.lightBlueAccent]
+                    begin: Alignment.topRight,
+                    end: Alignment.bottomLeft,
+                    stops: [
+                      0.2,
+                      0.5,
+                      0.8,
+                      0.7
+                    ],
+                    colors: [
+                    Colors.blue.shade50,
+                    Colors.blue.shade100,
+                    Colors.blue.shade200,
+                    Colors.blue.shade300,
+                  ]
                 )
             ),
         child: Column(
