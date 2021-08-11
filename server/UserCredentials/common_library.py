@@ -19,9 +19,12 @@ if os.path.isdir(imgPath) == False:
 
 def timeNow():
     return int(time.time())
+
+
 # Creating database connection
 db_server = motor.motor_asyncio.AsyncIOMotorClient("127.0.0.1", 27017)
 db_tableName = db_server["NewsFlix"]
 user_sign_up = db_tableName["Account"]
 user_image_folder = db_tableName["Post"]
-user_news_folder=db_tableName["news"]
+user_news_folder = db_tableName["news"]
+user_comment_folder = db_tableName["comments"]

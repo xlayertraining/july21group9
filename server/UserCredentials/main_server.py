@@ -3,6 +3,8 @@ from sign_up import signUpHandler
 from post import imageHandler
 from sign_in import signInHandler
 from search_News_api import searchEngineHandler
+from post_like import PostLikeHandler
+from post_comment import PostCommentHandler
 
 def app():
     return tornado.web.Application([
@@ -10,7 +12,8 @@ def app():
         (r"/web/api/sign/in", signInHandler),
         (r'/web/api/search', searchEngineHandler),
         (r'/web/api/post', imageHandler),
-
+        (r'/web/api/post/like',PostLikeHandler),
+        (r'/web/api/post/comment',PostCommentHandler)
     ])
 
 

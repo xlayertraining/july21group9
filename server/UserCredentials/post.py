@@ -60,19 +60,6 @@ class imageHandler(tornado.web.RequestHandler):
                     unixTime = str(timeNow())
                     fileName = str(imgPath+unixTime+fileType)
                     imageRaw = image['body']
-                    # try:
-
-                    #     if userImage:
-                    #         fh = open(fileName, 'wb')
-                    #         fh.write(imageRaw)
-                    #         fh.close()
-                    #         message = "Image has ben saved"
-                    #         self.write(message)
-                    #     else:
-                    #         print("Not inserted")
-                    # except:
-                    #     raise Exception
-
                 else:
                     message = "This file type is not supported."
 
@@ -81,14 +68,29 @@ class imageHandler(tornado.web.RequestHandler):
             user_news_folder.insert_one({
                 "title": title,
                 "body": body,
+                "like":0,
+                "likers":[],
                 "publisedTime": postTime,
                 "category": catagory,
                 "image": imageRaw,
                 "AccountId": account_id
             })
-
+            code=2000
+            status=True
+            message="News posted."
+            response={
+                "code":code,
+                "status":status,
+                "message":message
+            }
+            self.write(response)
         except:
-            self.write(message)
+            response={
+                "code":code,
+                "status":status,
+                "message":message
+            }
+            self.write(response)
 # /
 
     async def get(self):
@@ -176,7 +178,7 @@ class imageHandler(tornado.web.RequestHandler):
                 code = 3000
                 status = False
                 message = "invalid news id"
-            proUpdate = user_news_folder.delete_one(
+            proUpdate =await user_news_folder.delete_one(
                 {
                     "_id": newsId
                 },
