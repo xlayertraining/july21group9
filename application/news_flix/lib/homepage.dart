@@ -19,32 +19,30 @@ class _HomePageState extends State<HomePage> {
       "newsTitle": 'Anime Planet',
       'author': 'Rahul',
       'date': '6th August 2021',
-      'imageUrl': 'https://cdn.neow.in/news/images/uploaded/2019/06/1561493403_one_punch_man.jpg'
+      'imageUrl': 'https://cdn.neow.in/news/images/uploaded/2019/06/1561493403_one_punch_man.jpg',
+      "liked": true,
     },
     {
       "newsTitle": 'Headlines Tripura ',
       'author': 'Aniket Lodh',
       'date': '5th August 2021',
-      'imageUrl': 'https://thelogicalindian.com/h-upload/2020/07/21/177535-tripurafb.jpg'
+      'imageUrl': 'https://thelogicalindian.com/h-upload/2020/07/21/177535-tripurafb.jpg',
+      "liked": false,
     },
     {
       "newsTitle": 'India Today',
       'author': 'Samyadeep ',
       'date': '3rd August 2021',
-      'imageUrl': 'https://s3images.zee5.com/wp-content/uploads/sites/7/2021/08/india-vs-england-784x441.jpg'
+      'imageUrl': 'https://s3images.zee5.com/wp-content/uploads/sites/7/2021/08/india-vs-england-784x441.jpg',
+      "liked": true,
     },
     {
       "newsTitle": 'BBC News',
       'author': 'Nabanit Roy',
       'date': '2rd August 2021',
-      'imageUrl': 'https://www.mtbs3d.com/gallery/albums/userpics/10002/bbcnews_logo.jpg'
-    },
-    {
-      "newsTitle": 'Newyork Times',
-      'author': 'Basab',
-      'date': '3rd August 2021',
-      'imageUrl': 'https://images.template.net/wp-content/uploads/2019/04/Metalogic-%E2%80%93-Responsive-WordPress-Theme.jpeg'
-    },
+      'imageUrl': 'https://www.mtbs3d.com/gallery/albums/userpics/10002/bbcnews_logo.jpg',
+      "liked": false,
+    }
   ];
   get listTiles2 => [
     {
@@ -246,16 +244,26 @@ class _HomePageState extends State<HomePage> {
             IconButton(color: Colors.black,iconSize: 28,splashRadius:10,
                 onPressed: () => Navigator.of(context)
                     .push(MaterialPageRoute(builder: (_) => SearchPage())),
-                icon: Icon(Icons.search,),),
-            SizedBox(
-              width: 10,
+                icon: Icon(Icons.search,),
             ),
-            Container(
-              width: 50,
-              child: Image.asset("assets/news.png"
+            IconButton(
+              icon: Icon(
+                Icons.notifications_active,
+                color: Colors.red,
               ),
-                height: 200,
-              ),
+              onPressed: () {
+                // do something
+              },
+            ),
+            // SizedBox(
+            //   width: 10,
+            // ),
+            // Container(
+            //   width: 50,
+            //   child: Image.asset("assets/news.png"
+            //   ),
+            //     height: 200,
+            //   ),
           ],
 
           bottom:TabBar(
@@ -287,22 +295,20 @@ class _HomePageState extends State<HomePage> {
         ),
         body:TabBarView(
           children: <Widget>[
-            Padding(padding: EdgeInsets.all(8),
-              child: ListView.builder(
-                 // scrollDirection: Axis.horizontal,
-                itemCount: listTiles1.length,
-                itemBuilder: (context,index){
-                  return InkWell(
-                    onTap: (){},
-                    child: ListWidget(listTiles1[index]),
-                  );
-                },
-              ),
+            ListView.builder(
+               // scrollDirection: Axis.horizontal,
+              itemCount: listTiles1.length,
+              itemBuilder: (context,index){
+                return InkWell(
+                  onTap: (){},
+                  child: ListWidget(listTiles1[index]),
+                );
+              },
             ),
 
             Padding(padding: EdgeInsets.all(8),
               child: Container(
-                color: Colors.lightBlueAccent,
+                // color: Colors.lightBlueAccent,
                 child: ListView.builder(
                   itemCount: listTiles2.length,
                   itemBuilder: (context,index){
@@ -316,7 +322,7 @@ class _HomePageState extends State<HomePage> {
             ),
             Padding(padding: EdgeInsets.all(8),
               child: Container(
-                color: Colors.greenAccent,
+                // color: Colors.greenAccent,
                 child: ListView.builder(
                   itemCount: listTiles3.length,
                   itemBuilder: (context,index){
@@ -328,18 +334,16 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
-            Padding(padding: EdgeInsets.all(8),
-              child: Container(
-                color: Colors.greenAccent,
-                child: ListView.builder(
-                  itemCount: listTiles4.length,
-                  itemBuilder: (context,index){
-                    return InkWell(
-                      onTap: (){},
-                      child: ListWidget(listTiles4[index]),
-                    );
-                  },
-                ),
+            Container(
+              color: Colors.greenAccent,
+              child: ListView.builder(
+                itemCount: listTiles4.length,
+                itemBuilder: (context,index){
+                  return InkWell(
+                    onTap: (){},
+                    child: ListWidget(listTiles4[index]),
+                  );
+                },
               ),
             ),
 
@@ -447,9 +451,12 @@ class _HomePageState extends State<HomePage> {
                   );
                 },
               ),
+              const SizedBox(height: 15),
+              Divider(color: Colors.black),
+              const SizedBox(height: 10),
               ListTile(
-                leading: Icon(Icons.share,color:Colors.lightBlueAccent),
-                title: const Text('Share'),
+                leading: Icon(Icons.bookmarks,color:Colors.lightBlueAccent),
+                title: const Text('bookmark'),
                 onTap: () {
                   // Update the state of the app
                   // ...
@@ -459,18 +466,30 @@ class _HomePageState extends State<HomePage> {
                   );
                 },
               ),
-              ListTile(
-                leading: Icon(Icons.settings,color:Colors.black ),
-                title: const Text('Settings'),
-                onTap: () {
-                  // Update the state of the app
-                  // ...
-                  // Then close the drawer
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Settings())
-                  );
-                },
-              ),
+
+
+              const SizedBox(height: 10),
+              Divider(color: Colors.black),
+              const SizedBox(height: 10),
+              // ListTile(
+              //   leading: Icon(Icons.notifications,color:Colors.red.shade600 ),
+              //   title: const Text('Notification'),
+              //   onTap: () {},
+              //   trailing: ClipOval(
+              //     child:Container(
+              //       color: Colors.red,
+              //       width: 20,
+              //       height: 20,
+              //       child:Center(
+              //         child: Text(
+              //           '6',style: TextStyle(color: Colors.white,
+              //             fontSize:12 ),
+              //         ),
+              //       ),
+              //     ),
+              //   ),
+              // ),
+
               ListTile(
                 leading: Icon(Icons.description),
                 title: const Text('About us'),
@@ -483,38 +502,10 @@ class _HomePageState extends State<HomePage> {
                   );
                 },
               ),
-
               const SizedBox(height: 10),
               Divider(color: Colors.black),
               const SizedBox(height: 10),
-              ListTile(
-                leading: Icon(Icons.notifications,color:Colors.red.shade600 ),
-                title: const Text('Notification'),
-                onTap: () {},
-                trailing: ClipOval(
-                  child:Container(
-                    color: Colors.red,
-                    width: 20,
-                    height: 20,
-                    child:Center(
-                      child: Text(
-                        '6',style: TextStyle(color: Colors.white,
-                          fontSize:12 ),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              ListTile(
-                leading: Icon(Icons.search,color:Colors.blue.shade600 ),
-                title: const Text('Search'),
-                onTap: () {
-                  // Update the state of the app
-                  // ...
-                  // Then close the drawer
-                  Navigator.pop(context);
-                },
-              ),
+
               ListTile(
                 leading: Icon(Icons.settings_power,
                     color:Colors.red ),
