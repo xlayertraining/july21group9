@@ -7,6 +7,7 @@ from post_comment import PostCommentHandler
 from post_favourites import Postfavouriteshandler
 from search_news import SearchNewsHandler
 from user_profile import ProfileHandler
+from user_post import UserSharedPostHandler
 
 def app():
     return tornado.web.Application([
@@ -17,7 +18,8 @@ def app():
         (r'/web/api/post/comment',PostCommentHandler),
         (r'/web/api/post/favourites',Postfavouriteshandler),
         (r'/web/api/post/search',SearchNewsHandler),
-        (r'/web/api/profile',ProfileHandler)
+        (r'/web/api/profile',ProfileHandler),
+        (r'/web/api/post/user',UserSharedPostHandler)
 
     ])
 

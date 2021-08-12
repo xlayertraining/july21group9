@@ -108,7 +108,7 @@ class imageHandler(tornado.web.RequestHandler):
                 raise Exception
 
             try:
-                category_id = int(self.request.arguments["category"][0])
+                category_id = int(self.request.arguments["category"][0].decode())
             except:
                 message = "inValid category"
                 raise Exception
