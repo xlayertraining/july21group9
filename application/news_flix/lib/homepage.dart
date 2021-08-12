@@ -288,18 +288,15 @@ class _HomePageState extends State<HomePage> {
         body:TabBarView(
           children: <Widget>[
             Padding(padding: EdgeInsets.all(8),
-              child: Container(
-                color: Colors.lightBlue,
-                child: ListView.builder(
-                   // scrollDirection: Axis.horizontal,
-                  itemCount: listTiles1.length,
-                  itemBuilder: (context,index){
-                    return InkWell(
-                      onTap: (){},
-                      child: ListWidget(listTiles1[index]),
-                    );
-                  },
-                ),
+              child: ListView.builder(
+                 // scrollDirection: Axis.horizontal,
+                itemCount: listTiles1.length,
+                itemBuilder: (context,index){
+                  return InkWell(
+                    onTap: (){},
+                    child: ListWidget(listTiles1[index]),
+                  );
+                },
               ),
             ),
 
