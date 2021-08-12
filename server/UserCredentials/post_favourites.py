@@ -46,4 +46,48 @@ class Postfavouriteshandler(tornado.web.RequestHandler):
                 "message": message
             }
             self.write(response)
+
+
 # /
+
+    async def get(self):
+        code = 4000
+        status = False
+        message = ""
+        result = []
+        try:
+            account_id = await SecureHeader.decrypt(self.request.headers["Authorization"])
+            if account_id == None:
+                message = "You're not authorized"
+                raise Exception
+
+            post_List = user_news_folder.find({
+                "favourites": account_id
+            })
+            async for i in post_List:
+                del[i["image"]]
+                # i["image"]=str(i["image"])
+                # i["image"]=json.loads(i["image"])
+                i['_id'] = str(i['_id'])
+                i["fav_user"] = False
+                if account_id in i["favourites"]:
+                    i["fav_user"] = True
+                account_find = await user_sign_up.find_one({"_id": ObjectId(i["AccountId"])})
+                if account_find:
+                    i["author"] = account_find["userName"]
+                result.append(i)
+            response = {
+                "code": code,
+                "status": status,
+                "message": message,
+                "result": result
+            }
+            self.write(response)
+        except:
+            response = {
+                "code": code,
+                "status": status,
+                "message": message,
+                "result": result
+            }
+            self.write(response)
