@@ -22,7 +22,7 @@ environment:
   sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
-
+  comment_box: ^0.0.16
   flutter:
     sdk: flutter
   lottie: ^1.1.0

@@ -3,6 +3,8 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'CommentPage.dart';
+
 class ListWidget extends StatefulWidget {
 
   Map itemData;
@@ -74,7 +76,10 @@ class _ListWidgetState extends State<ListWidget> {
                         color: (item!['liked'] == null || item!['liked'] == false)? Colors.grey : Colors.blue,
                       ),
                     ),
-                    IconButton(onPressed: () {},
+                    IconButton(onPressed: () {
+                      Navigator.push(
+                          context,MaterialPageRoute(builder: (context) =>CommentPage()));
+                    },
                       icon: Icon(
                         Icons.comment,
                         color: (item!['liked'] == null || item!['liked'] == false)? Colors.grey : Colors.blue,

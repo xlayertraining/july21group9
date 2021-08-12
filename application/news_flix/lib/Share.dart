@@ -12,7 +12,7 @@ class Share extends StatelessWidget {
         backgroundColor: Colors.purpleAccent[78],
         iconTheme: IconThemeData(color: Colors.white),
         title: Text(
-          "Share",
+          "Bookmark",
           style: TextStyle(
               color: Colors.white,
               fontSize: 24.0,

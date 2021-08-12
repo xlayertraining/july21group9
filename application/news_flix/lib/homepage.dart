@@ -335,7 +335,6 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             Container(
-              color: Colors.greenAccent,
               child: ListView.builder(
                 itemCount: listTiles4.length,
                 itemBuilder: (context,index){
@@ -349,7 +348,6 @@ class _HomePageState extends State<HomePage> {
 
             Padding(padding: EdgeInsets.all(8),
               child: Container(
-                color: Colors.greenAccent,
                 child: ListView.builder(
                   itemCount: listTiles5.length,
                   itemBuilder: (context,index){
