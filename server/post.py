@@ -25,7 +25,7 @@ class imageHandler(tornado.web.RequestHandler):
                 message = "Please enter valid title.[1-100]"
                 raise Exception
             try:
-                body = self.request.arguments["body"][0].decode()
+                body = self.request.arguments["description"][0].decode()
                 if body == None or body == "" or len(body) > 1000:
                     raise Exception
             except:
@@ -67,7 +67,7 @@ class imageHandler(tornado.web.RequestHandler):
                 raise Exception
             user_news_folder.insert_one({
                 "title": title,
-                "body": body,
+                "description": body,
                 "like":0,
                 "likers":[],
                 "publisedTime": postTime,
