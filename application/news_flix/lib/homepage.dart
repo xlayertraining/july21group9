@@ -246,16 +246,26 @@ class _HomePageState extends State<HomePage> {
             IconButton(color: Colors.black,iconSize: 28,splashRadius:10,
                 onPressed: () => Navigator.of(context)
                     .push(MaterialPageRoute(builder: (_) => SearchPage())),
-                icon: Icon(Icons.search,),),
-            SizedBox(
-              width: 10,
+                icon: Icon(Icons.search,),
             ),
-            Container(
-              width: 50,
-              child: Image.asset("assets/news.png"
+            IconButton(
+              icon: Icon(
+                Icons.notifications_active,
+                color: Colors.red,
               ),
-                height: 200,
-              ),
+              onPressed: () {
+                // do something
+              },
+            ),
+            // SizedBox(
+            //   width: 10,
+            // ),
+            // Container(
+            //   width: 50,
+            //   child: Image.asset("assets/news.png"
+            //   ),
+            //     height: 200,
+            //   ),
           ],
 
           bottom:TabBar(
@@ -289,7 +299,7 @@ class _HomePageState extends State<HomePage> {
           children: <Widget>[
             Padding(padding: EdgeInsets.all(8),
               child: Container(
-                color: Colors.lightBlue,
+                // color: Colors.lightBlue,
                 child: ListView.builder(
                    // scrollDirection: Axis.horizontal,
                   itemCount: listTiles1.length,
@@ -305,7 +315,7 @@ class _HomePageState extends State<HomePage> {
 
             Padding(padding: EdgeInsets.all(8),
               child: Container(
-                color: Colors.lightBlueAccent,
+                // color: Colors.lightBlueAccent,
                 child: ListView.builder(
                   itemCount: listTiles2.length,
                   itemBuilder: (context,index){
@@ -319,7 +329,7 @@ class _HomePageState extends State<HomePage> {
             ),
             Padding(padding: EdgeInsets.all(8),
               child: Container(
-                color: Colors.greenAccent,
+                // color: Colors.greenAccent,
                 child: ListView.builder(
                   itemCount: listTiles3.length,
                   itemBuilder: (context,index){
@@ -450,9 +460,12 @@ class _HomePageState extends State<HomePage> {
                   );
                 },
               ),
+              const SizedBox(height: 15),
+              Divider(color: Colors.black),
+              const SizedBox(height: 10),
               ListTile(
-                leading: Icon(Icons.share,color:Colors.lightBlueAccent),
-                title: const Text('Share'),
+                leading: Icon(Icons.bookmarks,color:Colors.lightBlueAccent),
+                title: const Text('bookmark'),
                 onTap: () {
                   // Update the state of the app
                   // ...
@@ -462,18 +475,30 @@ class _HomePageState extends State<HomePage> {
                   );
                 },
               ),
-              ListTile(
-                leading: Icon(Icons.settings,color:Colors.black ),
-                title: const Text('Settings'),
-                onTap: () {
-                  // Update the state of the app
-                  // ...
-                  // Then close the drawer
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Settings())
-                  );
-                },
-              ),
+
+
+              const SizedBox(height: 10),
+              Divider(color: Colors.black),
+              const SizedBox(height: 10),
+              // ListTile(
+              //   leading: Icon(Icons.notifications,color:Colors.red.shade600 ),
+              //   title: const Text('Notification'),
+              //   onTap: () {},
+              //   trailing: ClipOval(
+              //     child:Container(
+              //       color: Colors.red,
+              //       width: 20,
+              //       height: 20,
+              //       child:Center(
+              //         child: Text(
+              //           '6',style: TextStyle(color: Colors.white,
+              //             fontSize:12 ),
+              //         ),
+              //       ),
+              //     ),
+              //   ),
+              // ),
+
               ListTile(
                 leading: Icon(Icons.description),
                 title: const Text('About us'),
@@ -486,38 +511,10 @@ class _HomePageState extends State<HomePage> {
                   );
                 },
               ),
-
               const SizedBox(height: 10),
               Divider(color: Colors.black),
               const SizedBox(height: 10),
-              ListTile(
-                leading: Icon(Icons.notifications,color:Colors.red.shade600 ),
-                title: const Text('Notification'),
-                onTap: () {},
-                trailing: ClipOval(
-                  child:Container(
-                    color: Colors.red,
-                    width: 20,
-                    height: 20,
-                    child:Center(
-                      child: Text(
-                        '6',style: TextStyle(color: Colors.white,
-                          fontSize:12 ),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              ListTile(
-                leading: Icon(Icons.search,color:Colors.blue.shade600 ),
-                title: const Text('Search'),
-                onTap: () {
-                  // Update the state of the app
-                  // ...
-                  // Then close the drawer
-                  Navigator.pop(context);
-                },
-              ),
+
               ListTile(
                 leading: Icon(Icons.settings_power,
                     color:Colors.red ),

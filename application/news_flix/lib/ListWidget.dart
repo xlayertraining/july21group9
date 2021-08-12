@@ -15,7 +15,7 @@ Widget ListWidget(item){
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: NetworkImage(item['imageUrl']),
-                  fit: BoxFit.cover,
+                  fit: BoxFit.fitHeight,
                 ),
                 borderRadius: BorderRadius.circular(12),
               ),
@@ -46,7 +46,9 @@ Widget ListWidget(item){
                     SizedBox(
                       width: 10,
                     ),
-                    Icon(Icons.bookmarks_outlined,color: Colors.lightBlueAccent,size: 20,),
+                    Icon(Icons.bookmarks_outlined,color: Colors.lightBlueAccent,size: 20,
+
+                    ),
                     // SizedBox(
                     //   width: 30,
                     // ),
