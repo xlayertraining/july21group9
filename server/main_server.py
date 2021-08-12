@@ -11,19 +11,19 @@ from user_post import UserSharedPostHandler
 
 def app():
     return tornado.web.Application([
-        (r"/web/api/sign/up", signUpHandler),
-        (r"/web/api/sign/in", signInHandler),
-        (r'/web/api/post', imageHandler),
-        (r'/web/api/post/like',PostLikeHandler),
-        (r'/web/api/post/comment',PostCommentHandler),
-        (r'/web/api/post/favourites',Postfavouriteshandler),
-        (r'/web/api/post/search',SearchNewsHandler),
-        (r'/web/api/profile',ProfileHandler),
-        (r'/web/api/post/user',UserSharedPostHandler)
+        (r"/julygroup9_web/api/sign/up", signUpHandler),
+        (r"/julygroup9_web/api/sign/in", signInHandler),
+        (r'/julygroup9_web/api/post', imageHandler),
+        (r'/julygroup9_web/api/post/like',PostLikeHandler),
+        (r'/julygroup9_web/api/post/comment',PostCommentHandler),
+        (r'/julygroup9_web/api/post/favourites',Postfavouriteshandler),
+        (r'/julygroup9_web/api/post/search',SearchNewsHandler),
+        (r'/julygroup9_web/api/profile',ProfileHandler),
+        (r'/julygroup9_web/api/post/user',UserSharedPostHandler)
 
     ])
 
 
 if __name__ == "__main__":
-    app().listen(8888)
+    app().listen(8009)
     tornado.ioloop.IOLoop.current().start()
