@@ -11,10 +11,8 @@ import os
 import requests
 import jwt
 from bson import ObjectId
-from newsapi import newsapi_client
-imgPath = r"D:/xlayer_Tech/july21group9/server/Uploads/"
-if os.path.isdir(imgPath) == False:
-    os.makedirs(imgPath)
+
+
 
 
 def timeNow():

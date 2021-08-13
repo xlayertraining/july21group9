@@ -12,6 +12,8 @@ class signInHandler(tornado.web.RequestHandler):
                 jsonbody = json.loads(self.request.body)
                 print(jsonbody)
             except:
+                code = 4000
+                status = False
                 message = "Invalid JSON body"
                 raise Exception
             # Getting the fields username/emailAddress,password
@@ -21,16 +23,22 @@ class signInHandler(tornado.web.RequestHandler):
                 emailAddress = jsonbody.get('emailAddress')
                 emailAddress.lower()
                 if emailAddress == None or emailAddress == "":
+                    code = 6724
+                    status = False
                     message = "Email cant be empty!"
                     raise Exception
 
                 regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
                 if re.match(regex, emailAddress) == None:
+                    code = 3245
+                    status = False
                     message = "Please submit valid email Address!"
                     raise Exception
 
                 emailFind = await user_sign_up.find_one({"emailAddress": emailAddress})
                 if not emailFind:
+                    code = 9856
+                    status = False
                     message = "Email is not Registered!"
                     raise Exception
             except:
@@ -40,19 +48,21 @@ class signInHandler(tornado.web.RequestHandler):
             try:
                 userPassword = jsonbody.get('password')
                 if userPassword == None or userPassword == "":
+                    code = 7239
+                    status = False
                     message = "password can't be empty!"
                     raise Exception
             except:
                 raise Exception
 
-            
             try:
                 findUser = await user_sign_up.find_one({
                     "emailAddress": emailAddress,
                     "password": userPassword
                 })
-                print(findUser)
                 if not findUser:
+                    code = 4000
+                    status = False
                     message = "Invalid email or password!"
                     raise Exception
                 else:
@@ -89,5 +99,12 @@ class signInHandler(tornado.web.RequestHandler):
             except:
                 raise Exception
         except:
-            self.write(message)
+            response = {
+                'code': code,
+                'status': status,
+                'message': message,
+                'result': result
+            }
+            self.write(response)
             self.finish()
+            return

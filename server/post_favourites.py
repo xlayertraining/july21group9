@@ -15,13 +15,19 @@ class Postfavouriteshandler(tornado.web.RequestHandler):
         try:
             account_id = await SecureHeader.decrypt(self.request.headers["Authorization"])
             if account_id == None:
+                code = 4000
+                status = False
                 message = "You're not authorized"
                 raise Exception
             try:
                 post_Id = ObjectId(
                     self.request.arguments['postId'][0].decode())
             except:
+                code = 3920
+                status = False
+                message = "Invalid Post Id"
                 raise Exception
+
             post_Find = await user_news_folder.find_one({
                 "favourites": account_id,
                 "_id": post_Id
@@ -33,19 +39,38 @@ class Postfavouriteshandler(tornado.web.RequestHandler):
                     "$pull": {"favourites": account_id}
 
                 })
+                code = 200
+                status = True
+                message = "Removed from favourites"
             else:
                 favourites_Update = await user_news_folder.update_one({
                     "_id": post_Id
                 }, {
                     "$push": {"favourites": account_id}
                 })
+                code = 200
+                status = True
+                message = "Added to favourites"
+
+            response = {
+                "code": code,
+                "status": status,
+                "message": message,
+                "result":result
+            }
+            self.write(response)
+            self.finish()
+            return
         except:
             response = {
                 "code": code,
                 "status": status,
-                "message": message
+                "message": message,
+                "result":result
             }
             self.write(response)
+            self.finish()
+            return
 
 
 # /
@@ -58,6 +83,8 @@ class Postfavouriteshandler(tornado.web.RequestHandler):
         try:
             account_id = await SecureHeader.decrypt(self.request.headers["Authorization"])
             if account_id == None:
+                code = 4000
+                status = False
                 message = "You're not authorized"
                 raise Exception
 
@@ -67,7 +94,6 @@ class Postfavouriteshandler(tornado.web.RequestHandler):
             async for i in post_List:
                 del[i["image"]]
                 # i["image"]=str(i["image"])
-                # i["image"]=json.loads(i["image"])
                 i['_id'] = str(i['_id'])
                 i["fav_user"] = False
                 if account_id in i["favourites"]:
@@ -83,6 +109,8 @@ class Postfavouriteshandler(tornado.web.RequestHandler):
                 "result": result
             }
             self.write(response)
+            self.finish()
+            return
         except:
             response = {
                 "code": code,
@@ -91,3 +119,5 @@ class Postfavouriteshandler(tornado.web.RequestHandler):
                 "result": result
             }
             self.write(response)
+            self.finish()
+            return

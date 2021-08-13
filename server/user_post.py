@@ -30,11 +30,10 @@ class UserSharedPostHandler(tornado.web.RequestHandler):
                 message = "Shared News"
                 
             except:
+                code = 5623
                 status = False
-                if not len(message):
-                    code = 5623
-                    status = False
-                    message = 'Internal Error, Please Contact the Support Team.'
+                message = 'Internal Error, Please Contact the Support Team.'
+                raise Exception
             response = {
                 'code': code,
                 'status': status,

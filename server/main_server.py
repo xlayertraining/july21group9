@@ -20,7 +20,6 @@ def app():
         (r'/julygroup9_web/api/post/search',SearchNewsHandler),
         (r'/julygroup9_web/api/profile',ProfileHandler),
         (r'/julygroup9_web/api/post/user',UserSharedPostHandler)
-
     ])
 
 

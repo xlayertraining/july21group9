@@ -16,11 +16,16 @@ class SearchNewsHandler(tornado.web.RequestHandler):
         try:
             account_id = await SecureHeader.decrypt(self.request.headers["Authorization"])
             if account_id == None:
+                code = 8765
+                status = False
                 message = "You're not authorized"
                 raise Exception
             try:
                 keyword = self.request.arguments["keyword"][0].decode()
             except:
+                code = 3289
+                status = False
+                message="Enter Valid keyword"
                 raise Exception
 
             news_List = user_news_folder.find({
@@ -42,7 +47,6 @@ class SearchNewsHandler(tornado.web.RequestHandler):
             async for i in news_List:
                 # del[i["image"]]
                 i["image"] = str(i["image"])
-                 # i["image"]=json.loads(i["image"])
                 i['_id'] = str(i['_id'])
                 account_find = await user_sign_up.find_one({"_id": ObjectId(i["AccountId"])})
                 if account_find:
@@ -55,6 +59,8 @@ class SearchNewsHandler(tornado.web.RequestHandler):
                 "result": result
             }
             self.write(response)
+            self.finish()
+            return
         except:
             response = {
                 "code": code,
@@ -63,4 +69,6 @@ class SearchNewsHandler(tornado.web.RequestHandler):
                 "result": result
             }
             self.write(response)
+            self.finish()
+            return
 # /

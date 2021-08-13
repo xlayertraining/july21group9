@@ -22,9 +22,13 @@ class signUpHandler(tornado.web.RequestHandler):
             try:
                 firstName = jsonBody.get('firstName')
                 if firstName == None:
+                    code = 6743
+                    status = False
                     message = "User name can't be empty"
                     raise Exception
                 if len(firstName) < 3 or len(firstName) > 20:
+                    code = 8971
+                    status = False
                     message = "please submit valid user name[3-20]"
                     raise Exception
                 firstName.title()
@@ -35,9 +39,13 @@ class signUpHandler(tornado.web.RequestHandler):
             try:
                 lastName = jsonBody.get('lastName')
                 if lastName == None:
+                    code = 6743
+                    status = False
                     message = "User name can't be empty"
                     raise Exception
                 if len(lastName) < 3 or len(lastName) > 15:
+                    code = 8971
+                    status = False
                     message = "please submit valid user name[3-20]"
                     raise Exception
                 lastName = lastName.title()
@@ -47,11 +55,15 @@ class signUpHandler(tornado.web.RequestHandler):
             try:
                 emailAddress = jsonBody.get("emailAddress")
                 if emailAddress == None or emailAddress == "":
+                    code = 6724
+                    status = False
                     message = "Please enter valid email address!"
                     raise Exception
                 else:
                     regex = r'\b[A-Za-z0-9._+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
                     if(re.match(regex, emailAddress) == None):
+                        code = 3245
+                        status = False
                         message = "Email format is invalid!"
                         raise Exception
                     emailAddress = emailAddress.lower()
@@ -59,6 +71,8 @@ class signUpHandler(tornado.web.RequestHandler):
                     "emailAddress": emailAddress
                 })
                 if emailfind:
+                    code = 9856
+                    status = False
                     message = "Email is already registered!"
                     raise Exception
             except:
@@ -68,11 +82,17 @@ class signUpHandler(tornado.web.RequestHandler):
                 phoneNumber = int(jsonBody['phoneNumber'])
 
                 if len(str(phoneNumber)) != 10:
+                    code = 4671
+                    status = False
                     message = "Please enter valid Phone Number!"
                     raise Exception
+
                 user_phone_confirm = await user_sign_up.find_one(
                     {"phoneNumber": phoneNumber})
+
                 if user_phone_confirm:
+                    code = 8261
+                    status = False
                     message = "Phone Number is already Registered!"
                     raise Exception
             except:
@@ -81,18 +101,13 @@ class signUpHandler(tornado.web.RequestHandler):
             try:
                 usrPassword = jsonBody.get('password')
                 if len(usrPassword) < 5 or len(usrPassword) > 20:
+                    code = 7239
+                    status = False
                     message = "Password limit exceeded[5-20]"
                     raise Exception
             except:
                 raise Exception
-            # try:
-            #     encoded_jwt = str(jwt.encode(
-            #         {"userPassword": usrPassword, "userEmail": emailAddress}, "icfai", algorithm="HS256"))
-            #     print(encoded_jwt)
-            #     result.append({"User Authorization key":encoded_jwt})
-            # except:
-            #     message = "problem in jwt"
-            #     raise Exception
+
             users_info = await user_sign_up.insert_one({
                 "firstName": firstName,
                 "lastName": lastName,
@@ -106,30 +121,32 @@ class signUpHandler(tornado.web.RequestHandler):
             encoded_jwt = jwt.encode(
                 {"key": account_id}, "icfai", algorithm="HS256")
             result.append({"Authorization": encoded_jwt})
-            # eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJrZXkiOiJkZXJldnczdmVhaS5vaXdmZWguMDhAZ21haWwuY29tIn0.2FwRO2wFkd9nwYjQOJdYVrmKTOo09F9U1uLxpitollE
             code = 200
             status = True
             message = "Sign-up Successfull"
+            response = {
+                "code": code,
+                "status": status,
+                "message": message,
+                "result": result
+            }
             try:
-                response = {
-                    "code": code,
-                    "status": status,
-                    "message": message,
-                    "result": result
-                }
                 self.write(response)
                 self.finish()
+                return
             except:
                 status = False
                 code = 5011
                 message = 'Internal Error, Please Contact the Support Team.'
-                response = {
-                    'code': code,
-                    'status': status,
-                    'message': message
-                }
                 self.write(response)
                 self.finish()
                 return
         except:
-            self.write(message)
+            response = {
+                'code': code,
+                'status': status,
+                'message': message
+            }
+            self.write(response)
+            self.finish()
+            return

@@ -41,25 +41,13 @@ class ProfileHandler(tornado.web.RequestHandler):
             response = {
                 'code': code,
                 'status': status,
-                'message': message
-            }
-            try:
-                response['result'] = result
-                self.write(response)
-                self.finish()
-                return
-            except:
-                status = False
-                code = 5011
-                message = 'Internal Error, Please Contact the Support Team.'
-            response = {
-                'code': code,
-                'status': status,
-                'message': message
+                'message': message,
+                'result':result
             }
             self.write(response)
             self.finish()
             return
+
         except:
             response = {
                 'code': code,
@@ -133,30 +121,21 @@ class ProfileHandler(tornado.web.RequestHandler):
             response = {
                 'code': code,
                 'status': status,
-                'message': message
-            }
-            try:
-                response['result'] = result
-                self.write(response)
-                self.finish()
-                return
-            except:
-                status = False
-                code = 5011
-                message = 'Internal Error, Please Contact the Support Team.'
-            response = {
-                'code': code,
-                'status': status,
-                'message': message
+                'message': message,
+                'result':result
+
             }
             self.write(response)
             self.finish()
             return
+
         except:
             response = {
                 'code': code,
                 'status': status,
-                'message': message
+                'message': message,
+                'result':result
+
             }
             self.write(response)
             self.finish()

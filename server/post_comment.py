@@ -71,6 +71,8 @@ class PostCommentHandler(tornado.web.RequestHandler):
             # Getting user authorization token
             account_id = await SecureHeader.decrypt(self.request.headers["Authorization"])
             if account_id == None:
+                code=4000
+                status=False
                 message = "You're not authorized"
                 raise Exception
             try:
@@ -78,6 +80,9 @@ class PostCommentHandler(tornado.web.RequestHandler):
                 post_Id = ObjectId(
                     self.request.arguments['postId'][0].decode())
             except:
+                code=3920
+                status=False
+                message="Invalid Post Id"
                 raise Exception
 
             # Getting all the available comments on tht post
@@ -99,6 +104,8 @@ class PostCommentHandler(tornado.web.RequestHandler):
                 "result": result
             }
             self.write(response)
+            self.finish()
+            return
         except:
             response = {
                 "code": code,
@@ -107,4 +114,6 @@ class PostCommentHandler(tornado.web.RequestHandler):
                 "result": result
             }
             self.write(response)
+            self.finish()
+            return
 # /

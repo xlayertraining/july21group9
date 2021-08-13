@@ -15,17 +15,24 @@ class PostLikeHandler(tornado.web.RequestHandler):
         try:
             account_id = await SecureHeader.decrypt(self.request.headers["Authorization"])
             if account_id == None:
+                code = 8765
+                status = False
                 message = "You're not authorized"
                 raise Exception
             try:
                 post_Id = ObjectId(
                     self.request.arguments['postId'][0].decode())
             except:
+                code = 5683
+                status = False
+                message = "Invalid Post-Id"
                 raise Exception
+
             post_Find = await user_news_folder.find_one({
                 "likers": account_id,
                 "_id": post_Id
             })
+
             if post_Find:
                 like_Update = await user_news_folder.update_one({
                     "_id": post_Id
@@ -41,6 +48,7 @@ class PostLikeHandler(tornado.web.RequestHandler):
                     "$inc": {"like": 1},
                     "$push": {"likers": account_id}
                 })
+           
         except:
             response = {
                 "code": code,
@@ -48,4 +56,6 @@ class PostLikeHandler(tornado.web.RequestHandler):
                 "message": message
             }
             self.write(response)
+            self.finish()
+            return
 # /
