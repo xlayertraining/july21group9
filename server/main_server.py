@@ -8,6 +8,7 @@ from post_favourites import Postfavouriteshandler
 from search_news import SearchNewsHandler
 from user_profile import ProfileHandler
 from user_post import UserSharedPostHandler
+from post_dislike import PostDislikeHandler
 
 def app():
     return tornado.web.Application([
@@ -19,7 +20,8 @@ def app():
         (r'/julygroup9_web/api/post/favourites',Postfavouriteshandler),
         (r'/julygroup9_web/api/post/search',SearchNewsHandler),
         (r'/julygroup9_web/api/profile',ProfileHandler),
-        (r'/julygroup9_web/api/post/user',UserSharedPostHandler)
+        (r'/julygroup9_web/api/post/user',UserSharedPostHandler),
+        (r'/julygroup9_web/api/post/dislike',PostDislikeHandler)
     ])
 
 

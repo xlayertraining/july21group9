@@ -58,7 +58,15 @@ class imageHandler(tornado.web.RequestHandler):
                 status = False
                 message = "submit valid category"
                 raise Exception
-
+            try:
+                tags = self.request.arguments["tags"][0].decode()
+                tags = eval(tags)
+                if tags == None or type(tags) != list or not len(tags):
+                    raise Exception
+                
+            except:
+                tags=[]
+                   
             try:
                 fileType = str(mimetypes.guess_extension(
                     image['content_type'], strict=True))
@@ -77,6 +85,9 @@ class imageHandler(tornado.web.RequestHandler):
                     "favourites": [],
                     "like": 0,
                     "likers": [],
+                    "dislike":0,
+                    "dislikers":[],
+                    "tags":tags,
                     "publisedTime": postTime,
                     "category": catagory,
                     "image": imageRaw
