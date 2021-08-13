@@ -55,7 +55,10 @@ flutter:
       - assets/news.png
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
-
+#  fonts:
+#     - family: Harrington
+#       fonts:
+#         - asset: fonts/Colonna MT.ttf
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 

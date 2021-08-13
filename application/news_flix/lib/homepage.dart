@@ -6,7 +6,6 @@ import 'AboutUs.dart';
 import 'Favourite.dart';
 import 'Loginpg.dart';
 import 'SearchPage.dart';
-import 'Settings.dart';
 import 'Share.dart';
 class HomePage extends StatefulWidget {
   @override
@@ -18,28 +17,28 @@ class _HomePageState extends State<HomePage> {
     {
       "newsTitle": 'Anime Planet',
       'author': 'Rahul',
-      'date': '6th August 2021',
+      'date': '6hr ago',
       'imageUrl': 'https://cdn.neow.in/news/images/uploaded/2019/06/1561493403_one_punch_man.jpg',
       "liked": true,
     },
     {
       "newsTitle": 'Headlines Tripura ',
       'author': 'Aniket Lodh',
-      'date': '5th August 2021',
+      'date': '5hr ago',
       'imageUrl': 'https://thelogicalindian.com/h-upload/2020/07/21/177535-tripurafb.jpg',
       "liked": false,
     },
     {
       "newsTitle": 'India Today',
       'author': 'Samyadeep ',
-      'date': '3rd August 2021',
+      'date': '3rd August',
       'imageUrl': 'https://s3images.zee5.com/wp-content/uploads/sites/7/2021/08/india-vs-england-784x441.jpg',
       "liked": true,
     },
     {
       "newsTitle": 'BBC News',
       'author': 'Nabanit Roy',
-      'date': '2rd August 2021',
+      'date': '2rd August',
       'imageUrl': 'https://www.mtbs3d.com/gallery/albums/userpics/10002/bbcnews_logo.jpg',
       "liked": false,
     }
@@ -48,31 +47,32 @@ class _HomePageState extends State<HomePage> {
     {
       "newsTitle": 'Zee News ',
       'author': 'Nabanit Roy',
-      'date': '6th August 2021',
+      'date': '6th August ',
       'imageUrl': 'https://i.kym-cdn.com/photos/images/newsfeed/000/775/726/e40.jpg'
+
     },
     {
       "newsTitle": 'Ajj Tak ',
       'author': 'Basabjit',
-      'date': '5th August 2021',
+      'date': '5th August',
       'imageUrl': 'https://d2c7ipcroan06u.cloudfront.net/wp-content/uploads/2019/05/2019.jpg'
     },
     {
       "newsTitle": 'India Today',
       'author': 'Samyadeep ',
-      'date': '3rd August 2021',
+      'date': '3rd August',
       'imageUrl': 'https://www.epapersland.com/images/dailynews.jpg'
     },
     {
       "newsTitle": 'Asia Today',
       'author': 'Aniket ',
-      'date': '3rd August 2021',
+      'date': '3rd August',
       'imageUrl': 'https://images.indianexpress.com/2014/01/thumb119.jpg'
     },
     {
       "newsTitle": 'Daily Planet',
       'author': 'Rahul ',
-      'date': '6th August 2021',
+      'date': '6th August',
       'imageUrl': 'https://dominicanewsonline.com/news/wp-content/uploads/2020/07/budget.jpg'
     },
   ];
@@ -80,13 +80,14 @@ class _HomePageState extends State<HomePage> {
     {
       "newsTitle": 'World News ',
       'author': 'Nabanit Roy',
-      'date': '6th August 2021',
-      'imageUrl': 'https://www.foxnewsinternational.com/img/marquee-specialreport.jpg'
+      'date': '6hr ago',
+      'imageUrl': 'https://www.foxnewsinternational.com/img/marquee-specialreport.jpg',
+      "liked": true,
     },
     {
       "newsTitle": 'London Times ',
       'author': 'Basabjit',
-      'date': '5th August 2021',
+      'date': '5hr ago',
       'imageUrl': 'https://simplycareer.com/wp-content/uploads/2015/04/international-affairs-jobs-1024x512.jpg'
     },
     {
@@ -98,13 +99,14 @@ class _HomePageState extends State<HomePage> {
     {
       "newsTitle": 'Newyork Times',
       'author': 'Aniket ',
-      'date': '3rd August 2021',
-      'imageUrl': 'https://cdn.pixabay.com/photo/2015/12/03/10/12/news-1074604_640.jpg'
+      'date': '3hr ago',
+      'imageUrl': 'https://cdn.pixabay.com/photo/2015/12/03/10/12/news-1074604_640.jpg',
+      "liked": true,
     },
     {
       "newsTitle": 'Daily Planet',
       'author': 'Ankit ',
-      'date': '3rd August 2021',
+      'date': '3rd August ',
       'imageUrl': 'https://www.mentalhealth.org.uk/sites/default/files/Mental-Health-Awareness-Week-2021-theme.jpg'
     },
   ];

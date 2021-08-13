@@ -51,10 +51,25 @@ class _ListWidgetState extends State<ListWidget> {
                   borderRadius: BorderRadius.circular(3),
                 ),
               ),
-              Text(item!['newsTitle'],
+           Row(
+              children: [
+              Padding(padding: EdgeInsets.fromLTRB(15, 10, 10, 10),
+              child: Text(item!['newsTitle'],
                 style: TextStyle(
-                  fontSize: 24,fontStyle: FontStyle.italic
-                ),),
+                  fontSize: 24,fontStyle: FontStyle.italic,
+                  decorationStyle: TextDecorationStyle.double,
+                ),),),
+                SizedBox(
+                  width: 60,
+                ),
+                Icon(Icons.date_range,color: Colors.greenAccent,),
+                Text(
+                  item!['date'],
+                  style: TextStyle(
+                    fontSize: 12,
+                  ),
+                ),
+              ],),
               Container(
                 padding: EdgeInsets.only(
                   left: 5,
@@ -62,32 +77,42 @@ class _ListWidgetState extends State<ListWidget> {
                   top: 5,
                   right: 5,
                 ),
+
                 child: Row(
                   children: [
                     IconButton(onPressed: () {},
                         icon: Icon(
-                            Icons.thumb_up,
+                            Icons.thumb_up_outlined,
                           color: (item!['liked'] == null || item!['liked'] == false)? Colors.grey : Colors.blue,
                         ),
                     ),
+                    SizedBox(
+                      width: 20,
+                    ),
                     IconButton(onPressed: () {},
                       icon: Icon(
-                        Icons.thumb_down,
+                        Icons.thumb_down_outlined,
                         color: (item!['liked'] == null || item!['liked'] == false)? Colors.grey : Colors.blue,
                       ),
+                    ),
+                    SizedBox(
+                      width: 30,
                     ),
                     IconButton(onPressed: () {
                       Navigator.push(
                           context,MaterialPageRoute(builder: (context) =>CommentPage()));
                     },
                       icon: Icon(
-                        Icons.comment,
+                        Icons.comment_outlined,
                         color: (item!['liked'] == null || item!['liked'] == false)? Colors.grey : Colors.blue,
                       ),
                     ),
+                    SizedBox(
+                      width: 30,
+                    ),
                     IconButton(onPressed: () {},
                       icon: Icon(
-                        Icons.favorite,
+                        Icons.favorite_outline,
                         color: (item!['liked'] == null || item!['liked'] == false)? Colors.grey : Colors.blue,
                       ),
                     ),

@@ -26,11 +26,13 @@ class _CommentPage extends State<CommentPage> {
       'message': 'Very cool'
     },
     {
-      'name': 'Iron Man',
+      'name': 'Iron  Man',
       'pic': 'https://picsum.photos/300/30',
       'message': 'Very cool'
     },
   ];
+
+  bool get withBorder => true;
 
   Widget commentChild(data) {
     return ListView(
@@ -98,11 +100,20 @@ class _CommentPage extends State<CommentPage> {
               print("Not validated");
             }
           },
+
           formKey: formKey,
+         // title: Form(
+         //  key: formKey, child: TextFormField(
+         //   decoration: InputDecoration(
+         //   border: !withBorder
+         //      ? InputBorder.none
+         //      : UnderlineInputBorder(
+         //    borderSide: BorderSide(color: Colors.),
+         //  ),
           commentController: commentController,
-          backgroundColor: Colors.black,
-          textColor: Colors.white,
-          sendWidget: Icon(Icons.send_sharp, size: 30, color: Colors.white),
+          backgroundColor: Colors.white,
+          textColor: Colors.black,
+          sendWidget: Icon(Icons.send_sharp, size: 30, color: Colors.black),
         ),
       ),
     );
