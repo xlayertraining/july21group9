@@ -26,9 +26,12 @@ class Share extends StatelessWidget {
               gradient: LinearGradient(
                   begin: Alignment.bottomLeft,
                   end: Alignment.topRight,
-                  colors: [Colors.red, Colors.yellow, Colors.blue, Colors.purple]
-              )
-          ),
+                  colors: [
+                Colors.red,
+                Colors.yellow,
+                Colors.blue,
+                Colors.purple
+              ])),
         ),
       ),
     );

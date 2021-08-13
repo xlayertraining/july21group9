@@ -1,9 +1,27 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 
-
+import 'package:http/http.dart' as http;
 import 'package:untitled2/SplashScreen.dart';
 import 'package:untitled2/homepage.dart';
+Future<http.Response> createAlbum(String title) {
+  print("Hello");
+  return http.post(
+    Uri.parse('https://api.xlayer.in/julygroup9_web/api/sign/up'),
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
 
+    body: jsonEncode(<String, String>{
+      "firstName":"Sam",
+      "lastName":"Jhonson",
+      "phoneNumber":"9655870115",
+      "emailAddress":"test4@gmail.com",
+      "password":"moinvwuondvoncs"
+    }),
+  );
+}
 
 class SignUp extends StatelessWidget {
   // This widget is the root of your application.
@@ -139,6 +157,7 @@ class _MyWidgetState extends State<MyWidget> {
                     Navigator.pushReplacement(context,
                         MaterialPageRoute(builder: (context) => HomePage()));
                   },
+                  // createAlbum("test string");
                   child: Text("Submit",style: TextStyle(
                     color: Colors.white
                   ),),

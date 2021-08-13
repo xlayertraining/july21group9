@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'CommentPage.dart';
 
 class ListWidget extends StatefulWidget {
-
   Map itemData;
 
   ListWidget(this.itemData);
@@ -16,13 +15,11 @@ class ListWidget extends StatefulWidget {
 }
 
 class _ListWidgetState extends State<ListWidget> {
-
   late BuildContext? _context = null;
   late Map? item;
-  
+
   @override
   Widget build(BuildContext context) {
-
     if (_context == null) {
       _context = context;
       item = widget.itemData;
@@ -30,19 +27,14 @@ class _ListWidgetState extends State<ListWidget> {
 
     return Card(
         elevation: 5,
-        margin: EdgeInsets.only(
-          bottom: 20,
-          top: 10,
-          left: 10,
-          right: 10
-        ),
+        margin: EdgeInsets.only(bottom: 20, top: 10, left: 10, right: 10),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Container(
                 width: MediaQuery.of(_context!).size.width,
-                height: MediaQuery.of(_context!).size.width/2,
+                height: MediaQuery.of(_context!).size.width / 2,
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     image: NetworkImage(item!['imageUrl']),
@@ -51,25 +43,34 @@ class _ListWidgetState extends State<ListWidget> {
                   borderRadius: BorderRadius.circular(3),
                 ),
               ),
-           Row(
-              children: [
-              Padding(padding: EdgeInsets.fromLTRB(15, 10, 10, 10),
-              child: Text(item!['newsTitle'],
-                style: TextStyle(
-                  fontSize: 24,fontStyle: FontStyle.italic,
-                  decorationStyle: TextDecorationStyle.double,
-                ),),),
-                SizedBox(
-                  width: 60,
-                ),
-                Icon(Icons.date_range,color: Colors.greenAccent,),
-                Text(
-                  item!['date'],
-                  style: TextStyle(
-                    fontSize: 12,
+              Row(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(15, 10, 10, 10),
+                    child: Text(
+                      item!['newsTitle'],
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontStyle: FontStyle.italic,
+                        decorationStyle: TextDecorationStyle.double,
+                      ),
+                    ),
                   ),
-                ),
-              ],),
+                  SizedBox(
+                    width: 60,
+                  ),
+                  Icon(
+                    Icons.date_range,
+                    color: Colors.greenAccent,
+                  ),
+                  Text(
+                    item!['date'],
+                    style: TextStyle(
+                      fontSize: 12,
+                    ),
+                  ),
+                ],
+              ),
               Container(
                 padding: EdgeInsets.only(
                   left: 5,
@@ -77,43 +78,60 @@ class _ListWidgetState extends State<ListWidget> {
                   top: 5,
                   right: 5,
                 ),
-
                 child: Row(
                   children: [
-                    IconButton(onPressed: () {},
-                        icon: Icon(
-                            Icons.thumb_up_outlined,
-                          color: (item!['liked'] == null || item!['liked'] == false)? Colors.grey : Colors.blue,
-                        ),
+                    IconButton(
+                      onPressed: () {},
+                      icon: Icon(
+                        Icons.thumb_up_outlined,
+                        color:
+                            (item!['liked'] == null || item!['liked'] == false)
+                                ? Colors.grey
+                                : Colors.blue,
+                      ),
                     ),
                     SizedBox(
                       width: 20,
                     ),
-                    IconButton(onPressed: () {},
+                    IconButton(
+                      onPressed: () {},
                       icon: Icon(
                         Icons.thumb_down_outlined,
-                        color: (item!['liked'] == null || item!['liked'] == false)? Colors.grey : Colors.blue,
+                        color:
+                            (item!['liked'] == null || item!['liked'] == false)
+                                ? Colors.grey
+                                : Colors.blue,
                       ),
                     ),
                     SizedBox(
                       width: 30,
                     ),
-                    IconButton(onPressed: () {
-                      Navigator.push(
-                          context,MaterialPageRoute(builder: (context) =>CommentPage()));
-                    },
+                    IconButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => CommentPage()));
+                      },
                       icon: Icon(
                         Icons.comment_outlined,
-                        color: (item!['liked'] == null || item!['liked'] == false)? Colors.grey : Colors.blue,
+                        color:
+                            (item!['liked'] == null || item!['liked'] == false)
+                                ? Colors.grey
+                                : Colors.blue,
                       ),
                     ),
                     SizedBox(
                       width: 30,
                     ),
-                    IconButton(onPressed: () {},
+                    IconButton(
+                      onPressed: () {},
                       icon: Icon(
                         Icons.favorite_outline,
-                        color: (item!['liked'] == null || item!['liked'] == false)? Colors.grey : Colors.blue,
+                        color:
+                            (item!['liked'] == null || item!['liked'] == false)
+                                ? Colors.grey
+                                : Colors.blue,
                       ),
                     ),
                   ],
@@ -172,8 +190,6 @@ class _ListWidgetState extends State<ListWidget> {
               // ]
               // )
               // ),
-            ]
-        )
-    );
+            ]));
   }
 }
