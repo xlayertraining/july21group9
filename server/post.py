@@ -69,17 +69,22 @@ class imageHandler(tornado.web.RequestHandler):
                 status = False
                 message = "This file type is not supported"
                 raise Exception
-
-            user_news_folder.insert_one({
-                "title": title,
-                "description": body,
-                "like": 0,
-                "likers": [],
-                "publisedTime": postTime,
-                "category": catagory,
-                "image": imageRaw,
-                "AccountId": account_id
-            })
+            try:
+                user_news_folder.insert_one({
+                    "AccountId": account_id,
+                    "title": title,
+                    "description": body,
+                    "favourites": [],
+                    "like": 0,
+                    "likers": [],
+                    "publisedTime": postTime,
+                    "category": catagory,
+                    "image": imageRaw
+                })
+            except:
+                code = 4000
+                status = False
+                message = "Problem in database"
             code = 2000
             status = True
             message = "News posted."
@@ -89,6 +94,8 @@ class imageHandler(tornado.web.RequestHandler):
                 "message": message
             }
             self.write(response)
+            self.finish()
+            return
         except:
             response = {
                 "code": code,
@@ -96,6 +103,8 @@ class imageHandler(tornado.web.RequestHandler):
                 "message": message
             }
             self.write(response)
+            self.finish()
+            return
 # /
 
     async def get(self):
@@ -131,7 +140,14 @@ class imageHandler(tornado.web.RequestHandler):
                     if account_find:
                         i["author"] = account_find["userName"]
                     result.append(i)
-
+                response = {
+                    'code': code,
+                    'status': status,
+                    'message': message,
+                    "result": result
+                }
+                self.write(response)
+                self.finish()
             except:
                 code = 5623
                 status = False
