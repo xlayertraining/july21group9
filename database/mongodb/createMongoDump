@@ -1,0 +1,21 @@
+#!/bin/bash
+
+TIME=$(date +%d_%m_%Y_%H_%M)
+
+#ODB='BigBase_'$TIMs
+#TDB='TourismService_'$TIME
+
+#echo $ODB
+#echo $TDB
+
+mongodump --db NewsFlix
+
+tar -cvzf $TIME.tar.gz dump
+
+rm -rf dump
+
+echo ''
+echo ''
+
+echo Dump has been created on $TIME.tar.gz
+
