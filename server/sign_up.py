@@ -107,7 +107,7 @@ class signUpHandler(tornado.web.RequestHandler):
                     raise Exception
             except:
                 raise Exception
-
+            print("hi")
             users_info = await user_sign_up.insert_one({
                 "firstName": firstName,
                 "lastName": lastName,
@@ -124,13 +124,14 @@ class signUpHandler(tornado.web.RequestHandler):
             code = 200
             status = True
             message = "Sign-up Successfull"
-            response = {
+           
+            try:
+                response = {
                 "code": code,
                 "status": status,
                 "message": message,
                 "result": result
             }
-            try:
                 self.write(response)
                 self.finish()
                 return

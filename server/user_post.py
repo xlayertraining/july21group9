@@ -20,8 +20,8 @@ class UserSharedPostHandler(tornado.web.RequestHandler):
             try:
                 post_List = user_news_folder.find({"AccountId":account_id})
                 async for i in post_List:
-                    del[i["image"]]
-                    # i["image"]=str(i["image"])
+                    # del[i["image"]]
+                    i["image"]=str(i["image"])
                     i['_id'] = str(i['_id'])
                     i["AccountId"]=str(i["AccountId"])
                     result.append(i)
