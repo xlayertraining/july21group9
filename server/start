@@ -1,0 +1,13 @@
+#WEB SERVER
+
+ulimit -n 100
+
+LOG_PATH="./log"
+LOG_FILE="$LOG_PATH/run.log"
+
+APPLICATION="nohup python3 group9_server.py"
+
+mkdir -p $LOG_PATH
+
+$APPLICATION & #> $LOG_FILE
+

@@ -1,0 +1,12 @@
+PID_PATH="/tmp/proxy/intr/july21group9/web"
+PID_HOME="$PID_PATH/srv.pid"
+
+mkdir -p $PID_PATH
+
+rm $PID_HOME
+pgrep "python3 group9_server.py" -f > $PID_HOME
+
+# Kill the PIDs
+echo `cat $PID_HOME`
+pkill -e -F $PID_HOME
+
