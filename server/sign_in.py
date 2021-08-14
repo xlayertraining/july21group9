@@ -71,7 +71,7 @@ class signInHandler(tornado.web.RequestHandler):
                     message = "Successfully logged in."
                     encoded_jwt = jwt.encode(
                         {"key": str(findUser.get("_id"))}, "icfai", algorithm="HS256")
-                    result.append(encoded_jwt)
+                    result.append(encoded_jwt.decode())
 
                 response = {
                     'code': code,
