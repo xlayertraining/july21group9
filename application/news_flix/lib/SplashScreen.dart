@@ -2,21 +2,23 @@ import 'dart:async';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:untitled2/config/configuration.dart';
+import 'package:untitled2/homepage.dart';
 
-import 'package:untitled2/Loginpg.dart';
+import 'package:untitled2/sign_in_page.dart';
 
 class SplashScreen extends StatelessWidget {
-  const SplashScreen({Key? key}) : super(key: key);
+
+  BuildContext? _context;
 
   @override
   Widget build(BuildContext context) {
 
-    Timer(Duration(seconds:3), () {
-      Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => Myapp())
-      );
+    if (_context == null) {
+      _context = context;
+      initTimer();
     }
-    );
 
     return Scaffold(
       body: Container(
@@ -76,4 +78,28 @@ class SplashScreen extends StatelessWidget {
       ),
     );
   }
+
+  void initTimer() async {
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    var signedInValue = await prefs.getString(Configuration.signedInKey);
+    print(signedInValue);
+    if (signedInValue == null) {
+      Timer(Duration(seconds:3), () {
+        Navigator.of(_context!).pushReplacement(
+            MaterialPageRoute(builder: (context) => Myapp())
+        );
+      }
+      );
+    } else {
+      Timer(Duration(seconds:3), () {
+        Navigator.of(_context!).pushReplacement(
+            MaterialPageRoute(builder: (context) => HomePage())
+        );
+      }
+      );
+    }
+  }
+
 }

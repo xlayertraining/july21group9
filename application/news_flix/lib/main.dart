@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:untitled2/SplashScreen.dart';
+
 void main() {
   runApp(MyApp());
 }

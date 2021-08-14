@@ -1,10 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:untitled2/ListWidget.dart';
 
 import 'AboutUs.dart';
 import 'Favourite.dart';
-import 'Loginpg.dart';
+import 'sign_in_page.dart';
 import 'MyPost.dart';
 import 'SearchPage.dart';
 import 'Share.dart';
@@ -539,8 +540,7 @@ class _HomePageState extends State<HomePage> {
                 leading: Icon(Icons.settings_power, color: Colors.red),
                 title: const Text('Sign out'),
                 onTap: () {
-                  Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => Myapp()));
+                  signOut();
                   // Update the state of the app
                   // ...
                   // Then close the drawer
@@ -552,4 +552,13 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
+
+  signOut() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.clear();
+
+    Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => Myapp()));
+  }
+
 }
