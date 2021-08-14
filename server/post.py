@@ -48,12 +48,20 @@ class imageHandler(tornado.web.RequestHandler):
                 raise Exception
             # Category
             try:
-                catagory = self.request.arguments["category"][0].decode()
-                catagory = eval(catagory)
+                val = self.request.arguments["category"][0]
+                catagory = None
+                print(val)
+                if (type(val) == bytes):
+                    catagory = self.request.arguments["category"][0].decode()
+                    catagory = eval(catagory)
+                else:
+                    catagory = self.request.arguments["category"][0]
+
                 if catagory == None or type(catagory) != list or not len(catagory):
                     raise Exception
                 # type = catagory
-            except:
+            except Exception as e:
+                print(e)
                 code = 8043
                 status = False
                 message = "submit valid category"
