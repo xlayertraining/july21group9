@@ -256,22 +256,6 @@ class _HomePageState extends State<HomePage> {
                       begin: Alignment.centerLeft,
                       end: Alignment.centerRight,
                       colors: [Colors.cyan.shade100, Colors.blue.shade400]))),
-          // backgroundColor: Colors.redAccent,
-          //  child:Row(
-          //     mainAxisSize: MainAxisSize.min,
-          //     children: <Widget>[
-          //     Icon(Icons.search,color: Colors.grey),
-          // Expanded(
-          //   child: TextField(
-          //     // textAlign: TextAlign.center,
-          //     decoration: InputDecoration.collapsed(
-          //       hintText: ' Search by name or address',
-          //     ),
-          //     onChanged: (value) {
-          //
-          //     },
-          //   ),
-          // ),
           actions: [
             IconButton(
               color: Colors.black,
@@ -284,9 +268,8 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             IconButton(
-              icon: Icon(
-                Icons.notifications_active,
-                color: Colors.red,
+              icon: Icon(Icons.more_vert,
+                color: Colors.white,
               ),
               onPressed: () {
                 // do something

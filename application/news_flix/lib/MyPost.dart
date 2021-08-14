@@ -13,7 +13,13 @@ class MyPost extends StatelessWidget {
                     end: Alignment.centerRight,
                     colors: [Colors.blue.shade400, Colors.cyan.shade100]))),
         elevation: 0.0,
-      ),
+          actions: [
+        IconButton(
+        icon: Image.network( 'https://images.wallpapersden.com/image/download/itachi-uchiha-anime_a2xuZmiUmZqaraWkpJRnbmhnrWduaGc.jpg'),
+         onPressed: () {},
+     ),
+       ]
+        ),
       body: MyPostBody(),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
@@ -50,14 +56,18 @@ class MyPost extends StatelessWidget {
               leading: CircleAvatar(backgroundImage: AssetImage(images[index]),),
               title: Text("This is Post Title"),
               subtitle: Text("This is Post Description"),
+              trailing:IconButton(
+                icon: Icon(Icons.delete,color: Colors.red,size: 22,),
+                onPressed:  () {},
+              ) ,
             ),
           );
         },
-        itemCount: images.length,
-        shrinkWrap: true,
-        padding: EdgeInsets.all(5),
-        scrollDirection: Axis.vertical,
-        )
+           itemCount: images.length,
+           shrinkWrap: true,
+            padding: EdgeInsets.all(5),
+            scrollDirection: Axis.vertical,
+          ),
         );
       }
     }
