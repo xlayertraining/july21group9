@@ -92,8 +92,8 @@ class Postfavouriteshandler(tornado.web.RequestHandler):
                 "favourites": account_id
             })
             async for i in post_List:
-                del[i["image"]]
-                # i["image"]=str(i["image"])
+                # del[i["image"]]
+                i["image"]=str(i["image"])
                 i['_id'] = str(i['_id'])
                 i["fav_user"] = False
                 if account_id in i["favourites"]:

@@ -37,7 +37,7 @@ class SearchNewsHandler(tornado.web.RequestHandler):
                         }
                     },
                     {
-                        "body": {
+                        "description": {
                             "$regex": keyword,
                             "$options": "i"
                         }

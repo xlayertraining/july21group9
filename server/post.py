@@ -141,8 +141,8 @@ class imageHandler(tornado.web.RequestHandler):
             try:
                 imageList = user_news_folder.find({"category": category_id})
                 async for i in imageList:
-                    del[i["image"]]
-                    # i["image"]=str(i["image"])
+                    # del[i["image"]]
+                    i["image"]=str(i["image"])
                     i['_id'] = str(i['_id'])
                     i["fav_user"] = False
                     if account_id in i["favourites"]:
@@ -151,6 +151,9 @@ class imageHandler(tornado.web.RequestHandler):
                     if account_find:
                         i["author"] = account_find["userName"]
                     result.append(i)
+                code=2000
+                status=True
+                message="list of news"
                 response = {
                     'code': code,
                     'status': status,
