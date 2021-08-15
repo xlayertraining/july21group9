@@ -65,6 +65,7 @@ class _CommentPage extends State<CommentPage> {
             ),
           )
       ],
+      reverse: true,
     );
   }
 

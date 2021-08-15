@@ -32,6 +32,48 @@ class _ListWidgetState extends State<ListWidget> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
+              Row(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(15, 10, 10, 5),
+                    child: Text(
+                      item!['newsTitle'],
+                      style: TextStyle(
+                        fontSize: 24,color: Colors.blue,
+                        fontStyle: FontStyle.italic,
+                        decorationStyle: TextDecorationStyle.double,
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 60,
+                  ),
+                  Icon(
+                    Icons.access_time_outlined,
+                    color: Colors.blueGrey,
+                  ),
+                  Text(
+                    item!['date'],
+                    style: TextStyle(
+                      fontSize: 12,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 5),
+              Divider(color: Colors.black),
+              const SizedBox(height: 5),
+              Padding(
+                padding: EdgeInsets.fromLTRB(15, 5, 10, 10),
+                child: Text(
+                  item!['newsSubtitle'],
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontStyle: FontStyle.italic,
+                    decorationStyle: TextDecorationStyle.double,
+                  ),
+                ),
+              ),
               Container(
                 width: MediaQuery.of(_context!).size.width,
                 height: MediaQuery.of(_context!).size.width / 2,
@@ -43,38 +85,13 @@ class _ListWidgetState extends State<ListWidget> {
                   borderRadius: BorderRadius.circular(3),
                 ),
               ),
-              Row(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(15, 10, 10, 10),
-                    child: Text(
-                      item!['newsTitle'],
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontStyle: FontStyle.italic,
-                        decorationStyle: TextDecorationStyle.double,
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 60,
-                  ),
-                  Icon(
-                    Icons.date_range,
-                    color: Colors.greenAccent,
-                  ),
-                  Text(
-                    item!['date'],
-                    style: TextStyle(
-                      fontSize: 12,
-                    ),
-                  ),
-                ],
-              ),
+              const SizedBox(height: 5),
+              Divider(color: Colors.black),
+              const SizedBox(height: 5),
               Container(
                 padding: EdgeInsets.only(
                   left: 5,
-                  bottom: 5,
+                  bottom: 15,
                   top: 5,
                   right: 5,
                 ),
