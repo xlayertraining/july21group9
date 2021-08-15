@@ -88,7 +88,7 @@ class _CommentPage extends State<CommentPage> {
               print(commentController.text);
               setState(() {
                 var value = {
-                  'name': 'New User',
+                  'name': 'Samyadeep Saha',
                   'pic':
                   'https://lh3.googleusercontent.com/a-/AOh14GjRHcaendrf6gU5fPIVd8GIl1OgblrMMvGUoCBj4g=s400',
                   'message': commentController.text
