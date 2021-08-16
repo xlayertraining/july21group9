@@ -20,14 +20,16 @@ class _HomePageState extends State<HomePage> {
         {
           "newsTitle": 'Anime Planet',
           'date': '6hr ago',
-          'newsSubtitle': 'One punch Man Season 3 does not have any release date yet.' ,
+          'newsSubtitle':
+              'One punch Man Season 3 does not have any release date yet.',
           'imageUrl':
               'https://cdn.neow.in/news/images/uploaded/2019/06/1561493403_one_punch_man.jpg',
           "liked": true,
         },
         {
           "newsTitle": 'Headlines Tripura ',
-          'newsSubtitle': 'One punch Man Season 3 does not have any release date yet.' ,
+          'newsSubtitle':
+              'One punch Man Season 3 does not have any release date yet.',
           'date': '5hr ago',
           'imageUrl':
               'https://thelogicalindian.com/h-upload/2020/07/21/177535-tripurafb.jpg',
@@ -35,7 +37,8 @@ class _HomePageState extends State<HomePage> {
         },
         {
           "newsTitle": 'India Today',
-          'newsSubtitle': 'One punch Man Season 3 does not have any release date yet.' ,
+          'newsSubtitle':
+              'One punch Man Season 3 does not have any release date yet.',
           'date': '3rd August',
           'imageUrl':
               'https://s3images.zee5.com/wp-content/uploads/sites/7/2021/08/india-vs-england-784x441.jpg',
@@ -43,7 +46,8 @@ class _HomePageState extends State<HomePage> {
         },
         {
           "newsTitle": 'BBC News',
-          'newsSubtitle': 'One punch Man Season 3 doesnot have any release date yet.' ,
+          'newsSubtitle':
+              'One punch Man Season 3 doesnot have any release date yet.',
           'date': '2rd August',
           'imageUrl':
               'https://www.mtbs3d.com/gallery/albums/userpics/10002/bbcnews_logo.jpg',
@@ -88,7 +92,8 @@ class _HomePageState extends State<HomePage> {
   get listTiles3 => [
         {
           "newsTitle": 'World News ',
-          'newsSubtitle': 'The world is still under the terror of new covid wave.',
+          'newsSubtitle':
+              'The world is still under the terror of new covid wave.',
           'date': '6hr ago',
           'imageUrl':
               'https://www.foxnewsinternational.com/img/marquee-specialreport.jpg',
@@ -96,21 +101,24 @@ class _HomePageState extends State<HomePage> {
         },
         {
           "newsTitle": 'London Times ',
-          'newsSubtitle': 'The world is still under the terror of new covid wave.',
+          'newsSubtitle':
+              'The world is still under the terror of new covid wave.',
           'date': '5hr ago',
           'imageUrl':
               'https://simplycareer.com/wp-content/uploads/2015/04/international-affairs-jobs-1024x512.jpg'
         },
         {
           "newsTitle": 'BBC',
-          'newsSubtitle': 'The world is still under the terror of new covid wave.',
+          'newsSubtitle':
+              'The world is still under the terror of new covid wave.',
           'date': '3rd August 2021',
           'imageUrl':
               'https://www.pngfacts.com/uploads/1/1/3/2/11320972/fire-australia_orig.jpg'
         },
         {
           "newsTitle": 'Newyork Times',
-          'newsSubtitle': 'The world is still under the terror of new covid wave.',
+          'newsSubtitle':
+              'The world is still under the terror of new covid wave.',
           'date': '3hr ago',
           'imageUrl':
               'https://cdn.pixabay.com/photo/2015/12/03/10/12/news-1074604_640.jpg',
@@ -118,7 +126,8 @@ class _HomePageState extends State<HomePage> {
         },
         {
           "newsTitle": 'Daily Planet',
-          'newsSubtitle': 'The world is still under the terror of new covid wave.',
+          'newsSubtitle':
+              'The world is still under the terror of new covid wave.',
           'date': '3rd August ',
           'imageUrl':
               'https://www.mentalhealth.org.uk/sites/default/files/Mental-Health-Awareness-Week-2021-theme.jpg'
@@ -241,9 +250,8 @@ class _HomePageState extends State<HomePage> {
       length: 6,
       child: Scaffold(
         appBar: AppBar(
-          toolbarOpacity: 0.5,
           toolbarHeight: 120,
-          backgroundColor: Colors.blue.shade400,
+          backgroundColor: Colors.blue.shade600,
           title: Text(
             "NEWS FLIX",
             style: TextStyle(
@@ -267,11 +275,13 @@ class _HomePageState extends State<HomePage> {
                   .push(MaterialPageRoute(builder: (_) => SearchPage())),
               icon: Icon(
                 Icons.search,
+                color: Colors.white,
               ),
             ),
             IconButton(
-              icon: Icon(Icons.more_vert,
-                color: Colors.white,
+              icon: Icon(
+                Icons.notifications_active,
+                color: Colors.redAccent.shade400,
               ),
               onPressed: () {
                 // do something
@@ -434,132 +444,124 @@ class _HomePageState extends State<HomePage> {
         // ),
 
         drawer: Drawer(
-          child: ListView(
-            padding: EdgeInsets.zero,
-            // Important: Remove any padding from the ListView.
-            children: [
-              UserAccountsDrawerHeader(
-                accountName: Text('Samyadeep'),
-                accountEmail: Text('sahasamyadeep@gmail.com'),
-                currentAccountPicture: CircleAvatar(
-                  child: ClipOval(
-                    child: Image.network(
-                      'https://images.wallpapersden.com/image/download/itachi-uchiha-anime_a2xuZmiUmZqaraWkpJRnbmhnrWduaGc.jpg',
-                      width: 120,
-                      height: 120,
+          // child: SliverAppBar(
+          //   backgroundColor: Theme.of(context).backgroundColor,
+          //   leading: Builder(
+          //     builder: (context) => IconButton(
+          //       icon: ImageIcon(NetworkImage(
+          //           'https://images.wallpapersden.com/image/download/itachi-uchiha-anime_a2xuZmiUmZqaraWkpJRnbmhnrWduaGc.jpg')),
+          //       onPressed: () => Scaffold.of(context).openDrawer(),
+          //       tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
+          //     ),
+          //   ),
+          // ),
+          //   child: Container(
+           child: ListView(
+              padding: EdgeInsets.zero,
+              // Important: Remove any padding from the ListView.
+              children: [
+                UserAccountsDrawerHeader(
+                  accountName: Text('Samyadeep'),
+                  accountEmail: Text('sahasamyadeep@gmail.com'),
+                  currentAccountPicture: CircleAvatar(
+                    child: ClipOval(
+                      child: Image.network(
+                        'https://images.wallpapersden.com/image/download/itachi-uchiha-anime_a2xuZmiUmZqaraWkpJRnbmhnrWduaGc.jpg',
+                        width: 120,
+                        height: 120,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: NetworkImage(
+                          "https://wallpaperaccess.com/full/22250.jpg"),
                       fit: BoxFit.cover,
                     ),
                   ),
                 ),
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: NetworkImage(
-                        "https://wallpaperaccess.com/full/22250.jpg"),
-                    fit: BoxFit.cover,
-                  ),
+                ListTile(
+                  leading:
+                      Icon(Icons.favorite, color: Colors.pinkAccent.shade100),
+                  title: const Text('Favourites'),
+                  onTap: () {
+                    // Update the state of the app
+                    // ...
+                    // Then close the drawer
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Favourite()));
+                  },
                 ),
-              ),
-              ListTile(
-                leading:
-                    Icon(Icons.favorite, color: Colors.pinkAccent.shade100),
-                title: const Text('Favourites'),
-                onTap: () {
-                  // Update the state of the app
-                  // ...
-                  // Then close the drawer
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Favourite()));
-                },
-              ),
-              const SizedBox(height: 15),
-              Divider(color: Colors.black),
-              const SizedBox(height: 10),
-              ListTile(
-                leading: Icon(Icons.post_add, color: Colors.blue),
-                title: const Text('My Post'),
-                onTap: () {
-                  // Update the state of the app
-                  // ...
-                  // Then close the drawer
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => MyPost()));
-                },
-              ),
-              const SizedBox(height: 15),
-              Divider(color: Colors.black),
-              const SizedBox(height: 10),
-              ListTile(
-                leading: Icon(Icons.bookmarks, color: Colors.lightBlueAccent),
-                title: const Text('bookmark'),
-                onTap: () {
-                  // Update the state of the app
-                  // ...
-                  // Then close the drawer
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Share()));
-                },
-              ),
+                const SizedBox(height: 15),
+                Divider(color: Colors.black),
+                const SizedBox(height: 10),
+                ListTile(
+                  leading: Icon(Icons.post_add, color: Colors.blue),
+                  title: const Text('My Post'),
+                  onTap: () {
+                    // Update the state of the app
+                    // ...
+                    // Then close the drawer
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => MyPost()));
+                  },
+                ),
+                const SizedBox(height: 15),
+                Divider(color: Colors.black),
+                const SizedBox(height: 10),
+                ListTile(
+                  leading: Icon(Icons.bookmarks, color: Colors.lightBlueAccent),
+                  title: const Text('bookmark'),
+                  onTap: () {
+                    // Update the state of the app
+                    // ...
+                    // Then close the drawer
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Share()));
+                  },
+                ),
 
-              const SizedBox(height: 10),
-              Divider(color: Colors.black),
-              const SizedBox(height: 10),
-              // ListTile(
-              //   leading: Icon(Icons.notifications,color:Colors.red.shade600 ),
-              //   title: const Text('Notification'),
-              //   onTap: () {},
-              //   trailing: ClipOval(
-              //     child:Container(
-              //       color: Colors.red,
-              //       width: 20,
-              //       height: 20,
-              //       child:Center(
-              //         child: Text(
-              //           '6',style: TextStyle(color: Colors.white,
-              //             fontSize:12 ),
-              //         ),
-              //       ),
-              //     ),
-              //   ),
-              // ),
+                const SizedBox(height: 10),
+                Divider(color: Colors.black),
+                const SizedBox(height: 10),
+                ListTile(
+                  leading: Icon(Icons.description),
+                  title: const Text('About us'),
+                  onTap: () {
+                    // Update the state of the app
+                    // ...
+                    // Then close the drawer
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => AboutUs()));
+                  },
+                ),
+                const SizedBox(height: 10),
+                Divider(color: Colors.black),
+                const SizedBox(height: 10),
 
-              ListTile(
-                leading: Icon(Icons.description),
-                title: const Text('About us'),
-                onTap: () {
-                  // Update the state of the app
-                  // ...
-                  // Then close the drawer
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => AboutUs()));
-                },
-              ),
-              const SizedBox(height: 10),
-              Divider(color: Colors.black),
-              const SizedBox(height: 10),
-
-              ListTile(
-                leading: Icon(Icons.settings_power, color: Colors.red),
-                title: const Text('Sign out'),
-                onTap: () {
-                  signOut();
-                  // Update the state of the app
-                  // ...
-                  // Then close the drawer
-                },
-              ),
-            ],
-          ),
+                ListTile(
+                  leading: Icon(Icons.settings_power, color: Colors.red),
+                  title: const Text('Sign out'),
+                  onTap: () {
+                    signOut();
+                    // Update the state of the app
+                    // ...
+                    // Then close the drawer
+                  },
+                ),
+              ],
+            ),
+        )
         ),
-      ),
-    );
+      );
   }
 
   signOut() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.clear();
 
-    Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => Myapp()));
+    Navigator.of(context)
+        .pushReplacement(MaterialPageRoute(builder: (context) => Myapp()));
   }
-
 }

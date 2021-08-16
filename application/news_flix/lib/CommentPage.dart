@@ -90,7 +90,7 @@ class _CommentPage extends State<CommentPage> {
                 var value = {
                   'name': 'Samyadeep Saha',
                   'pic':
-                  'https://lh3.googleusercontent.com/a-/AOh14GjRHcaendrf6gU5fPIVd8GIl1OgblrMMvGUoCBj4g=s400',
+                  'https://images.wallpapersden.com/image/download/itachi-uchiha-anime_a2xuZmiUmZqaraWkpJRnbmhnrWduaGc.jpg',
                   'message': commentController.text
                 };
                 filedata.insert(0, value);
