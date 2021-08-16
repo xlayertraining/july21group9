@@ -10,7 +10,7 @@ class signInHandler(tornado.web.RequestHandler):
         try:
             try:
                 jsonbody = json.loads(self.request.body)
-                print(jsonbody)
+                
             except:
                 code = 4000
                 status = False
@@ -66,12 +66,16 @@ class signInHandler(tornado.web.RequestHandler):
                     message = "Invalid email or password!"
                     raise Exception
                 else:
+                    account_id= str(findUser.get('_id'))
+                    
+                    encoded_jwt = jwt.encode(
+                        {"key": account_id}, "icfai", algorithm="HS256")
+                    result.append({"Authorization":encoded_jwt})
+                   
                     code = 200
                     status = True
                     message = "Successfully logged in."
-                    encoded_jwt = jwt.encode(
-                        {"key": str(findUser.get("_id"))}, "icfai", algorithm="HS256")
-                    result.append(encoded_jwt.decode())
+                   
 
                 response = {
                     'code': code,
