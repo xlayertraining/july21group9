@@ -170,24 +170,12 @@ class imageHandler(tornado.web.RequestHandler):
                 }
                 self.write(response)
                 self.finish()
+                return
             except:
                 code = 5623
                 status = False
                 message = 'Internal Error, Please Contact the Support Team.'
                 raise Exception
-
-            code = 2000
-            status = True
-            message = "List of images"
-            response = {
-                'code': code,
-                'status': status,
-                'message': message,
-                "result": result
-            }
-            self.write(response)
-            self.finish()
-            return
         except:
             response = {
                 'code': code,
