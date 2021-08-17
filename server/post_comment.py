@@ -5,6 +5,7 @@ from re import T
 from tornado.locale import get
 from common_library import*
 from auth import SecureHeader
+# from log_util import Log
 
 
 class PostCommentHandler(tornado.web.RequestHandler):
@@ -24,7 +25,7 @@ class PostCommentHandler(tornado.web.RequestHandler):
             try:
                 # provide postId to insert comment on that post
                 post_Id = ObjectId(
-                    self.request.arguments['postId'][0].decode())
+                    self.request.arguments['newsId'][0].decode())
             except:
                 code = 4356
                 status = False
@@ -39,10 +40,10 @@ class PostCommentHandler(tornado.web.RequestHandler):
             # inserting all the fields to the database named "comments"
 
             commentInsert = await user_comment_folder.insert_one({
-                "postId": post_Id,
+                "newsId": post_Id,
                 "comment": comment,
-                "accountId": account_id,
-                "time": timeNow()
+                "createdBy": account_id,
+                "createdAt": timeNow()
             })
             code = 200
             status = True
@@ -53,7 +54,17 @@ class PostCommentHandler(tornado.web.RequestHandler):
                 "message": message
             }
             self.write(response)
-        except:
+        except Exception as e:
+
+            template = 'Exception: {0}. Argument: {1!r}'
+            code = 5011
+            iMessage = template.format(type(e).__name__, e.args)
+            message = 'Internal Error, Please Contact the Support Team.'
+            exc_type, exc_obj, exc_tb = sys.exc_info()
+            fname = exc_tb.tb_frame.f_code.co_filename
+            print('EXC', iMessage)
+            print('EX2', 'FILE: ' + str(fname) + ' LINE: ' + str(exc_tb.tb_lineno) + ' TYPE: ' + str(exc_type))
+
             response = {
                 "code": code,
                 "status": status,
@@ -78,7 +89,7 @@ class PostCommentHandler(tornado.web.RequestHandler):
             try:
                 # provide postId to access comments on that post
                 post_Id = ObjectId(
-                    self.request.arguments['postId'][0].decode())
+                    self.request.arguments['newsId'][0].decode())
             except:
                 code=3920
                 status=False
@@ -92,7 +103,7 @@ class PostCommentHandler(tornado.web.RequestHandler):
             # converting objectId's to strings
             async for i in commentList:
                 i["_id"] = str(i["_id"])
-                i["postId"] = str(i["postId"])
+                i["newsId"] = str(i["newsId"])
                 result.append(i)
             code = 200
             status = True
