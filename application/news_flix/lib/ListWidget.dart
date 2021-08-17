@@ -98,13 +98,21 @@ class _ListWidgetState extends State<ListWidget> {
               ),
               child: Row(
                 children: [
-                  IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.thumb_up_outlined,
-                      color: (item!['liked'] == null || item!['liked'] == false)
-                          ? Colors.grey
-                          : Colors.blue,
+                  InkWell(
+                    onLongPress: () {
+                      print("long_press");
+                    },
+                    onTap: () {
+                      print("click_press");
+                    },
+                    child: IconButton(
+                      onPressed: null,
+                      icon: Icon(
+                        Icons.thumb_up_outlined,
+                        color: (item!['liked'] == null || item!['liked'] == false)
+                            ? Colors.grey
+                            : Colors.blue,
+                      ),
                     ),
                   ),
                   SizedBox(

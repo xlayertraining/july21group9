@@ -32,12 +32,7 @@ class MyPost extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => AppImagePicker(
-                key: controller.initialize().then((_) {}),
-                maxImageWidth: controller.initialize().then((_) {}),
-                maxImageHeight: controller.initialize().then((_) {}),
-                onImageSelected: (File) {},
-              ),
+              builder: (context) => AppImagePicker(),
             ),
           );
           print("UPLOAD");
