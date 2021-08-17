@@ -7,6 +7,7 @@ from auth import SecureHeader
 
 
 class imageHandler(tornado.web.RequestHandler):
+
     async def post(self):
         code = 4000
         status = False
@@ -48,12 +49,20 @@ class imageHandler(tornado.web.RequestHandler):
                 raise Exception
             # Category
             try:
-                catagory = self.request.arguments["category"][0].decode()
-                catagory = eval(catagory)
+                val = self.request.arguments["category"][0]
+                catagory = None
+                print(val)
+                if (type(val) == bytes):
+                    catagory = self.request.arguments["category"][0].decode()
+                    catagory = eval(catagory)
+                else:
+                    catagory = self.request.arguments["category"][0]
+
                 if catagory == None or type(catagory) != list or not len(catagory):
                     raise Exception
                 # type = catagory
-            except:
+            except Exception as e:
+                print(e)
                 code = 8043
                 status = False
                 message = "submit valid category"
@@ -78,8 +87,10 @@ class imageHandler(tornado.web.RequestHandler):
                 message = "This file type is not supported"
                 raise Exception
             try:
-                user_news_folder.insert_one({
-                    "AccountId": account_id,
+                rs = await user_news_folder.insert_one({
+                    "accountId": account_id,
+                    "createdBy": account_id,
+                    "createdAt": timeNow(),
                     "title": title,
                     "description": body,
                     "favourites": [],
@@ -92,20 +103,22 @@ class imageHandler(tornado.web.RequestHandler):
                     "category": catagory,
                     "image": imageRaw
                 })
+                result.append(str(rs.inserted_id))
             except:
                 code = 4000
                 status = False
                 message = "Problem in database"
             code = 2000
             status = True
-            message = "News posted."
+            message = "News is created."
             response = {
                 "code": code,
                 "status": status,
-                "message": message
+                "message": message,
+                "result": result
             }
             self.write(response)
-            self.finish()
+            await self.finish()
             return
         except:
             response = {
@@ -114,7 +127,7 @@ class imageHandler(tornado.web.RequestHandler):
                 "message": message
             }
             self.write(response)
-            self.finish()
+            await self.finish()
             return
 # /
 
@@ -162,24 +175,12 @@ class imageHandler(tornado.web.RequestHandler):
                 }
                 self.write(response)
                 self.finish()
+                return
             except:
                 code = 5623
                 status = False
                 message = 'Internal Error, Please Contact the Support Team.'
                 raise Exception
-
-            code = 2000
-            status = True
-            message = "List of images"
-            response = {
-                'code': code,
-                'status': status,
-                'message': message,
-                "result": result
-            }
-            self.write(response)
-            self.finish()
-            return
         except:
             response = {
                 'code': code,

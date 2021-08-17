@@ -6,6 +6,7 @@ class SearchPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+          toolbarHeight: 70,
         // The search area here
           title: Container(
             width: double.infinity,

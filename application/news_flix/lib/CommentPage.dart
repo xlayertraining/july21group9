@@ -65,6 +65,7 @@ class _CommentPage extends State<CommentPage> {
             ),
           )
       ],
+      reverse: true,
     );
   }
 
@@ -72,6 +73,7 @@ class _CommentPage extends State<CommentPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: 60,
         title: Text("Comment Page"),
         backgroundColor: Colors.blue,
       ),
@@ -87,9 +89,9 @@ class _CommentPage extends State<CommentPage> {
               print(commentController.text);
               setState(() {
                 var value = {
-                  'name': 'New User',
+                  'name': 'Samyadeep Saha',
                   'pic':
-                  'https://lh3.googleusercontent.com/a-/AOh14GjRHcaendrf6gU5fPIVd8GIl1OgblrMMvGUoCBj4g=s400',
+                  'https://images.wallpapersden.com/image/download/itachi-uchiha-anime_a2xuZmiUmZqaraWkpJRnbmhnrWduaGc.jpg',
                   'message': commentController.text
                 };
                 filedata.insert(0, value);
@@ -113,7 +115,7 @@ class _CommentPage extends State<CommentPage> {
           commentController: commentController,
           backgroundColor: Colors.white,
           textColor: Colors.black,
-          sendWidget: Icon(Icons.send_sharp, size: 30, color: Colors.black),
+          sendWidget: Icon(Icons.send_sharp, size: 30, color: Colors.blue),
         ),
       ),
     );

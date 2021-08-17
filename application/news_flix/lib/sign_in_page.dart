@@ -201,7 +201,7 @@ class _MyappState extends State<Myapp> {
   validate() async {
 
     if (emailController.text.isEmpty) {
-      ToastUtil.error(_context!, message: "Enter your email.");
+      ToastUtil.error(_context!, message: "Enter your email.",);
       return;
     }
 
