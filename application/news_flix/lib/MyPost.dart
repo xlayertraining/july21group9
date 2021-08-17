@@ -3,27 +3,28 @@ import 'package:flutter/material.dart';
 import 'CreatePost.dart';
 
 class MyPost extends StatelessWidget {
-  get controller => null;
+  var controller;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: 60,
           title: Text('My Posts'),
-          flexibleSpace: Container(
-              decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                      begin: Alignment.centerLeft,
-                      end: Alignment.centerRight,
-                      colors: [Colors.blue.shade400, Colors.cyan.shade100]))),
+         backgroundColor:Colors.blue.shade600,
           elevation: 0.0,
-          actions: [
-            IconButton(
-              icon: Image.network(
-                  'https://images.wallpapersden.com/image/download/itachi-uchiha-anime_a2xuZmiUmZqaraWkpJRnbmhnrWduaGc.jpg'),
-              onPressed: () {},
-            ),
-          ]),
+          // actions: [
+          //   Container(
+          //   child:CircleAvatar(
+          //     backgroundImage:NetworkImage(
+          //       "https://images.wallpapersden.com/image/download/itachi-uchiha-anime_a2xuZmiUmZqaraWkpJRnbmhnrWduaGc.jpg",
+          //     ),
+          //     radius: 20,
+          //   ),
+          //     height: 200,
+          // ),
+          // ]
+          ),
       body: MyPostBody(),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),

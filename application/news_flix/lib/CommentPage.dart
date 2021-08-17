@@ -73,6 +73,7 @@ class _CommentPage extends State<CommentPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: 60,
         title: Text("Comment Page"),
         backgroundColor: Colors.blue,
       ),
@@ -114,7 +115,7 @@ class _CommentPage extends State<CommentPage> {
           commentController: commentController,
           backgroundColor: Colors.white,
           textColor: Colors.black,
-          sendWidget: Icon(Icons.send_sharp, size: 30, color: Colors.black),
+          sendWidget: Icon(Icons.send_sharp, size: 30, color: Colors.blue),
         ),
       ),
     );

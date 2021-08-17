@@ -17,7 +17,11 @@ class _FullViewState extends State<FullView> {
         actions: [
           Container(
             width: 50,
-            child: Image.asset("assets/news.png"
+            child:CircleAvatar(
+            backgroundImage:NetworkImage(
+                "https://images.wallpapersden.com/image/download/itachi-uchiha-anime_a2xuZmiUmZqaraWkpJRnbmhnrWduaGc.jpg",
+            ),
+              radius: 15,
             ),
               height: 200,
             ),
