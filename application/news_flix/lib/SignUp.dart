@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:http/http.dart' as http;
 import 'package:untitled2/SplashScreen.dart';
-import 'package:untitled2/homepage.dart';
+import 'package:untitled2/Homepage.dart';
 Future<http.Response> createAlbum(String title) {
   print("Hello");
   return http.post(

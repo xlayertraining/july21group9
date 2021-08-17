@@ -6,7 +6,7 @@ import 'package:untitled2/SignUp.dart';
 import 'package:untitled2/config/configuration.dart';
 import 'package:untitled2/util/toast_util.dart';
 
-import 'homepage.dart';
+import 'Homepage.dart';
 import 'package:lottie/lottie.dart';
 
 class Myapp extends StatefulWidget {
@@ -211,7 +211,7 @@ class _MyappState extends State<Myapp> {
     }
 
     var response = await Dio().post(
-        Configuration.serverUrl + "/sign/in",
+        Configuration.serverUrl + "/sign_in",
       data: {
           "emailAddress": emailController.text,
           "password": passwordController.text
