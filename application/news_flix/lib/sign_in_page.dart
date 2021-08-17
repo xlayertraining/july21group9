@@ -224,7 +224,7 @@ class _MyappState extends State<Myapp> {
     try {
       if (response.data['status']) {
 
-        await prefs.setString(Configuration.signedInKey, response.data['result'][0]);
+        await prefs.setString(Configuration.signedInKey, response.data['result'][0]['Authorization']);
 
         ToastUtil.info(_context!, message: response.data['message']);
         Navigator.pushReplacement(
