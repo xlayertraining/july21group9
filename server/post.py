@@ -110,6 +110,8 @@ class imageHandler(tornado.web.RequestHandler):
                     "publisedTime": postTime,
                     "category": catagory,
                     "approve": approve,
+                    "approvedBy":None,
+                    "approveAt":None,
                     "image": imageRaw
                     
                 })
@@ -170,7 +172,7 @@ class imageHandler(tornado.web.RequestHandler):
                     i["fav_user"] = False
                     if account_id in i["favourites"]:
                         i["fav_user"] = True
-                    account_find = await user_sign_up.find_one({"_id": ObjectId(i["AccountId"])})
+                    account_find = await user_sign_up.find_one({"_id": ObjectId(i["accountId"])})
                     if account_find:
                         i["author"] = account_find["userName"]
                     result.append(i)

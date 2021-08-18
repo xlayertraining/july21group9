@@ -1,4 +1,4 @@
-from bson import regex
+from bson import encode, regex
 from common_library import *
 
 
@@ -125,6 +125,7 @@ class signUpHandler(tornado.web.RequestHandler):
 
             encoded_jwt = jwt.encode(
                 {"key": account_id}, "icfai", algorithm="HS256")
+            encode_jwt=encoded_jwt.decode()
             result.append({"Authorization": encoded_jwt})
             code = 200
             status = True

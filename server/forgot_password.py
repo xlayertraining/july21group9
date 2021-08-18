@@ -6,55 +6,35 @@ from common_library import*
 from auth import SecureHeader
 
 
-class NewsApproveHandler(tornado.web.RequestHandler):
-
+class ForgotPasswordHandler(tornado.web.RequestHandler):
     async def post(self):
         code = 4000
         status = False
         message = ""
         result = []
         try:
-            account_id = await SecureHeader.decrypt(self.request.headers["Authorization"])
-            if account_id == None:
-                code = 8765
-                status = False
-                message = "You're not authorized"
-                raise Exception
-            accountfind=await user_sign_up.find_one({"_id":ObjectId(account_id)})
-            
             try:
-                if accountfind.get("role")!=1:
-                    raise Exception
+                emailAddress = json.loads(self.request.body("email").decode())
             except:
-                code = 8765
+                code = 3523
                 status = False
-                message = "You're not authorized"
-                raise Exception      
-            # Title
-            try:
-                newsid = ObjectId(self.request.arguments["newsid"][0].decode())     
-            except:
-                message = " invalid news id."
-                raise Exception
-            
-            newsupdate=await user_news_folder.update_one({
-                "_id":newsid
-            },
-            {
-                "$set":{"approve":True,"approvedBy":account_id,"approvedAt":timeNow()}
-            })
+                message = "Invalid email!"
+            otp = random.randint(1000, 9999)
             code = 2000
             status = True
-            message = "News is approved."
+            message = otp
+            await user_otp_folder.insert_one({
+                "otp": otp,
+                "emailAddress": emailAddress,
+                "createdAt": dtime.now(),
+            })
             response = {
                 "code": code,
                 "status": status,
-                "message": message,
-                "result": result
+                "message": message
             }
             self.write(response)
-            await self.finish()
-            return
+            self.finish()
         except:
             response = {
                 "code": code,
@@ -62,7 +42,7 @@ class NewsApproveHandler(tornado.web.RequestHandler):
                 "message": message
             }
             self.write(response)
-            await self.finish()
+            self.finish()
             return
 # /
 
@@ -79,24 +59,18 @@ class NewsApproveHandler(tornado.web.RequestHandler):
                 status = False
                 message = "You're not authorized"
                 raise Exception
-            accountfind=await user_sign_up.find_one({"_id":ObjectId(account_id)})
-            
-            try:
-                if accountfind.get("role")!=1:
-                    raise Exception
-            except:
-                code = 8765
-                status = False
-                message = "You're not authorized"
-                raise Exception
-                
             # Category
-           
             try:
-                imageList = user_news_folder.find({"approve":False})
+                category_id = int(
+                    self.request.arguments["category"][0].decode())
+            except:
+                message = "Invalid category"
+                raise Exception
+            try:
+                imageList = user_news_folder.find({"category": category_id})
                 async for i in imageList:
                     # del[i["image"]]
-                    i["image"]=str(i["image"])
+                    i["image"] = str(i["image"])
                     i['_id'] = str(i['_id'])
                     i["fav_user"] = False
                     if account_id in i["favourites"]:
@@ -105,9 +79,9 @@ class NewsApproveHandler(tornado.web.RequestHandler):
                     if account_find:
                         i["author"] = account_find["userName"]
                     result.append(i)
-                code=2000
-                status=True
-                message="list of news"
+                code = 2000
+                status = True
+                message = "list of news"
                 response = {
                     'code': code,
                     'status': status,
