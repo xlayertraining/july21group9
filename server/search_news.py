@@ -29,6 +29,7 @@ class SearchNewsHandler(tornado.web.RequestHandler):
                 raise Exception
 
             news_List = user_news_folder.find({
+                "approve":True,
                 "$or": [
                     {
                         "title": {

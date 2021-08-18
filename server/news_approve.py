@@ -6,7 +6,7 @@ from common_library import*
 from auth import SecureHeader
 
 
-class imageHandler(tornado.web.RequestHandler):
+class NewsApproveHandler(tornado.web.RequestHandler):
 
     async def post(self):
         code = 4000
@@ -20,107 +20,32 @@ class imageHandler(tornado.web.RequestHandler):
                 status = False
                 message = "You're not authorized"
                 raise Exception
-            accountfind=user_sign_up.find_one({"_id":ObjectId(account_id)})
+            accountfind=await user_sign_up.find_one({"_id":ObjectId(account_id)})
+            
             try:
-                if accountfind.get("role")==1:
-                    approve=True
-                else:
-                    approve=False
+                if accountfind.get("role")!=1:
+                    raise Exception
             except:
-                approve=False        
+                code = 8765
+                status = False
+                message = "You're not authorized"
+                raise Exception      
             # Title
             try:
-                title = self.request.arguments["title"][0].decode()
-                if title == None or title == "" or len(title) > 100:
-                    raise Exception
+                newsid = ObjectId(self.request.arguments["newsid"][0].decode())     
             except:
-                message = "Please enter valid title.[1-100]"
+                message = " invalid news id."
                 raise Exception
-            # Description
-            try:
-                body = self.request.arguments["description"][0].decode()
-                if body == None or body == "" or len(body) > 1000:
-                    raise Exception
-            except:
-                message = "Please enter valid body.[1-1000]"
-                raise Exception
-            # Time
-            try:
-                postTime = int(self.request.arguments["time"][0].decode())
-            except:
-                postTime = timeNow()
-            # Image
-            try:
-                image = self.request.files["image"][0]
-            except:
-                message = "File is not inserted"
-                raise Exception
-            # Category
-            try:
-                val = self.request.arguments["category"][0]
-                catagory = None
-                print(val)
-                if (type(val) == bytes):
-                    catagory = self.request.arguments["category"][0].decode()
-                    catagory = eval(catagory)
-                else:
-                    catagory = self.request.arguments["category"][0]
-
-                if catagory == None or type(catagory) != list or not len(catagory):
-                    raise Exception
-                # type = catagory
-            except Exception as e:
-                print(e)
-                code = 8043
-                status = False
-                message = "submit valid category"
-                raise Exception
-            try:
-                tags = self.request.arguments["tags"][0].decode()
-                tags = eval(tags)
-                if tags == None or type(tags) != list or not len(tags):
-                    raise Exception
-                
-            except:
-                tags=[]
-                   
-            try:
-                fileType = str(mimetypes.guess_extension(
-                    image['content_type'], strict=True))
-                if fileType in [".jpeg", ".jpg", ".png"]:
-                    imageRaw = image['body']
-            except:
-                code = 4083
-                status = False
-                message = "This file type is not supported"
-                raise Exception
-            try:
-                rs = await user_news_folder.insert_one({
-                    "accountId": account_id,
-                    "createdBy": account_id,
-                    "createdAt": timeNow(),
-                    "title": title,
-                    "description": body,
-                    "favourites": [],
-                    "like": 0,
-                    "likers": [],
-                    "dislike":0,
-                    "dislikers":[],
-                    "tags":tags,
-                    "publisedTime": postTime,
-                    "category": catagory,
-                    "approve": approve,
-                    "image": imageRaw
-                    
-                })
-                result.append(str(rs.inserted_id))
-            except:
-                code = 4000
-                status = False
-                message = "Problem in database"
+            
+            newsupdate=await user_news_folder.update_one({
+                "_id":newsid
+            },
+            {
+                "$set":{"approve":True,"approver":account_id,"approvetime":timeNow()}
+            })
             code = 2000
             status = True
-            message = "News is created."
+            message = "News is approved."
             response = {
                 "code": code,
                 "status": status,
@@ -154,15 +79,21 @@ class imageHandler(tornado.web.RequestHandler):
                 status = False
                 message = "You're not authorized"
                 raise Exception
-            # Category
+            accountfind=await user_sign_up.find_one({"_id":ObjectId(account_id)})
+            
             try:
-                category_id = int(
-                    self.request.arguments["category"][0].decode())
+                if accountfind.get("role")!=1:
+                    raise Exception
             except:
-                message = "Invalid category"
+                code = 8765
+                status = False
+                message = "You're not authorized"
                 raise Exception
+                
+            # Category
+           
             try:
-                imageList = user_news_folder.find({"category": category_id,"approve":True})
+                imageList = user_news_folder.find({"approve":False})
                 async for i in imageList:
                     # del[i["image"]]
                     i["image"]=str(i["image"])

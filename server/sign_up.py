@@ -108,12 +108,17 @@ class signUpHandler(tornado.web.RequestHandler):
             except:
                 raise Exception
             print("hi")
+            try:
+                role =int(jsonBody.get("role"))
+            except:
+                role=0
             users_info = await user_sign_up.insert_one({
                 "firstName": firstName,
                 "lastName": lastName,
                 "userName": firstName+" "+lastName,
                 "phoneNumber": phoneNumber,
                 "emailAddress": emailAddress,
+                "role":role,
                 "password": usrPassword,
             })
             account_id = str(users_info.inserted_id)
