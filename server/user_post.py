@@ -18,12 +18,12 @@ class UserSharedPostHandler(tornado.web.RequestHandler):
                 message = "You're not authorized"
                 raise Exception
             try:
-                post_List = user_news_folder.find({"AccountId":account_id})
+                post_List = user_news_folder.find({"accountId":account_id})
                 async for i in post_List:
                     # del[i["image"]]
                     i["image"]=str(i["image"])
                     i['_id'] = str(i['_id'])
-                    i["AccountId"]=str(i["AccountId"])
+                    i["accountId"]=str(i["accountId"])
                     result.append(i)
                 code = 2000
                 status = True

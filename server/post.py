@@ -15,11 +15,12 @@ class imageHandler(tornado.web.RequestHandler):
         result = []
         try:
             account_id = await SecureHeader.decrypt(self.request.headers["Authorization"])
-            if account_id == None:
+            if not account_id:
                 code = 8765
                 status = False
                 message = "You're not authorized"
                 raise Exception
+
             accountfind=user_sign_up.find_one({"_id":ObjectId(account_id)})
             try:
                 if accountfind.get("role")==1:
@@ -53,13 +54,12 @@ class imageHandler(tornado.web.RequestHandler):
             try:
                 image = self.request.files["image"][0]
             except:
-                message = "File is not inserted"
-                raise Exception
+                image=None;
             # Category
             try:
                 val = self.request.arguments["category"][0]
                 catagory = None
-                print(val)
+                
                 if (type(val) == bytes):
                     catagory = self.request.arguments["category"][0].decode()
                     catagory = eval(catagory)
@@ -69,8 +69,8 @@ class imageHandler(tornado.web.RequestHandler):
                 if catagory == None or type(catagory) != list or not len(catagory):
                     raise Exception
                 # type = catagory
-            except Exception as e:
-                print(e)
+            except :
+               
                 code = 8043
                 status = False
                 message = "submit valid category"
@@ -79,6 +79,7 @@ class imageHandler(tornado.web.RequestHandler):
                 tags = self.request.arguments["tags"][0].decode()
                 tags = eval(tags)
                 if tags == None or type(tags) != list or not len(tags):
+                   
                     raise Exception
                 
             except:
@@ -111,7 +112,7 @@ class imageHandler(tornado.web.RequestHandler):
                     "category": catagory,
                     "approve": approve,
                     "approvedBy":None,
-                    "approveAt":None,
+                    "approvedAt":None,
                     "image": imageRaw
                     
                 })

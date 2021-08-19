@@ -90,7 +90,6 @@ class NewsApproveHandler(tornado.web.RequestHandler):
                 message = "You're not authorized"
                 raise Exception
                 
-            # Category
            
             try:
                 imageList = user_news_folder.find({"approve":False})

@@ -107,37 +107,44 @@ class signUpHandler(tornado.web.RequestHandler):
                     raise Exception
             except:
                 raise Exception
-            print("hi")
+            # Role
             try:
-                role =int(jsonBody.get("role"))
+                role = int(jsonBody.get('role'))
+
             except:
-                role=0
+                role = 0
+            if role < 0 or role > 1:
+                code = 8767
+                status = False
+                message = "role can't be higher or lesser then [0-1]"
+                raise Exception
+
             users_info = await user_sign_up.insert_one({
                 "firstName": firstName,
                 "lastName": lastName,
                 "userName": firstName+" "+lastName,
                 "phoneNumber": phoneNumber,
                 "emailAddress": emailAddress,
-                "role":role,
+                "role": role,
                 "password": usrPassword,
             })
             account_id = str(users_info.inserted_id)
 
             encoded_jwt = jwt.encode(
                 {"key": account_id}, "icfai", algorithm="HS256")
-            encode_jwt=encoded_jwt.decode()
+            encoded_jwt = encoded_jwt.decode()
             result.append({"Authorization": encoded_jwt})
             code = 200
             status = True
             message = "Sign-up Successfull"
-           
+
             try:
                 response = {
-                "code": code,
-                "status": status,
-                "message": message,
-                "result": result
-            }
+                    "code": code,
+                    "status": status,
+                    "message": message,
+                    "result": result
+                }
                 self.write(response)
                 self.finish()
                 return

@@ -1,9 +1,11 @@
+
 from common_library import *
 
 
 class SecureHeader():
     async def decrypt(Authorization):
-        if True:
+    
+        try:
             print(Authorization)
             Authorization = Authorization.split()
             firstPart = Authorization[0]
@@ -12,16 +14,18 @@ class SecureHeader():
                 raise Exception
             userAccountId = jwt.decode(
                 secondPart, "icfai", algorithms=["HS256"])
-            print(userAccountId)
+            # print(userAccountId)
             accFind = await user_sign_up.find_one(
                 {
                     "_id": ObjectId(userAccountId['key'])
                 }
             )
-            print(accFind)
+            # print(accFind)
             if accFind == None:
+               
                 raise Exception
             else:
                 return str(accFind['_id'])
-        else:
+        except:
+            
             return None

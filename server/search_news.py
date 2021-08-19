@@ -25,11 +25,11 @@ class SearchNewsHandler(tornado.web.RequestHandler):
             except:
                 code = 3289
                 status = False
-                message="Enter Valid keyword"
+                message = "Enter Valid keyword"
                 raise Exception
 
-            news_List = user_news_folder.find({
-                "approve":True,
+            news_List =user_news_folder.find({
+                "approve": True,
                 "$or": [
                     {
                         "title": {
@@ -45,14 +45,27 @@ class SearchNewsHandler(tornado.web.RequestHandler):
                     }
                 ]
             })
-            async for i in news_List:
-                # del[i["image"]]
-                i["image"] = str(i["image"])
-                i['_id'] = str(i['_id'])
-                account_find = await user_sign_up.find_one({"_id": ObjectId(i["AccountId"])})
-                if account_find:
-                        i["author"] = account_find["userName"]
-                result.append(i)
+            
+            
+            try:
+                async for i in news_List:
+                    # del[i["image"]]
+                    i["image"] = str(i["image"])
+                    i['_id'] = str(i['_id'])
+                    account_find = await user_sign_up.find_one({"_id": ObjectId(i["accountId"])})
+                    if account_find:
+                         i["author"] = account_find["userName"]
+                    result.append(i)
+                    
+                code=2000
+                status=True
+                message="Found this topics"
+            except:
+                code=4000
+                status=False
+                message="unexpected error occured!"
+                raise Exception
+
             response = {
                 "code": code,
                 "status": status,
