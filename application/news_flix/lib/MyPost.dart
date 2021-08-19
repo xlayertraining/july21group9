@@ -10,21 +10,21 @@ class MyPost extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 60,
-          title: Text('My Posts'),
-         backgroundColor:Colors.blue.shade600,
-          elevation: 0.0,
-          // actions: [
-          //   Container(
-          //   child:CircleAvatar(
-          //     backgroundImage:NetworkImage(
-          //       "https://images.wallpapersden.com/image/download/itachi-uchiha-anime_a2xuZmiUmZqaraWkpJRnbmhnrWduaGc.jpg",
-          //     ),
-          //     radius: 20,
-          //   ),
-          //     height: 200,
-          // ),
-          // ]
-          ),
+        title: Text('My Posts'),
+        backgroundColor:Colors.blue.shade600,
+        elevation: 0.0,
+        // actions: [
+        //   Container(
+        //   child:CircleAvatar(
+        //     backgroundImage:NetworkImage(
+        //       "https://images.wallpapersden.com/image/download/itachi-uchiha-anime_a2xuZmiUmZqaraWkpJRnbmhnrWduaGc.jpg",
+        //     ),
+        //     radius: 20,
+        //   ),
+        //     height: 200,
+        // ),
+        // ]
+      ),
       body: MyPostBody(),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),

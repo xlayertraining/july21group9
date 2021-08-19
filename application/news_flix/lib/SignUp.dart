@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:untitled2/SplashScreen.dart';
 import 'package:untitled2/Homepage.dart';
+
 Future<http.Response> createAlbum(String title) {
   print("Hello");
   return http.post(
@@ -12,13 +13,12 @@ Future<http.Response> createAlbum(String title) {
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
     },
-
     body: jsonEncode(<String, String>{
-      "firstName":"Sam",
-      "lastName":"Jhonson",
-      "phoneNumber":"9655870115",
-      "emailAddress":"test4@gmail.com",
-      "password":"moinvwuondvoncs"
+      "firstName": "Sam",
+      "lastName": "Jhonson",
+      "phoneNumber": "9655870115",
+      "emailAddress": "test4@gmail.com",
+      "password": "moinvwuondvoncs"
     }),
   );
 }
@@ -46,133 +46,113 @@ class _MyWidgetState extends State<MyWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        // appBar: AppBar(
-        //   backgroundColor: Colors.pink,
-        //   iconTheme: IconThemeData(
-        //       color:Colors.black ),
-        //   title: Text(
-        //     "Welcome",
-        //     style: TextStyle(color: Colors.white),
-        //   ),
-        // ),
-        body: Container(
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  begin: Alignment.centerLeft,
-                  end: Alignment.centerRight,
-                  colors: [Colors.white, Colors.purpleAccent.shade100]
-              )
-          ),
-          padding: EdgeInsets.all(10),
-          width: MediaQuery.of(context).size.width,
-          // color: Colors.white70,
-          child: SingleChildScrollView(
+        resizeToAvoidBottomInset: false,
+        body:
+         Container(
+            decoration: BoxDecoration(color: Colors.lightBlueAccent),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SizedBox(
-                  height: 70,
-                ),
-                Text(
-                  "Sign Up Form",
-                  style: TextStyle(fontSize: 25.0,color: Colors.red.shade500, fontWeight: FontWeight.bold),
-                ),
-                SizedBox(
-                  height: 40,
-                ),
-                TextField(
-                    decoration: InputDecoration(
-                  labelText: "First name",
-                  labelStyle: TextStyle(color: Colors.red.shade500),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20.0),
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    height: 20,
                   ),
-                )),
-                SizedBox(
-                  height: 30,
-                ),
-                TextField(
-                    decoration: InputDecoration(
-                  labelText: "Last name",
-                  labelStyle: TextStyle(color: Colors.red.shade500),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20.0),
+                  Padding(
+                      padding: EdgeInsets.only(
+                    top: 80,
+                  )),
+                  Text(
+                    "Sign Up",
+                    style: TextStyle(
+                        fontSize: 35.0,
+                        fontStyle: FontStyle.italic,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold),
                   ),
-                )),
-                SizedBox(
-                  height: 30,
-                ),
-                TextField(
-                    decoration: InputDecoration(
-                      labelText: "Gender",
-                      labelStyle: TextStyle(color: Colors.red.shade500),
-                      hintText: 'Male or Female or Others',
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                    )),
-                SizedBox(
-                  height: 30,
-                ),
-                TextField(
-                    decoration: InputDecoration(
-                      labelText: " Phone No.",
-                      labelStyle: TextStyle(color: Colors.red.shade500),
-                      suffixIcon: Icon(Icons.phone,color: Colors.black),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                    )),
-                SizedBox(
-                  height: 30,
-                ),
-                TextField(
-                    decoration: InputDecoration(
-                  labelText: "Email",
-                  labelStyle: TextStyle(color: Colors.red.shade500),
-                  suffixIcon: Icon(Icons.email,color: Colors.black),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20.0),
-                  ),
-                )),
-                SizedBox(
-                  height: 30,
-                ),
-                TextField(
-                  obscureText: true,
-                  decoration: InputDecoration(
-                    labelText: 'Password',
-                    labelStyle: TextStyle(color: Colors.red.shade500),
-                    suffixIcon: Icon(Icons.visibility_off,color: Colors.black),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20.0),
+                  Expanded(
+                      child: Container(
+                        padding: EdgeInsets.fromLTRB(10, 30, 10, 10),
+                        child: Column(
+                          children: [
+
+                            SizedBox(
+                              height: 30,
+                            ),
+
+                            TextField(
+
+                        decoration: InputDecoration(
+                        labelText: "First name",
+                          labelStyle: TextStyle(color: Colors.lightBlue),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(40.0),
+                          ),
+                        )
+                              ),
+                            SizedBox(
+                              height: 30,
+                            ),
+                            TextField(
+                                decoration: InputDecoration(
+                                  labelText: "Last name",
+                                  labelStyle: TextStyle(color: Colors.lightBlue),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(40.0),
+                                  ),
+                                )
+                            ),
+                            SizedBox(
+                              height: 30,
+                            ),
+                            TextField(
+                                decoration: InputDecoration(
+                                  labelText: "Email",
+                                  labelStyle: TextStyle(color: Colors.lightBlue),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(40.0),
+                                  ),
+                                )
+                            ),
+                            SizedBox(
+                              height: 30,
+                            ),
+                            TextField(
+                                decoration: InputDecoration(
+                                  labelText: "Phone No.",
+                                  labelStyle: TextStyle(color: Colors.lightBlue),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(40.0),
+                                  ),
+                                )
+                            ),
+                            SizedBox(
+                              height: 30,
+                            ),
+                            ElevatedButton(
+                              onPressed: () {
+                                Navigator.pushReplacement(context,
+                                    MaterialPageRoute(builder: (context) => HomePage()));
+                              },
+                              // createAlbum("test string");
+                              child: Text("Submit",style: TextStyle(
+                                  color: Colors.white
+                              ),),
+                              style: ElevatedButton.styleFrom(primary: Colors.lightBlue),
+                            ),
+                          ],
+                        ),
+                    margin: EdgeInsets.only(
+                      top: 100,
                     ),
-                  ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (context) => HomePage()));
-                  },
-                  // createAlbum("test string");
-                  child: Text("Submit",style: TextStyle(
-                    color: Colors.white
-                  ),),
-                  style: ElevatedButton.styleFrom(primary: Colors.red),
-                ),
-                SizedBox(height: 20.0),
-                // GestureDetector(
-                //   onTap: () {
-                //     Navigator.of(context).pop(
-                //         MaterialPageRoute(builder: (context) => Myapp()));
-                //   },
-                // ),
-              ],
-            ),
-          ),
-        ));
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(55.0),
+                        topRight: Radius.circular(55.0),
+                      ),
+                    ),
+
+
+                  ))
+                ])));
   }
 }

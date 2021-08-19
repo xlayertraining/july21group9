@@ -42,9 +42,9 @@ class _AppImagePickerState extends State<AppImagePicker> {
               (newsImage.path.isNotEmpty)
                   ? Image.file(newsImage)
                   : Icon(
-                      Icons.image,
-                      size: 90,
-                    ),
+                Icons.image,
+                size: 90,
+              ),
               IconButton(
                 icon: Icon(Icons.camera_alt),
                 iconSize: 50.0,
@@ -74,9 +74,11 @@ class _AppImagePickerState extends State<AppImagePicker> {
                 },
               ),
               SizedBox(
+
                 height: 30,
               ),
               SizedBox(
+
                 width: 120,
                 child: ElevatedButton(
                   onPressed: () {
