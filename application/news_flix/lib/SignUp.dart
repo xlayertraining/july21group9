@@ -81,7 +81,7 @@ class _MyWidgetState extends State<MyWidget> {
                             TextField(
 
                         decoration: InputDecoration(
-                        labelText: "First name",
+                        labelText: "First name :",
                           labelStyle: TextStyle(color: Colors.lightBlue),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(40.0),
@@ -93,7 +93,7 @@ class _MyWidgetState extends State<MyWidget> {
                             ),
                             TextField(
                                 decoration: InputDecoration(
-                                  labelText: "Last name",
+                                  labelText: "Last name :",
                                   labelStyle: TextStyle(color: Colors.lightBlue),
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(40.0),
@@ -107,6 +107,7 @@ class _MyWidgetState extends State<MyWidget> {
                                 decoration: InputDecoration(
                                   labelText: "Email",
                                   labelStyle: TextStyle(color: Colors.lightBlue),
+                                  suffixIcon: Icon(Icons.email, color: Colors.lightBlue),
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(40.0),
                                   ),
@@ -119,6 +120,7 @@ class _MyWidgetState extends State<MyWidget> {
                                 decoration: InputDecoration(
                                   labelText: "Phone No.",
                                   labelStyle: TextStyle(color: Colors.lightBlue),
+                                  suffixIcon: Icon(Icons.phone, color: Colors.lightBlue),
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(40.0),
                                   ),

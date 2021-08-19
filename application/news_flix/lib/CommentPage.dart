@@ -1,5 +1,8 @@
 import 'package:comment_box/comment/comment.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+
+import 'config/configuration.dart';
 
 class CommentPage extends StatefulWidget {
   @override
@@ -119,5 +122,21 @@ class _CommentPage extends State<CommentPage> {
         ),
       ),
     );
+  }
+}
+void getHttp() async {
+  try {
+    var img;
+    var response = await Dio().post(Configuration.serverUrl + "/",
+        data: {
+          "title":"test1",
+          "description":"test1",
+          "image":"1 2 ka 4 ",
+          "category":[0,1,2],
+        }
+    );
+    print(response);
+  } catch (e) {
+    print(e);
   }
 }

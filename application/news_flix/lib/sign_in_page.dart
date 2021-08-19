@@ -15,7 +15,6 @@ class Myapp extends StatefulWidget {
 }
 
 class _MyappState extends State<Myapp> {
-
   TextEditingController emailController = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
   BuildContext? _context;
@@ -24,15 +23,14 @@ class _MyappState extends State<Myapp> {
 
   @override
   Widget build(BuildContext context) {
-
     if (_context == null) {
       _context = context;
     }
 
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-        return Scaffold(
-          // backgroundColor: Colors.white38. withOpacity(0.9),
+    return Scaffold(
+      // backgroundColor: Colors.white38. withOpacity(0.9),
       body: Container(
         // decoration: BoxDecoration(
         //     gradient: LinearGradient(
@@ -63,11 +61,11 @@ class _MyappState extends State<Myapp> {
                   Text(
                     'Welcome back',
                     style: TextStyle(
-                        fontSize: 25.0,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.deepPurple,
+                      fontSize: 25.0,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.deepPurple,
                       // fontStyle: FontStyle.italic,
-                  ),
+                    ),
                   ),
                   SizedBox(
                     height: 10,
@@ -93,12 +91,12 @@ class _MyappState extends State<Myapp> {
                   labelStyle: TextStyle(color: Colors.deepPurple),
                   hintText: 'Enter valid email id as abc@gmail.com',
                   suffixIcon: Icon(Icons.email, color: Colors.black),
-
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.deepPurple),
-                    borderRadius: BorderRadius.circular(25.0),),
+                    borderRadius: BorderRadius.circular(25.0),
+                  ),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color:Colors.black87),
+                    borderSide: BorderSide(color: Colors.black87),
                     borderRadius: BorderRadius.circular(25.0),
                   ),
                 ),
@@ -119,19 +117,20 @@ class _MyappState extends State<Myapp> {
                         passShow = !passShow;
                       });
                     },
-                    icon: (passShow == true)? Icon(Icons.visibility,color: Colors.black) : Icon(Icons.visibility_off,color: Colors.black),
+                    icon: (passShow == true)
+                        ? Icon(Icons.visibility, color: Colors.black)
+                        : Icon(Icons.visibility_off, color: Colors.black),
                   ),
-                 enabledBorder: OutlineInputBorder(
+                  enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.deepPurple),
-                    borderRadius: BorderRadius.circular(25.0),),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color:Colors.black87),
-                      borderRadius: BorderRadius.circular(25.0),
-                    ),
-
+                    borderRadius: BorderRadius.circular(25.0),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black87),
+                    borderRadius: BorderRadius.circular(25.0),
                   ),
                 ),
-
+              ),
               SizedBox(
                 height: 30.0,
               ),
@@ -142,17 +141,15 @@ class _MyappState extends State<Myapp> {
                   children: [
                     Text(
                       'Forget password?',
-                      style: TextStyle(
-                          fontSize: 14,
-                        fontWeight: FontWeight.bold
-                      ),
+                      style:
+                          TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),
               ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                    primary: Colors.deepPurple.shade400,
+                  primary: Colors.deepPurple.shade400,
                 ),
                 onPressed: () {
                   validate();
@@ -166,10 +163,7 @@ class _MyappState extends State<Myapp> {
                   ),
                   child: Text(
                     'Sign In',
-                    style: TextStyle(
-                        color: Colors.white,
-                      fontSize: 15
-                    ),
+                    style: TextStyle(color: Colors.white, fontSize: 15),
                   ),
                 ),
               ),
@@ -184,9 +178,9 @@ class _MyappState extends State<Myapp> {
                     TextSpan(
                       text: 'Sign Up',
                       style: TextStyle(
-                          color:Colors.deepPurple,fontSize: 16.0,
-                        fontWeight: FontWeight.bold
-                      ),
+                          color: Colors.deepPurple,
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.bold),
                     ),
                   ]),
                 ),
@@ -199,9 +193,11 @@ class _MyappState extends State<Myapp> {
   }
 
   validate() async {
-
     if (emailController.text.isEmpty) {
-      ToastUtil.error(_context!, message: "Enter your email.",);
+      ToastUtil.error(
+        _context!,
+        message: "Enter your email.",
+      );
       return;
     }
 
@@ -211,10 +207,10 @@ class _MyappState extends State<Myapp> {
     }
 
     var response = await Dio().post(
-        Configuration.serverUrl + "/sign_in",
+      Configuration.serverUrl + "/sign_in",
       data: {
-          "emailAddress": emailController.text,
-          "password": passwordController.text
+        "emailAddress": emailController.text,
+        "password": passwordController.text
       },
     );
 
@@ -223,8 +219,8 @@ class _MyappState extends State<Myapp> {
 
     try {
       if (response.data['status']) {
-
-        await prefs.setString(Configuration.signedInKey, response.data['result'][0]['Authorization']);
+        await prefs.setString(Configuration.signedInKey,
+            response.data['result'][0]['Authorization']);
 
         ToastUtil.info(_context!, message: response.data['message']);
         Navigator.pushReplacement(
@@ -238,6 +234,4 @@ class _MyappState extends State<Myapp> {
       print(e.toString() + s.toString());
     }
   }
-
-
 }
