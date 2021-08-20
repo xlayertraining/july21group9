@@ -1,7 +1,11 @@
 import 'dart:ui';
 
+
+
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 import 'CommentPage.dart';
 import 'FullView.dart';
@@ -21,6 +25,26 @@ class _ListWidgetState extends State<ListWidget> {
   Color _favIconColor = Colors.grey;
   Color _favIconColor2 = Colors.grey;
   @override
+  // void initState() {
+  //   super.initState();
+  //   // EasyLoading.show();
+  // }
+  //
+  // @override
+  // void deactivate() {
+  //   EasyLoading.dismiss();
+  //   super.deactivate();
+  // }
+  //
+  // void loadData() async {
+  //   try {
+  //     EasyLoading.show();
+  //     Response response = await Dio().get('https://github.com');
+  //     print(response);
+  //     EasyLoading.dismiss();
+  //   } catch (e) {
+  //     EasyLoading.showError(e.toString());
+  //     print(e);
   Widget build(BuildContext context) {
     if (_context == null) {
       _context = context;

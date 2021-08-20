@@ -20,6 +20,7 @@ class _AppImagePickerState extends State<AppImagePicker> {
 
   get picker => null;
   int selectedValue = 1;
+
   @override
   Widget build(BuildContext context) {
     if (_context == null) {
@@ -28,7 +29,7 @@ class _AppImagePickerState extends State<AppImagePicker> {
 
     return Scaffold(
       appBar: AppBar(
-        title:Text("Create Post")
+          title: Text("Create Post")
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -68,16 +69,11 @@ class _AppImagePickerState extends State<AppImagePicker> {
               (newsImage.path.isNotEmpty)
                   ? Image.file(newsImage)
                   : Icon(
-<<<<<<< Updated upstream
+
                 Icons.image,
                 size: 90,
               ),
-=======
-                      Icons.image,
-                      size: 90,
-                    ),
 
->>>>>>> Stashed changes
               IconButton(
                 icon: Icon(Icons.camera_alt),
                 iconSize: 50.0,
@@ -149,34 +145,30 @@ class _AppImagePickerState extends State<AppImagePicker> {
             quality: 70
         );
       }
-        // setState(() async {
-        //   newsImage = new File(img.path);
-        // }
-        // );
-      return  CmpressedImage;
-      }
+      // setState(() async {
+      //   newsImage = new File(img.path);
+      // }
+      // );
+      return CmpressedImage;
+    }
     else {
       ToastUtil.error(_context!, message: "No image is selected.");
     }
   }
-<<<<<<< Updated upstream
-}
-=======
-}
 
-void getHttp() async {
-  try {
-    var img;
-    var response = await Dio().post(Configuration.serverUrl + "/post", data: {
-      "title": "test1",
-      "description": "test1",
-      "image": "1 2 ka 4 " ,
-      "category": [0, 1, 2],
+  void getHttp() async {
+    try {
+      var img;
+      var response = await Dio().post(Configuration.serverUrl + "/post", data: {
+        "title": "test1",
+        "description": "test1",
+        "image": "1 2 ka 4 ",
+        "category": [0, 1, 2],
+      }
+      );
+      print(response);
+    } catch (e) {
+      print(e);
     }
-    );
-    print(response);
-  } catch (e) {
-    print(e);
   }
 }
->>>>>>> Stashed changes

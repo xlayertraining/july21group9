@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 class FullView extends StatefulWidget {
   const FullView({Key? key}) : super(key: key);
 
@@ -14,20 +15,41 @@ class _FullViewState extends State<FullView> {
         title: Text('Full View'),
         backgroundColor: Colors.blue,
         toolbarHeight: 70,
-        actions: [
-          Container(
-            width: 50,
-            child:CircleAvatar(
-            backgroundImage:NetworkImage(
-                "https://images.wallpapersden.com/image/download/itachi-uchiha-anime_a2xuZmiUmZqaraWkpJRnbmhnrWduaGc.jpg",
-            ),
-              radius: 15,
-            ),
-              height: 200,
-            ),
-        ],
       ),
-    );
+       body: SingleChildScrollView(
+       child: Column(
+        children:[
+          Padding(padding: EdgeInsets.fromLTRB(10, 10,10,10)),
+          TextField(
+            decoration: InputDecoration(
+              labelText: "Title :",
+              labelStyle: TextStyle(color: Colors.blue),
+            ),
+            maxLength: 200,
+            maxLines: 3,
+          ),
+          Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.width/2,
+            child:
+            Image.network(
+                'https://png.pngtree.com/thumb_back/fh260/background/20200714/pngtree-old-paper-texture-parchment-background-image_354980.jpg',
+              fit: BoxFit.fitWidth,
+            ),
+          ),
+          SizedBox(
+            width: 10,
+          ),
+          TextField(
+            decoration: InputDecoration(labelText: "Description :",
+              labelStyle: TextStyle(color: Colors.blue),
+            ),
+            maxLines: 8,
+            maxLength: 2000,
+          ),
+          ]
+       )
+       ),
+      );
   }
 }
-
