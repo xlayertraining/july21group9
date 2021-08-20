@@ -53,7 +53,6 @@ class _CommentPage extends State<CommentPage> {
                   height: 50.0,
                   width: 50.0,
                   decoration: new BoxDecoration(
-                      color: Colors.blue,
                       borderRadius: new BorderRadius.all(Radius.circular(50))),
                   child: CircleAvatar(
                       radius: 50,
@@ -76,9 +75,20 @@ class _CommentPage extends State<CommentPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: 60,
-        title: Text("Comment Page"),
-        backgroundColor: Colors.blue,
+        toolbarHeight: 70,
+        title: Text("Comment Page",
+        style: TextStyle(
+        color: Colors.black,
+        fontSize: 24.0,
+        fontStyle: FontStyle.italic,
+        ),),
+        backgroundColor: Colors.white,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios_outlined, color: Colors.black), // set your color here
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
       ),
       body: Container(
         child: CommentBox(
@@ -118,8 +128,9 @@ class _CommentPage extends State<CommentPage> {
           commentController: commentController,
           backgroundColor: Colors.white,
           textColor: Colors.black,
-          sendWidget: Icon(Icons.send_sharp, size: 30, color: Colors.blue),
+          sendWidget: Icon(Icons.send_sharp, size: 30, color: Colors.black,
         ),
+      ),
       ),
     );
   }

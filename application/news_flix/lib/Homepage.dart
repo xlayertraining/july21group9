@@ -244,18 +244,23 @@ class _HomePageState extends State<HomePage> {
       'https://www.tentaran.com/wp-content/uploads/2021/01/latest-india-business-news-today-23-january-2021.jpg'
     },
   ];
+  BuildContext? _context;
   @override
   Widget build(BuildContext context) {
+    if (_context == null) {
+      _context = context;
+    }
+
     return new DefaultTabController(
       length: 6,
       child: Scaffold(
           appBar: AppBar(
             toolbarHeight: 120,
-            backgroundColor: Colors.blue.shade600,
+            backgroundColor: Colors.white,
             title: Text(
               "NEWS FLIX",
               style: TextStyle(
-                color: Colors.white,
+                color: Colors.deepPurple,
                 fontSize: 24.0,
                 fontStyle: FontStyle.italic,
               ),
@@ -275,7 +280,7 @@ class _HomePageState extends State<HomePage> {
                     .push(MaterialPageRoute(builder: (_) => SearchPage())),
                 icon: Icon(
                   Icons.search,
-                  color: Colors.white,
+                  color: Colors.black,
                 ),
               ),
               IconButton(
@@ -287,26 +292,23 @@ class _HomePageState extends State<HomePage> {
                   // do something
                 },
               ),
-              // SizedBox(
-              //   width: 10,
-              // ),
-              // Container(
-              //   width: 50,
-              //   child: Image.asset("assets/news.png"
-              //   ),
-              //     height: 200,
-              //   ),
             ],
-
+            leading: IconButton(
+              icon: Icon(Icons.menu, color: Colors.deepPurple), // set your color here
+                onPressed: () => Scaffold.of(context).openDrawer(),
+            ),
             bottom: TabBar(
                 isScrollable: true,
                 indicatorWeight: 3.0,
                 indicatorSize: TabBarIndicatorSize.label,
-                indicatorColor: Colors.white,
+                labelColor: Colors.deepPurple,
+                indicatorColor: Colors.deepPurple,
+                unselectedLabelColor: Colors.grey,
                 labelPadding: EdgeInsets.symmetric(horizontal: 15),
                 tabs: [
                   Tab(
-                    child: Text("Latest"),
+                    child: Text("Latest",
+                    ),
                   ),
                   Tab(
                     child: Text("National"),

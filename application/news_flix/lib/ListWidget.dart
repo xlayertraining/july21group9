@@ -22,8 +22,9 @@ class ListWidget extends StatefulWidget {
 class _ListWidgetState extends State<ListWidget> {
   late BuildContext? _context = null;
   late Map? item;
-  Color _favIconColor = Colors.grey;
-  Color _favIconColor2 = Colors.grey;
+  Color _favIconColor = Colors.blueGrey;
+  Color _favIconColor2 = Colors.blueGrey;
+  Color _favIconColor3 = Colors.blueGrey;
   @override
   // void initState() {
   //   super.initState();
@@ -66,23 +67,10 @@ class _ListWidgetState extends State<ListWidget> {
                     item!['newsTitle'],
                     style: TextStyle(
                       fontSize: 24,
-                      color: Colors.blue,
+                      color: Colors.deepPurple,
                       fontStyle: FontStyle.italic,
                       decorationStyle: TextDecorationStyle.double,
                     ),
-                  ),
-                ),
-                SizedBox(
-                  width: 60,
-                ),
-                Icon(
-                  Icons.access_time_outlined,
-                  color: Colors.blueGrey,
-                ),
-                Text(
-                  item!['date'],
-                  style: TextStyle(
-                    fontSize: 12,
                   ),
                 ),
               ],
@@ -111,8 +99,11 @@ class _ListWidgetState extends State<ListWidget> {
                 ),
                 borderRadius: BorderRadius.circular(3),
               ),
+
             ),
-            Divider(color: Colors.black),
+
+
+            Divider(color: Colors.black,),
             Container(
               padding: EdgeInsets.only(
                 left: 5,
@@ -136,10 +127,10 @@ class _ListWidgetState extends State<ListWidget> {
                       color: _favIconColor,
                       onPressed: () {
                         setState(() {
-                          if (_favIconColor == Colors.grey) {
-                            _favIconColor = Colors.blue;
+                          if (_favIconColor == Colors.blueGrey) {
+                            _favIconColor = Colors.deepPurple;
                           } else {
-                            _favIconColor = Colors.grey;
+                            _favIconColor = Colors.blueGrey;
                           }
                         });
                       },
@@ -164,10 +155,10 @@ class _ListWidgetState extends State<ListWidget> {
                       onPressed: () {
                         setState(() {
 
-                          if (_favIconColor2 == Colors.grey) {
+                          if (_favIconColor2 == Colors.blueGrey) {
                             _favIconColor2 = Colors.red;
                           } else {
-                            _favIconColor2 = Colors.grey;
+                            _favIconColor2 = Colors.blueGrey;
                           }
                         });
                       },
@@ -188,19 +179,35 @@ class _ListWidgetState extends State<ListWidget> {
                       Icons.comment_outlined,
                       color: (item!['liked'] == null || item!['liked'] == false)
                           ? Colors.grey
-                          : Colors.blue,
+                          : Colors.blueGrey,
                     ),
                   ),
                   SizedBox(
                     width: 30,
                   ),
-                  IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.favorite_outline,
-                      color: (item!['liked'] == null || item!['liked'] == false)
-                          ? Colors.grey
-                          : Colors.blue,
+                  InkWell(
+                    onLongPress: () {
+                      print("long_press");
+                    },
+                    onTap: () {
+                      print("click_press");
+                    },
+                    child:IconButton(
+
+                      icon: Icon(
+                        Icons.favorite,),
+                      color: _favIconColor3,
+                      onPressed: () {
+                        setState(() {
+
+                          if (_favIconColor3 == Colors.blueGrey) {
+                            _favIconColor3 = Colors.redAccent;
+                          } else {
+                            _favIconColor3 = Colors.blueGrey;
+                          }
+                        });
+                      },
+
                     ),
                   ),
                 ],
@@ -209,6 +216,12 @@ class _ListWidgetState extends State<ListWidget> {
             Divider(color: Colors.black),
             Container(
               child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+                primary: Colors.deepPurple,
+              shape: RoundedRectangleBorder( //to set border radius to button
+                  borderRadius: BorderRadius.circular(30)
+              ),
+               ),
                 child: Text('View full news'),
                 onPressed: () {
                   Navigator.push(

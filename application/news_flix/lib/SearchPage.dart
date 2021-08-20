@@ -7,6 +7,13 @@ class SearchPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
           toolbarHeight: 70,
+        backgroundColor: Colors.deepPurple,
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back_ios_outlined, color: Colors.white), // set your color here
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
         // The search area here
           title: Container(
             width: double.infinity,
