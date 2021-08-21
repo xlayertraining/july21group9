@@ -1,45 +1,29 @@
 import 'package:flutter/material.dart';
 
-import 'CreatePost.dart';
-
-class MyPost extends StatelessWidget {
-  var controller;
+class Likers extends StatelessWidget {
+  const Likers({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 60,
-        title: Text('My Posts'),
-        backgroundColor:Colors.blue.shade600,
-        elevation: 0.0,
+        title: Text('Liked By'),
+        backgroundColor: Colors.deepPurpleAccent.shade200,
 
       ),
-      body: MyPostBody(),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => AppImagePicker(),
-            ),
-          );
-          print("UPLOAD");
-        },
-      ),
+      body: LikedBy(),
     );
   }
 }
-
-class MyPostBody extends StatefulWidget {
-  const MyPostBody({Key? key}) : super(key: key);
+class LikedBy extends StatefulWidget {
+  const LikedBy({Key? key}) : super(key: key);
 
   @override
-  _MyPostBodyState createState() => _MyPostBodyState();
+  _LikedByState createState() => _LikedByState();
 }
 
-class _MyPostBodyState extends State<MyPostBody> {
+class _LikedByState extends State<LikedBy> {
   List<String> images = [
     "assets/boy.png",
     "assets/boy.png",
@@ -48,6 +32,7 @@ class _MyPostBodyState extends State<MyPostBody> {
     "assets/boy.png",
     "assets/boy.png",
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,8 +43,8 @@ class _MyPostBodyState extends State<MyPostBody> {
               leading: CircleAvatar(
                 backgroundImage: AssetImage(images[index]),
               ),
-              title: Text("This is Post Title"),
-              subtitle: Text("This is Post Description"),
+              title: Text("Samyadeep Saha"),
+              subtitle: Text("BadBoy Samya"),
               trailing: IconButton(
                 icon: Icon(
                   Icons.delete,

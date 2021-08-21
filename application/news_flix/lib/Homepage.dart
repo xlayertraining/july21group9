@@ -254,6 +254,7 @@ class _HomePageState extends State<HomePage> {
     return new DefaultTabController(
       length: 6,
       child: Scaffold(
+
           appBar: AppBar(
             toolbarHeight: 120,
             backgroundColor: Colors.white,
@@ -293,10 +294,12 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
             ],
-            leading: IconButton(
+            leading: Builder(
+              builder: (context)=>IconButton(
               icon: Icon(Icons.menu, color: Colors.deepPurple), // set your color here
-                onPressed: () => Scaffold.of(context).openDrawer(),
-            ),
+              onPressed: () => Scaffold.of(context).openDrawer(),
+            ),),
+
             bottom: TabBar(
                 isScrollable: true,
                 indicatorWeight: 3.0,

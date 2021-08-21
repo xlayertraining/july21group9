@@ -6,6 +6,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:untitled2/LikersPage.dart';
 
 import 'CommentPage.dart';
 import 'FullView.dart';
@@ -115,7 +116,8 @@ class _ListWidgetState extends State<ListWidget> {
                 children: [
                   InkWell(
                     onLongPress: () {
-                      print("long_press");
+                      Navigator.push(
+                          context, MaterialPageRoute(builder: (context) => Likers()));
                     },
                     onTap: () {
                       print("click_press");

@@ -23,9 +23,9 @@ environment:
 
 dependencies:
   #for viewing the loading process
-  flutter_easyloading: ^2.0.0
+  flutter_easyloading: ^3.0.0
 
-  flutter_image_compress: ^0.7.0
+  flutter_image_compress: ^1.1.0
   #for picking up images from the gallery and camera
   image_picker: ^0.8.3+2
 
