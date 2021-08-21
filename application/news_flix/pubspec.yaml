@@ -32,6 +32,13 @@ dependencies:
   http: 0.13.3
   #for creating comment box in comment page
   comment_box: ^0.0.16
+
+  #for creating custom navigation barcode:
+  curved_navigation_bar: ^1.0.1
+
+  #To create animated list view :
+  auto_animated: ^3.0.0
+
   flutter:
     sdk: flutter
   lottie: ^1.1.0

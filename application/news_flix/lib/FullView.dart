@@ -12,8 +12,19 @@ class _FullViewState extends State<FullView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Full View'),
-        backgroundColor: Colors.blue,
+        title: Text('Full View',
+        style: TextStyle(
+        color: Colors.deepPurple,
+        fontSize: 24.0,
+        fontStyle: FontStyle.italic,
+        ),),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios_outlined, color: Colors.deepPurple), // set your color here
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        backgroundColor: Colors.white,
         toolbarHeight: 70,
       ),
        body: SingleChildScrollView(
@@ -23,7 +34,7 @@ class _FullViewState extends State<FullView> {
           TextField(
             decoration: InputDecoration(
               labelText: "Title :",
-              labelStyle: TextStyle(color: Colors.blue),
+              labelStyle: TextStyle(color: Colors.deepPurple),
             ),
             maxLength: 200,
             maxLines: 3,
@@ -42,7 +53,7 @@ class _FullViewState extends State<FullView> {
           ),
           TextField(
             decoration: InputDecoration(labelText: "Description :",
-              labelStyle: TextStyle(color: Colors.blue),
+              labelStyle: TextStyle(color: Colors.deepPurple),
             ),
             maxLines: 8,
             maxLength: 2000,

@@ -9,6 +9,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:untitled2/LikersPage.dart';
 
 import 'CommentPage.dart';
+import 'Dislikers.dart';
 import 'FullView.dart';
 
 class ListWidget extends StatefulWidget {
@@ -23,9 +24,9 @@ class ListWidget extends StatefulWidget {
 class _ListWidgetState extends State<ListWidget> {
   late BuildContext? _context = null;
   late Map? item;
-  Color _favIconColor = Colors.blueGrey;
-  Color _favIconColor2 = Colors.blueGrey;
-  Color _favIconColor3 = Colors.blueGrey;
+  Color _favIconColor = Colors.grey;
+  Color _favIconColor2 = Colors.grey;
+  Color _favIconColor3 = Colors.grey;
   @override
   // void initState() {
   //   super.initState();
@@ -77,7 +78,8 @@ class _ListWidgetState extends State<ListWidget> {
               ],
             ),
             const SizedBox(height: 5),
-            Divider(color: Colors.black),
+            Divider(color: Colors.deepPurple, indent: 10,
+              endIndent: 10,),
             const SizedBox(height: 5),
             Padding(
               padding: EdgeInsets.fromLTRB(15, 5, 10, 10),
@@ -100,17 +102,19 @@ class _ListWidgetState extends State<ListWidget> {
                 ),
                 borderRadius: BorderRadius.circular(3),
               ),
-
             ),
 
+            Divider(color: Colors.deepPurple,
+              indent: 10,
+              endIndent: 10,
+            ),
 
-            Divider(color: Colors.black,),
             Container(
               padding: EdgeInsets.only(
                 left: 5,
-                bottom: 5,
-                top: 5,
-                right: 5,
+              //   bottom: 0,
+              //   top: 0,
+              //   right: 4,
               ),
               child: Row(
                 children: [
@@ -129,10 +133,10 @@ class _ListWidgetState extends State<ListWidget> {
                       color: _favIconColor,
                       onPressed: () {
                         setState(() {
-                          if (_favIconColor == Colors.blueGrey) {
+                          if (_favIconColor == Colors.grey) {
                             _favIconColor = Colors.deepPurple;
                           } else {
-                            _favIconColor = Colors.blueGrey;
+                            _favIconColor = Colors.grey;
                           }
                         });
                       },
@@ -144,7 +148,8 @@ class _ListWidgetState extends State<ListWidget> {
 
                InkWell(
                  onLongPress: () {
-                   print("long_press");
+                   Navigator.push(
+                       context, MaterialPageRoute(builder: (context) => Dislikers()));
                  },
                      onTap: () {
                       print("click_press");
@@ -157,16 +162,16 @@ class _ListWidgetState extends State<ListWidget> {
                       onPressed: () {
                         setState(() {
 
-                          if (_favIconColor2 == Colors.blueGrey) {
+                          if (_favIconColor2 == Colors.grey) {
                             _favIconColor2 = Colors.red;
                           } else {
-                            _favIconColor2 = Colors.blueGrey;
+                            _favIconColor2 = Colors.grey;
                           }
                         });
                       },
 
                   ),
-    ),
+                 ),
                   SizedBox(
                     width: 30,
                   ),
@@ -181,7 +186,7 @@ class _ListWidgetState extends State<ListWidget> {
                       Icons.comment_outlined,
                       color: (item!['liked'] == null || item!['liked'] == false)
                           ? Colors.grey
-                          : Colors.blueGrey,
+                          : Colors.grey,
                     ),
                   ),
                   SizedBox(
@@ -202,10 +207,10 @@ class _ListWidgetState extends State<ListWidget> {
                       onPressed: () {
                         setState(() {
 
-                          if (_favIconColor3 == Colors.blueGrey) {
+                          if (_favIconColor3 == Colors.grey) {
                             _favIconColor3 = Colors.redAccent;
                           } else {
-                            _favIconColor3 = Colors.blueGrey;
+                            _favIconColor3 = Colors.grey;
                           }
                         });
                       },
@@ -215,10 +220,13 @@ class _ListWidgetState extends State<ListWidget> {
                 ],
               ),
             ),
-            Divider(color: Colors.black),
+            Divider(color: Colors.deepPurple, indent: 10,
+              endIndent: 10,),
+
             Container(
+              padding: EdgeInsets.only(left: 10,bottom: 8),
               child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
+               style: ElevatedButton.styleFrom(
                 primary: Colors.deepPurple,
               shape: RoundedRectangleBorder( //to set border radius to button
                   borderRadius: BorderRadius.circular(30)

@@ -1,3 +1,4 @@
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -5,6 +6,7 @@ import 'package:untitled2/ListWidget.dart';
 
 import 'AboutUs.dart';
 import 'Favourite.dart';
+import 'ProfilePage.dart';
 import 'sign_in_page.dart';
 import 'MyPost.dart';
 import 'SearchPage.dart';
@@ -296,9 +298,10 @@ class _HomePageState extends State<HomePage> {
             ],
             leading: Builder(
               builder: (context)=>IconButton(
-              icon: Icon(Icons.menu, color: Colors.deepPurple), // set your color here
-              onPressed: () => Scaffold.of(context).openDrawer(),
-            ),),
+                icon: Icon(Icons.arrow_forward_ios_rounded, color: Colors.deepPurple), // set your color here
+                onPressed: () => Scaffold.of(context).openDrawer(),
+              ),
+            ),
 
             bottom: TabBar(
                 isScrollable: true,
@@ -415,38 +418,19 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
 
-          // bottomNavigationBar: BottomNavigationBar(
-          //     currentIndex: _currentIndex,
-          //
-          //     items: [
-          //       BottomNavigationBarItem(
-          //         icon:Icon(Icons.home),
-          //         label: "Home",
-          //         backgroundColor: Colors.redAccent,
-          //       ),
-          //       BottomNavigationBarItem(
-          //         icon:Icon(Icons.search),
-          //         label: "Search",
-          //         backgroundColor: Colors.indigoAccent,
-          //       ),
-          //
-          //       BottomNavigationBarItem(
-          //         icon:Icon(Icons.notifications),
-          //         label: "Notification",
-          //         backgroundColor: Colors.yellowAccent,
-          //       ),
-          //       BottomNavigationBarItem(
-          //         icon:Icon(Icons.person),
-          //         label: "Person",
-          //         backgroundColor: Colors.blueAccent,
-          //       ),
-          //     ],
-          //     onTap: (index){
-          //       setState(() {
-          //         _currentIndex = index;
-          //       });
-          //     }
-          // ),
+        bottomNavigationBar: CurvedNavigationBar(
+          backgroundColor: Colors.deepPurple,
+          items: <Widget>[
+            Icon(Icons.add, size: 30),
+            Icon(Icons.list, size: 30),
+            Icon(Icons.compare_arrows, size: 30),
+          ],
+          onTap: (index) {
+            //Handle button tap
+          },
+        ),
+        // body: Container(color: Colors.blueAccent),
+
 
           drawer: Drawer(
             // child: SliverAppBar(
@@ -488,12 +472,21 @@ class _HomePageState extends State<HomePage> {
                 ),
                 ListTile(
                   leading:
+                  Icon(Icons.account_circle_sharp, color: Colors.deepPurpleAccent),
+                  title: const Text('Profile'),
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) =>ProfilePage()));
+                  },
+                ),
+                const SizedBox(height: 15),
+                Divider(color: Colors.black),
+                const SizedBox(height: 10),
+                ListTile(
+                  leading:
                   Icon(Icons.favorite, color: Colors.pinkAccent.shade100),
                   title: const Text('Favourites'),
                   onTap: () {
-                    // Update the state of the app
-                    // ...
-                    // Then close the drawer
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => Favourite()));
                   },
@@ -505,9 +498,6 @@ class _HomePageState extends State<HomePage> {
                   leading: Icon(Icons.post_add, color: Colors.blue),
                   title: const Text('My Post'),
                   onTap: () {
-                    // Update the state of the app
-                    // ...
-                    // Then close the drawer
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => MyPost()));
                   },
@@ -516,8 +506,8 @@ class _HomePageState extends State<HomePage> {
                 Divider(color: Colors.black),
                 const SizedBox(height: 10),
                 ListTile(
-                  leading: Icon(Icons.bookmarks, color: Colors.lightBlueAccent),
-                  title: const Text('bookmark'),
+                  leading: Icon(Icons.share, color: Colors.lightBlueAccent),
+                  title: const Text('Share'),
                   onTap: () {
                     // Update the state of the app
                     // ...
