@@ -40,6 +40,14 @@ class _ProfilePageState extends State<ProfilePage> {
       appBar: AppBar(
         elevation: 0.0,
         backgroundColor: Color(0xf06609b1),
+        // flexibleSpace: Container(
+        //   decoration: BoxDecoration(
+        //     gradient: LinearGradient(
+        //       colors: [Colors.pinkAccent.shade200, Colors.purpleAccent.shade400,
+        //         Colors.purpleAccent.shade700],
+        //     )
+        //   ),
+        // ),
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios_outlined, color: Colors.white), // set your color here
           onPressed: () {
@@ -79,6 +87,8 @@ class _ProfilePageState extends State<ProfilePage> {
                         onPressed: () {},
                         style: ElevatedButton.styleFrom(
                           primary: Color(0xf06609b1)),
+                          // primary: Colors.transparent,
+                          // onPrimary: Colors.transparent),
                         child: Center(
                           child: Text(
                             "Update",
