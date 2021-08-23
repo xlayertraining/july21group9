@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Likers extends StatelessWidget {
@@ -8,7 +9,11 @@ class Likers extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 60,
-        title: Text('Liked By'),
+        title: Text('Liked By',
+        style: TextStyle(fontStyle: FontStyle.italic,
+          fontSize: 25
+        ),
+        ),
         backgroundColor: Colors.deepPurpleAccent.shade200,
 
       ),
@@ -24,43 +29,64 @@ class LikedBy extends StatefulWidget {
 }
 
 class _LikedByState extends State<LikedBy> {
-  List<String> images = [
-    "assets/boy.png",
-    "assets/boy.png",
-    "assets/boy.png",
-    "assets/boy.png",
-    "assets/boy.png",
-    "assets/boy.png",
-  ];
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView.builder(
-        itemBuilder: (BuildContext, index) {
-          return Card(
-            child: ListTile(
-              leading: CircleAvatar(
-                backgroundImage: AssetImage(images[index]),
-              ),
-              title: Text("Samyadeep Saha"),
-              subtitle: Text("BadBoy Samya"),
-              trailing: IconButton(
-                icon: Icon(
-                  Icons.delete,
-                  color: Colors.red,
-                  size: 22,
-                ),
-                onPressed: () {},
-              ),
+      body: Container(
+        child:ListView(
+          children: [
+            SizedBox(
+              height: 5,
             ),
-          );
-        },
-        itemCount: images.length,
-        shrinkWrap: true,
-        padding: EdgeInsets.all(5),
-        scrollDirection: Axis.vertical,
-      ),
-    );
-  }
-}
+            ListTile(
+              leading: CircleAvatar(
+                backgroundImage: NetworkImage(
+                    'https://avatarfiles.alphacoders.com/155/thumb-1920-155821.jpg'),
+              ),
+              title: Text(
+                'Basabjit Singha Ray',
+                style: TextStyle(fontStyle:FontStyle.normal),
+              ),
+
+            ),
+            SizedBox(
+              height: 5,
+            ),
+
+            ListTile(
+              leading: CircleAvatar(
+                backgroundImage: NetworkImage(
+                    'https://avatarfiles.alphacoders.com/155/thumb-1920-155821.jpg'),
+              ),
+              title: Text(
+                'Samyadeep Saha',
+                style: TextStyle(fontStyle:FontStyle.normal),
+              ),
+
+            ),
+            ListTile(
+              leading: CircleAvatar(
+                backgroundImage: NetworkImage(
+                    'https://avatarfiles.alphacoders.com/155/thumb-1920-155821.jpg'),
+              ),
+              title: Text(
+                'Nabanit Roy',
+                style: TextStyle(fontStyle:FontStyle.normal),
+              ),
+
+            ),
+            ListTile(
+              leading: CircleAvatar(
+                backgroundImage: NetworkImage(
+                    'https://avatarfiles.alphacoders.com/155/thumb-1920-155821.jpg'),
+              ),
+              title: Text(
+                'Aniket Lodh',
+                style: TextStyle(fontStyle:FontStyle.normal),
+              ),
+
+            ),
+          ],
+    )));}}
