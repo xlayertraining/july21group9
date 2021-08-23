@@ -68,7 +68,7 @@ class _ListWidgetState extends State<ListWidget> {
                   child: Text(
                     item!['newsTitle'],
                     style: TextStyle(
-                      fontSize: 24,
+                      fontSize: 25,
                       color: Colors.deepPurple,
                       fontStyle: FontStyle.italic,
                       decorationStyle: TextDecorationStyle.double,

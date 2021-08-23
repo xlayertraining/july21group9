@@ -471,9 +471,12 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 ListTile(
-                  leading: Icon(Icons.person,
-                      color: Colors.deepPurpleAccent),
-                  title: const Text('Profile'),
+                  leading: Icon(Icons.person,size: 25,
+                      color: Colors.black),
+                  title: const Text('Profile', style: TextStyle(
+                    // fontWeight: FontWeight.bold,
+                    fontSize: 15,
+                  ),),
                   onTap: () {},
                   trailing: IconButton(
                     icon: Icon(Icons.arrow_forward_ios_outlined,
@@ -490,8 +493,11 @@ class _HomePageState extends State<HomePage> {
 
                 ListTile(
                   leading:
-                      Icon(Icons.favorite, color: Colors.pinkAccent.shade100),
-                  title: const Text('Favourites'),
+                      Icon(Icons.favorite, size: 25,color: Colors.black),
+                  title: const Text('Favourites', style: TextStyle(
+                    // fontWeight: FontWeight.bold,
+                    fontSize: 15,
+                  ),),
                   onTap: () {},
                   trailing: IconButton(
                     icon: Icon(Icons.arrow_forward_ios_outlined,
@@ -504,8 +510,11 @@ class _HomePageState extends State<HomePage> {
                 ),
                 const SizedBox(height: 20),
                 ListTile(
-                  leading: Icon(Icons.post_add, color: Colors.purple),
-                  title: const Text('My Post'),
+                  leading: Icon(Icons.post_add,size: 25, color: Colors.black),
+                  title: const Text('My Post', style: TextStyle(
+                    // fontWeight: FontWeight.bold,
+                    fontSize: 15,
+                  ),),
                   onTap: () {},
                   trailing: IconButton(
                     icon: Icon(Icons.arrow_forward_ios_outlined,
@@ -520,8 +529,11 @@ class _HomePageState extends State<HomePage> {
                 // Divider(color: Colors.black),
                 // const SizedBox(height: 10),
                 ListTile(
-                  leading: Icon(Icons.share, color: Colors.lightBlueAccent),
-                  title: const Text('Share'),
+                  leading: Icon(Icons.share,size: 25, color:Colors.black),
+                  title: const Text('Share', style: TextStyle(
+                    // fontWeight: FontWeight.bold,
+                    fontSize: 15,
+                  ),),
                   onTap: () {},
                   trailing: IconButton(
                     icon: Icon(Icons.arrow_forward_ios_outlined,
@@ -537,8 +549,11 @@ class _HomePageState extends State<HomePage> {
                 Divider(color: Colors.black),
                 const SizedBox(height: 10),
                 ListTile(
-                  leading: Icon(Icons.description),
-                  title: const Text('About us'),
+                  leading: Icon(Icons.description,size: 25,color:Colors.black),
+                  title: const Text('About us', style: TextStyle(
+                    // fontWeight: FontWeight.bold,
+                    fontSize: 15,
+                  ),),
                   onTap: () {
                     // Update the state of the app
                     // ...
@@ -560,12 +575,15 @@ class _HomePageState extends State<HomePage> {
                 // const SizedBox(height: 10),
 
                 ListTile(
-                  leading: Icon(Icons.settings_power, color: Colors.red),
-                  title: const Text('Sign out'),
+                  leading: Icon(Icons.settings_power,size: 25, color: Colors.red),
+                  title: const Text('Sign out', style: TextStyle(
+                    // fontWeight: FontWeight.bold,
+                    fontSize: 15,
+                  ),),
                   onTap: () {},
                   trailing: IconButton(
                     icon: Icon(Icons.arrow_back_ios_outlined,
-                        color: Colors.deepPurple), // set your color here
+                        color: Colors.red), // set your color here
                     onPressed: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) => signOut()()));
