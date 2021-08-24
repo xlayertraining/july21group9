@@ -12,14 +12,17 @@ class _FullViewState extends State<FullView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Full View',
-        style: TextStyle(
-        color: Colors.deepPurple,
-        fontSize: 24.0,
-        fontStyle: FontStyle.italic,
-        ),),
+        title: Text(
+          'Full View',
+          style: TextStyle(
+            color: Colors.deepPurple,
+            fontSize: 24.0,
+            fontStyle: FontStyle.italic,
+          ),
+        ),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios_outlined, color: Colors.deepPurple), // set your color here
+          icon: Icon(Icons.arrow_back_ios_outlined,
+              color: Colors.deepPurple), // set your color here
           onPressed: () {
             Navigator.pop(context);
           },
@@ -27,40 +30,39 @@ class _FullViewState extends State<FullView> {
         backgroundColor: Colors.white,
         toolbarHeight: 70,
       ),
-       body: SingleChildScrollView(
-       child: Column(
-        children:[
-          Padding(padding: EdgeInsets.fromLTRB(10, 10,10,10)),
-          TextField(
-            decoration: InputDecoration(
-              labelText: "Title :",
-              labelStyle: TextStyle(color: Colors.deepPurple),
-            ),
-            maxLength: 200,
-            maxLines: 3,
-          ),
-          Container(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.width/2,
-            child:
-            Image.network(
-                'https://png.pngtree.com/thumb_back/fh260/background/20200714/pngtree-old-paper-texture-parchment-background-image_354980.jpg',
-              fit: BoxFit.fitWidth,
-            ),
-          ),
-          SizedBox(
-            width: 10,
-          ),
-          TextField(
-            decoration: InputDecoration(labelText: "Description :",
-              labelStyle: TextStyle(color: Colors.deepPurple),
-            ),
-            maxLines: 8,
-            maxLength: 2000,
-          ),
-          ]
-       )
-       ),
-      );
+      body: SingleChildScrollView(
+        child: Container(
+            padding: EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 80),
+            child: Column(mainAxisSize: MainAxisSize.min, children: [
+              TextField(
+                decoration: InputDecoration(
+                  labelText: "Title :",
+                  labelStyle: TextStyle(color: Colors.deepPurple,fontSize: 20),
+                ),
+                maxLength: 200,
+                maxLines: 3,
+              ),
+              Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.width / 2,
+                child: Image.network(
+                  'https://png.pngtree.com/thumb_back/fh260/background/20200714/pngtree-old-paper-texture-parchment-background-image_354980.jpg',
+                  fit: BoxFit.fitWidth,
+                ),
+              ),
+              SizedBox(
+                width: 10,
+              ),
+              TextField(
+                decoration: InputDecoration(
+                  labelText: "Description :",
+                  labelStyle: TextStyle(color: Colors.deepPurple,fontSize: 20),
+                ),
+                maxLines: 8,
+                maxLength: 2000,
+              ),
+            ])),
+      ),
+    );
   }
 }

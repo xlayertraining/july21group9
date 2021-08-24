@@ -44,8 +44,17 @@ class MyWidget extends StatefulWidget {
 }
 
 class _MyWidgetState extends State<MyWidget> {
+  TextEditingController emailController = new TextEditingController();
+  TextEditingController passwordController = new TextEditingController();
+  BuildContext? _context;
+  bool passShow = false;
   @override
+
   Widget build(BuildContext context) {
+    if (_context == null) {
+      _context = context;
+    }
+
     return Scaffold(
         resizeToAvoidBottomInset: false,
         body:
@@ -105,6 +114,7 @@ class _MyWidgetState extends State<MyWidget> {
                               height: 30,
                             ),
                             TextField(
+                                controller: emailController,
                                 decoration: InputDecoration(
                                   labelText: "Email",
                                   labelStyle: TextStyle(color: Colors.lightBlue),
@@ -118,8 +128,9 @@ class _MyWidgetState extends State<MyWidget> {
                               height: 30,
                             ),
                             TextField(
+                                controller: passwordController,
                                 decoration: InputDecoration(
-                                  labelText: "Phone No.",
+                                  labelText: "Password.",
                                   labelStyle: TextStyle(color: Colors.lightBlue),
                                   suffixIcon: Icon(Icons.phone, color: Colors.lightBlue),
                                   border: OutlineInputBorder(
@@ -157,5 +168,6 @@ class _MyWidgetState extends State<MyWidget> {
 
                   ))
                 ])));
+
   }
 }

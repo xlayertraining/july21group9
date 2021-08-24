@@ -15,11 +15,12 @@ class AppImagePicker extends StatefulWidget {
 }
 
 class _AppImagePickerState extends State<AppImagePicker> {
+  String? _value;
   BuildContext? _context;
   File newsImage = new File('');
 
   get picker => null;
-  int selectedValue = 1;
+  // int selectedValue = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +30,22 @@ class _AppImagePickerState extends State<AppImagePicker> {
 
     return Scaffold(
       appBar: AppBar(
-          title: Text("Create Post")
+        backgroundColor: Colors.white,
+        title: Text(
+          "Create Post",
+          style: TextStyle(
+            color: Colors.deepPurple,
+            fontSize: 24.0,
+            fontStyle: FontStyle.italic,
+          ),
+        ),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios_outlined,
+              color: Colors.deepPurple), // set your color here
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -38,42 +54,108 @@ class _AppImagePickerState extends State<AppImagePicker> {
             mainAxisSize: MainAxisSize.min,
             children: [
               TextField(
-                decoration: InputDecoration(labelText: "Title"),
+                decoration: InputDecoration(
+                  labelText: "Title",
+                  labelStyle: TextStyle(color: Colors.deepPurple),
+                ),
                 maxLength: 200,
                 maxLines: 3,
               ),
               TextField(
-                decoration: InputDecoration(labelText: "Description"),
+                decoration: InputDecoration(
+                  labelText: "Description",
+                  labelStyle: TextStyle(color: Colors.deepPurple),
+                ),
                 maxLines: 8,
                 maxLength: 2000,
               ),
-              DropdownButton(
-                  value: selectedValue,
-                  items: [
-                    DropdownMenuItem(
-                      child: Text("latest"),
-                      value: 1,
+              DropdownButton<String>(
+                items: [
+                  DropdownMenuItem<String>(
+                    child: Row(
+                      children: <Widget>[
+                        Icon(Icons.filter_1),
+                        Text('Latest'),
+                      ],
                     ),
-                    DropdownMenuItem(
-                      child: Text("national"),
-                      value: 2,
+                    value: 'one',
+                  ),
+                  DropdownMenuItem<String>(
+                    child: Row(
+                      children: <Widget>[
+                        Icon(Icons.filter_2),
+                        Text('National'),
+                      ],
                     ),
-                  ],
-                  onChanged: (value) {
-                    setState(() {
-                      selectedValue = 2;
-                    });
-                  }
+                    value: 'two',
+                  ),
+                  DropdownMenuItem<String>(
+                    child: Row(
+                      children: <Widget>[
+                        Icon(Icons.filter_3),
+                        Text('Item 3'),
+                      ],
+                    ),
+                    value: 'International',
+                  ),
+                  DropdownMenuItem<String>(
+                    child: Row(
+                      children: <Widget>[
+                        Icon(Icons.filter_4),
+                        Text('Sports'),
+                      ],
+                    ),
+                    value: 'four',
+                  ),
+                  DropdownMenuItem<String>(
+                    child: Row(
+                      children: <Widget>[
+                        Icon(Icons.filter_5),
+                        Text('Tech'),
+                      ],
+                    ),
+                    value: 'five',
+                  ),
+                  DropdownMenuItem<String>(
+                    child: Row(
+                      children: <Widget>[
+                        Icon(Icons.filter_6),
+                        Text('Business'),
+                      ],
+                    ),
+                    value: 'six',
+                  ),
+                ],
+                isExpanded: false,
+                onChanged: (String? value) {
+                  setState(() {
+                    _value = value;
+                  });
+                },
+                hint: Text(
+                  'Select Item',
+                  style: TextStyle(color: Colors.deepPurple),
+                ),
+                value: _value,
+                underline: Container(
+                  decoration: const BoxDecoration(
+                      border:
+                          Border(bottom: BorderSide(color: Colors.deepPurple))),
+                ),
+                style: TextStyle(
+                  fontSize: 20,
+                  color: Colors.black,
+                ),
+                iconEnabledColor: Colors.pink,
+                //        iconDisabledColor: Colors.grey,
+                iconSize: 40,
               ),
-
               (newsImage.path.isNotEmpty)
                   ? Image.file(newsImage)
                   : Icon(
-
-                Icons.image,
-                size: 90,
-              ),
-
+                      Icons.image,
+                      size: 90,
+                    ),
               IconButton(
                 icon: Icon(Icons.camera_alt),
                 iconSize: 50.0,
@@ -103,20 +185,24 @@ class _AppImagePickerState extends State<AppImagePicker> {
                 },
               ),
               SizedBox(
-
                 height: 30,
               ),
               SizedBox(
-
                 width: 120,
                 child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.deepPurple,
+                    shape: RoundedRectangleBorder(
+                        //to set border radius to button
+                        borderRadius: BorderRadius.circular(30)),
+                  ),
                   onPressed: () {
                     getHttp();
                     // call that api
                   },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: [Text("Create Post")],
+                    children: [Text("Upload")],
                   ),
                 ),
               ),
@@ -133,25 +219,18 @@ class _AppImagePickerState extends State<AppImagePicker> {
     if (img != null) {
       var CmpressedImage;
       try {
-        CmpressedImage = await FlutterImageCompress.compressWithFile(
-            img.path,
-            format: CompressFormat.heic,
-            quality: 70
-        );
+        CmpressedImage = await FlutterImageCompress.compressWithFile(img.path,
+            format: CompressFormat.heic, quality: 70);
       } catch (e) {
-        CmpressedImage = await FlutterImageCompress.compressWithFile(
-            img.path,
-            format: CompressFormat.jpeg,
-            quality: 70
-        );
+        CmpressedImage = await FlutterImageCompress.compressWithFile(img.path,
+            format: CompressFormat.jpeg, quality: 70);
       }
       // setState(() async {
       //   newsImage = new File(img.path);
       // }
       // );
       return CmpressedImage;
-    }
-    else {
+    } else {
       ToastUtil.error(_context!, message: "No image is selected.");
     }
   }
@@ -164,8 +243,7 @@ class _AppImagePickerState extends State<AppImagePicker> {
         "description": "test1",
         "image": "1 2 ka 4 ",
         "category": [0, 1, 2],
-      }
-      );
+      });
       print(response);
     } catch (e) {
       print(e);

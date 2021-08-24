@@ -10,14 +10,26 @@ class MyPost extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 60,
-        title: Text('My Posts'),
-        backgroundColor:Colors.blue.shade600,
+        title: Text('My Posts',
+          style: TextStyle(
+            color: Colors.deepPurple,
+            fontSize: 24.0,
+            fontStyle: FontStyle.italic,
+          ),),
+        backgroundColor: Colors.white,
         elevation: 0.0,
-
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios_outlined,
+              color: Colors.deepPurple), // set your color here
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
       ),
       body: MyPostBody(),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
+        backgroundColor: Colors.deepPurple,
+        child: Icon(Icons.create_outlined),
         onPressed: () {
           Navigator.push(
             context,
@@ -56,10 +68,19 @@ class _MyPostBodyState extends State<MyPostBody> {
           return Card(
             child: ListTile(
               leading: CircleAvatar(
-                backgroundImage: AssetImage(images[index]),
+                backgroundImage: NetworkImage(
+                    'https://images.wallpapersden.com/image/download/demon-slayer-tanjirou-kamado_a2tsa2uUmZqaraWkpJRnamtlrWZlbWU.jpg'),
+                // backgroundImage: AssetImage(images[index]),
               ),
-              title: Text("This is Post Title"),
-              subtitle: Text("This is Post Description"),
+
+              // title: Text("This is Post Title"),
+              // subtitle: Text("This is Post Description"),
+              title: Text(
+                'Samyadeep',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              subtitle: Text('Samyadeep@gmail.com'),
+
               trailing: IconButton(
                 icon: Icon(
                   Icons.delete,
@@ -68,8 +89,8 @@ class _MyPostBodyState extends State<MyPostBody> {
                 ),
                 onPressed: () {},
               ),
-            ),
-          );
+            )
+            );
         },
         itemCount: images.length,
         shrinkWrap: true,
