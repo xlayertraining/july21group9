@@ -21,7 +21,7 @@ class PostLikeHandler(tornado.web.RequestHandler):
                 raise Exception
             try:
                 post_Id = ObjectId(
-                    self.request.arguments['postId'][0].decode())
+                    self.request.arguments['newsId'][0].decode())
             except:
                 code = 5683
                 status = False
@@ -41,6 +41,10 @@ class PostLikeHandler(tornado.web.RequestHandler):
                     "$pull": {"likers": account_id}
 
                 })
+                status = True
+                code = 2000
+                message = 'News like is removed.'
+                result = []
             else:
                 like_Update = await user_news_folder.update_one({
                     "_id": post_Id
@@ -48,14 +52,24 @@ class PostLikeHandler(tornado.web.RequestHandler):
                     "$inc": {"like": 1},
                     "$push": {"likers": account_id}
                 })
+                status = True
+                code = 2000
+                message = 'News is liked'
+                result = []
            
         except:
-            response = {
-                "code": code,
-                "status": status,
-                "message": message
-            }
-            self.write(response)
-            self.finish()
-            return
+            status = False
+            code = 4003
+            message = 'Internal Error.'
+            result = []
+
+        response = {
+            "code": code,
+            "status": status,
+            "message": message,
+            'result': result
+        }
+        self.write(response)
+        await self.finish()
+        return
 # /
