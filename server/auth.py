@@ -22,10 +22,8 @@ class SecureHeader():
             )
             # print(accFind)
             if accFind == None:
-               
                 raise Exception
             else:
                 return str(accFind['_id'])
         except:
-            
             return None
