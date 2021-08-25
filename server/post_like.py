@@ -42,6 +42,7 @@ class PostLikeHandler(tornado.web.RequestHandler):
                     "$pull": {"likers": account_id}
 
                 })
+
                 status = True
                 code = 2000
                 message = 'News like is removed.'
@@ -54,11 +55,19 @@ class PostLikeHandler(tornado.web.RequestHandler):
                     "$inc": {"like": 1},
                     "$push": {"likers": account_id}
                 })
+                # remove dislike
+                dislike_Update = await user_news_folder.update_one({
+                    "_id": post_Id
+                }, {
+                    "$inc": {"dislike": -1},
+                    "$pull": {"dislikers": account_id}
+
+                })
                 status = True
                 code = 2000
                 message = 'News is liked'
                 result = []
-           
+
         except:
             status = False
             code = 4003

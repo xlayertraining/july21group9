@@ -147,7 +147,7 @@ class NewsApproveHandler(tornado.web.RequestHandler):
                 raise Exception
             # NewsId
             try:
-                newsId = ObjectId(self.request.arguments["id"][0].decode())
+                newsId = ObjectId(self.request.arguments["newsId"][0].decode())
             except:
                 code = 3000
                 status = False

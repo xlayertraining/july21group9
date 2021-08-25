@@ -69,8 +69,7 @@ class imageHandler(tornado.web.RequestHandler):
                 if catagory == None or type(catagory) != list or not len(catagory):
                     raise Exception
                 # type = catagory
-            except Exception as e:
-                print('cat', e)
+            except:
                 code = 8043
                 status = False
                 message = "submit valid category"
@@ -79,9 +78,7 @@ class imageHandler(tornado.web.RequestHandler):
                 tags = self.request.arguments["tags"][0].decode()
                 tags = eval(tags)
                 if tags == None or type(tags) != list or not len(tags):
-                   
                     raise Exception
-                
             except:
                 tags=[]
                    
@@ -116,6 +113,7 @@ class imageHandler(tornado.web.RequestHandler):
                     "image": imageRaw
                     
                 })
+                #NewsId in result
                 result.append(str(rs.inserted_id))
             except:
                 code = 4000
@@ -220,11 +218,11 @@ class imageHandler(tornado.web.RequestHandler):
                 raise Exception
             # NewsId
             try:
-                newsId = ObjectId(self.request.arguments["id"][0].decode())
+                newsId = ObjectId(self.request.arguments["newsId"][0].decode())
             except:
                 code = 3000
                 status = False
-                message = "invalid news id"
+                message = "Invalid news id"
                 raise Exception
             proUpdate = await user_news_folder.delete_one(
                 {

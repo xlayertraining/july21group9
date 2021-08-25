@@ -35,6 +35,11 @@ class PostDislikeHandler(tornado.web.RequestHandler):
                     "$pull": {"dislikers": account_id}
 
                 })
+                status = True
+                code = 2000
+                message = 'dislike has been removed.'
+                result = []
+
             else:
                 # Add dislike
                 dislike_Update = await user_news_folder.update_one({
@@ -43,7 +48,8 @@ class PostDislikeHandler(tornado.web.RequestHandler):
                     "$inc": {"dislike": 1},
                     "$push": {"dislikers": account_id}
                 })
-                #remove like
+
+                # remove like
                 like_Update = await user_news_folder.update_one({
                     "_id": post_Id
                 }, {
@@ -51,11 +57,25 @@ class PostDislikeHandler(tornado.web.RequestHandler):
                     "$pull": {"likers": account_id}
 
                 })
+                status = True
+                code = 2000
+                message = 'you disliked this news'
+                result = []
+
+            response = {
+                "code": code,
+                "status": status,
+                "message": message,
+                "result":result
+            }
+            self.write(response)
+            await self.finish()
         except:
             response = {
                 "code": code,
                 "status": status,
-                "message": message
+                "message": message,
+                "result":result
             }
             self.write(response)
 # /

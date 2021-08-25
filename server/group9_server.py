@@ -17,12 +17,12 @@ def app():
         (r"/julygroup9_web/api/sign_in", signInHandler),
         (r'/julygroup9_web/api/news', imageHandler),
         (r'/julygroup9_web/api/news/like',PostLikeHandler),
+        (r'/julygroup9_web/api/news/dislike',PostDislikeHandler),
+        (r'/julygroup9_web/api/news/search',SearchNewsHandler),
         (r'/julygroup9_web/api/news/comment',PostCommentHandler),
         (r'/julygroup9_web/api/news/favourites',Postfavouriteshandler),
-        (r'/julygroup9_web/api/news/search',SearchNewsHandler),
         (r'/julygroup9_web/api/profile',ProfileHandler),
         (r'/julygroup9_web/api/post/user',UserSharedPostHandler),
-        (r'/julygroup9_web/api/post/dislike',PostDislikeHandler),
         (r'/julygroup9_web/api/news/approve',NewsApproveHandler)
     ])
 

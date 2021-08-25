@@ -21,7 +21,7 @@ class Postfavouriteshandler(tornado.web.RequestHandler):
                 raise Exception
             try:
                 post_Id = ObjectId(
-                    self.request.arguments['postId'][0].decode())
+                    self.request.arguments['newsId'][0].decode())
             except:
                 code = 3920
                 status = False
