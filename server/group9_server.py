@@ -8,6 +8,7 @@ from post_favourites import Postfavouriteshandler
 from search_news import SearchNewsHandler
 from user_profile import ProfileHandler
 from user_post import UserSharedPostHandler
+from post_dislike import PostDislikeHandler
 from news_approve import NewsApproveHandler
 
 def app():
@@ -21,6 +22,7 @@ def app():
         (r'/julygroup9_web/api/news/search',SearchNewsHandler),
         (r'/julygroup9_web/api/profile',ProfileHandler),
         (r'/julygroup9_web/api/post/user',UserSharedPostHandler),
+        (r'/julygroup9_web/api/post/dislike',PostDislikeHandler),
         (r'/julygroup9_web/api/news/approve',NewsApproveHandler)
     ])
 
