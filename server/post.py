@@ -69,8 +69,8 @@ class imageHandler(tornado.web.RequestHandler):
                 if catagory == None or type(catagory) != list or not len(catagory):
                     raise Exception
                 # type = catagory
-            except :
-               
+            except Exception as e:
+                print('cat', e)
                 code = 8043
                 status = False
                 message = "submit valid category"

@@ -32,7 +32,7 @@ class NewsApproveHandler(tornado.web.RequestHandler):
                 raise Exception      
             # Title
             try:
-                newsid = ObjectId(self.request.arguments["newsid"][0].decode())     
+                newsid = ObjectId(self.request.arguments["newsId"][0].decode())
             except:
                 message = " invalid news id."
                 raise Exception

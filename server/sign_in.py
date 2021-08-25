@@ -73,7 +73,17 @@ class signInHandler(tornado.web.RequestHandler):
 
                     if type(encoded_jwt) == bytes:
                         encoded_jwt = encoded_jwt.decode()
-                    result.append({"Authorization":encoded_jwt})
+
+                    roleText = 'User'
+                    if findUser.get('role') == 1:
+                        roleText = 'Admin'
+
+                    result.append(
+                        {
+                            "Authorization": encoded_jwt,
+                            'role': roleText
+                        }
+                    )
                    
                     code = 200
                     status = True
