@@ -19,7 +19,7 @@ class PostDislikeHandler(tornado.web.RequestHandler):
                 raise Exception
             try:
                 post_Id = ObjectId(
-                    self.request.arguments['postId'][0].decode())
+                    self.request.arguments['newsId'][0].decode())
             except:
                 raise Exception
             post_Find = await user_news_folder.find_one({
@@ -27,6 +27,7 @@ class PostDislikeHandler(tornado.web.RequestHandler):
                 "_id": post_Id
             })
             if post_Find:
+                # remove dislike
                 dislike_Update = await user_news_folder.update_one({
                     "_id": post_Id
                 }, {
@@ -35,11 +36,20 @@ class PostDislikeHandler(tornado.web.RequestHandler):
 
                 })
             else:
+                # Add dislike
                 dislike_Update = await user_news_folder.update_one({
                     "_id": post_Id
                 }, {
                     "$inc": {"dislike": 1},
                     "$push": {"dislikers": account_id}
+                })
+                #remove like
+                like_Update = await user_news_folder.update_one({
+                    "_id": post_Id
+                }, {
+                    "$inc": {"like": -1},
+                    "$pull": {"likers": account_id}
+
                 })
         except:
             response = {
