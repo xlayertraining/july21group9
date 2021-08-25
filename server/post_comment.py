@@ -1,6 +1,7 @@
 from mimetypes import MimeTypes
 from os import stat
 from re import T
+from sys import hash_info
 
 from tornado.locale import get
 from common_library import*
@@ -26,6 +27,7 @@ class PostCommentHandler(tornado.web.RequestHandler):
                 # provide postId to insert comment on that post
                 post_Id = ObjectId(
                     self.request.arguments['newsId'][0].decode())
+                print("Hi")
             except:
                 code = 4356
                 status = False
@@ -36,13 +38,13 @@ class PostCommentHandler(tornado.web.RequestHandler):
                 comment = self.request.arguments["comment"][0].decode()
             except:
                 raise Exception
-
+            print("hi")  
             # inserting all the fields to the database named "comments"
 
             commentInsert = await user_comment_folder.insert_one({
                 "newsId": post_Id,
                 "comment": comment,
-                "createdBy": account_id,
+                "createdBy":  ObjectId(account_id),
                 "createdAt": timeNow()
             })
             code = 200
@@ -55,7 +57,6 @@ class PostCommentHandler(tornado.web.RequestHandler):
             }
             self.write(response)
         except Exception as e:
-
             template = 'Exception: {0}. Argument: {1!r}'
             code = 5011
             iMessage = template.format(type(e).__name__, e.args)
@@ -98,13 +99,15 @@ class PostCommentHandler(tornado.web.RequestHandler):
 
             # Getting all the available comments on tht post
             commentList = user_comment_folder.find({
-                "postId": post_Id,
+                "newsId": post_Id,
             })
             # converting objectId's to strings
             async for i in commentList:
                 i["_id"] = str(i["_id"])
                 i["newsId"] = str(i["newsId"])
+                i["createdBy"]=str(i["createdBy"])
                 result.append(i)
+                
             code = 200
             status = True
             message = "All available comments:"
