@@ -34,6 +34,7 @@ class PostLikeHandler(tornado.web.RequestHandler):
             })
 
             if post_Find:
+                # like remove
                 like_Update = await user_news_folder.update_one({
                     "_id": post_Id
                 }, {
@@ -46,6 +47,7 @@ class PostLikeHandler(tornado.web.RequestHandler):
                 message = 'News like is removed.'
                 result = []
             else:
+                # like is added
                 like_Update = await user_news_folder.update_one({
                     "_id": post_Id
                 }, {
