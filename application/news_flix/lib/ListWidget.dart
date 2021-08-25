@@ -1,7 +1,5 @@
 import 'dart:ui';
 
-
-
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -78,8 +76,11 @@ class _ListWidgetState extends State<ListWidget> {
               ],
             ),
             const SizedBox(height: 5),
-            Divider(color: Colors.deepPurple, indent: 10,
-              endIndent: 10,),
+            Divider(
+              color: Colors.deepPurple,
+              indent: 10,
+              endIndent: 10,
+            ),
             const SizedBox(height: 5),
             Padding(
               padding: EdgeInsets.fromLTRB(15, 5, 10, 10),
@@ -103,25 +104,24 @@ class _ListWidgetState extends State<ListWidget> {
                 borderRadius: BorderRadius.circular(3),
               ),
             ),
-
-            Divider(color: Colors.deepPurple,
+            Divider(
+              color: Colors.deepPurple,
               indent: 10,
               endIndent: 10,
             ),
-
             Container(
               padding: EdgeInsets.only(
                 left: 5,
-              //   bottom: 0,
-              //   top: 0,
-              //   right: 4,
+                //   bottom: 0,
+                //   top: 0,
+                //   right: 4,
               ),
               child: Row(
                 children: [
                   InkWell(
                     onLongPress: () {
-                      Navigator.push(
-                          context, MaterialPageRoute(builder: (context) => Likers()));
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Likers()));
                     },
                     onTap: () {
                       print("click_press");
@@ -145,23 +145,21 @@ class _ListWidgetState extends State<ListWidget> {
                   SizedBox(
                     width: 20,
                   ),
-
-               InkWell(
-                 onLongPress: () {
-                   Navigator.push(
-                       context, MaterialPageRoute(builder: (context) => Dislikers()));
-                 },
-                     onTap: () {
+                  InkWell(
+                    onLongPress: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Dislikers()));
+                    },
+                    onTap: () {
                       print("click_press");
-                   },
-                 child:IconButton(
-
-                    icon: Icon(
-                      Icons.thumb_down_outlined,),
-                   color: _favIconColor2,
+                    },
+                    child: IconButton(
+                      icon: Icon(
+                        Icons.thumb_down_outlined,
+                      ),
+                      color: _favIconColor2,
                       onPressed: () {
                         setState(() {
-
                           if (_favIconColor2 == Colors.grey) {
                             _favIconColor2 = Colors.red;
                           } else {
@@ -169,9 +167,8 @@ class _ListWidgetState extends State<ListWidget> {
                           }
                         });
                       },
-
+                    ),
                   ),
-                 ),
                   SizedBox(
                     width: 30,
                   ),
@@ -199,14 +196,13 @@ class _ListWidgetState extends State<ListWidget> {
                     onTap: () {
                       print("click_press");
                     },
-                    child:IconButton(
-
+                    child: IconButton(
                       icon: Icon(
-                        Icons.favorite,),
+                        Icons.favorite,
+                      ),
                       color: _favIconColor3,
                       onPressed: () {
                         setState(() {
-
                           if (_favIconColor3 == Colors.grey) {
                             _favIconColor3 = Colors.redAccent;
                           } else {
@@ -214,24 +210,25 @@ class _ListWidgetState extends State<ListWidget> {
                           }
                         });
                       },
-
                     ),
                   ),
                 ],
               ),
             ),
-            Divider(color: Colors.deepPurple, indent: 10,
-              endIndent: 10,),
-
+            Divider(
+              color: Colors.deepPurple,
+              indent: 10,
+              endIndent: 10,
+            ),
             Container(
-              padding: EdgeInsets.only(left: 10,bottom: 8),
+              padding: EdgeInsets.only(left: 10, bottom: 8),
               child: ElevatedButton(
-               style: ElevatedButton.styleFrom(
-                primary: Colors.deepPurple,
-              shape: RoundedRectangleBorder( //to set border radius to button
-                  borderRadius: BorderRadius.circular(30)
-              ),
-               ),
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.deepPurple,
+                  shape: RoundedRectangleBorder(
+                      //to set border radius to button
+                      borderRadius: BorderRadius.circular(30)),
+                ),
                 child: Text('View full news'),
                 onPressed: () {
                   Navigator.push(

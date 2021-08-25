@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -8,9 +9,7 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  @override
-
-  Widget textfield ({@required hintText}) {
+  Widget TextField({@required hintText, required InputDecoration decoration}) {
     return Material(
       elevation: 4,
       shadowColor: Colors.purple,
@@ -30,6 +29,7 @@ class _ProfilePageState extends State<ProfilePage> {
             border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10.0),
                 borderSide: BorderSide.none)),
+        hintText: null,
       ),
     );
   }
@@ -49,7 +49,8 @@ class _ProfilePageState extends State<ProfilePage> {
         //   ),
         // ),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios_outlined, color: Colors.white), // set your color here
+          icon: Icon(Icons.arrow_back_ios_outlined,
+              color: Colors.white), // set your color here
           onPressed: () {
             Navigator.pop(context);
           },
@@ -68,17 +69,33 @@ class _ProfilePageState extends State<ProfilePage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    textfield(
+                    TextField(
                       hintText: 'Username :',
+                      decoration: InputDecoration(
+                          border: InputBorder.none,
+                          labelText: 'Enter your Name',
+                          hintText: 'Enter Your Name'),
                     ),
-                    textfield(
+                    TextField(
                       hintText: 'Email :',
+                      decoration: InputDecoration(
+                          border: InputBorder.none,
+                          labelText: 'Enter your email',
+                          hintText: 'Enter Your Name'),
                     ),
-                    textfield(
+                    TextField(
                       hintText: 'Password :',
+                      decoration: InputDecoration(
+                          border: InputBorder.none,
+                          labelText: 'Enter  your Password',
+                          hintText: 'Enter Your Name'),
                     ),
-                    textfield(
+                    TextField(
                       hintText: 'Confirm password:',
+                      decoration: InputDecoration(
+                          border: InputBorder.none,
+                          labelText: 'confirm the password ',
+                          hintText: 'Enter Your Name'),
                     ),
                     Container(
                       height: 55,
@@ -86,9 +103,9 @@ class _ProfilePageState extends State<ProfilePage> {
                       child: ElevatedButton(
                         onPressed: () {},
                         style: ElevatedButton.styleFrom(
-                          primary: Color(0xf06609b1)),
-                          // primary: Colors.transparent,
-                          // onPrimary: Colors.transparent),
+                            primary: Color(0xf06609b1)),
+                        // primary: Colors.transparent,
+                        // onPrimary: Colors.transparent),
                         child: Center(
                           child: Text(
                             "Update",
@@ -137,7 +154,8 @@ class _ProfilePageState extends State<ProfilePage> {
                   color: Colors.white,
                   image: DecorationImage(
                     fit: BoxFit.cover,
-                    image: NetworkImage('https://images3.alphacoders.com/998/998333.jpg'),
+                    image: NetworkImage(
+                        'https://images3.alphacoders.com/998/998333.jpg'),
                   ),
                 ),
               ),
@@ -175,5 +193,5 @@ class HeaderCurvedContainer extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(CustomPainter oldDelegate) =>true;
+  bool shouldRepaint(CustomPainter oldDelegate) => true;
 }

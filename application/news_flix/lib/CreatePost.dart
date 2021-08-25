@@ -93,7 +93,7 @@ class _AppImagePickerState extends State<AppImagePicker> {
                     child: Row(
                       children: <Widget>[
                         Icon(Icons.filter_3),
-                        Text('Item 3'),
+                        Text('International'),
                       ],
                     ),
                     value: 'International',

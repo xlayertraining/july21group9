@@ -10,12 +10,12 @@ class Likers extends StatelessWidget {
         toolbarHeight: 60,
         title: Text('Liked By'),
         backgroundColor: Colors.deepPurpleAccent.shade200,
-
       ),
       body: LikedBy(),
     );
   }
 }
+
 class LikedBy extends StatefulWidget {
   const LikedBy({Key? key}) : super(key: key);
 

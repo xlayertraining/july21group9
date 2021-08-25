@@ -61,17 +61,21 @@ class _MyWidgetState extends State<MyWidget> {
                       padding: EdgeInsets.only(
                     top: 80,
                   )),
+                          Icon(Icons.person,
+                            color: Colors.white,
+                          size: 60,
+                          ),
                   Text(
                     "Sign Up",
                     style: TextStyle(
-                        fontSize: 35.0,
+                        fontSize: 30.0,
                         fontStyle: FontStyle.italic,
                         color: Colors.white,
                         fontWeight: FontWeight.bold),
                   ),
                   Expanded(
                       child: Container(
-                        padding: EdgeInsets.fromLTRB(10, 30, 10, 10),
+                        padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
                         child: Column(
                           children: [
 
@@ -90,7 +94,7 @@ class _MyWidgetState extends State<MyWidget> {
                         )
                               ),
                             SizedBox(
-                              height: 30,
+                              height: 10,
                             ),
                             TextField(
                                 decoration: InputDecoration(
@@ -102,7 +106,7 @@ class _MyWidgetState extends State<MyWidget> {
                                 )
                             ),
                             SizedBox(
-                              height: 30,
+                              height: 10,
                             ),
                             TextField(
                                 decoration: InputDecoration(
@@ -115,7 +119,7 @@ class _MyWidgetState extends State<MyWidget> {
                                 )
                             ),
                             SizedBox(
-                              height: 30,
+                              height: 10,
                             ),
                             TextField(
                                 decoration: InputDecoration(
@@ -128,7 +132,20 @@ class _MyWidgetState extends State<MyWidget> {
                                 )
                             ),
                             SizedBox(
-                              height: 30,
+                              height: 10,
+                            ),
+                            TextField(
+                                decoration: InputDecoration(
+                                  labelText: " Password ",
+                                  labelStyle: TextStyle(color: Colors.lightBlue),
+                                  suffixIcon: Icon(Icons.phone, color: Colors.lightBlue),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(40.0),
+                                  ),
+                                )
+                            ),
+                            SizedBox(
+                              height: 10,
                             ),
                             ElevatedButton(
                               onPressed: () {

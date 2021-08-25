@@ -11,7 +11,8 @@ import 'sign_in_page.dart';
 import 'MyPost.dart';
 import 'SearchPage.dart';
 import 'Share.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
+
+// import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -471,124 +472,122 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 ListTile(
-                  leading: Icon(Icons.person,size: 25,
-                      color: Colors.black),
-                  title: const Text('Profile', style: TextStyle(
-                    // fontWeight: FontWeight.bold,
-                    fontSize: 15,
-                  ),),
-                  onTap: () {},
-                  trailing: IconButton(
-                    icon: Icon(Icons.arrow_forward_ios_outlined,
-                        color: Colors.deepPurple), // set your color here
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ProfilePage()));
-                    },
+
+                  leading: Icon(Icons.person, size: 25, color: Colors.black),
+                  title: const Text(
+                    'Profile',
+                    style: TextStyle(
+                      // fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                    ),
                   ),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ProfilePage()),
+                    );
+                  },
+                //   trailing: IconButton(
+                //     icon: Icon(Icons.arrow_forward_ios_outlined,
+                //         color: Colors.deepPurple), // set your color here
+                //     onPressed: () {
+                //       Navigator.push(
+                //           context,
+                //           MaterialPageRoute(
+                //               builder: (context) => ProfilePage()));
+                //     },
+                // )
                 ),
-                const SizedBox(height: 20),
+
+                const SizedBox(height: 10),
 
                 ListTile(
-                  leading:
-                      Icon(Icons.favorite, size: 25,color: Colors.black),
-                  title: const Text('Favourites', style: TextStyle(
-                    // fontWeight: FontWeight.bold,
-                    fontSize: 15,
-                  ),),
-                  onTap: () {},
-                  trailing: IconButton(
-                    icon: Icon(Icons.arrow_forward_ios_outlined,
-                        color: Colors.deepPurple), // set your color here
-                    onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Favourite()));
-                    },
+                  leading: Icon(Icons.favorite, size: 25, color: Colors.black),
+                  title: const Text(
+                    'Favourites',
+                    style: TextStyle(
+                      // fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                    ),
                   ),
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Favourite()));
+                  },
+
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 10),
                 ListTile(
-                  leading: Icon(Icons.post_add,size: 25, color: Colors.black),
-                  title: const Text('My Post', style: TextStyle(
-                    // fontWeight: FontWeight.bold,
-                    fontSize: 15,
-                  ),),
-                  onTap: () {},
-                  trailing: IconButton(
-                    icon: Icon(Icons.arrow_forward_ios_outlined,
-                        color: Colors.deepPurple), // set your color here
-                    onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => MyPost()));
-                    },
+                  leading: Icon(Icons.post_add, size: 25, color: Colors.black),
+                  title: const Text(
+                    'My Post',
+                    style: TextStyle(
+                      // fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                    ),
                   ),
+                  onTap: () {
+                    Navigator.push(context,
+                                MaterialPageRoute(builder: (context) => MyPost()));
+                  },
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 10),
                 // Divider(color: Colors.black),
                 // const SizedBox(height: 10),
                 ListTile(
-                  leading: Icon(Icons.share,size: 25, color:Colors.black),
-                  title: const Text('Share', style: TextStyle(
-                    // fontWeight: FontWeight.bold,
-                    fontSize: 15,
-                  ),),
-                  onTap: () {},
-                  trailing: IconButton(
-                    icon: Icon(Icons.arrow_forward_ios_outlined,
-                        color: Colors.deepPurple), // set your color here
-                    onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Share()));
-                    },
+                  leading: Icon(Icons.share, size: 25, color: Colors.black),
+                  title: const Text(
+                    'Share',
+                    style: TextStyle(
+                      // fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                    ),
                   ),
+                  onTap: () {
+                    MaterialPageRoute(builder: (context) => Share());
+                    },
+
                 ),
 
                 const SizedBox(height: 10),
-                Divider(color: Colors.black),
-                const SizedBox(height: 10),
+                // Divider(color: Colors.black),
+                // const SizedBox(height: 10),
                 ListTile(
-                  leading: Icon(Icons.description,size: 25,color:Colors.black),
-                  title: const Text('About us', style: TextStyle(
-                    // fontWeight: FontWeight.bold,
-                    fontSize: 15,
-                  ),),
+                  leading:
+                      Icon(Icons.info, size: 25, color: Colors.black),
+                  title: const Text(
+                    'About us',
+                    style: TextStyle(
+                      // fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                    ),
+                  ),
                   onTap: () {
-                    // Update the state of the app
-                    // ...
-                    // Then close the drawer
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => AboutUs()));
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => AboutUs()));
                   },
-                  trailing: IconButton(
-                    icon: Icon(Icons.arrow_forward_ios_outlined,
-                        color: Colors.deepPurple), // set your color here
-                    onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => AboutUs()));
-                    },
-                  ),
+
                 ),
-                const SizedBox(height: 20),
-                // Divider(color: Colors.black),
+                const SizedBox(height: 120),
+                Divider(color: Colors.black),
                 // const SizedBox(height: 10),
 
                 ListTile(
-                  leading: Icon(Icons.settings_power,size: 25, color: Colors.red),
-                  title: const Text('Sign out', style: TextStyle(
-                    // fontWeight: FontWeight.bold,
-                    fontSize: 15,
-                  ),),
-                  onTap: () {},
-                  trailing: IconButton(
-                    icon: Icon(Icons.arrow_back_ios_outlined,
-                        color: Colors.red), // set your color here
-                    onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => signOut()()));
-                    },
+                  leading:
+                      Icon(Icons.settings_power, size: 25, color: Colors.red),
+                  title: const Text(
+                    'Sign out',
+                    style: TextStyle(
+                      // fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                    ),
                   ),
+                  onTap: () {
+                    signOut();
+                  },
+
                 ),
               ],
             ),

@@ -7,7 +7,7 @@ import 'package:untitled2/config/configuration.dart';
 import 'package:untitled2/Homepage.dart';
 
 import 'package:untitled2/sign_in_page.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
+// import 'package:flutter_easyloading/flutter_easyloading.dart';
 class SplashScreen extends StatelessWidget {
 
 // class SplashScreen extends EasyLoadingAnimation {

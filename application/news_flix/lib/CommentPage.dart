@@ -76,15 +76,18 @@ class _CommentPage extends State<CommentPage> {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 70,
-        title: Text("Comment Page",
-        style: TextStyle(
-        color: Colors.black,
-        fontSize: 24.0,
-        fontStyle: FontStyle.italic,
-        ),),
+        title: Text(
+          "Comment Page",
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 24.0,
+            fontStyle: FontStyle.italic,
+          ),
+        ),
         backgroundColor: Colors.white,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios_outlined, color: Colors.black), // set your color here
+          icon: Icon(Icons.arrow_back_ios_outlined,
+              color: Colors.black), // set your color here
           onPressed: () {
             Navigator.pop(context);
           },
@@ -93,7 +96,7 @@ class _CommentPage extends State<CommentPage> {
       body: Container(
         child: CommentBox(
           userImage:
-          "https://images.wallpapersden.com/image/download/itachi-uchiha-anime_a2xuZmiUmZqaraWkpJRnbmhnrWduaGc.jpg",
+              "https://images.wallpapersden.com/image/download/itachi-uchiha-anime_a2xuZmiUmZqaraWkpJRnbmhnrWduaGc.jpg",
           child: commentChild(filedata),
           labelText: 'Write a comment...',
           errorText: 'Comment cannot be blank',
@@ -103,8 +106,7 @@ class _CommentPage extends State<CommentPage> {
               setState(() {
                 var value = {
                   'name': 'Samyadeep Saha',
-                  'pic':
-                  'https://picsum.photos/300/30',
+                  'pic': 'https://picsum.photos/300/30',
                   'message': commentController.text
                 };
                 filedata.insert(0, value);
@@ -117,35 +119,37 @@ class _CommentPage extends State<CommentPage> {
           },
 
           formKey: formKey,
-         // title: Form(
-         //  key: formKey, child: TextFormField(
-         //   decoration: InputDecoration(
-         //   border: !withBorder
-         //      ? InputBorder.none
-         //      : UnderlineInputBorder(
-         //    borderSide: BorderSide(color: Colors.),
-         //  ),
+          // title: Form(
+          //  key: formKey, child: TextFormField(
+          //   decoration: InputDecoration(
+          //   border: !withBorder
+          //      ? InputBorder.none
+          //      : UnderlineInputBorder(
+          //    borderSide: BorderSide(color: Colors.),
+          //  ),
           commentController: commentController,
           backgroundColor: Colors.white,
           textColor: Colors.black,
-          sendWidget: Icon(Icons.send_sharp, size: 30, color: Colors.black,
+          sendWidget: Icon(
+            Icons.send_sharp,
+            size: 30,
+            color: Colors.black,
+          ),
         ),
-      ),
       ),
     );
   }
 }
+
 void getHttp() async {
   try {
     var img;
-    var response = await Dio().post(Configuration.serverUrl + "/",
-        data: {
-          "title":"test1",
-          "description":"test1",
-          "image":"1 2 ka 4 ",
-          "category":[0,1,2],
-        }
-    );
+    var response = await Dio().post(Configuration.serverUrl + "/", data: {
+      "title": "test1",
+      "description": "test1",
+      "image": "1 2 ka 4 ",
+      "category": [0, 1, 2],
+    });
     print(response);
   } catch (e) {
     print(e);
