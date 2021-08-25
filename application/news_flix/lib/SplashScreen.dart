@@ -74,20 +74,21 @@ class SplashScreen extends StatelessWidget {
                     Colors.deepPurple.shade300,
                   ]
               )
-          ),
+            ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Image.asset("assets/News Flix.png",
+              height: 150,
+              width: 150,
+              fit: BoxFit.cover,
+            ),
+            SizedBox(
+              height: 10,
+            ),
 
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Image.asset("assets/news.png",
-                height: 150,
-                width: 150,
-                fit: BoxFit.cover,
-              ),
-              SizedBox(
-                height: 10,
-              ),
+
               Text("NEWS FLIX",
                 style: TextStyle(
                   fontSize: 20,
