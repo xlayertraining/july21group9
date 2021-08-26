@@ -1,8 +1,14 @@
+import 'dart:async';
+import 'dart:convert';
+
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:untitled2/ListWidget.dart';
+import 'package:untitled2/config/configuration.dart';
+import 'package:untitled2/util/log_util.dart';
 
 import 'AboutUs.dart';
 import 'Favourite.dart';
@@ -21,44 +27,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  get listTiles1 => [
-        {
-          "newsTitle": 'Anime Planet',
-          'date': '6hr ago',
-          'newsSubtitle':
-              'One punch Man Season 3 does not have any release date yet.',
-          'imageUrl':
-              'https://cdn.neow.in/news/images/uploaded/2019/06/1561493403_one_punch_man.jpg',
-          "liked": true,
-        },
-        {
-          "newsTitle": 'Headlines Tripura ',
-          'newsSubtitle':
-              'One punch Man Season 3 does not have any release date yet.',
-          'date': '5hr ago',
-          'imageUrl':
-              'https://thelogicalindian.com/h-upload/2020/07/21/177535-tripurafb.jpg',
-          "liked": false,
-        },
-        {
-          "newsTitle": 'India Today',
-          'newsSubtitle':
-              'One punch Man Season 3 does not have any release date yet.',
-          'date': '3rd August',
-          'imageUrl':
-              'https://s3images.zee5.com/wp-content/uploads/sites/7/2021/08/india-vs-england-784x441.jpg',
-          "liked": true,
-        },
-        {
-          "newsTitle": 'BBC News',
-          'newsSubtitle':
-              'One punch Man Season 3 doesnot have any release date yet.',
-          'date': '2rd August',
-          'imageUrl':
-              'https://www.mtbs3d.com/gallery/albums/userpics/10002/bbcnews_logo.jpg',
-          "liked": false,
-        }
-      ];
+  var listTiles1 = [];
   get listTiles2 => [
         {
           "newsTitle": 'Zee News ',
@@ -254,9 +223,10 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     if (_context == null) {
       _context = context;
+      getNewsCategory1();
     }
 
-    return new DefaultTabController(
+    return DefaultTabController(
       length: 6,
       child: Scaffold(
           appBar: AppBar(
@@ -295,6 +265,15 @@ class _HomePageState extends State<HomePage> {
                 ),
                 onPressed: () {
                   // do something
+                },
+              ),
+              IconButton(
+                icon: Icon(
+                  Icons.refresh,
+                  color: Colors.redAccent.shade400,
+                ),
+                onPressed: () {
+                  getNewsCategory1();
                 },
               ),
             ],
@@ -345,7 +324,7 @@ class _HomePageState extends State<HomePage> {
                 itemBuilder: (context, index) {
                   return InkWell(
                     onTap: () {},
-                    child: ListWidget(listTiles1[index]),
+                    child: buildCard(listTiles1[index]),
                   );
                 },
               ),
@@ -603,4 +582,290 @@ class _HomePageState extends State<HomePage> {
     Navigator.of(context)
         .pushReplacement(MaterialPageRoute(builder: (context) => Myapp()));
   }
+
+  getNewsCategory1() async {
+
+    Response? resp = null;
+    resp = await Dio().get(
+        Configuration.serverUrl + '/news?category=0',
+      options: Options(
+        headers: {
+          'Authorization': 'Bearer ' + Configuration.authToken
+        }
+      )
+    );
+
+    try {
+      listTiles1 = resp.data['result'];
+      Log.i('0_length', listTiles1.length.toString());
+    } catch (e, s) {
+      print(e.toString() + s.toString());
+    }
+
+    Timer(Duration(seconds: 1),
+          () {
+            setState(() {
+            });
+          },
+    );
+
+  }
+
+  Widget buildCard(var item) {
+    return Card(
+      elevation: 5,
+      margin: EdgeInsets.only(bottom: 20, top: 10, left: 10, right: 10),
+      child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Padding(
+                  padding: EdgeInsets.fromLTRB(15, 10, 10, 5),
+                  child: Text(
+                    item!['title'],
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.deepPurple,
+                      // fontStyle: FontStyle.italic,
+                      decorationStyle: TextDecorationStyle.double,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            // const SizedBox(height: 5),
+            // Divider(
+            //   color: Colors.deepPurple,
+            //   indent: 10,
+            //   endIndent: 10,
+            // ),
+            // const SizedBox(height: 5),
+            Padding(
+              padding: EdgeInsets.fromLTRB(15, 5, 10, 10),
+              child: Text(
+                item!['description'],
+                style: TextStyle(
+                  fontSize: 16,
+                  // fontStyle: FontStyle.italic,
+                  decorationStyle: TextDecorationStyle.double,
+                ),
+              ),
+            ),
+            (item!['imageUrl'] != null)? Container(
+              width: MediaQuery.of(_context!).size.width,
+              height: MediaQuery.of(_context!).size.width / 2,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: NetworkImage(item!['imageUrl']),
+                  fit: BoxFit.cover,
+                ),
+                borderRadius: BorderRadius.circular(3),
+              ),
+            ) : Container(),
+            // Divider(
+            //   color: Colors.deepPurple,
+            //   indent: 10,
+            //   endIndent: 10,
+            // ),
+            Container(
+              padding: EdgeInsets.only(
+                left: 5,
+                //   bottom: 0,
+                //   top: 0,
+                //   right: 4,
+              ),
+              child: Row(
+                children: [
+                  InkWell(
+                    onLongPress: () {
+                      // Navigator.push(context,
+                      //     MaterialPageRoute(builder: (context) => Likers()));
+                    },
+                    onTap: () {
+                      print("click_press");
+                    },
+                    child: Column(
+                      children: [
+                        IconButton(
+                          icon: Icon(
+                            Icons.thumb_up_outlined,
+                          ),
+                          // color: _favIconColor,
+                          onPressed: () {
+                          //   setState(() {
+                          //     if (_favIconColor == Colors.grey) {
+                          //       _favIconColor = Colors.deepPurple;
+                          //     } else {
+                          //       _favIconColor = Colors.grey;
+                          //     }
+                          //   });
+                          },
+                        ),
+                        (item!['like'] > 0)? Text(
+                            item!['like'].toString()
+                        ) : Container(),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    width: 20,
+                  ),
+                  InkWell(
+                    onLongPress: () {
+                      // Navigator.push(context,
+                      //     MaterialPageRoute(builder: (context) => Dislikers()));
+                    },
+                    onTap: () {
+                      print("click_press");
+                    },
+                    child: IconButton(
+                      icon: Icon(
+                        Icons.thumb_down_outlined,
+                      ),
+                      // color: _favIconColor2,
+                      onPressed: () {
+                      //   setState(() {
+                      //     if (_favIconColor2 == Colors.grey) {
+                      //       _favIconColor2 = Colors.red;
+                      //     } else {
+                      //       _favIconColor2 = Colors.grey;
+                      //     }
+                      //   });
+                      },
+                    ),
+                  ),
+                  SizedBox(
+                    width: 30,
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      // Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //         builder: (context) => CommentPage()));
+                    },
+                    icon: Icon(
+                      Icons.comment_outlined,
+                      color: (item!['liked'] == null || item!['liked'] == false)
+                          ? Colors.grey
+                          : Colors.grey,
+                    ),
+                  ),
+                  SizedBox(
+                    width: 30,
+                  ),
+                  InkWell(
+                    onLongPress: () {
+                      print("long_press");
+                    },
+                    onTap: () {
+                      print("click_press");
+                    },
+                    child: IconButton(
+                      icon: Icon(
+                        Icons.favorite,
+                      ),
+                      color: Configuration.favIconColor,
+                      onPressed: () {
+                        // setState(() {
+                        //   if (_favIconColor3 == Colors.grey) {
+                        //     _favIconColor3 = Colors.redAccent;
+                        //   } else {
+                        //     _favIconColor3 = Colors.grey;
+                        //   }
+                        // });
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Divider(
+              color: Colors.deepPurple,
+              indent: 10,
+              endIndent: 10,
+            ),
+            Container(
+              padding: EdgeInsets.only(left: 10, bottom: 8),
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.deepPurple,
+                  shape: RoundedRectangleBorder(
+                    //to set border radius to button
+                      borderRadius: BorderRadius.circular(30)),
+                ),
+                child: Text('View full news'),
+                onPressed: () {
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(builder: (context) => FullView()),
+                  // );
+                },
+              ),
+              // SizedBox(width: 5,),
+              // Expanded(child: Column(
+              //   mainAxisAlignment: MainAxisAlignment.start,
+              //   crossAxisAlignment: CrossAxisAlignment.start,
+              //
+              //   children: [
+              //     Text(item['newsTitle'],
+              //       style: TextStyle(
+              //         fontSize: 24,fontStyle: FontStyle.italic
+              //       ),),
+              //
+              //     SizedBox(
+
+              //       height: 5,
+              //     ),
+              //     Row(
+              //       children: [
+              //         Icon(Icons.date_range,color: Colors.greenAccent,),
+              //         Text(
+              //           item['date'],
+              //           style: TextStyle(
+              //             fontSize: 12,
+              //           ),
+              //         ),
+              //         SizedBox(
+
+              //           width: 10,
+              //         ),
+              //         Icon(Icons.bookmarks_outlined,color: Colors.lightBlueAccent,size: 20,),
+              //         // SizedBox(
+
+              //         //   width: 30,
+              //         // ),
+              //         // Icon(Icons.play_circle_fill,color: Colors.lightBlueAccent,size: 40,),
+              //
+              //       ],
+              //     ),
+              //     Row(
+              //       children: [
+              //         Icon(Icons.favorite_sharp,color: Colors.redAccent,
+              //             size:20
+              //         ),
+              //         SizedBox(
+
+              //           width: 30,
+              //         ),
+              //         Icon(Icons.comment_outlined,color: Colors.blue,
+              //           size:20),
+              //         SizedBox(
+
+              //           width: 30,
+              //         ),
+              //         Icon(Icons.share,color: Colors.pinkAccent,size: 20,),
+              //   ],
+              // )
+              // ]
+              // )
+              // ),
+            ),
+          ]),
+    );
+  }
+
+
 }

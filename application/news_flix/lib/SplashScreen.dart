@@ -127,6 +127,7 @@ class SplashScreen extends StatelessWidget {
       }
       );
     } else {
+      Configuration.authToken = signedInValue;
       Timer(Duration(seconds: 3), () {
         Navigator.of(_context!).pushReplacement(
             MaterialPageRoute(builder: (context) => HomePage())

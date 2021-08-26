@@ -6,7 +6,7 @@ from common_library import*
 from auth import SecureHeader
 
 
-class imageHandler(tornado.web.RequestHandler):
+class NewsHandler(tornado.web.RequestHandler):
 
     async def post(self):
         code = 4000
@@ -50,11 +50,7 @@ class imageHandler(tornado.web.RequestHandler):
                 postTime = int(self.request.arguments["time"][0].decode())
             except:
                 postTime = timeNow()
-            # Image
-            try:
-                image = self.request.files["image"][0]
-            except:
-                image=None;
+            
             # Category
             try:
                 val = self.request.arguments["category"][0]
@@ -81,17 +77,37 @@ class imageHandler(tornado.web.RequestHandler):
                     raise Exception
             except:
                 tags=[]
-                   
+
+            # Image
+            attach = []
             try:
-                fileType = str(mimetypes.guess_extension(
-                    image['content_type'], strict=True))
-                if fileType in [".jpeg", ".jpg", ".png"]:
-                    imageRaw = image['body']
+                image = self.request.files["image"][0]
             except:
-                code = 4083
-                status = False
-                message = "This file type is not supported"
-                raise Exception
+                image=None
+
+            if image is not None: 
+                try:
+                    fileType = str(mimetypes.guess_extension(
+                        image['content_type'], strict=True))
+                    if fileType in [".jpeg", ".jpg", ".png"]:
+                        imageRaw = image['body']
+                except:
+                    code = 4083
+                    status = False
+                    message = "This file type is not supported"
+                    raise Exception
+
+                attach = [
+                        {
+                            'rawFile': imageRaw,
+                            'extention': fileType,
+                            'mimeType': image['content_type'],
+                            'fileName': str(timeNow()) + fileType
+                        }
+                    ]
+            else:
+                attach = []
+
             try:
                 rs = await user_news_folder.insert_one({
                     "accountId": account_id,
@@ -110,7 +126,7 @@ class imageHandler(tornado.web.RequestHandler):
                     "approve": approve,
                     "approvedBy":None,
                     "approvedAt":None,
-                    "image": imageRaw
+                    'attachments': attach
                     
                 })
                 #NewsId in result
@@ -163,10 +179,11 @@ class imageHandler(tornado.web.RequestHandler):
                 message = "Invalid category"
                 raise Exception
             try:
-                imageList = user_news_folder.find({"category": category_id,"approve":True})
+                imageList = user_news_folder.find(
+                        {"category": category_id,"approve":True},
+                    )
                 async for i in imageList:
-                    # del[i["image"]]
-                    i["image"]=str(i["image"])
+                    del[i['likers'], i['dislikers'], i['category'], i['description']]
                     i['_id'] = str(i['_id'])
                     i["fav_user"] = False
                     if account_id in i["favourites"]:
@@ -174,6 +191,13 @@ class imageHandler(tornado.web.RequestHandler):
                     account_find = await user_sign_up.find_one({"_id": ObjectId(i["accountId"])})
                     if account_find:
                         i["author"] = account_find["userName"]
+                    
+                    # adding image url
+                    i['imageUrl'] = None
+                    if len(i['attachments']) > 0:
+                        i['imageUrl'] = serverUrl + '/news/image/' + i['attachments'][0]['fileName']
+                        del i['attachments']
+
                     result.append(i)
                 code=2000
                 status=True
@@ -187,21 +211,37 @@ class imageHandler(tornado.web.RequestHandler):
                 self.write(response)
                 self.finish()
                 return
-            except:
+            except Exception as e:
                 code = 5623
                 status = False
                 message = 'Internal Error, Please Contact the Support Team.'
+                template = 'Exception: {0}. Argument: {1!r}'
+                iMessage = template.format(type(e).__name__, e.args)
+                message = 'Internal Error, Please Contact the Support Team.'
+                exc_type, exc_obj, exc_tb = sys.exc_info()
+                fname = exc_tb.tb_frame.f_code.co_filename
+                print('EXC', iMessage)
+                print('EX2', 'FILE: ' + str(fname) + ' LINE: ' + str(exc_tb.tb_lineno) + ' TYPE: ' + str(exc_type))
                 raise Exception
-        except:
-            response = {
-                'code': code,
-                'status': status,
-                'message': message,
-                "result": result
-            }
-            self.write(response)
-            self.finish()
-            return
+        
+        except Exception as e:
+            template = 'Exception: {0}. Argument: {1!r}'
+            iMessage = template.format(type(e).__name__, e.args)
+            message = 'Internal Error, Please Contact the Support Team.'
+            exc_type, exc_obj, exc_tb = sys.exc_info()
+            fname = exc_tb.tb_frame.f_code.co_filename
+            print('EXC', iMessage)
+            print('EX2', 'FILE: ' + str(fname) + ' LINE: ' + str(exc_tb.tb_lineno) + ' TYPE: ' + str(exc_type))
+
+        response = {
+            'code': code,
+            'status': status,
+            'message': message,
+            "result": result
+        }
+        self.write(response)
+        self.finish()
+        return
 
     async def delete(self):
         code = 4000
@@ -247,16 +287,23 @@ class imageHandler(tornado.web.RequestHandler):
             self.write(response)
             self.finish()
             return
-        except:
+        except Exception as e:
             status = False
             code = 5011
+            template = 'Exception: {0}. Argument: {1!r}'
+            iMessage = template.format(type(e).__name__, e.args)
             message = 'Internal Error, Please Contact the Support Team.'
-            response = {
-                'code': code,
-                'status': status,
-                'message': message,
-                "result": result
-            }
-            self.write(response)
-            self.finish()
-            return
+            exc_type, exc_obj, exc_tb = sys.exc_info()
+            fname = exc_tb.tb_frame.f_code.co_filename
+            print('EXC', iMessage)
+            print('EX2', 'FILE: ' + str(fname) + ' LINE: ' + str(exc_tb.tb_lineno) + ' TYPE: ' + str(exc_type))
+
+        response = {
+            'code': code,
+            'status': status,
+            'message': message,
+            "result": result
+        }
+        self.write(response)
+        self.finish()
+        return

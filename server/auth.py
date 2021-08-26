@@ -6,7 +6,7 @@ class SecureHeader():
     async def decrypt(Authorization):
     
         try:
-            print(Authorization)
+            # print(Authorization)
             Authorization = Authorization.split()
             firstPart = Authorization[0]
             secondPart = Authorization[1]

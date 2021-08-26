@@ -64,36 +64,36 @@ class _ListWidgetState extends State<ListWidget> {
                 Padding(
                   padding: EdgeInsets.fromLTRB(15, 10, 10, 5),
                   child: Text(
-                    item!['newsTitle'],
+                    item!['title'],
                     style: TextStyle(
-                      fontSize: 25,
+                      fontSize: 16,
                       color: Colors.deepPurple,
-                      fontStyle: FontStyle.italic,
+                      // fontStyle: FontStyle.italic,
                       decorationStyle: TextDecorationStyle.double,
                     ),
                   ),
                 ),
               ],
             ),
-            const SizedBox(height: 5),
-            Divider(
-              color: Colors.deepPurple,
-              indent: 10,
-              endIndent: 10,
-            ),
-            const SizedBox(height: 5),
+            // const SizedBox(height: 5),
+            // Divider(
+            //   color: Colors.deepPurple,
+            //   indent: 10,
+            //   endIndent: 10,
+            // ),
+            // const SizedBox(height: 5),
             Padding(
               padding: EdgeInsets.fromLTRB(15, 5, 10, 10),
               child: Text(
-                item!['newsSubtitle'],
+                item!['description'],
                 style: TextStyle(
-                  fontSize: 24,
-                  fontStyle: FontStyle.italic,
+                  fontSize: 16,
+                  // fontStyle: FontStyle.italic,
                   decorationStyle: TextDecorationStyle.double,
                 ),
               ),
             ),
-            Container(
+            (item!['imageUrl'] != null)? Container(
               width: MediaQuery.of(_context!).size.width,
               height: MediaQuery.of(_context!).size.width / 2,
               decoration: BoxDecoration(
@@ -103,12 +103,12 @@ class _ListWidgetState extends State<ListWidget> {
                 ),
                 borderRadius: BorderRadius.circular(3),
               ),
-            ),
-            Divider(
-              color: Colors.deepPurple,
-              indent: 10,
-              endIndent: 10,
-            ),
+            ) : Container(),
+            // Divider(
+            //   color: Colors.deepPurple,
+            //   indent: 10,
+            //   endIndent: 10,
+            // ),
             Container(
               padding: EdgeInsets.only(
                 left: 5,
@@ -126,20 +126,27 @@ class _ListWidgetState extends State<ListWidget> {
                     onTap: () {
                       print("click_press");
                     },
-                    child: IconButton(
-                      icon: Icon(
-                        Icons.thumb_up_outlined,
-                      ),
-                      color: _favIconColor,
-                      onPressed: () {
-                        setState(() {
-                          if (_favIconColor == Colors.grey) {
-                            _favIconColor = Colors.deepPurple;
-                          } else {
-                            _favIconColor = Colors.grey;
-                          }
-                        });
-                      },
+                    child: Column(
+                      children: [
+                        IconButton(
+                          icon: Icon(
+                            Icons.thumb_up_outlined,
+                          ),
+                          color: _favIconColor,
+                          onPressed: () {
+                            setState(() {
+                              if (_favIconColor == Colors.grey) {
+                                _favIconColor = Colors.deepPurple;
+                              } else {
+                                _favIconColor = Colors.grey;
+                              }
+                            });
+                          },
+                        ),
+                        (item!['like'] > 0)? Text(
+                            item!['like'].toString()
+                        ) : Container(),
+                      ],
                     ),
                   ),
                   SizedBox(
