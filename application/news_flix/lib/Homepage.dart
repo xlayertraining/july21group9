@@ -6,6 +6,7 @@ import 'package:untitled2/ListWidget.dart';
 
 import 'AboutUs.dart';
 import 'Favourite.dart';
+import 'Profile2.dart';
 import 'ProfilePage.dart';
 import 'sign_in_page.dart';
 import 'MyPost.dart';
@@ -484,7 +485,7 @@ class _HomePageState extends State<HomePage> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => ProfilePage()),
+                      MaterialPageRoute(builder: (context) => Profile2()),
                     );
                   },
                 //   trailing: IconButton(
