@@ -1,1 +1,1 @@
-# New Flix
+# News Flix
