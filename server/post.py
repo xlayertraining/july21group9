@@ -112,7 +112,7 @@ class NewsHandler(tornado.web.RequestHandler):
                 rs = await user_news_folder.insert_one({
                     "accountId": account_id,
                     "createdBy": account_id,
-                    "createdAt": timeNow(),
+                    "createdAt": postTime,
                     "title": title,
                     "description": body,
                     "favourites": [],
@@ -121,7 +121,6 @@ class NewsHandler(tornado.web.RequestHandler):
                     "dislike":0,
                     "dislikers":[],
                     "tags":tags,
-                    "publisedTime": postTime,
                     "category": catagory,
                     "approve": approve,
                     "approvedBy":None,
@@ -183,14 +182,17 @@ class NewsHandler(tornado.web.RequestHandler):
                         {"category": category_id,"approve":True},
                     )
                 async for i in imageList:
-                    del[i['likers'], i['dislikers'], i['category'], i['description']]
+                    del[i['likers'], i['dislikers'], i['category'], i['description'],i['createdBy'],i['approvedAt']]
                     i['_id'] = str(i['_id'])
                     i["fav_user"] = False
                     if account_id in i["favourites"]:
                         i["fav_user"] = True
+                    else:
+                        del i['favourites']
                     account_find = await user_sign_up.find_one({"_id": ObjectId(i["accountId"])})
                     if account_find:
                         i["author"] = account_find["userName"]
+                   
                     
                     # adding image url
                     i['imageUrl'] = None
