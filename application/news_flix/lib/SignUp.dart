@@ -49,142 +49,125 @@ class _MyWidgetState extends State<MyWidget> {
   BuildContext? _context;
   bool passShow = false;
   @override
-
   Widget build(BuildContext context) {
     if (_context == null) {
       _context = context;
     }
 
-    return Scaffold(
-        resizeToAvoidBottomInset: false,
-        body:
-         Container(
-            decoration: BoxDecoration(color: Colors.lightBlueAccent),
+    return WillPopScope(
+      onWillPop: () async {
+        return true;
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: Colors.white,
+          iconTheme: IconThemeData(
+            color: Colors.black
+          ),
+        ),
+        body: SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.only(
+              top: 10,
+              right: 20,
+              left: 20,
+            ),
             child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    height: 20,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  "Sign Up",
+                  style: TextStyle(
+                      fontSize: 30.0,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
                   ),
-                  Padding(
-                      padding: EdgeInsets.only(
-                    top: 80,
-                  )),
-                          Icon(Icons.person,
-                            color: Colors.white,
-                          size: 60,
-                          ),
-                  Text(
-                    "Sign Up",
-                    style: TextStyle(
-                        fontSize: 30.0,
-                        fontStyle: FontStyle.italic,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold),
-                  ),
-                  Expanded(
-                      child: Container(
-                        padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                        child: Column(
-                          children: [
-
-                            SizedBox(
-                              height: 30,
-                            ),
-
-                            TextField(
-
-                        decoration: InputDecoration(
-                        labelText: "First name :",
-                          labelStyle: TextStyle(color: Colors.lightBlue),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(40.0),
-                          ),
-                        )
-                              ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            TextField(
-                                decoration: InputDecoration(
-                                  labelText: "Last name :",
-                                  labelStyle: TextStyle(color: Colors.lightBlue),
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(40.0),
-                                  ),
-                                )
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            TextField(
-                                controller: emailController,
-                                decoration: InputDecoration(
-                                  labelText: "Email",
-                                  labelStyle: TextStyle(color: Colors.lightBlue),
-                                  suffixIcon: Icon(Icons.email, color: Colors.lightBlue),
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(40.0),
-                                  ),
-                                )
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            TextField(
-                                controller: passwordController,
-                                decoration: InputDecoration(
-                                  labelText: "Password.",
-                                  labelStyle: TextStyle(color: Colors.lightBlue),
-                                  suffixIcon: Icon(Icons.phone, color: Colors.lightBlue),
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(40.0),
-                                  ),
-                                )
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            TextField(
-                                decoration: InputDecoration(
-                                  labelText: " Password ",
-                                  labelStyle: TextStyle(color: Colors.lightBlue),
-                                  suffixIcon: Icon(Icons.phone, color: Colors.lightBlue),
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(40.0),
-                                  ),
-                                )
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            ElevatedButton(
-                              onPressed: () {
-                                Navigator.pushReplacement(context,
-                                    MaterialPageRoute(builder: (context) => HomePage()));
-                              },
-                              // createAlbum("test string");
-                              child: Text("Submit",style: TextStyle(
-                                  color: Colors.white
-                              ),),
-                              style: ElevatedButton.styleFrom(primary: Colors.lightBlue),
-                            ),
-                          ],
-                        ),
-                    margin: EdgeInsets.only(
-                      top: 100,
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                TextField(
+                  decoration: InputDecoration(
+                    labelText: "First name :",
+                    labelStyle: TextStyle(color: Colors.lightBlue),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(40.0),
                     ),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(55.0),
-                        topRight: Radius.circular(55.0),
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                TextField(
+                    decoration: InputDecoration(
+                      labelText: "Last name :",
+                      labelStyle: TextStyle(color: Colors.lightBlue),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(40.0),
                       ),
-                    ),
-
-
-                  ))
-                ])));
-
+                      suffixIcon: Icon(
+                        Icons.person
+                      )
+                    )),
+                SizedBox(
+                  height: 10,
+                ),
+                TextField(
+                    controller: emailController,
+                    decoration: InputDecoration(
+                      labelText: "Email",
+                      labelStyle: TextStyle(color: Colors.lightBlue),
+                      suffixIcon: Icon(Icons.email, color: Colors.lightBlue),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(40.0),
+                      ),
+                    )),
+                SizedBox(
+                  height: 10,
+                ),
+                TextField(
+                    controller: passwordController,
+                    decoration: InputDecoration(
+                      labelText: "Password.",
+                      labelStyle: TextStyle(color: Colors.lightBlue),
+                      suffixIcon: Icon(Icons.phone, color: Colors.lightBlue),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(40.0),
+                      ),
+                    )),
+                SizedBox(
+                  height: 10,
+                ),
+                TextField(
+                    decoration: InputDecoration(
+                      labelText: "Password",
+                      labelStyle: TextStyle(color: Colors.lightBlue),
+                      suffixIcon: Icon(Icons.phone, color: Colors.lightBlue),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(40.0),
+                      ),
+                    )),
+                SizedBox(
+                  height: 10,
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushReplacement(context,
+                        MaterialPageRoute(builder: (context) => HomePage()));
+                  },
+                  // createAlbum("test string");
+                  child: Text(
+                    "Submit",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  style: ElevatedButton.styleFrom(primary: Colors.lightBlue),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }

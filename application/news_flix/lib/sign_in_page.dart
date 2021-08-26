@@ -169,21 +169,17 @@ class _MyappState extends State<Myapp> {
                 ),
               ),
               SizedBox(height: 20.0),
-              GestureDetector(
+              InkWell(
                 onTap: () {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => MyWidget()));
                 },
-                child: Text.rich(
-                  TextSpan(text: 'Don\'t have an account? \t', children: [
-                    TextSpan(
-                      text: 'Sign Up',
-                      style: TextStyle(
-                          color: Colors.deepPurple,
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ]),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("Don\'t have an account?"),
+                    Text("Sign Up"),
+                  ],
                 ),
               ),
             ],
