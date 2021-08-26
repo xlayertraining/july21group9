@@ -59,7 +59,7 @@ class PostLikeHandler(tornado.web.RequestHandler):
                 dislike_Update = await user_news_folder.update_one({
                     "_id": post_Id
                 }, {
-                    "$inc": {"dislike": -1},
+                    "$set": {"dislike": 0},
                     "$pull": {"dislikers": account_id}
 
                 })
