@@ -81,8 +81,7 @@ flutter:
       - assets/news animation.json
       - assets/boy.png
       - assets/News Flix.png
-
-
+      - assets/Sign Up.json
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 #  fonts:

@@ -49,7 +49,7 @@ class _MyappState extends State<Myapp> {
             children: [
               Container(
                 width: width,
-                height: height * 0.25,
+                height: height * 0.35,
                 child: Lottie.asset(
                   'assets/news animation.json',
                   fit: BoxFit.contain,
@@ -69,7 +69,7 @@ class _MyappState extends State<Myapp> {
                     ),
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 5,
                   ),
                   Text(
                     'Enter your email and password to sign in.',
