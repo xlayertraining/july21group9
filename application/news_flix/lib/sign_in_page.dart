@@ -178,7 +178,10 @@ class _MyappState extends State<Myapp> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text("Don\'t have an account?"),
-                    Text("Sign Up"),
+                    SizedBox(width: 5,),
+                    Text("Sign Up",
+                      style: TextStyle(color: Colors.deepPurple,fontSize: 14, fontWeight: FontWeight.bold),
+                    ),
                   ],
                 ),
               ),
