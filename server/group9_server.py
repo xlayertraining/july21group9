@@ -11,6 +11,7 @@ from user_post import UserSharedPostHandler
 from post_dislike import PostDislikeHandler
 from news_approve import NewsApproveHandler
 from news_image_get import NewsImageGetHandler
+from post_news_info import NewsInfoHandler
 
 
 def app():
@@ -27,6 +28,7 @@ def app():
             (r'/julygroup9_web/api/profile', ProfileHandler),
             (r'/julygroup9_web/api/post/user', UserSharedPostHandler),
             (r'/julygroup9_web/api/news/approve', NewsApproveHandler),
+            (r'/julygroup9_web/api/news/info', NewsInfoHandler),
             (r'/julygroup9_web/api/news/image/.*', NewsImageGetHandler),
         ],
         settings={
