@@ -79,7 +79,7 @@ class _CommentPage extends State<CommentPage> {
         title: Text(
           "Comment Page",
           style: TextStyle(
-            color: Colors.black,
+            color: Colors.deepPurple,
             fontSize: 24.0,
             fontStyle: FontStyle.italic,
           ),
@@ -87,7 +87,7 @@ class _CommentPage extends State<CommentPage> {
         backgroundColor: Colors.white,
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios_outlined,
-              color: Colors.black), // set your color here
+              color: Colors.deepPurple), // set your color here
           onPressed: () {
             Navigator.pop(context);
           },

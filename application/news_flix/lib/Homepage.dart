@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'dart:convert';
+
 
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:dio/dio.dart';
@@ -11,9 +11,13 @@ import 'package:untitled2/config/configuration.dart';
 import 'package:untitled2/util/log_util.dart';
 
 import 'AboutUs.dart';
+import 'CommentPage.dart';
+import 'Dislikers.dart';
 import 'Favourite.dart';
+import 'FullView.dart';
+import 'LikersPage.dart';
 import 'Profile2.dart';
-import 'ProfilePage.dart';
+
 import 'sign_in_page.dart';
 import 'MyPost.dart';
 import 'SearchPage.dart';
@@ -62,7 +66,8 @@ class _HomePageState extends State<HomePage> {
           'imageUrl':
               'https://dominicanewsonline.com/news/wp-content/uploads/2020/07/budget.jpg'
         },
-      ];
+];
+
   get listTiles3 => [
         {
           "newsTitle": 'World News ',
@@ -224,6 +229,7 @@ class _HomePageState extends State<HomePage> {
     if (_context == null) {
       _context = context;
       getNewsCategory1();
+      // getNewsCategory2();
     }
 
     return DefaultTabController(
@@ -274,6 +280,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 onPressed: () {
                   getNewsCategory1();
+                  // getNewsCategory2();
                 },
               ),
             ],
@@ -300,7 +307,9 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   Tab(
-                    child: Text("National"),
+                    child: Text(
+                      "National",
+                    ),
                   ),
                   Tab(
                     child: Text("International"),
@@ -411,7 +420,6 @@ class _HomePageState extends State<HomePage> {
               //Handle button tap
             },
           ),
-          // body: Container(color: Colors.blueAccent),
 
           drawer: Drawer(
             // child: SliverAppBar(
@@ -545,8 +553,6 @@ class _HomePageState extends State<HomePage> {
                   onTap: () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => AboutUs()));
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => AboutUs()));
                   },
 
                 ),
@@ -590,7 +596,7 @@ class _HomePageState extends State<HomePage> {
         Configuration.serverUrl + '/news?category=0',
       options: Options(
         headers: {
-          'Authorization': 'Bearer ' + Configuration.authToken
+          'Authorization': ' Bearer ' + Configuration.authToken
         }
       )
     );
@@ -610,6 +616,33 @@ class _HomePageState extends State<HomePage> {
     );
 
   }
+  // getNewsCategory2() async {
+  //
+  //   Response? resp = null;
+  //   resp = await Dio().get(
+  //       Configuration.serverUrl + '/news?category=1',
+  //       options: Options(
+  //           headers: {
+  //             'Authorization': ' Bearer ' + Configuration.authToken
+  //           }
+  //       )
+  //   );
+  //
+  //   try {
+  //     listTiles2 = resp.data['result'];
+  //     Log.i('0_length', listTiles2.length.toString());
+  //   } catch (e, s) {
+  //     print(e.toString() + s.toString());
+  //   }
+  //
+  //   Timer(Duration(seconds: 1),
+  //         () {
+  //       setState(() {
+  //       });
+  //     },
+  //   );
+  //
+  // }
 
   Widget buildCard(var item) {
     return Card(
@@ -635,20 +668,20 @@ class _HomePageState extends State<HomePage> {
                 ),
               ],
             ),
-            // const SizedBox(height: 5),
-            // Divider(
-            //   color: Colors.deepPurple,
-            //   indent: 10,
-            //   endIndent: 10,
-            // ),
-            // const SizedBox(height: 5),
+            const SizedBox(height: 5),
+            Divider(
+              color: Colors.deepPurple,
+              indent: 10,
+              endIndent: 10,
+            ),
+            const SizedBox(height: 5),
             Padding(
               padding: EdgeInsets.fromLTRB(15, 5, 10, 10),
               child: Text(
                 item!['description'],
                 style: TextStyle(
                   fontSize: 16,
-                  // fontStyle: FontStyle.italic,
+
                   decorationStyle: TextDecorationStyle.double,
                 ),
               ),
@@ -664,11 +697,11 @@ class _HomePageState extends State<HomePage> {
                 borderRadius: BorderRadius.circular(3),
               ),
             ) : Container(),
-            // Divider(
-            //   color: Colors.deepPurple,
-            //   indent: 10,
-            //   endIndent: 10,
-            // ),
+            Divider(
+              color: Colors.deepPurple,
+              indent: 10,
+              endIndent: 10,
+            ),
             Container(
               padding: EdgeInsets.only(
                 left: 5,
@@ -680,8 +713,8 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   InkWell(
                     onLongPress: () {
-                      // Navigator.push(context,
-                      //     MaterialPageRoute(builder: (context) => Likers()));
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Likers()));
                     },
                     onTap: () {
                       print("click_press");
@@ -692,15 +725,15 @@ class _HomePageState extends State<HomePage> {
                           icon: Icon(
                             Icons.thumb_up_outlined,
                           ),
-                          // color: _favIconColor,
+                          color: Configuration.favIconColor1,
                           onPressed: () {
-                          //   setState(() {
-                          //     if (_favIconColor == Colors.grey) {
-                          //       _favIconColor = Colors.deepPurple;
-                          //     } else {
-                          //       _favIconColor = Colors.grey;
-                          //     }
-                          //   });
+                            setState(() {
+                              if (Configuration.favIconColor1 == Colors.grey) {
+                                Configuration.favIconColor1 = Colors.deepPurple;
+                              } else {
+                                Configuration.favIconColor1 = Colors.grey;
+                              }
+                            });
                           },
                         ),
                         (item!['like'] > 0)? Text(
@@ -714,8 +747,8 @@ class _HomePageState extends State<HomePage> {
                   ),
                   InkWell(
                     onLongPress: () {
-                      // Navigator.push(context,
-                      //     MaterialPageRoute(builder: (context) => Dislikers()));
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Dislikers()));
                     },
                     onTap: () {
                       print("click_press");
@@ -724,15 +757,15 @@ class _HomePageState extends State<HomePage> {
                       icon: Icon(
                         Icons.thumb_down_outlined,
                       ),
-                      // color: _favIconColor2,
+                      color: Configuration.favIconColor2,
                       onPressed: () {
-                      //   setState(() {
-                      //     if (_favIconColor2 == Colors.grey) {
-                      //       _favIconColor2 = Colors.red;
-                      //     } else {
-                      //       _favIconColor2 = Colors.grey;
-                      //     }
-                      //   });
+                        setState(() {
+                          if ( Configuration.favIconColor2 == Colors.grey) {
+                            Configuration.favIconColor2 = Colors.red;
+                          } else {
+                            Configuration.favIconColor2 = Colors.grey;
+                          }
+                        });
                       },
                     ),
                   ),
@@ -741,10 +774,10 @@ class _HomePageState extends State<HomePage> {
                   ),
                   IconButton(
                     onPressed: () {
-                      // Navigator.push(
-                      //     context,
-                      //     MaterialPageRoute(
-                      //         builder: (context) => CommentPage()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => CommentPage()));
                     },
                     icon: Icon(
                       Icons.comment_outlined,
@@ -767,15 +800,15 @@ class _HomePageState extends State<HomePage> {
                       icon: Icon(
                         Icons.favorite,
                       ),
-                      color: Configuration.favIconColor,
+                      color: Configuration.favIconColor3,
                       onPressed: () {
-                        // setState(() {
-                        //   if (_favIconColor3 == Colors.grey) {
-                        //     _favIconColor3 = Colors.redAccent;
-                        //   } else {
-                        //     _favIconColor3 = Colors.grey;
-                        //   }
-                        // });
+                        setState(() {
+                          if (Configuration.favIconColor3 == Colors.grey) {
+                            Configuration.favIconColor3 = Colors.pink;
+                          } else {
+                            Configuration.favIconColor3 = Colors.grey;
+                          }
+                        });
                       },
                     ),
                   ),
@@ -798,72 +831,64 @@ class _HomePageState extends State<HomePage> {
                 ),
                 child: Text('View full news'),
                 onPressed: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(builder: (context) => FullView()),
-                  // );
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => FullView()),
+                  );
                 },
               ),
-              // SizedBox(width: 5,),
-              // Expanded(child: Column(
-              //   mainAxisAlignment: MainAxisAlignment.start,
-              //   crossAxisAlignment: CrossAxisAlignment.start,
-              //
-              //   children: [
-              //     Text(item['newsTitle'],
-              //       style: TextStyle(
-              //         fontSize: 24,fontStyle: FontStyle.italic
-              //       ),),
-              //
-              //     SizedBox(
-
-              //       height: 5,
-              //     ),
-              //     Row(
-              //       children: [
-              //         Icon(Icons.date_range,color: Colors.greenAccent,),
-              //         Text(
-              //           item['date'],
-              //           style: TextStyle(
-              //             fontSize: 12,
-              //           ),
-              //         ),
-              //         SizedBox(
-
-              //           width: 10,
-              //         ),
-              //         Icon(Icons.bookmarks_outlined,color: Colors.lightBlueAccent,size: 20,),
-              //         // SizedBox(
-
-              //         //   width: 30,
-              //         // ),
-              //         // Icon(Icons.play_circle_fill,color: Colors.lightBlueAccent,size: 40,),
-              //
-              //       ],
-              //     ),
-              //     Row(
-              //       children: [
-              //         Icon(Icons.favorite_sharp,color: Colors.redAccent,
-              //             size:20
-              //         ),
-              //         SizedBox(
-
-              //           width: 30,
-              //         ),
-              //         Icon(Icons.comment_outlined,color: Colors.blue,
-              //           size:20),
-              //         SizedBox(
-
-              //           width: 30,
-              //         ),
-              //         Icon(Icons.share,color: Colors.pinkAccent,size: 20,),
-              //   ],
-              // )
-              // ]
-              // )
-              // ),
             ),
-          ]),
+              SizedBox(width: 5,),
+              Expanded(child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+
+                children: [
+                  Text(item['newsTitle'],
+                    style: TextStyle(
+                      fontSize: 24,fontStyle: FontStyle.italic
+                    ),),
+
+                  SizedBox(
+
+                    height: 5,
+                  ),
+                  Row(
+                    children: [
+                      Icon(Icons.date_range,color: Colors.greenAccent,),
+                      Text(
+                        item['date'],
+                        style: TextStyle(
+                          fontSize: 12,
+                        ),
+                      ),
+
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Icon(Icons.favorite_sharp,color: Colors.redAccent,
+                          size:20
+                      ),
+                      SizedBox(
+
+                        width: 30,
+                      ),
+                      Icon(Icons.comment_outlined,color: Colors.blue,
+                        size:20),
+                      SizedBox(
+
+                        width: 30,
+                      ),
+                      Icon(Icons.share,color: Colors.pinkAccent,size: 20,),
+                ],
+              )
+              ]
+              )
+              ),
+
+          ]
+      )
     );
   }
 
