@@ -1,6 +1,5 @@
 import 'dart:async';
 
-
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
@@ -32,41 +31,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   var listTiles1 = [];
-  get listTiles2 => [
-        {
-          "newsTitle": 'Zee News ',
-          'newsSubtitle': 'Indian new Education Bill is ready.',
-          'date': '6th August ',
-          'imageUrl':
-              'https://i.kym-cdn.com/photos/images/newsfeed/000/775/726/e40.jpg'
-        },
-        {
-          "newsTitle": 'Ajj Tak ',
-          'newsSubtitle': 'Indian new Education Bill is ready.',
-          'date': '5th August',
-          'imageUrl':
-              'https://d2c7ipcroan06u.cloudfront.net/wp-content/uploads/2019/05/2019.jpg'
-        },
-        {
-          "newsTitle": 'India Today',
-          'newsSubtitle': 'Indian new Education Bill is ready.',
-          'date': '3rd August',
-          'imageUrl': 'https://www.epapersland.com/images/dailynews.jpg'
-        },
-        {
-          "newsTitle": 'Asia Today',
-          'newsSubtitle': 'Indian new Education Bill is ready.',
-          'date': '3rd August',
-          'imageUrl': 'https://images.indianexpress.com/2014/01/thumb119.jpg'
-        },
-        {
-          "newsTitle": 'Daily Planet',
-          'newsSubtitle': 'Indian new Education Bill is ready.',
-          'date': '6th August',
-          'imageUrl':
-              'https://dominicanewsonline.com/news/wp-content/uploads/2020/07/budget.jpg'
-        },
-];
+  var listTiles2 = [];
 
   get listTiles3 => [
         {
@@ -333,7 +298,7 @@ class _HomePageState extends State<HomePage> {
                 itemBuilder: (context, index) {
                   return InkWell(
                     onTap: () {},
-                    child: buildCard(listTiles1[index]),
+                    child: buildCard(listTiles1[0]),
                   );
                 },
               ),
@@ -346,7 +311,7 @@ class _HomePageState extends State<HomePage> {
                     itemBuilder: (context, index) {
                       return InkWell(
                         onTap: () {},
-                        child: ListWidget(listTiles2[index]),
+                        child: buildCard(listTiles2[index]),
                       );
                     },
                   ),
@@ -420,20 +385,7 @@ class _HomePageState extends State<HomePage> {
               //Handle button tap
             },
           ),
-
           drawer: Drawer(
-            // child: SliverAppBar(
-            //   backgroundColor: Theme.of(context).backgroundColor,
-            //   leading: Builder(
-            //     builder: (context) => IconButton(
-            //       icon: ImageIcon(NetworkImage(
-            //           'https://images.wallpapersden.com/image/download/itachi-uchiha-anime_a2xuZmiUmZqaraWkpJRnbmhnrWduaGc.jpg')),
-            //       onPressed: () => Scaffold.of(context).openDrawer(),
-            //       tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
-            //     ),
-            //   ),
-            // ),
-            //   child: Container(
             child: ListView(
               padding: EdgeInsets.zero,
               // Important: Remove any padding from the ListView.
@@ -460,7 +412,6 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 ListTile(
-
                   leading: Icon(Icons.person, size: 25, color: Colors.black),
                   title: const Text(
                     'Profile',
@@ -475,16 +426,6 @@ class _HomePageState extends State<HomePage> {
                       MaterialPageRoute(builder: (context) => Profile2()),
                     );
                   },
-                //   trailing: IconButton(
-                //     icon: Icon(Icons.arrow_forward_ios_outlined,
-                //         color: Colors.deepPurple), // set your color here
-                //     onPressed: () {
-                //       Navigator.push(
-                //           context,
-                //           MaterialPageRoute(
-                //               builder: (context) => ProfilePage()));
-                //     },
-                // )
                 ),
 
                 const SizedBox(height: 10),
@@ -502,7 +443,6 @@ class _HomePageState extends State<HomePage> {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => Favourite()));
                   },
-
                 ),
                 const SizedBox(height: 10),
                 ListTile(
@@ -516,7 +456,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   onTap: () {
                     Navigator.push(context,
-                                MaterialPageRoute(builder: (context) => MyPost()));
+                        MaterialPageRoute(builder: (context) => MyPost()));
                   },
                 ),
                 const SizedBox(height: 10),
@@ -533,16 +473,14 @@ class _HomePageState extends State<HomePage> {
                   ),
                   onTap: () {
                     MaterialPageRoute(builder: (context) => Share());
-                    },
-
+                  },
                 ),
 
                 const SizedBox(height: 10),
                 // Divider(color: Colors.black),
                 // const SizedBox(height: 10),
                 ListTile(
-                  leading:
-                      Icon(Icons.info, size: 25, color: Colors.black),
+                  leading: Icon(Icons.info, size: 25, color: Colors.black),
                   title: const Text(
                     'About us',
                     style: TextStyle(
@@ -554,7 +492,6 @@ class _HomePageState extends State<HomePage> {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => AboutUs()));
                   },
-
                 ),
                 const SizedBox(height: 120),
                 Divider(color: Colors.black),
@@ -573,7 +510,6 @@ class _HomePageState extends State<HomePage> {
                   onTap: () {
                     signOut();
                   },
-
                 ),
               ],
             ),
@@ -590,31 +526,25 @@ class _HomePageState extends State<HomePage> {
   }
 
   getNewsCategory1() async {
-
     Response? resp = null;
-    resp = await Dio().get(
-        Configuration.serverUrl + '/news?category=0',
-      options: Options(
-        headers: {
-          'Authorization': ' Bearer ' + Configuration.authToken
-        }
-      )
-    );
+    resp = await Dio().get(Configuration.serverUrl + '/news?category=1',
+        options: Options(
+            headers: {'Authorization': ' Bearer ' + Configuration.authToken}));
 
     try {
       listTiles1 = resp.data['result'];
       Log.i('0_length', listTiles1.length.toString());
+      print(listTiles1);
     } catch (e, s) {
       print(e.toString() + s.toString());
     }
 
-    Timer(Duration(seconds: 1),
-          () {
-            setState(() {
-            });
-          },
+    Timer(
+      Duration(seconds: 1),
+      () {
+        setState(() {});
+      },
     );
-
   }
   // getNewsCategory2() async {
   //
@@ -645,252 +575,258 @@ class _HomePageState extends State<HomePage> {
   // }
 
   Widget buildCard(var item) {
+    print("Hi");
     return Card(
-      elevation: 5,
-      margin: EdgeInsets.only(bottom: 20, top: 10, left: 10, right: 10),
-      child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Padding(
-                  padding: EdgeInsets.fromLTRB(15, 10, 10, 5),
-                  child: Text(
-                    item!['title'],
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.deepPurple,
-                      // fontStyle: FontStyle.italic,
-                      decorationStyle: TextDecorationStyle.double,
+        elevation: 5,
+        margin: EdgeInsets.only(bottom: 20, top: 10, left: 10, right: 10),
+        child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(15, 10, 10, 5),
+                    child: Text(
+                      item!['title'],
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.deepPurple,
+                        // fontStyle: FontStyle.italic,
+                        decorationStyle: TextDecorationStyle.double,
+                      ),
                     ),
                   ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 5),
-            Divider(
-              color: Colors.deepPurple,
-              indent: 10,
-              endIndent: 10,
-            ),
-            const SizedBox(height: 5),
-            Padding(
-              padding: EdgeInsets.fromLTRB(15, 5, 10, 10),
-              child: Text(
-                item!['description'],
-                style: TextStyle(
-                  fontSize: 16,
-
-                  decorationStyle: TextDecorationStyle.double,
-                ),
+                ],
               ),
-            ),
-            (item!['imageUrl'] != null)? Container(
-              width: MediaQuery.of(_context!).size.width,
-              height: MediaQuery.of(_context!).size.width / 2,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: NetworkImage(item!['imageUrl']),
-                  fit: BoxFit.cover,
+              const SizedBox(height: 5),
+              Divider(
+                color: Colors.deepPurple,
+                indent: 10,
+                endIndent: 10,
+              ),
+              // const SizedBox(height: 5),
+              // Padding(
+              // padding: EdgeInsets.fromLTRB(15, 5, 10, 10),
+              // child: Text(
+              //   item!['description'],
+              //   style: TextStyle(
+              //     fontSize: 16,
+              //     decorationStyle: TextDecorationStyle.double,
+              //   ),
+              // ),
+              // ),
+              (item!['imageUrl'] != null)
+                  ? Container(
+                      width: MediaQuery.of(_context!).size.width,
+                      height: MediaQuery.of(_context!).size.width / 2,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: NetworkImage(item!['imageUrl']),
+                          fit: BoxFit.cover,
+                        ),
+                        borderRadius: BorderRadius.circular(3),
+                      ),
+                    )
+                  : Container(),
+              Divider(
+                color: Colors.deepPurple,
+                indent: 10,
+                endIndent: 10,
+              ),
+              Container(
+                padding: EdgeInsets.only(
+                  left: 5,
+                  //   bottom: 0,
+                  //   top: 0,
+                  //   right: 4,
                 ),
-                borderRadius: BorderRadius.circular(3),
-              ),
-            ) : Container(),
-            Divider(
-              color: Colors.deepPurple,
-              indent: 10,
-              endIndent: 10,
-            ),
-            Container(
-              padding: EdgeInsets.only(
-                left: 5,
-                //   bottom: 0,
-                //   top: 0,
-                //   right: 4,
-              ),
-              child: Row(
-                children: [
-                  InkWell(
-                    onLongPress: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Likers()));
-                    },
-                    onTap: () {
-                      print("click_press");
-                    },
-                    child: Column(
-                      children: [
-                        IconButton(
-                          icon: Icon(
-                            Icons.thumb_up_outlined,
+                child: Row(
+                  children: [
+                    InkWell(
+                      onLongPress: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => Likers()));
+                      },
+                      onTap: () {
+                        print("click_press");
+                      },
+                      child: Column(
+                        children: [
+                          IconButton(
+                            icon: Icon(
+                              Icons.thumb_up_outlined,
+                            ),
+                            color: Configuration.favIconColor1,
+                            onPressed: () {
+                              setState(() {
+                                if (Configuration.favIconColor1 ==
+                                    Colors.grey) {
+                                  Configuration.favIconColor1 =
+                                      Colors.deepPurple;
+                                } else {
+                                  Configuration.favIconColor1 = Colors.grey;
+                                }
+                              });
+                            },
                           ),
-                          color: Configuration.favIconColor1,
-                          onPressed: () {
-                            setState(() {
-                              if (Configuration.favIconColor1 == Colors.grey) {
-                                Configuration.favIconColor1 = Colors.deepPurple;
-                              } else {
-                                Configuration.favIconColor1 = Colors.grey;
-                              }
-                            });
-                          },
+                          (item!['like'] > 0)
+                              ? Text(item!['like'].toString())
+                              : Container(),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      width: 20,
+                    ),
+                    InkWell(
+                      onLongPress: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Dislikers()));
+                      },
+                      onTap: () {
+                        print("click_press");
+                      },
+                      child: IconButton(
+                        icon: Icon(
+                          Icons.thumb_down_outlined,
                         ),
-                        (item!['like'] > 0)? Text(
-                            item!['like'].toString()
-                        ) : Container(),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  InkWell(
-                    onLongPress: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Dislikers()));
-                    },
-                    onTap: () {
-                      print("click_press");
-                    },
-                    child: IconButton(
-                      icon: Icon(
-                        Icons.thumb_down_outlined,
+                        color: Configuration.favIconColor2,
+                        onPressed: () {
+                          setState(() {
+                            if (Configuration.favIconColor2 == Colors.grey) {
+                              Configuration.favIconColor2 = Colors.red;
+                            } else {
+                              Configuration.favIconColor2 = Colors.grey;
+                            }
+                          });
+                        },
                       ),
-                      color: Configuration.favIconColor2,
+                    ),
+                    SizedBox(
+                      width: 30,
+                    ),
+                    IconButton(
                       onPressed: () {
-                        setState(() {
-                          if ( Configuration.favIconColor2 == Colors.grey) {
-                            Configuration.favIconColor2 = Colors.red;
-                          } else {
-                            Configuration.favIconColor2 = Colors.grey;
-                          }
-                        });
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => CommentPage()));
                       },
-                    ),
-                  ),
-                  SizedBox(
-                    width: 30,
-                  ),
-                  IconButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => CommentPage()));
-                    },
-                    icon: Icon(
-                      Icons.comment_outlined,
-                      color: (item!['liked'] == null || item!['liked'] == false)
-                          ? Colors.grey
-                          : Colors.grey,
-                    ),
-                  ),
-                  SizedBox(
-                    width: 30,
-                  ),
-                  InkWell(
-                    onLongPress: () {
-                      print("long_press");
-                    },
-                    onTap: () {
-                      print("click_press");
-                    },
-                    child: IconButton(
                       icon: Icon(
-                        Icons.favorite,
+                        Icons.comment_outlined,
+                        color:
+                            (item!['liked'] == null || item!['liked'] == false)
+                                ? Colors.grey
+                                : Colors.grey,
                       ),
-                      color: Configuration.favIconColor3,
-                      onPressed: () {
-                        setState(() {
-                          if (Configuration.favIconColor3 == Colors.grey) {
-                            Configuration.favIconColor3 = Colors.pink;
-                          } else {
-                            Configuration.favIconColor3 = Colors.grey;
-                          }
-                        });
-                      },
                     ),
-                  ),
-                ],
-              ),
-            ),
-            Divider(
-              color: Colors.deepPurple,
-              indent: 10,
-              endIndent: 10,
-            ),
-            Container(
-              padding: EdgeInsets.only(left: 10, bottom: 8),
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.deepPurple,
-                  shape: RoundedRectangleBorder(
-                    //to set border radius to button
-                      borderRadius: BorderRadius.circular(30)),
+                    SizedBox(
+                      width: 30,
+                    ),
+                    InkWell(
+                      onLongPress: () {
+                        print("long_press");
+                      },
+                      onTap: () {
+                        print("click_press");
+                      },
+                      child: IconButton(
+                        icon: Icon(
+                          Icons.favorite,
+                        ),
+                        color: Configuration.favIconColor3,
+                        onPressed: () {
+                          setState(() {
+                            if (Configuration.favIconColor3 == Colors.grey) {
+                              Configuration.favIconColor3 = Colors.pink;
+                            } else {
+                              Configuration.favIconColor3 = Colors.grey;
+                            }
+                          });
+                        },
+                      ),
+                    ),
+                  ],
                 ),
-                child: Text('View full news'),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => FullView()),
-                  );
-                },
               ),
-            ),
-              SizedBox(width: 5,),
-              Expanded(child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-
-                children: [
-                  Text(item['newsTitle'],
-                    style: TextStyle(
-                      fontSize: 24,fontStyle: FontStyle.italic
-                    ),),
-
-                  SizedBox(
-
-                    height: 5,
-                  ),
-                  Row(
-                    children: [
-                      Icon(Icons.date_range,color: Colors.greenAccent,),
-                      Text(
-                        item['date'],
-                        style: TextStyle(
-                          fontSize: 12,
-                        ),
-                      ),
-
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Icon(Icons.favorite_sharp,color: Colors.redAccent,
-                          size:20
-                      ),
-                      SizedBox(
-
-                        width: 30,
-                      ),
-                      Icon(Icons.comment_outlined,color: Colors.blue,
-                        size:20),
-                      SizedBox(
-
-                        width: 30,
-                      ),
-                      Icon(Icons.share,color: Colors.pinkAccent,size: 20,),
-                ],
-              )
-              ]
-              )
+              Divider(
+                color: Colors.deepPurple,
+                indent: 10,
+                endIndent: 10,
               ),
-
-          ]
-      )
-    );
+              Container(
+                padding: EdgeInsets.only(left: 10, bottom: 8),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.deepPurple,
+                    shape: RoundedRectangleBorder(
+                        //to set border radius to button
+                        borderRadius: BorderRadius.circular(30)),
+                  ),
+                  child: Text('View full news'),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => FullView()),
+                    );
+                  },
+                ),
+              ),
+              // SizedBox(
+              //   width: 5,
+              // ),
+              // Expanded(
+              //     child: Column(
+              //         mainAxisAlignment: MainAxisAlignment.start,
+              //         crossAxisAlignment: CrossAxisAlignment.start,
+              //         children: [
+              //       Text(
+              //         item['newsTitle'],
+              //         style:
+              //             TextStyle(fontSize: 24, fontStyle: FontStyle.italic),
+              //       ),
+              //       SizedBox(
+              //         height: 5,
+              //       ),
+              //       Row(
+              //         children: [
+              //           Icon(
+              //             Icons.date_range,
+              //             color: Colors.greenAccent,
+              //           ),
+              //           Text(
+              //             item['date'],
+              //             style: TextStyle(
+              //               fontSize: 12,
+              //             ),
+              //           ),
+              //         ],
+              //       ),
+              //       Row(
+              //         children: [
+              //           Icon(Icons.favorite_sharp,
+              //               color: Colors.redAccent, size: 20),
+              //           SizedBox(
+              //             width: 30,
+              //           ),
+              //           Icon(Icons.comment_outlined,
+              //               color: Colors.blue, size: 20),
+              //           SizedBox(
+              //             width: 30,
+              //           ),
+              //           Icon(
+              //             Icons.share,
+              //             color: Colors.pinkAccent,
+              //             size: 20,
+              //           ),
+              //         ],
+              //       )
+              //         ]
+              //     )
+              // ),
+            ]));
   }
-
-
 }
