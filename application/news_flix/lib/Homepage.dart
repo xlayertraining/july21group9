@@ -347,7 +347,7 @@ class _HomePageState extends State<HomePage> {
 
                 ListTile(
                   leading:
-                      Icon(Icons.settings_power, size: 25, color: Colors.red),
+                  Icon(Icons.settings_power, size: 25, color: Colors.red),
                   title: const Text(
                     'Sign out',
                     style: TextStyle(
@@ -389,7 +389,7 @@ class _HomePageState extends State<HomePage> {
 
     Timer(
       Duration(seconds: 1),
-      () {
+          () {
         setState(() {});
       },
     );
@@ -467,16 +467,16 @@ class _HomePageState extends State<HomePage> {
               // ),
               (item!['imageUrl'] != null)
                   ? Container(
-                      width: MediaQuery.of(_context!).size.width,
-                      height: MediaQuery.of(_context!).size.width / 2,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: NetworkImage(item!['imageUrl']),
-                          fit: BoxFit.cover,
-                        ),
-                        borderRadius: BorderRadius.circular(3),
-                      ),
-                    )
+                width: MediaQuery.of(_context!).size.width,
+                height: MediaQuery.of(_context!).size.width / 2,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: NetworkImage(item!['imageUrl']),
+                    fit: BoxFit.cover,
+                  ),
+                  borderRadius: BorderRadius.circular(3),
+                ),
+              )
                   : Container(),
               Divider(
                 color: Colors.deepPurple,
@@ -566,9 +566,9 @@ class _HomePageState extends State<HomePage> {
                       icon: Icon(
                         Icons.comment_outlined,
                         color:
-                            (item!['liked'] == null || item!['liked'] == false)
-                                ? Colors.grey
-                                : Colors.grey,
+                        (item!['liked'] == null || item!['liked'] == false)
+                            ? Colors.grey
+                            : Colors.grey,
                       ),
                     ),
                     SizedBox(
@@ -611,7 +611,7 @@ class _HomePageState extends State<HomePage> {
                   style: ElevatedButton.styleFrom(
                     primary: Colors.deepPurple,
                     shape: RoundedRectangleBorder(
-                        //to set border radius to button
+                      //to set border radius to button
                         borderRadius: BorderRadius.circular(30)),
                   ),
                   child: Text('View full news'),

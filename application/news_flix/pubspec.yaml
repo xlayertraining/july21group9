@@ -41,6 +41,9 @@ dependencies:
   #To create animated list view :
   auto_animated: ^3.0.0
 
+  #customizable indicators for page view:
+  page_view_indicators: ^2.0.0
+
   flutter:
     sdk: flutter
 
@@ -51,8 +54,10 @@ dependencies:
   fluttertoast: ^8.0.8
 
   #for downloading responses from different API
-
   dio: ^4.0.0
+
+  #for ripple page transition effect:
+  rect_getter: ^1.0.0
 
   shared_preferences: ^2.0.6
 

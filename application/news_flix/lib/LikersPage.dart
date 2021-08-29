@@ -10,11 +10,11 @@ class Likers extends StatelessWidget {
       appBar: AppBar(
         toolbarHeight: 60,
         title: Text('Liked By',
-        style: TextStyle(fontStyle: FontStyle.italic,
+        style: TextStyle(fontStyle: FontStyle.italic,color: Colors.deepPurple,
           fontSize: 25
         ),
         ),
-        backgroundColor: Colors.deepPurpleAccent.shade200,
+        backgroundColor: Colors.white,
       ),
       body: LikedBy(),
     );

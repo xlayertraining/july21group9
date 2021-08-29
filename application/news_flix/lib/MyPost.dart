@@ -1,10 +1,27 @@
+
 import 'package:flutter/material.dart';
+// import 'package:rect_getter/rect_getter.dart';
 
 import 'CreatePost.dart';
 
-class MyPost extends StatelessWidget {
-  var controller;
+class MyPost extends StatefulWidget {
+  const MyPost({Key? key}) : super(key: key);
 
+  @override
+  _MyPostState createState() => _MyPostState();
+}
+
+class _MyPostState extends State<MyPost> {
+
+  var controller;
+  // GlobalKey rectGetterKey = RectGetter.createGlobalKey(); //<--Create a key
+  // late Rect rect;
+  // void _onTap() {
+  //   setState(() => rect = RectGetter.getRectFromKey(rectGetterKey)!);
+  //   Navigator.push(
+  //       context,
+  //       MaterialPageRoute(
+  //       builder: (context) => AppImagePicker()));}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,21 +44,26 @@ class MyPost extends StatelessWidget {
         ),
       ),
       body: MyPostBody(),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.deepPurple,
-        child: Icon(Icons.create_outlined),
+      floatingActionButton:
+      // RectGetter(           //<-- Wrap Fab with RectGetter
+      //    key: rectGetterKey,
+      //     child:
+          FloatingActionButton(
+            backgroundColor: Colors.deepPurple,
+            child: Icon(Icons.create_outlined),
+
         onPressed: () {
+          // _onTap;
           Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => AppImagePicker(),
-            ),
-          );
-          print("UPLOAD");
+                    context,
+                    MaterialPageRoute(
+                    builder: (context) => AppImagePicker()));
         },
       ),
-    );
+      );
   }
+
+
 }
 
 class MyPostBody extends StatefulWidget {
