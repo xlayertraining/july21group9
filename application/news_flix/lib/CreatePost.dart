@@ -222,33 +222,42 @@ class _AppImagePickerState extends State<AppImagePicker> {
     var img = await ImagePicker().pickImage(
         source: src, maxHeight: 300, maxWidth: 600, imageQuality: 70);
     if (img != null) {
-      var CmpressedImage;
-      try {
-        CmpressedImage = await FlutterImageCompress.compressWithFile(img.path,
-            format: CompressFormat.heic, quality: 70);
-      } catch (e) {
-        CmpressedImage = await FlutterImageCompress.compressWithFile(img.path,
-            format: CompressFormat.jpeg, quality: 70);
-      }
+      newsImage = new File(img.path);
+      // var CmpressedImage;
+      // try {
+      //   // CmpressedImage = await FlutterImageCompress.compressWithFile(img.path,
+      //   //     format: CompressFormat.heic, quality: 70);
+      // } catch (e) {
+      //   // CmpressedImage = await FlutterImageCompress.compressWithFile(img.path,
+      //   //     format: CompressFormat.jpeg, quality: 70);
+      // }
       // setState(() async {
       //   newsImage = new File(img.path);
       // }
       // );
-      return CmpressedImage;
+      // return CmpressedImage;
     } else {
+      newsImage = new File('');
       ToastUtil.error(_context!, message: "No image is selected.");
     }
   }
 
   void getHttp() async {
+
+    if (newsImage.path.isEmpty) {
+      ToastUtil.error(_context!, message: '');
+      return;
+    }
+
     try {
-      var img;
-      var response = await Dio().post(Configuration.serverUrl + "/post", data: {
-        "title": "test1",
-        "description": "test1",
-        "image": "1 2 ka 4 ",
-        "category": [0, 1, 2],
+
+      var postFormData = FormData.fromMap({
+        'title': '',
+        'image': await MultipartFile.fromFile(newsImage.path, filename: newsImage.path.split('/')[newsImage.path.split('/').length - 1 ]),
       });
+
+      var img;
+      var response = await Dio().post(Configuration.serverUrl + "/post", data: postFormData);
       print(response);
     } catch (e) {
       print(e);

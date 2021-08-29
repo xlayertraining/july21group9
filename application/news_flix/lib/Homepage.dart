@@ -518,7 +518,7 @@ class _HomePageState extends State<HomePage> {
                               });
                             },
                           ),
-                          (item!['like'] ==0 )
+                          (item!['like'] != null && item!['like'] > 0 )
                               ? Text(item!['like'].toString())
                               : Container(),
                         ],

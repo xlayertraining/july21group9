@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:untitled2/SignUp.dart';
 import 'package:untitled2/config/configuration.dart';
+import 'package:untitled2/util/log_util.dart';
 import 'package:untitled2/util/toast_util.dart';
 
 import 'Homepage.dart';
@@ -205,14 +206,25 @@ class _MyappState extends State<Myapp> {
       ToastUtil.error(_context!, message: "Enter your password.");
       return;
     }
+    var response;
 
-    var response = await Dio().post(
-      Configuration.serverUrl + "/sign_in",
-      data: {
-        "emailAddress": emailController.text,
-        "password": passwordController.text
-      },
-    );
+    try {
+      response = await Dio().post(
+        Configuration.serverUrl + "/sign_in",
+        data: {
+          "emailAddress": emailController.text,
+          "password": passwordController.text
+        },
+      );
+    } catch (e, s) {
+      Log.i(e, s);
+      response = null;
+    }
+
+    if (response == null) {
+      ToastUtil.info(_context!, message: "Failed, please try again later.");
+      return;
+    }
 
     print(response);
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -222,7 +234,7 @@ class _MyappState extends State<Myapp> {
         await prefs.setString(Configuration.signedInKey,
             response.data['result'][0]['Authorization']);
         Configuration.authToken = response.data['result'][0]['Authorization'];
-        ToastUtil.info(_context!, message: response.data['message']);
+        ToastUtil.success(_context!, message: response.data['message']);
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => HomePage()),

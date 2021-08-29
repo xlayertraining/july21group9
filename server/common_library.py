@@ -13,13 +13,12 @@ import jwt
 from bson import ObjectId
 
 
-
-
 def timeNow():
     return int(time.time())
 
-serverUrl = 'http://10.0.2.2:8009/julygroup9_web/api'
-#serverUrl = 'https://api.xlayer.in/julygroup9_web/api'
+
+serverUrl = 'http://localhost:8009/julygroup9_web/api'
+# serverUrl = 'https://api.xlayer.in/julygroup9_web/api'
 
 # Creating database connection
 db_server = motor.motor_asyncio.AsyncIOMotorClient("127.0.0.1", 27017)
