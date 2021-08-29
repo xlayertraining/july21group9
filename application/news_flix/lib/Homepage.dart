@@ -43,6 +43,10 @@ class _HomePageState extends State<HomePage> {
       _context = context;
       getNewsCategory1();
       getNewsCategory2();
+      getNewsCategory3();
+      getNewsCategory4();
+      getNewsCategory5();
+      getNewsCategory6();
     }
 
     return DefaultTabController(
@@ -94,6 +98,10 @@ class _HomePageState extends State<HomePage> {
                 onPressed: () {
                   getNewsCategory1();
                   getNewsCategory2();
+                  getNewsCategory3();
+                  getNewsCategory4();
+                  getNewsCategory5();
+                  getNewsCategory6();
                 },
               ),
             ],
@@ -423,7 +431,122 @@ class _HomePageState extends State<HomePage> {
     );
 
   }
+  getNewsCategory3() async {
 
+
+    Response? resp = null;
+    resp = await Dio().get(
+        Configuration.serverUrl + '/news?category=2',
+        options: Options(
+            headers: {
+              'Authorization': ' Bearer ' + Configuration.authToken
+            }
+        )
+    );
+
+    try {
+      listTiles3 = resp.data['result'];
+      Log.i('0_length', listTiles3.length.toString());
+
+    } catch (e, s) {
+      print(e.toString() + s.toString());
+    }
+
+    Timer(Duration(seconds: 1),
+          () {
+        setState(() {
+        });
+      },
+    );
+
+  }
+  getNewsCategory4() async {
+
+
+    Response? resp = null;
+    resp = await Dio().get(
+        Configuration.serverUrl + '/news?category=3',
+        options: Options(
+            headers: {
+              'Authorization': ' Bearer ' + Configuration.authToken
+            }
+        )
+    );
+
+    try {
+      listTiles4 = resp.data['result'];
+      Log.i('0_length', listTiles4.length.toString());
+
+    } catch (e, s) {
+      print(e.toString() + s.toString());
+    }
+
+    Timer(Duration(seconds: 1),
+          () {
+        setState(() {
+        });
+      },
+    );
+
+  }
+  getNewsCategory5() async {
+
+
+    Response? resp = null;
+    resp = await Dio().get(
+        Configuration.serverUrl + '/news?category=4',
+        options: Options(
+            headers: {
+              'Authorization': ' Bearer ' + Configuration.authToken
+            }
+        )
+    );
+
+    try {
+      listTiles5 = resp.data['result'];
+      Log.i('0_length', listTiles5.length.toString());
+
+    } catch (e, s) {
+      print(e.toString() + s.toString());
+    }
+
+    Timer(Duration(seconds: 1),
+          () {
+        setState(() {
+        });
+      },
+    );
+
+  }
+  getNewsCategory6() async {
+
+
+    Response? resp = null;
+    resp = await Dio().get(
+        Configuration.serverUrl + '/news?category=5',
+        options: Options(
+            headers: {
+              'Authorization': ' Bearer ' + Configuration.authToken
+            }
+        )
+    );
+
+    try {
+      listTiles6 = resp.data['result'];
+      Log.i('0_length', listTiles6.length.toString());
+
+    } catch (e, s) {
+      print(e.toString() + s.toString());
+    }
+
+    Timer(Duration(seconds: 1),
+          () {
+        setState(() {
+        });
+      },
+    );
+
+  }
   Widget buildCard(var item) {
     return Card(
         elevation: 5,

@@ -280,8 +280,8 @@ class _MyWidgetState extends State<MyWidget> {
     // Navigator.pushReplacement(
     //     context, MaterialPageRoute(builder: (context) => HomePage()));
     var response;
-    Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => HomePage()));
+    // Navigator.pushReplacement(
+    //     context, MaterialPageRoute(builder: (context) => HomePage()));
     try {
       response = await Dio().post(
         Configuration.serverUrl + "/sign_up",
