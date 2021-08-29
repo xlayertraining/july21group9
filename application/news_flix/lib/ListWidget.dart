@@ -75,13 +75,13 @@ class _ListWidgetState extends State<ListWidget> {
                 ),
               ],
             ),
-            // const SizedBox(height: 5),
-            // Divider(
-            //   color: Colors.deepPurple,
-            //   indent: 10,
-            //   endIndent: 10,
-            // ),
-            // const SizedBox(height: 5),
+            const SizedBox(height: 5),
+            Divider(
+              color: Colors.deepPurple,
+              indent: 10,
+              endIndent: 10,
+            ),
+            const SizedBox(height: 5),
             Padding(
               padding: EdgeInsets.fromLTRB(15, 5, 10, 10),
               child: Text(
