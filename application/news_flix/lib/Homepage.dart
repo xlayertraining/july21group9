@@ -271,7 +271,7 @@ class _HomePageState extends State<HomePage> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => Profile2()),
+                      MaterialPageRoute(builder: (context) => MyProfilePage2()),
                     );
                   },
                 ),
@@ -518,7 +518,7 @@ class _HomePageState extends State<HomePage> {
                               });
                             },
                           ),
-                          (item!['like'] != null && item!['like'] > 0 )
+                          (item!['like'] ==0 )
                               ? Text(item!['like'].toString())
                               : Container(),
                         ],

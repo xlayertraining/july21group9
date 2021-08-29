@@ -54,8 +54,24 @@ class _MyWidgetState extends State<MyWidget> {
         child: Scaffold(
           backgroundColor: Colors.white,
           appBar: AppBar(
-            backgroundColor: Colors.deepPurpleAccent,
-            iconTheme: IconThemeData(color: Colors.white),
+            toolbarHeight: 60,
+            title: Text(
+              'Sign up ',
+              style: TextStyle(
+                color: Colors.deepPurple,
+                fontSize: 24.0,
+                fontStyle: FontStyle.italic,
+              ),
+            ),
+            backgroundColor: Colors.white,
+            elevation: 0.0,
+            leading: IconButton(
+              icon: Icon(Icons.arrow_back_ios_outlined,
+                  color: Colors.deepPurple), // set your color here
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
           ),
           body: SingleChildScrollView(
             child: Container(
@@ -212,7 +228,8 @@ class _MyWidgetState extends State<MyWidget> {
                             // createAlbum("test string");
                             child: Text(
                               "Submit",
-                              style: TextStyle(color: Colors.white),
+                              style: TextStyle(color: Colors.white,fontSize: 20,),
+
                             ),
                           ),
                           style: ElevatedButton.styleFrom(
@@ -263,6 +280,8 @@ class _MyWidgetState extends State<MyWidget> {
     // Navigator.pushReplacement(
     //     context, MaterialPageRoute(builder: (context) => HomePage()));
     var response;
+    Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: (context) => HomePage()));
     try {
       response = await Dio().post(
         Configuration.serverUrl + "/sign_up",
@@ -284,6 +303,7 @@ class _MyWidgetState extends State<MyWidget> {
      await prefs.setString(Configuration.signedInKey,response.data['result'][0]['Authorization']);
      Configuration.authToken= response.data['result'][0]['Authorization'];
      ToastUtil.info(_context!, message: response.data['message']);
+
       } else {
         ToastUtil.error(_context!, message: response.data['message']);
       }
