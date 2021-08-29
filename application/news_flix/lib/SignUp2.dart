@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 
 import 'package:http/http.dart' as http;
-import 'package:untitled2/SplashScreen.dart';
-import 'package:untitled2/Homepage.dart';
+import 'package:untitled2/splash_screen.dart';
+import 'package:untitled2/home_page.dart';
 
 Future<http.Response> createAlbum(String title) {
   print("Hello");

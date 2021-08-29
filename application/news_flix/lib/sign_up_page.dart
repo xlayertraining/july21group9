@@ -1,4 +1,3 @@
-import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -6,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:lottie/lottie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:untitled2/SplashScreen.dart';
-import 'package:untitled2/Homepage.dart';
+import 'package:untitled2/splash_screen.dart';
+import 'package:untitled2/home_page.dart';
 import 'package:untitled2/config/configuration.dart';
 import 'package:untitled2/util/toast_util.dart';
 

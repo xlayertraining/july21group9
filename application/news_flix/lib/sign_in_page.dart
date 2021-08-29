@@ -2,12 +2,12 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'package:untitled2/SignUp.dart';
+import 'package:untitled2/sign_up_page.dart';
 import 'package:untitled2/config/configuration.dart';
 import 'package:untitled2/util/log_util.dart';
 import 'package:untitled2/util/toast_util.dart';
 
-import 'Homepage.dart';
+import 'home_page.dart';
 import 'package:lottie/lottie.dart';
 
 class Myapp extends StatefulWidget {

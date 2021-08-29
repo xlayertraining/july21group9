@@ -4,7 +4,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:untitled2/config/configuration.dart';
-import 'package:untitled2/Homepage.dart';
+import 'package:untitled2/home_page.dart';
 
 import 'package:untitled2/sign_in_page.dart';
 // import 'package:flutter_easyloading/flutter_easyloading.dart';

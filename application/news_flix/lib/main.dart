@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:untitled2/SplashScreen.dart';
+import 'package:untitled2/splash_screen.dart';
 
 void main() {
   runApp(MyApp());

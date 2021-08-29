@@ -4,11 +4,11 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:untitled2/LikersPage.dart';
+import 'package:untitled2/likers.dart';
 
-import 'CommentPage.dart';
-import 'Dislikers.dart';
-import 'FullView.dart';
+import 'comment_page.dart';
+import 'dislikers.dart';
+import 'full_view.dart';
 
 class ListWidget extends StatefulWidget {
   Map itemData;

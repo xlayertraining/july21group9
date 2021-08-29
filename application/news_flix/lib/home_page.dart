@@ -5,21 +5,22 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:untitled2/ListWidget.dart';
+import 'package:untitled2/list_widget.dart';
 import 'package:untitled2/config/configuration.dart';
 import 'package:untitled2/util/log_util.dart';
 
-import 'AboutUs.dart';
-import 'CommentPage.dart';
-import 'Dislikers.dart';
+import 'about_us.dart';
+import 'comment_page.dart';
+import 'create_post.dart';
+import 'dislikers.dart';
 import 'Favourite.dart';
-import 'FullView.dart';
-import 'LikersPage.dart';
+import 'full_view.dart';
+import 'likers.dart';
 import 'Profile2.dart';
 
 import 'sign_in_page.dart';
 import 'MyPost.dart';
-import 'SearchPage.dart';
+import 'search_page.dart';
 import 'Share.dart';
 
 // import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -238,6 +239,10 @@ class _HomePageState extends State<HomePage> {
               Icon(Icons.compare_arrows, size: 30),
             ],
             onTap: (index) {
+             if (index==1){
+               Navigator.push(context, MaterialPageRoute
+                 (builder: (context)=>  AppImagePicker()));
+             }
               //Handle button tap
             },
           ),

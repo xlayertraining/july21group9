@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 // import 'package:rect_getter/rect_getter.dart';
 
-import 'CreatePost.dart';
+import 'create_post.dart';
 
 class MyPost extends StatefulWidget {
   const MyPost({Key? key}) : super(key: key);
