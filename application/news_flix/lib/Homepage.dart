@@ -32,169 +32,17 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   var listTiles1 = [];
   var listTiles2 = [];
-
-  get listTiles3 => [
-        {
-          "newsTitle": 'World News ',
-          'newsSubtitle':
-              'The world is still under the terror of new covid wave.',
-          'date': '6hr ago',
-          'imageUrl':
-              'https://www.foxnewsinternational.com/img/marquee-specialreport.jpg',
-          "liked": true,
-        },
-        {
-          "newsTitle": 'London Times ',
-          'newsSubtitle':
-              'The world is still under the terror of new covid wave.',
-          'date': '5hr ago',
-          'imageUrl':
-              'https://simplycareer.com/wp-content/uploads/2015/04/international-affairs-jobs-1024x512.jpg'
-        },
-        {
-          "newsTitle": 'BBC',
-          'newsSubtitle':
-              'The world is still under the terror of new covid wave.',
-          'date': '3rd August 2021',
-          'imageUrl':
-              'https://www.pngfacts.com/uploads/1/1/3/2/11320972/fire-australia_orig.jpg'
-        },
-        {
-          "newsTitle": 'Newyork Times',
-          'newsSubtitle':
-              'The world is still under the terror of new covid wave.',
-          'date': '3hr ago',
-          'imageUrl':
-              'https://cdn.pixabay.com/photo/2015/12/03/10/12/news-1074604_640.jpg',
-          "liked": true,
-        },
-        {
-          "newsTitle": 'Daily Planet',
-          'newsSubtitle':
-              'The world is still under the terror of new covid wave.',
-          'date': '3rd August ',
-          'imageUrl':
-              'https://www.mentalhealth.org.uk/sites/default/files/Mental-Health-Awareness-Week-2021-theme.jpg'
-        },
-      ];
-  get listTiles4 => [
-        {
-          "newsTitle": 'World News ',
-          'newsSubtitle': 'India achieves gold for the 1st time in Athletics.',
-          'date': '6th August 2021',
-          'imageUrl':
-              'http://static.dnaindia.com/sites/default/files/2018/04/14/671873-neeraj-chopra-gold-afp.jpg'
-        },
-        {
-          "newsTitle": 'London Times ',
-          'newsSubtitle': 'India achieves gold for the 1st time in Athletics.',
-          'date': '5hr ago',
-          'imageUrl':
-              'https://www.thesportsgeek.com/wp-content/uploads/2020/06/2021-Olympic-Logo-825x400.jpg'
-        },
-        {
-          "newsTitle": 'India Today',
-          'newsSubtitle': 'India achieves gold for the 1st time in Athletics.',
-          'date': '3rd August 2021',
-          'imageUrl':
-              'https://s3images.zee5.com/wp-content/uploads/sites/7/2021/08/india-vs-england-784x441.jpg'
-        },
-        {
-          "newsTitle": 'Newyork Times',
-          'newsSubtitle': 'India achieves gold for the 1st time in Athletics.',
-          'date': '3rd August 2021',
-          'imageUrl':
-              'https://i.pinimg.com/originals/55/55/9c/55559cfe50a9870c3ea7dd034f0997e5.jpg'
-        },
-        {
-          "newsTitle": 'Sports News',
-          'newsSubtitle': 'India achieves gold for the 1st time in Athletics.',
-          'date': '3rd August 2021',
-          'imageUrl':
-              'https://dehayf5mhw1h7.cloudfront.net/wp-content/uploads/sites/1363/2020/04/10080746/trials-opening-currie-885x544-1.jpg'
-        },
-      ];
-  get listTiles5 => [
-        {
-          "newsTitle": 'World News ',
-          'newsSubtitle': 'India achieves gold for the 1st time in Athletics.',
-          'date': '5hr ago',
-          'imageUrl':
-              'https://www.e-zigurat.com/news/wp-content/uploads/sites/3/2021/03/news_agorbaim_es1.jpg'
-        },
-        {
-          "newsTitle": 'London Times ',
-          'newsSubtitle': 'India achieves gold for the 1st time in Athletics.',
-          'date': '5hr ago',
-          'imageUrl':
-              'https://schoolofmusic.ucla.edu/app/uploads/2019/04/Final-AMOLA.png'
-        },
-        {
-          "newsTitle": 'BBC',
-          'newsSubtitle': 'India achieves gold for the 1st time in Athletics.',
-          'date': '3rd August 2021',
-          'imageUrl':
-              'https://www.e-zigurat.com/news/wp-content/uploads/sites/3/2021/01/ited_news_1.jpg'
-        },
-        {
-          "newsTitle": 'Newyork Times',
-          'newsSubtitle': 'India achieves gold for the 1st time in Athletics.',
-          'date': '5hr ago',
-          'imageUrl':
-              'https://images.template.net/wp-content/uploads/2019/04/Metalogic-%E2%80%93-Responsive-WordPress-Theme.jpeg'
-        },
-        {
-          "newsTitle": 'India Today',
-          'newsSubtitle': 'India achieves gold for the 1st time in Athletics.',
-          'date': '3rd August 2021',
-          'imageUrl':
-              'https://www.mentalhealth.org.uk/sites/default/files/Mental-Health-Awareness-Week-2021-theme.jpg'
-        },
-      ];
-  get listTiles6 => [
-        {
-          "newsTitle": 'World News ',
-          'newsSubtitle': 'India achieves gold for the 1st time in Athletics.',
-          'date': '6hr ago',
-          'imageUrl':
-              'https://thumbs.dreamstime.com/b/year-coronavirus-illustration-particles-181596054.jpg'
-        },
-        {
-          "newsTitle": 'London Times ',
-          'newsSubtitle': 'India achieves gold for the 1st time in Athletics.',
-          'date': '5 min ago',
-          'imageUrl':
-              'https://i.ebayimg.com/images/g/N04AAOSwNXlfBg~2/s-l400.jpg'
-        },
-        {
-          "newsTitle": 'BBC',
-          'newsSubtitle': 'India achieves gold for the 1st time in Athletics.',
-          'date': '3rd August 2021',
-          'imageUrl':
-              'https://www.mentalhealth.org.uk/sites/default/files/MHAW-2021-Hold-Twitter-Image.jpg'
-        },
-        {
-          "newsTitle": 'Newyork Times',
-          'newsSubtitle': 'India achieves gold for the 1st time in Athletics.',
-          'date': '3rd August 2021',
-          'imageUrl':
-              'https://www.mentalhealth.org.uk/sites/default/files/Mental-Health-Awareness-Week-2021-theme.jpg'
-        },
-        {
-          "newsTitle": 'Newyork Times',
-          'newsSubtitle': 'India achieves gold for the 1st time in Athletics.',
-          'date': '3rd August 2021',
-          'imageUrl':
-              'https://www.tentaran.com/wp-content/uploads/2021/01/latest-india-business-news-today-23-january-2021.jpg'
-        },
-      ];
+  var listTiles3 = [];
+  var listTiles4 = [];
+  var listTiles5 = [];
+  var listTiles6 = [];
   BuildContext? _context;
   @override
   Widget build(BuildContext context) {
     if (_context == null) {
       _context = context;
       getNewsCategory1();
-      // getNewsCategory2();
+      getNewsCategory2();
     }
 
     return DefaultTabController(
@@ -245,7 +93,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 onPressed: () {
                   getNewsCategory1();
-                  // getNewsCategory2();
+                  getNewsCategory2();
                 },
               ),
             ],
@@ -298,7 +146,7 @@ class _HomePageState extends State<HomePage> {
                 itemBuilder: (context, index) {
                   return InkWell(
                     onTap: () {},
-                    child: buildCard(listTiles1[0]),
+                    child: buildCard(listTiles1[index]),
                   );
                 },
               ),
@@ -326,7 +174,7 @@ class _HomePageState extends State<HomePage> {
                     itemBuilder: (context, index) {
                       return InkWell(
                         onTap: () {},
-                        child: ListWidget(listTiles3[index]),
+                        child: buildCard(listTiles3[index]),
                       );
                     },
                   ),
@@ -338,7 +186,7 @@ class _HomePageState extends State<HomePage> {
                   itemBuilder: (context, index) {
                     return InkWell(
                       onTap: () {},
-                      child: ListWidget(listTiles4[index]),
+                      child: buildCard(listTiles4[index]),
                     );
                   },
                 ),
@@ -351,7 +199,7 @@ class _HomePageState extends State<HomePage> {
                     itemBuilder: (context, index) {
                       return InkWell(
                         onTap: () {},
-                        child: ListWidget(listTiles5[index]),
+                        child: buildCard(listTiles5[index]),
                       );
                     },
                   ),
@@ -366,7 +214,7 @@ class _HomePageState extends State<HomePage> {
                     itemBuilder: (context, index) {
                       return InkWell(
                         onTap: () {},
-                        child: ListWidget(listTiles6[index]),
+                        child: buildCard(listTiles6[index]),
                       );
                     },
                   ),
@@ -527,7 +375,7 @@ class _HomePageState extends State<HomePage> {
 
   getNewsCategory1() async {
     Response? resp = null;
-    resp = await Dio().get(Configuration.serverUrl + '/news?category=1',
+    resp = await Dio().get(Configuration.serverUrl + '/news?category=0',
         options: Options(
             headers: {'Authorization': ' Bearer ' + Configuration.authToken}));
 
@@ -546,36 +394,37 @@ class _HomePageState extends State<HomePage> {
       },
     );
   }
-  // getNewsCategory2() async {
-  //
-  //   Response? resp = null;
-  //   resp = await Dio().get(
-  //       Configuration.serverUrl + '/news?category=1',
-  //       options: Options(
-  //           headers: {
-  //             'Authorization': ' Bearer ' + Configuration.authToken
-  //           }
-  //       )
-  //   );
-  //
-  //   try {
-  //     listTiles2 = resp.data['result'];
-  //     Log.i('0_length', listTiles2.length.toString());
-  //   } catch (e, s) {
-  //     print(e.toString() + s.toString());
-  //   }
-  //
-  //   Timer(Duration(seconds: 1),
-  //         () {
-  //       setState(() {
-  //       });
-  //     },
-  //   );
-  //
-  // }
+  getNewsCategory2() async {
+
+
+    Response? resp = null;
+    resp = await Dio().get(
+        Configuration.serverUrl + '/news?category=1',
+        options: Options(
+            headers: {
+              'Authorization': ' Bearer ' + Configuration.authToken
+            }
+        )
+    );
+
+    try {
+      listTiles2 = resp.data['result'];
+      Log.i('0_length', listTiles2.length.toString());
+
+    } catch (e, s) {
+      print(e.toString() + s.toString());
+    }
+
+    Timer(Duration(seconds: 1),
+          () {
+        setState(() {
+        });
+      },
+    );
+
+  }
 
   Widget buildCard(var item) {
-    print("Hi");
     return Card(
         elevation: 5,
         margin: EdgeInsets.only(bottom: 20, top: 10, left: 10, right: 10),
@@ -648,9 +497,7 @@ class _HomePageState extends State<HomePage> {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) => Likers()));
                       },
-                      onTap: () {
-                        print("click_press");
-                      },
+
                       child: Column(
                         children: [
                           IconButton(
@@ -664,13 +511,14 @@ class _HomePageState extends State<HomePage> {
                                     Colors.grey) {
                                   Configuration.favIconColor1 =
                                       Colors.deepPurple;
+
                                 } else {
                                   Configuration.favIconColor1 = Colors.grey;
                                 }
                               });
                             },
                           ),
-                          (item!['like'] > 0)
+                          (item!['like'] ==0 )
                               ? Text(item!['like'].toString())
                               : Container(),
                         ],

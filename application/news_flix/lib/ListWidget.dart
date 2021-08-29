@@ -125,9 +125,7 @@ class _ListWidgetState extends State<ListWidget> {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) => Likers()));
                     },
-                    onTap: () {
-                      print("click_press");
-                    },
+
                     child: Column(
                       children: [
                         IconButton(

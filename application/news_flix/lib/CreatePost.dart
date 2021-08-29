@@ -15,6 +15,9 @@ class AppImagePicker extends StatefulWidget {
 }
 
 class _AppImagePickerState extends State<AppImagePicker> {
+  TextEditingController titleController = new TextEditingController();
+  TextEditingController descriptionController = new TextEditingController();
+
   String? _value;
   BuildContext? _context;
   File newsImage = new File('');
@@ -54,6 +57,7 @@ class _AppImagePickerState extends State<AppImagePicker> {
             mainAxisSize: MainAxisSize.min,
             children: [
               TextField(
+                controller: titleController,
                 decoration: InputDecoration(
                   labelText: "Title",
                   labelStyle: TextStyle(color: Colors.deepPurple),
@@ -62,6 +66,7 @@ class _AppImagePickerState extends State<AppImagePicker> {
                 maxLines: 3,
               ),
               TextField(
+                controller: descriptionController,
                 decoration: InputDecoration(
                   labelText: "Description",
                   labelStyle: TextStyle(color: Colors.deepPurple),
@@ -78,7 +83,7 @@ class _AppImagePickerState extends State<AppImagePicker> {
                         Text('Latest'),
                       ],
                     ),
-                    value: 'one',
+                    value: 'zero',
                   ),
                   DropdownMenuItem<String>(
                     child: Row(
@@ -87,7 +92,7 @@ class _AppImagePickerState extends State<AppImagePicker> {
                         Text('National'),
                       ],
                     ),
-                    value: 'two',
+                    value: 'one',
                   ),
                   DropdownMenuItem<String>(
                     child: Row(
@@ -96,7 +101,7 @@ class _AppImagePickerState extends State<AppImagePicker> {
                         Text('International'),
                       ],
                     ),
-                    value: 'International',
+                    value: 'two',
                   ),
                   DropdownMenuItem<String>(
                     child: Row(
@@ -105,7 +110,7 @@ class _AppImagePickerState extends State<AppImagePicker> {
                         Text('Sports'),
                       ],
                     ),
-                    value: 'four',
+                    value: 'three',
                   ),
                   DropdownMenuItem<String>(
                     child: Row(
@@ -114,7 +119,7 @@ class _AppImagePickerState extends State<AppImagePicker> {
                         Text('Tech'),
                       ],
                     ),
-                    value: 'five',
+                    value: 'four',
                   ),
                   DropdownMenuItem<String>(
                     child: Row(
@@ -123,7 +128,7 @@ class _AppImagePickerState extends State<AppImagePicker> {
                         Text('Business'),
                       ],
                     ),
-                    value: 'six',
+                    value: 'five',
                   ),
                 ],
                 isExpanded: false,
