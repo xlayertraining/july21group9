@@ -8,6 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:untitled2/list_widget.dart';
 import 'package:untitled2/config/configuration.dart';
 import 'package:untitled2/util/log_util.dart';
+import 'package:untitled2/util/toast_util.dart';
 
 import 'about_us.dart';
 import 'comment_page.dart';
@@ -43,11 +44,11 @@ class _HomePageState extends State<HomePage> {
     if (_context == null) {
       _context = context;
       getNewsCategory1();
-      getNewsCategory2();
-      getNewsCategory3();
-      getNewsCategory4();
-      getNewsCategory5();
-      getNewsCategory6();
+      // getNewsCategory2();
+      // getNewsCategory3();
+      // getNewsCategory4();
+      // getNewsCategory5();
+      // getNewsCategory6();
     }
 
     return DefaultTabController(
@@ -98,11 +99,11 @@ class _HomePageState extends State<HomePage> {
                 ),
                 onPressed: () {
                   getNewsCategory1();
-                  getNewsCategory2();
-                  getNewsCategory3();
-                  getNewsCategory4();
-                  getNewsCategory5();
-                  getNewsCategory6();
+                  // getNewsCategory2();
+                  // getNewsCategory3();
+                  // getNewsCategory4();
+                  // getNewsCategory5();
+                  // getNewsCategory6();
                 },
               ),
             ],
@@ -239,10 +240,10 @@ class _HomePageState extends State<HomePage> {
               Icon(Icons.compare_arrows, size: 30),
             ],
             onTap: (index) {
-             if (index==1){
-               Navigator.push(context, MaterialPageRoute
-                 (builder: (context)=>  AppImagePicker()));
-             }
+              if (index == 1) {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => AppImagePicker()));
+              }
               //Handle button tap
             },
           ),
@@ -360,7 +361,7 @@ class _HomePageState extends State<HomePage> {
 
                 ListTile(
                   leading:
-                  Icon(Icons.settings_power, size: 25, color: Colors.red),
+                      Icon(Icons.settings_power, size: 25, color: Colors.red),
                   title: const Text(
                     'Sign out',
                     style: TextStyle(
@@ -402,156 +403,135 @@ class _HomePageState extends State<HomePage> {
 
     Timer(
       Duration(seconds: 1),
-          () {
+      () {
         setState(() {});
       },
     );
   }
+
   getNewsCategory2() async {
-
-
     Response? resp = null;
-    resp = await Dio().get(
-        Configuration.serverUrl + '/news?category=1',
+    resp = await Dio().get(Configuration.serverUrl + '/news?category=1',
         options: Options(
-            headers: {
-              'Authorization': ' Bearer ' + Configuration.authToken
-            }
-        )
-    );
+            headers: {'Authorization': ' Bearer ' + Configuration.authToken}));
 
     try {
       listTiles2 = resp.data['result'];
       Log.i('0_length', listTiles2.length.toString());
-
     } catch (e, s) {
       print(e.toString() + s.toString());
     }
 
-    Timer(Duration(seconds: 1),
-          () {
-        setState(() {
-        });
+    Timer(
+      Duration(seconds: 1),
+      () {
+        setState(() {});
       },
     );
-
   }
+
   getNewsCategory3() async {
-
-
     Response? resp = null;
-    resp = await Dio().get(
-        Configuration.serverUrl + '/news?category=2',
+    resp = await Dio().get(Configuration.serverUrl + '/news?category=2',
         options: Options(
-            headers: {
-              'Authorization': ' Bearer ' + Configuration.authToken
-            }
-        )
-    );
+            headers: {'Authorization': ' Bearer ' + Configuration.authToken}));
 
     try {
       listTiles3 = resp.data['result'];
       Log.i('0_length', listTiles3.length.toString());
-
     } catch (e, s) {
       print(e.toString() + s.toString());
     }
 
-    Timer(Duration(seconds: 1),
-          () {
-        setState(() {
-        });
+    Timer(
+      Duration(seconds: 1),
+      () {
+        setState(() {});
       },
     );
-
   }
+
   getNewsCategory4() async {
-
-
     Response? resp = null;
-    resp = await Dio().get(
-        Configuration.serverUrl + '/news?category=3',
+    resp = await Dio().get(Configuration.serverUrl + '/news?category=3',
         options: Options(
-            headers: {
-              'Authorization': ' Bearer ' + Configuration.authToken
-            }
-        )
-    );
+            headers: {'Authorization': ' Bearer ' + Configuration.authToken}));
 
     try {
       listTiles4 = resp.data['result'];
       Log.i('0_length', listTiles4.length.toString());
-
     } catch (e, s) {
       print(e.toString() + s.toString());
     }
 
-    Timer(Duration(seconds: 1),
-          () {
-        setState(() {
-        });
+    Timer(
+      Duration(seconds: 1),
+      () {
+        setState(() {});
       },
     );
-
   }
+
   getNewsCategory5() async {
-
-
     Response? resp = null;
-    resp = await Dio().get(
-        Configuration.serverUrl + '/news?category=4',
+    resp = await Dio().get(Configuration.serverUrl + '/news?category=4',
         options: Options(
-            headers: {
-              'Authorization': ' Bearer ' + Configuration.authToken
-            }
-        )
-    );
+            headers: {'Authorization': ' Bearer ' + Configuration.authToken}));
 
     try {
       listTiles5 = resp.data['result'];
       Log.i('0_length', listTiles5.length.toString());
-
     } catch (e, s) {
       print(e.toString() + s.toString());
     }
 
-    Timer(Duration(seconds: 1),
-          () {
-        setState(() {
-        });
+    Timer(
+      Duration(seconds: 1),
+      () {
+        setState(() {});
       },
     );
-
   }
+
   getNewsCategory6() async {
-
-
     Response? resp = null;
-    resp = await Dio().get(
-        Configuration.serverUrl + '/news?category=5',
+    resp = await Dio().get(Configuration.serverUrl + '/news?category=5',
         options: Options(
-            headers: {
-              'Authorization': ' Bearer ' + Configuration.authToken
-            }
-        )
-    );
+            headers: {'Authorization': ' Bearer ' + Configuration.authToken}));
 
     try {
       listTiles6 = resp.data['result'];
       Log.i('0_length', listTiles6.length.toString());
-
     } catch (e, s) {
       print(e.toString() + s.toString());
     }
 
-    Timer(Duration(seconds: 1),
-          () {
-        setState(() {
-        });
+    Timer(
+      Duration(seconds: 1),
+      () {
+        setState(() {});
       },
     );
-
   }
+
+  newsLike(var id) async {
+    Response? resp = null;
+    var newsIdData = FormData.fromMap(
+      {
+        "newsId": id.toString()
+      }
+    );
+    resp = await Dio().post(Configuration.serverUrl + '/news/like',
+        data:newsIdData,
+        options: Options(
+            headers: {'Authorization': ' Bearer ' + Configuration.authToken}
+      ),
+
+    );
+    print(resp);
+    print(Configuration.authToken);
+  }
+
   Widget buildCard(var item) {
     return Card(
         elevation: 5,
@@ -595,16 +575,16 @@ class _HomePageState extends State<HomePage> {
               // ),
               (item!['imageUrl'] != null)
                   ? Container(
-                width: MediaQuery.of(_context!).size.width,
-                height: MediaQuery.of(_context!).size.width / 2,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: NetworkImage(item!['imageUrl']),
-                    fit: BoxFit.cover,
-                  ),
-                  borderRadius: BorderRadius.circular(3),
-                ),
-              )
+                      width: MediaQuery.of(_context!).size.width,
+                      height: MediaQuery.of(_context!).size.width / 2,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: NetworkImage(item!['imageUrl']),
+                          fit: BoxFit.cover,
+                        ),
+                        borderRadius: BorderRadius.circular(3),
+                      ),
+                    )
                   : Container(),
               Divider(
                 color: Colors.deepPurple,
@@ -625,7 +605,6 @@ class _HomePageState extends State<HomePage> {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) => Likers()));
                       },
-
                       child: Column(
                         children: [
                           IconButton(
@@ -633,7 +612,9 @@ class _HomePageState extends State<HomePage> {
                               Icons.thumb_up_outlined,
                             ),
                             color: Configuration.favIconColor1,
-                            onPressed: () {
+                            onPressed: () async{
+                              var likes = item['_id'];
+                              newsLike(likes);
                               setState(() {
                                 if (Configuration.favIconColor1 ==
                                     Colors.grey) {
@@ -646,7 +627,7 @@ class _HomePageState extends State<HomePage> {
                               });
                             },
                           ),
-                          (item!['like'] ==0 )
+                          (item!['like'] != 0 || item!['like'] != null)
                               ? Text(item!['like'].toString())
                               : Container(),
                         ],
@@ -694,9 +675,9 @@ class _HomePageState extends State<HomePage> {
                       icon: Icon(
                         Icons.comment_outlined,
                         color:
-                        (item!['liked'] == null || item!['liked'] == false)
-                            ? Colors.grey
-                            : Colors.grey,
+                            (item!['liked'] == null || item!['liked'] == false)
+                                ? Colors.grey
+                                : Colors.grey,
                       ),
                     ),
                     SizedBox(
@@ -739,7 +720,7 @@ class _HomePageState extends State<HomePage> {
                   style: ElevatedButton.styleFrom(
                     primary: Colors.deepPurple,
                     shape: RoundedRectangleBorder(
-                      //to set border radius to button
+                        //to set border radius to button
                         borderRadius: BorderRadius.circular(30)),
                   ),
                   child: Text('View full news'),

@@ -21,7 +21,7 @@ class _AppImagePickerState extends State<AppImagePicker> {
   String? _value;
   BuildContext? _context;
   File newsImage = new File('');
-  var newsCategoryIndex ;
+  var newsCategoryIndex;
   get picker => null;
   // int selectedValue = 1;
 
@@ -75,7 +75,7 @@ class _AppImagePickerState extends State<AppImagePicker> {
                 maxLength: 2000,
               ),
               DropdownButton<String>(
-                 items: [
+                items: [
                   DropdownMenuItem<String>(
                     child: Row(
                       children: <Widget>[
@@ -135,7 +135,7 @@ class _AppImagePickerState extends State<AppImagePicker> {
                 onChanged: (String? value) {
                   setState(() {
                     _value = value;
-                    newsCategoryIndex =value;
+                    newsCategoryIndex = value;
                   });
                 },
                 hint: Text(
@@ -223,8 +223,9 @@ class _AppImagePickerState extends State<AppImagePicker> {
     var img = await ImagePicker().pickImage(
         source: src, maxHeight: 150, maxWidth: 150, imageQuality: 70);
     if (img != null) {
-      newsImage = new File(img.path);
-
+      setState(() async {
+        newsImage = new File(img.path);
+      });
     } else {
       newsImage = new File('');
       ToastUtil.error(_context!, message: "No image is selected.");
@@ -232,25 +233,23 @@ class _AppImagePickerState extends State<AppImagePicker> {
   }
 
   void getHttp() async {
-
     // if (newsImage.path.isEmpty) {
     //   ToastUtil.error(_context!, message: 'failed to get image');
     //   return;
     // }
-   print (newsCategoryIndex);
+    print(newsCategoryIndex);
     try {
-
       var postFormData = FormData.fromMap({
         'title': titleController.text,
         'description': descriptionController.text,
         'category': [newsCategoryIndex],
-        'image': await MultipartFile.fromFile(newsImage.path, filename: newsImage.path.split('/')
-        [newsImage.path.split('/').length - 1 ]),
+        'image': await MultipartFile.fromFile(newsImage.path,
+            filename: newsImage.path
+                .split('/')[newsImage.path.split('/').length - 1]),
       });
 
-
-      var response = await Dio().post(Configuration.serverUrl + "/post",
-          data: postFormData);
+      var response = await Dio()
+          .post(Configuration.serverUrl + "/post", data: postFormData);
       print(response);
     } catch (e) {
       print(e);

@@ -14,14 +14,15 @@ class PostLikeHandler(tornado.web.RequestHandler):
         result = []
         try:
             account_id = await SecureHeader.decrypt(self.request.headers["Authorization"])
-            if account_id == None:
+            if account_id == None or account_id == '':
                 code = 8765
                 status = False
                 message = "You're not authorized"
                 raise Exception
             try:
                 post_Id = ObjectId(
-                    self.request.arguments['newsId'][0].decode())
+                    self.request.arguments["newsId"][0].decode())
+                print('Hi')
             except:
                 code = 5683
                 status = False
