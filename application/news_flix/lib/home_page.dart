@@ -44,11 +44,11 @@ class _HomePageState extends State<HomePage> {
     if (_context == null) {
       _context = context;
       getNewsCategory1();
-      // getNewsCategory2();
-      // getNewsCategory3();
-      // getNewsCategory4();
-      // getNewsCategory5();
-      // getNewsCategory6();
+      getNewsCategory2();
+      getNewsCategory3();
+      getNewsCategory4();
+      getNewsCategory5();
+      getNewsCategory6();
     }
 
     return DefaultTabController(
@@ -99,11 +99,11 @@ class _HomePageState extends State<HomePage> {
                 ),
                 onPressed: () {
                   getNewsCategory1();
-                  // getNewsCategory2();
-                  // getNewsCategory3();
-                  // getNewsCategory4();
-                  // getNewsCategory5();
-                  // getNewsCategory6();
+                  getNewsCategory2();
+                  getNewsCategory3();
+                  getNewsCategory4();
+                  getNewsCategory5();
+                  getNewsCategory6();
                 },
               ),
             ],
@@ -516,20 +516,24 @@ class _HomePageState extends State<HomePage> {
 
   newsLike(var id) async {
     Response? resp = null;
-    var newsIdData = FormData.fromMap(
-      {
-        "newsId": id.toString()
-      }
+    var newsIdData = FormData.fromMap({"newsId": id.toString()});
+    resp = await Dio().post(
+      Configuration.serverUrl + '/news/like',
+      data: newsIdData,
+      options: Options(
+          headers: {'Authorization': ' Bearer ' + Configuration.authToken}),
     );
-    resp = await Dio().post(Configuration.serverUrl + '/news/like',
-        data:newsIdData,
-        options: Options(
-            headers: {'Authorization': ' Bearer ' + Configuration.authToken}
-      ),
+  }
 
+  newsDislike(var id) async {
+    Response? resp = null;
+    var newsIdData = FormData.fromMap({"newsId": id.toString()});
+    resp = await Dio().post(
+      Configuration.serverUrl + '/news/dislike',
+      data: newsIdData,
+      options: Options(
+          headers: {'Authorization': ' Bearer ' + Configuration.authToken}),
     );
-    print(resp);
-    print(Configuration.authToken);
   }
 
   Widget buildCard(var item) {
@@ -612,7 +616,7 @@ class _HomePageState extends State<HomePage> {
                               Icons.thumb_up_outlined,
                             ),
                             color: Configuration.favIconColor1,
-                            onPressed: () async{
+                            onPressed: () async {
                               var likes = item['_id'];
                               newsLike(likes);
                               setState(() {
@@ -620,14 +624,14 @@ class _HomePageState extends State<HomePage> {
                                     Colors.grey) {
                                   Configuration.favIconColor1 =
                                       Colors.deepPurple;
-
+                                  Configuration.favIconColor2 = Colors.grey;
                                 } else {
                                   Configuration.favIconColor1 = Colors.grey;
                                 }
                               });
                             },
                           ),
-                          (item!['like'] != 0 || item!['like'] != null)
+                          (item!['like'] > 0)
                               ? Text(item!['like'].toString())
                               : Container(),
                         ],
@@ -643,23 +647,31 @@ class _HomePageState extends State<HomePage> {
                             MaterialPageRoute(
                                 builder: (context) => Dislikers()));
                       },
-                      onTap: () {
-                        print("click_press");
-                      },
-                      child: IconButton(
-                        icon: Icon(
-                          Icons.thumb_down_outlined,
-                        ),
-                        color: Configuration.favIconColor2,
-                        onPressed: () {
-                          setState(() {
-                            if (Configuration.favIconColor2 == Colors.grey) {
-                              Configuration.favIconColor2 = Colors.red;
-                            } else {
-                              Configuration.favIconColor2 = Colors.grey;
-                            }
-                          });
-                        },
+                      child: Column(
+                        children: [
+                          IconButton(
+                            icon: Icon(
+                              Icons.thumb_down_outlined,
+                            ),
+                            color: Configuration.favIconColor2,
+                            onPressed: () async {
+                              var dislikes = item!['_id'];
+                              newsDislike(dislikes);
+                              setState(() {
+                                if (Configuration.favIconColor2 ==
+                                    Colors.grey) {
+                                  Configuration.favIconColor2 = Colors.red;
+                                  Configuration.favIconColor1 = Colors.grey;
+                                } else {
+                                  Configuration.favIconColor2 = Colors.grey;
+                                }
+                              });
+                            },
+                          ),
+                          (item!['dislike'] > 0)
+                              ? Text(item!['dislike'].toString())
+                              : Container(),
+                        ],
                       ),
                     ),
                     SizedBox(
