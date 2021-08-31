@@ -61,7 +61,7 @@ class _MyPostState extends State<MyPost> {
             child: Icon(Icons.create_outlined),
 
         onPressed: () {
-          _onTap;
+          _onTap();
           // Navigator.push(
           //           context,
           //           MaterialPageRoute(

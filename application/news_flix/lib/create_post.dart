@@ -223,13 +223,13 @@ class _AppImagePickerState extends State<AppImagePicker> {
     var img = await ImagePicker().pickImage(
         source: src, maxHeight: 150, maxWidth: 150, imageQuality: 70);
     if (img != null) {
-      setState(() async {
-        newsImage = new File(img.path);
-      });
+      newsImage = new File(img.path);
     } else {
       newsImage = new File('');
       ToastUtil.error(_context!, message: "No image is selected.");
     }
+    setState(() {
+    });
   }
 
   void getHttp() async {
