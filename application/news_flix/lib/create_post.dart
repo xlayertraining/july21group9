@@ -56,11 +56,21 @@ class _AppImagePickerState extends State<AppImagePicker> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
+
               TextField(
                 controller: titleController,
                 decoration: InputDecoration(
-                  labelText: "Title",
+                  border: OutlineInputBorder(),
+                  labelText: "Title :",
                   labelStyle: TextStyle(color: Colors.deepPurple),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.deepPurple),
+                    borderRadius: BorderRadius.circular(25.0),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black87),
+                    borderRadius: BorderRadius.circular(25.0),
+                  ),
                 ),
                 maxLength: 200,
                 maxLines: 3,
@@ -68,8 +78,16 @@ class _AppImagePickerState extends State<AppImagePicker> {
               TextField(
                 controller: descriptionController,
                 decoration: InputDecoration(
-                  labelText: "Description",
+                  labelText: "Description :",
                   labelStyle: TextStyle(color: Colors.deepPurple),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.deepPurple),
+                    borderRadius: BorderRadius.circular(25.0),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black87),
+                    borderRadius: BorderRadius.circular(25.0),
+                  ),
                 ),
                 maxLines: 8,
                 maxLength: 2000,

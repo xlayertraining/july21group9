@@ -36,13 +36,13 @@ class PostLIstview extends StatelessWidget{
             Container(
                 width: double.infinity,
                 padding: EdgeInsets.all(4),
-                color: Colors.white,
+                color: Colors.white60,
                 margin: EdgeInsets.all(20.0),
-                child: Text("Posts :",style: TextStyle(fontSize: 24,color: Colors.deepPurple),)),
+                child: Text("Posts :",style: TextStyle(fontSize: 25,color: Colors.deepPurple),)),
             Container(
               color: Colors.white,
               margin: EdgeInsets.only(left: 8,right: 8),
-              height: 400,
+              height: 700,
               child: ListView.builder(
                   physics: ClampingScrollPhysics(),
                   scrollDirection: Axis.vertical,
@@ -63,7 +63,13 @@ class PostLIstview extends StatelessWidget{
                                  child: Padding(
                                   padding: const EdgeInsets.all(8.0),
                                    child: ElevatedButton(
-                                     child: Text('Approve'),
+                                     style: ElevatedButton.styleFrom(
+                                     shape:  RoundedRectangleBorder(
+                                         borderRadius: BorderRadius.circular(30)),
+                                         primary: Colors.white),
+                                     child: Text('Approve',
+                                       style: TextStyle(color: Colors.deepPurple, fontSize: 15),
+                                     ),
                                      onPressed: () {
                                      },
                                 ),
@@ -75,6 +81,8 @@ class PostLIstview extends StatelessWidget{
                                 padding: const EdgeInsets.all(8.0),
                                 child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(
+                                    shape:  RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(30)),
                                     primary: Colors.deepPurple
                                   ),
                                   child: Text('Deny'),

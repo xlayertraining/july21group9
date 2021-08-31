@@ -38,6 +38,14 @@ class _FullViewState extends State<FullView> {
                 decoration: InputDecoration(
                   labelText: "Title :",
                   labelStyle: TextStyle(color: Colors.deepPurple,fontSize: 20),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.deepPurple),
+                    borderRadius: BorderRadius.circular(25.0),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black87),
+                    borderRadius: BorderRadius.circular(25.0),
+                  ),
                 ),
                 maxLength: 200,
                 maxLines: 3,
@@ -57,6 +65,14 @@ class _FullViewState extends State<FullView> {
                 decoration: InputDecoration(
                   labelText: "Description :",
                   labelStyle: TextStyle(color: Colors.deepPurple,fontSize: 20),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.deepPurple),
+                    borderRadius: BorderRadius.circular(25.0),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black87),
+                    borderRadius: BorderRadius.circular(25.0),
+                  ),
                 ),
                 maxLines: 8,
                 maxLength: 2000,
