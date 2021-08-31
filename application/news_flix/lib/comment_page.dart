@@ -1,6 +1,7 @@
 import 'package:comment_box/comment/comment.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:untitled2/util/toast_util.dart';
 
 import 'config/configuration.dart';
 
@@ -77,7 +78,7 @@ class _CommentPage extends State<CommentPage> {
       appBar: AppBar(
         toolbarHeight: 70,
         title: Text(
-          "Comment Page",
+          "Comments",
           style: TextStyle(
             color: Colors.deepPurple,
             fontSize: 24.0,
@@ -100,9 +101,10 @@ class _CommentPage extends State<CommentPage> {
           child: commentChild(filedata),
           labelText: 'Write a comment...',
           errorText: 'Comment cannot be blank',
-          sendButtonMethod: () {
+          sendButtonMethod: () async {
             if (formKey.currentState!.validate()) {
               print(commentController.text);
+              postComment();
               setState(() {
                 var value = {
                   'name': 'Samyadeep Saha',
@@ -139,19 +141,33 @@ class _CommentPage extends State<CommentPage> {
       ),
     );
   }
-}
 
-void getHttp() async {
-  try {
-    var img;
-    var response = await Dio().post(Configuration.serverUrl + "/", data: {
-      "title": "test1",
-      "description": "test1",
-      "image": "1 2 ka 4 ",
-      "category": [0, 1, 2],
-    });
-    print(response);
-  } catch (e) {
-    print(e);
+  postComment() async {
+    Response? response = null;
+    try {
+      var comments = FormData.fromMap({
+        "newsId": "612cee5ecc3c4096ca4b7f92",
+        "comment": commentController.text
+      });
+      response = await Dio().post(
+        Configuration.serverUrl + "/news/comment",
+        data: comments,
+        options: Options(
+            headers: {'Authorization': ' Bearer ' + Configuration.authToken}),
+      );
+      print(response);
+      if(response==null)
+        ToastUtil.info(context, message: 'Failed please try again later');
+      try {
+        if (response.data['status'])
+          ToastUtil.info(context, message: response.data['message']);
+        else
+          ToastUtil.error(context, message: response.data['message']);
+      } catch (e, s) {
+        print(e.toString() + s.toString());
+      }
+    } catch (e) {
+      print(e);
+    }
   }
 }

@@ -39,6 +39,7 @@ class _HomePageState extends State<HomePage> {
   var listTiles5 = [];
   var listTiles6 = [];
   BuildContext? _context;
+  bool liked = false;
   @override
   Widget build(BuildContext context) {
     if (_context == null) {
@@ -536,6 +537,17 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  newsFav(var id) async {
+    Response? resp = null;
+    var newsIdData = FormData.fromMap({"newsId": id.toString()});
+    resp = await Dio().post(
+      Configuration.serverUrl + '/news/favourites',
+      data: newsIdData,
+      options: Options(
+          headers: {'Authorization': ' Bearer ' + Configuration.authToken}),
+    );
+  }
+
   Widget buildCard(var item) {
     return Card(
         elevation: 5,
@@ -615,7 +627,7 @@ class _HomePageState extends State<HomePage> {
                             icon: Icon(
                               Icons.thumb_up_outlined,
                             ),
-                            color: Configuration.favIconColor1,
+                            color: (liked==true)?Configuration.favIconColor1=Colors.deepPurple:  Configuration.favIconColor1 = Colors.grey,
                             onPressed: () async {
                               var likes = item['_id'];
                               newsLike(likes);
@@ -624,9 +636,11 @@ class _HomePageState extends State<HomePage> {
                                     Colors.grey) {
                                   Configuration.favIconColor1 =
                                       Colors.deepPurple;
+                                  liked=true;
                                   Configuration.favIconColor2 = Colors.grey;
                                 } else {
                                   Configuration.favIconColor1 = Colors.grey;
+                                  liked = false;
                                 }
                               });
                             },
@@ -696,27 +710,29 @@ class _HomePageState extends State<HomePage> {
                       width: 30,
                     ),
                     InkWell(
-                      onLongPress: () {
-                        print("long_press");
-                      },
-                      onTap: () {
-                        print("click_press");
-                      },
-                      child: IconButton(
-                        icon: Icon(
-                          Icons.favorite,
+                        child: Column(
+                      children: [
+                        IconButton(
+
+                          icon: Icon(
+                            Icons.favorite,
+                          ),
+                          color: (item!['fav_user']==true)?Configuration.favIconColor3=Colors.pink:  Configuration.favIconColor3 = Colors.grey,
+                          onPressed: () async {
+                            var favId = item!['_id'];
+                            newsFav(favId);
+                            setState(() {
+                              if (Configuration.favIconColor3 == Colors.grey) {
+                                Configuration.favIconColor3 = Colors.pink;
+                              } else {
+                                Configuration.favIconColor3 = Colors.grey;
+                              }
+                            });
+                          },
                         ),
-                        color: Configuration.favIconColor3,
-                        onPressed: () {
-                          setState(() {
-                            if (Configuration.favIconColor3 == Colors.grey) {
-                              Configuration.favIconColor3 = Colors.pink;
-                            } else {
-                              Configuration.favIconColor3 = Colors.grey;
-                            }
-                          });
-                        },
-                      ),
+
+                      ],
+                    )
                     ),
                   ],
                 ),
