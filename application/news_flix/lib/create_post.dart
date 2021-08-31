@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +22,7 @@ class _AppImagePickerState extends State<AppImagePicker> {
   String? _value;
   BuildContext? _context;
   File newsImage = new File('');
-  var newsCategoryIndex;
+var newsCategoryIndex;
   get picker => null;
   // int selectedValue = 1;
 
@@ -246,28 +247,31 @@ class _AppImagePickerState extends State<AppImagePicker> {
       newsImage = new File('');
       ToastUtil.error(_context!, message: "No image is selected.");
     }
-    setState(() {
-    });
+    setState(() {});
   }
 
   void getHttp() async {
-    // if (newsImage.path.isEmpty) {
-    //   ToastUtil.error(_context!, message: 'failed to get image');
-    //   return;
-    // }
+    if (newsImage.path.isEmpty) {
+      ToastUtil.error(_context!, message: 'failed to get image');
+      return;
+    }
     print(newsCategoryIndex);
     try {
       var postFormData = FormData.fromMap({
         'title': titleController.text,
         'description': descriptionController.text,
-        'category': [newsCategoryIndex],
+        'category':jsonEncode([newsCategoryIndex]) ,
         'image': await MultipartFile.fromFile(newsImage.path,
             filename: newsImage.path
                 .split('/')[newsImage.path.split('/').length - 1]),
       });
 
-      var response = await Dio()
-          .post(Configuration.serverUrl + "/post", data: postFormData);
+      var response = await Dio().post(
+        Configuration.serverUrl + "/news",
+        data: postFormData,
+        options: Options(
+            headers: {'Authorization': ' Bearer ' + Configuration.authToken}),
+      );
       print(response);
     } catch (e) {
       print(e);

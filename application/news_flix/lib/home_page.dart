@@ -717,10 +717,7 @@ class _HomePageState extends State<HomePage> {
                       },
                       icon: Icon(
                         Icons.comment_outlined,
-                        color:
-                            (item!['liked'] == null || item!['liked'] == false)
-                                ? Colors.grey
-                                : Colors.grey,
+                        color: Colors.grey,
                       ),
                     ),
                     SizedBox(
@@ -777,58 +774,6 @@ class _HomePageState extends State<HomePage> {
                   },
                 ),
               ),
-              // SizedBox(
-              //   width: 5,
-              // ),
-              // Expanded(
-              //     child: Column(
-              //         mainAxisAlignment: MainAxisAlignment.start,
-              //         crossAxisAlignment: CrossAxisAlignment.start,
-              //         children: [
-              //       Text(
-              //         item['newsTitle'],
-              //         style:
-              //             TextStyle(fontSize: 24, fontStyle: FontStyle.italic),
-              //       ),
-              //       SizedBox(
-              //         height: 5,
-              //       ),
-              //       Row(
-              //         children: [
-              //           Icon(
-              //             Icons.date_range,
-              //             color: Colors.greenAccent,
-              //           ),
-              //           Text(
-              //             item['date'],
-              //             style: TextStyle(
-              //               fontSize: 12,
-              //             ),
-              //           ),
-              //         ],
-              //       ),
-              //       Row(
-              //         children: [
-              //           Icon(Icons.favorite_sharp,
-              //               color: Colors.redAccent, size: 20),
-              //           SizedBox(
-              //             width: 30,
-              //           ),
-              //           Icon(Icons.comment_outlined,
-              //               color: Colors.blue, size: 20),
-              //           SizedBox(
-              //             width: 30,
-              //           ),
-              //           Icon(
-              //             Icons.share,
-              //             color: Colors.pinkAccent,
-              //             size: 20,
-              //           ),
-              //         ],
-              //       )
-              //         ]
-              //     )
-              // ),
             ]));
   }
 }
