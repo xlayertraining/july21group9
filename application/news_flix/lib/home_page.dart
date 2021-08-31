@@ -14,13 +14,13 @@ import 'about_us.dart';
 import 'comment_page.dart';
 import 'create_post.dart';
 import 'dislikers.dart';
-import 'Favourite.dart';
+import 'favourite_page.dart';
 import 'full_view.dart';
 import 'likers.dart';
 import 'Profile2.dart';
 
 import 'sign_in_page.dart';
-import 'MyPost.dart';
+import 'my_post.dart';
 import 'search_page.dart';
 import 'Share.dart';
 
@@ -236,7 +236,7 @@ class _HomePageState extends State<HomePage> {
           bottomNavigationBar: CurvedNavigationBar(
             backgroundColor: Colors.deepPurple,
             items: <Widget>[
-              Icon(Icons.list, size: 30),
+              Icon(Icons.home, size: 30),
               Icon(Icons.add, size: 30),
               Icon(Icons.compare_arrows, size: 30),
             ],
@@ -275,7 +275,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 ListTile(
-                  leading: Icon(Icons.person, size: 25, color: Colors.black),
+                  leading: Icon(Icons.person, size: 25, color: Colors.blueGrey),
                   title: const Text(
                     'Profile',
                     style: TextStyle(
@@ -294,7 +294,7 @@ class _HomePageState extends State<HomePage> {
                 const SizedBox(height: 10),
 
                 ListTile(
-                  leading: Icon(Icons.favorite, size: 25, color: Colors.black),
+                  leading: Icon(Icons.favorite, size: 25, color: Colors.blueGrey),
                   title: const Text(
                     'Favourites',
                     style: TextStyle(
@@ -309,7 +309,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 const SizedBox(height: 10),
                 ListTile(
-                  leading: Icon(Icons.post_add, size: 25, color: Colors.black),
+                  leading: Icon(Icons.post_add, size: 25, color: Colors.blueGrey),
                   title: const Text(
                     'My Post',
                     style: TextStyle(
@@ -326,7 +326,7 @@ class _HomePageState extends State<HomePage> {
                 // Divider(color: Colors.black),
                 // const SizedBox(height: 10),
                 ListTile(
-                  leading: Icon(Icons.share, size: 25, color: Colors.black),
+                  leading: Icon(Icons.share, size: 25, color: Colors.blueGrey),
                   title: const Text(
                     'Share',
                     style: TextStyle(
@@ -343,7 +343,7 @@ class _HomePageState extends State<HomePage> {
                 // Divider(color: Colors.black),
                 // const SizedBox(height: 10),
                 ListTile(
-                  leading: Icon(Icons.info, size: 25, color: Colors.black),
+                  leading: Icon(Icons.info, size: 25, color: Colors.blueGrey),
                   title: const Text(
                     'About us',
                     style: TextStyle(
@@ -361,7 +361,7 @@ class _HomePageState extends State<HomePage> {
                 // const SizedBox(height: 10),
 
                 ListTile(
-                  leading:
+                      leading:
                       Icon(Icons.settings_power, size: 25, color: Colors.red),
                   title: const Text(
                     'Sign out',

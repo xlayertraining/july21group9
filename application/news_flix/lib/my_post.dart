@@ -1,6 +1,8 @@
 
 import 'package:flutter/material.dart';
-// import 'package:rect_getter/rect_getter.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:untitled2/page_transition.dart';
+import 'package:rect_getter/rect_getter.dart';
 
 import 'create_post.dart';
 
@@ -14,17 +16,23 @@ class MyPost extends StatefulWidget {
 class _MyPostState extends State<MyPost> {
 
   var controller;
-  // GlobalKey rectGetterKey = RectGetter.createGlobalKey(); //<--Create a key
+
+  // final Duration animationDuration = Duration(milliseconds: 300);
+  // final Duration delay = Duration(milliseconds: 300);
+  // GlobalKey rectGetterKey = RectGetter.createGlobalKey();
   // late Rect rect;
-  // void _onTap() {
-  //   setState(() => rect = RectGetter.getRectFromKey(rectGetterKey)!);
-  //   Navigator.push(
-  //       context,
-  //       MaterialPageRoute(
-  //       builder: (context) => AppImagePicker()));}
+
+  void _onTap() async {
+    // setState(() => rect = RectGetter.getRectFromKey(rectGetterKey)!); //<--onTap, update rect
+    Navigator.of(context).push(FadeRouteBuilder(child: AppImagePicker()));
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return
+    // Stack( //<-- Wrap Scaffold with a Stack
+    //   children: <Widget>[
+    Scaffold(
       appBar: AppBar(
         toolbarHeight: 60,
         title: Text('My Posts',
@@ -45,21 +53,22 @@ class _MyPostState extends State<MyPost> {
       ),
       body: MyPostBody(),
       floatingActionButton:
-      // RectGetter(           //<-- Wrap Fab with RectGetter
-      //    key: rectGetterKey,
-      //     child:
+    // RectGetter(           //<-- Wrap Fab with RectGetter
+    // key: rectGetterKey,                       //<-- Passing the key
+    // child:
           FloatingActionButton(
             backgroundColor: Colors.deepPurple,
             child: Icon(Icons.create_outlined),
 
         onPressed: () {
-          // _onTap;
-          Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                    builder: (context) => AppImagePicker()));
+          _onTap;
+          // Navigator.push(
+          //           context,
+          //           MaterialPageRoute(
+          //           builder: (context) => AppImagePicker()));
         },
       ),
+
       );
   }
 
@@ -121,4 +130,16 @@ class _MyPostBodyState extends State<MyPostBody> {
       ),
     );
   }
+}
+
+class FadeRouteBuilder<T> extends PageRouteBuilder<T> {
+  final Widget child;
+
+  FadeRouteBuilder({required this.child, })
+      : super(
+    pageBuilder: (context, animation1, animation2) => child,
+    transitionsBuilder: (context, animation1, animation2, child) {
+      return FadeTransition(opacity: animation1, child: child);
+    },
+  );
 }
