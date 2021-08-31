@@ -90,8 +90,9 @@ class NewsHandler(tornado.web.RequestHandler):
                 try:
                     fileType = str(mimetypes.guess_extension(
                         image['content_type'], strict=True))
-                    if fileType in [".jpeg", ".jpg", ".png"]:
-                        imageRaw = image['body']
+                    if fileType not in[".jpeg", ".jpg", ".png",".tiff",".gif",".svg",".heic",".raw"]:
+                        raise Exception
+                    imageRaw = image['body']
                 except:
                     code = 4083
                     status = False
@@ -150,7 +151,7 @@ class NewsHandler(tornado.web.RequestHandler):
         except Exception as e:
             template = 'Exception: {0}. Argument: {1!r}'
             iMessage = template.format(type(e).__name__, e.args)
-            message = 'Internal Error, Please Contact the Support Team.'
+           
             exc_type, exc_obj, exc_tb = sys.exc_info()
             fname = exc_tb.tb_frame.f_code.co_filename
             print('EXC', iMessage)
