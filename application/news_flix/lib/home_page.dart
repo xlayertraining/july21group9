@@ -11,6 +11,7 @@ import 'package:untitled2/util/log_util.dart';
 import 'package:untitled2/util/toast_util.dart';
 
 import 'about_us.dart';
+import 'all_posts_page.dart';
 import 'comment_page.dart';
 import 'create_post.dart';
 import 'dislikers.dart';
@@ -305,6 +306,21 @@ class _HomePageState extends State<HomePage> {
                   onTap: () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => Favourite()));
+                  },
+                ),
+                const SizedBox(height: 10),
+                ListTile(
+                  leading: Icon(Icons.all_inbox, size: 25, color: Colors.blueGrey),
+                  title: const Text(
+                    'All posts',
+                    style: TextStyle(
+                      // fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                    ),
+                  ),
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) =>PostLIstview()));
                   },
                 ),
                 const SizedBox(height: 10),

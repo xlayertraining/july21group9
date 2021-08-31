@@ -1,0 +1,97 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
+class PostLIstview extends StatelessWidget{
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        appBar: AppBar(
+          toolbarHeight: 60,
+          title: Text(
+            'All posts',
+            style: TextStyle(
+              color: Colors.deepPurple,
+              fontSize: 24.0,
+              fontStyle: FontStyle.italic,
+            ),
+          ),
+          backgroundColor: Colors.white,
+          elevation: 0.0,
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back_ios_outlined,
+                color: Colors.deepPurple), // set your color here
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+        ),
+        backgroundColor: Colors.white,
+        body:Center(
+        child: ListView(
+          shrinkWrap: true,
+          children: [
+            Container(
+                width: double.infinity,
+                padding: EdgeInsets.all(4),
+                color: Colors.white,
+                margin: EdgeInsets.all(20.0),
+                child: Text("Posts :",style: TextStyle(fontSize: 24,color: Colors.deepPurple),)),
+            Container(
+              color: Colors.white,
+              margin: EdgeInsets.only(left: 8,right: 8),
+              height: 400,
+              child: ListView.builder(
+                  physics: ClampingScrollPhysics(),
+                  scrollDirection: Axis.vertical,
+                  itemCount: 10,
+                  shrinkWrap: true,
+                  itemBuilder: (context,index){
+
+                    return Padding(
+                      padding: const EdgeInsets.all(2.0),
+                      child: Card(
+                        child: Column(
+                          children: [
+                            Image.network("https://powerbacks.com/wp-content/uploads/2019/09/google-slides-icon.png",
+                              width: 300,height: 300,),
+                            Container(
+                                width: double.infinity,
+                                color: Colors.grey[200],
+                                 child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                   child: ElevatedButton(
+                                     child: Text('Approve'),
+                                     onPressed: () {
+                                     },
+                                ),
+                            ),),
+                            Container(
+                              width: double.infinity,
+                              color: Colors.grey[200],
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    primary: Colors.deepPurple
+                                  ),
+                                  child: Text('Deny'),
+                                  onPressed: () {
+                                  },
+                                ),
+                              ),),
+                          ],
+                        ),
+                      ),
+                    );
+                  }),
+            ),
+                          ],
+                        ),
+                      ),
+      )
+                    );
+                  }
+  }
