@@ -184,7 +184,7 @@ class _ListWidgetState extends State<ListWidget> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => CommentPage()));
+                              builder: (context) => CommentPage(newsId: '',)));
                     },
                     icon: Icon(
                       Icons.comment_outlined,

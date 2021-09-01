@@ -91,6 +91,8 @@ flutter:
       - assets/boy.png
       - assets/News Flix.png
       - assets/Sign Up.json
+      - assets/anime wallpaper1.jpg
+      - assets/default-avatar.jpg
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 #  fonts:

@@ -104,7 +104,7 @@ class _MyProfilePage2 extends State<MyProfilePage2> {
                     controller: firstNameCon,
                   ),
                   SizedBox(
-                    height: 30,
+                    height: 20,
                   ),
                   TextField(
                     decoration: InputDecoration(
@@ -125,7 +125,7 @@ class _MyProfilePage2 extends State<MyProfilePage2> {
                     ),
                   ),
                   SizedBox(
-                    height: 30,
+                    height: 20,
                   ),
                   TextField(
                     decoration: InputDecoration(
@@ -145,7 +145,7 @@ class _MyProfilePage2 extends State<MyProfilePage2> {
                     ),
                   ),
                   SizedBox(
-                    height: 30,
+                    height: 20,
                   ),
                   TextField(
                     controller: passwordController,
@@ -176,7 +176,7 @@ class _MyProfilePage2 extends State<MyProfilePage2> {
                     ),
                   ),
                   SizedBox(
-                    height: 30,
+                    height: 20,
                   ),
                   Container(
                     height: 55,

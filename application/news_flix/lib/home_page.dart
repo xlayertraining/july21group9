@@ -256,17 +256,19 @@ class _HomePageState extends State<HomePage> {
             },
           ),
           drawer: Drawer(
+            elevation: 18,
             child: ListView(
               padding: EdgeInsets.zero,
               // Important: Remove any padding from the ListView.
               children: [
                 UserAccountsDrawerHeader(
-                  accountName: Text((userName != null? userName:'abc')),
+                  accountName: Text((userName != null? userName:'abc'),
+                  style:TextStyle(fontSize: 20)
+                  ),
                   accountEmail: Text((userEmailAddress !=null? userEmailAddress:'abc@gmail.com')),
                   currentAccountPicture: CircleAvatar(
                     child: ClipOval(
-                      child: Image.network(
-                        'https://images.wallpapersden.com/image/download/itachi-uchiha-anime_a2xuZmiUmZqaraWkpJRnbmhnrWduaGc.jpg',
+                      child: Image.asset("assets/default-avatar.jpg",
                         width: 120,
                         height: 120,
                         fit: BoxFit.cover,
@@ -275,8 +277,8 @@ class _HomePageState extends State<HomePage> {
                   ),
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: NetworkImage(
-                          "https://wallpaperaccess.com/full/22250.jpg"),
+                      image: AssetImage(
+                          "assets/anime wallpaper1.jpg"),
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -321,7 +323,7 @@ class _HomePageState extends State<HomePage> {
                   leading:
                       Icon(Icons.all_inbox, size: 25, color: Colors.blueGrey),
                   title: const Text(
-                    'All posts',
+                    'All news',
                     style: TextStyle(
                       // fontWeight: FontWeight.bold,
                       fontSize: 15,
@@ -339,7 +341,7 @@ class _HomePageState extends State<HomePage> {
                   leading:
                       Icon(Icons.post_add, size: 25, color: Colors.blueGrey),
                   title: const Text(
-                    'My Post',
+                    'My news',
                     style: TextStyle(
                       // fontWeight: FontWeight.bold,
                       fontSize: 15,
@@ -384,7 +386,7 @@ class _HomePageState extends State<HomePage> {
                         MaterialPageRoute(builder: (context) => AboutUs()));
                   },
                 ),
-                const SizedBox(height: 120),
+                const SizedBox(height: 85),
                 Divider(color: Colors.black),
                 // const SizedBox(height: 10),
 

@@ -210,7 +210,7 @@ class _MyWidgetState extends State<MyWidget> {
                               ),
                             )),
                         SizedBox(
-                          height: 30,
+                          height: 25,
                         ),
                         ElevatedButton(
                           onPressed: () {
