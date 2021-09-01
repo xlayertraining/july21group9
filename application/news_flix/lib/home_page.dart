@@ -18,12 +18,12 @@ import 'dislikers.dart';
 import 'favourite_page.dart';
 import 'full_view.dart';
 import 'likers.dart';
-import 'Profile2.dart';
+import 'profile2.dart';
 
 import 'sign_in_page.dart';
 import 'my_post.dart';
 import 'search_page.dart';
-import 'Share.dart';
+import 'share.dart';
 
 // import 'package:flutter_easyloading/flutter_easyloading.dart';
 
