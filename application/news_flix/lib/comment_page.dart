@@ -6,6 +6,10 @@ import 'package:untitled2/util/toast_util.dart';
 import 'config/configuration.dart';
 
 class CommentPage extends StatefulWidget {
+
+  String newsId;
+  CommentPage({required this.newsId});
+
   @override
   _CommentPage createState() => _CommentPage();
 }
@@ -78,7 +82,7 @@ class _CommentPage extends State<CommentPage> {
       appBar: AppBar(
         toolbarHeight: 70,
         title: Text(
-          "Comments",
+          "Comments" + widget.newsId.toString(),
           style: TextStyle(
             color: Colors.deepPurple,
             fontSize: 24.0,

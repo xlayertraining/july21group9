@@ -1,9 +1,11 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:dio/dio.dart';
+import 'package:dropdown_plus/dropdown_plus.dart';
 import 'package:flutter/material.dart';
 
 import 'package:image_picker/image_picker.dart';
+import 'package:untitled2/util/log_util.dart';
 import 'package:untitled2/util/toast_util.dart';
 
 import 'config/configuration.dart';
@@ -18,6 +20,31 @@ class AppImagePicker extends StatefulWidget {
 class _AppImagePickerState extends State<AppImagePicker> {
   TextEditingController titleController = new TextEditingController();
   TextEditingController descriptionController = new TextEditingController();
+
+  final List<Map<String, dynamic>> _roles = [
+    {"name": "Super Admin", "desc": "Having full access rights", "role": 1},
+    {
+      "name": "Admin",
+      "desc": "Having full access rights of a Organization",
+      "role": 2
+    },
+    {
+      "name": "Manager",
+      "desc": "Having Magenent access rights of a Organization",
+      "role": 3
+    },
+    {
+      "name": "Technician",
+      "desc": "Having Technician Support access rights",
+      "role": 4
+    },
+    {
+      "name": "Customer Support",
+      "desc": "Having Customer Support access rights",
+      "role": 5
+    },
+    {"name": "User", "desc": "Having End User access rights", "role": 6},
+  ];
 
   String? _value;
   BuildContext? _context;
@@ -93,87 +120,42 @@ var newsCategoryIndex;
                 maxLines: 8,
                 maxLength: 2000,
               ),
-              DropdownButton<String>(
-                items: [
-                  DropdownMenuItem<String>(
-                    child: Row(
-                      children: <Widget>[
-                        Icon(Icons.filter_1),
-                        Text('Latest'),
-                      ],
-                    ),
-                    value: 'zero',
-                  ),
-                  DropdownMenuItem<String>(
-                    child: Row(
-                      children: <Widget>[
-                        Icon(Icons.filter_2),
-                        Text('National'),
-                      ],
-                    ),
-                    value: 'one',
-                  ),
-                  DropdownMenuItem<String>(
-                    child: Row(
-                      children: <Widget>[
-                        Icon(Icons.filter_3),
-                        Text('International'),
-                      ],
-                    ),
-                    value: 'two',
-                  ),
-                  DropdownMenuItem<String>(
-                    child: Row(
-                      children: <Widget>[
-                        Icon(Icons.filter_4),
-                        Text('Sports'),
-                      ],
-                    ),
-                    value: 'three',
-                  ),
-                  DropdownMenuItem<String>(
-                    child: Row(
-                      children: <Widget>[
-                        Icon(Icons.filter_5),
-                        Text('Tech'),
-                      ],
-                    ),
-                    value: 'four',
-                  ),
-                  DropdownMenuItem<String>(
-                    child: Row(
-                      children: <Widget>[
-                        Icon(Icons.filter_6),
-                        Text('Business'),
-                      ],
-                    ),
-                    value: 'five',
-                  ),
-                ],
-                isExpanded: false,
-                onChanged: (String? value) {
-                  setState(() {
-                    _value = value;
-                    newsCategoryIndex = value;
-                  });
+              DropdownFormField<Map<String, dynamic>>(
+                onEmptyActionPressed: () async {},
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    suffixIcon: Icon(Icons.arrow_drop_down),
+                    labelText: "Access"),
+                onSaved: (dynamic str) {},
+                onChanged: (dynamic str) {},
+                validator: (dynamic str) {},
+                displayItemFn: (dynamic item) {
+                  Log.i(item);
+                  if (item == null) {
+                    return Text(
+                      'N/A',
+                      style: TextStyle(fontSize: 16),
+                    );
+                  }
+                  return Text(
+                    item['name'] ?? '',
+                    style: TextStyle(fontSize: 16),
+                  );
                 },
-                hint: Text(
-                  'Select Item',
-                  style: TextStyle(color: Colors.deepPurple),
-                ),
-                value: _value,
-                underline: Container(
-                  decoration: const BoxDecoration(
-                      border:
-                          Border(bottom: BorderSide(color: Colors.deepPurple))),
-                ),
-                style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.black,
-                ),
-                iconEnabledColor: Colors.pink,
-                //        iconDisabledColor: Colors.grey,
-                iconSize: 40,
+                findFn: (dynamic str) async => _roles,
+                filterFn: (dynamic item, str) =>
+                item['name'].toLowerCase().indexOf(str.toLowerCase()) >= 0,
+                dropdownItemFn: (dynamic item, position, focused,
+                    dynamic lastSelectedItem, onTap) =>
+                    ListTile(
+                      title: Text(item['name']),
+                      subtitle: Text(
+                        item['desc'] ?? '',
+                      ),
+                      tileColor:
+                      focused ? Color.fromARGB(20, 0, 0, 0) : Colors.transparent,
+                      onTap: onTap,
+                    ),
               ),
               (newsImage.path.isNotEmpty)
                   ? Image.file(newsImage)
@@ -251,22 +233,38 @@ var newsCategoryIndex;
   }
 
   void getHttp() async {
-    if (newsImage.path.isEmpty) {
-      ToastUtil.error(_context!, message: 'failed to get image');
+    FormData? postFormData;
+
+    if (titleController.text.isEmpty) {
+      ToastUtil.error(_context!, message: 'Please enter news title.');
       return;
     }
-    print(newsCategoryIndex);
-    try {
-      var postFormData = FormData.fromMap({
+
+    if (descriptionController.text.isEmpty) {
+      ToastUtil.error(_context!, message: 'Please enter news description.');
+      return;
+    }
+
+    if (newsImage.path.isEmpty) {
+      postFormData = FormData.fromMap({
         'title': titleController.text,
         'description': descriptionController.text,
-        'category':jsonEncode([newsCategoryIndex]) ,
+        'category': json.encode([1,2,3]),
+      });
+    } else {
+      postFormData = FormData.fromMap({
+        'title': titleController.text,
+        'description': descriptionController.text,
+        'category': [1,2,3],
         'image': await MultipartFile.fromFile(newsImage.path,
             filename: newsImage.path
                 .split('/')[newsImage.path.split('/').length - 1]),
       });
+    }
 
-      var response = await Dio().post(
+    Response? response;
+    try {
+      response = await Dio().post(
         Configuration.serverUrl + "/news",
         data: postFormData,
         options: Options(
@@ -275,6 +273,19 @@ var newsCategoryIndex;
       print(response);
     } catch (e) {
       print(e);
+      response = null;
     }
+
+
+    try {
+      if (response!.data['status']) {
+        ToastUtil.success(_context!, message: response.data['message']);
+      } else {
+        ToastUtil.error(_context!, message: response.data['message']);
+      }
+    } catch (e, s) {
+      Log.e(e, s);
+    }
+
   }
 }

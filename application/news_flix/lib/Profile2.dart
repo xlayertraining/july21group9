@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:untitled2/config/configuration.dart';
+import 'package:untitled2/util/log_util.dart';
 
 class MyProfilePage2 extends StatefulWidget {
   MyProfilePage2();
@@ -12,9 +13,20 @@ class MyProfilePage2 extends StatefulWidget {
 
 class _MyProfilePage2 extends State<MyProfilePage2> {
   bool passShow = false;
+  TextEditingController firstNameCon = new TextEditingController();
+  TextEditingController lastName = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
+
+  BuildContext? _context;
+
   @override
   Widget build(BuildContext context) {
+
+    if (_context == null) {
+      _context = context;
+      getuserProfile();
+    }
+
     return Scaffold(
         appBar: AppBar(
           toolbarHeight: 60,
@@ -77,9 +89,8 @@ class _MyProfilePage2 extends State<MyProfilePage2> {
                   TextField(
                     decoration: InputDecoration(
                       border: InputBorder.none,
-                      labelText: 'Enter your Name :',
+                      labelText: 'Enter your first name :',
                       labelStyle: TextStyle(color: Colors.deepPurple),
-                      hintText: 'Enter Your Name',
                       suffixIcon: Icon(Icons.person_add, color: Colors.black),
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.deepPurple),
@@ -90,6 +101,7 @@ class _MyProfilePage2 extends State<MyProfilePage2> {
                         borderRadius: BorderRadius.circular(25.0),
                       ),
                     ),
+                    controller: firstNameCon,
                   ),
                   SizedBox(
                     height: 30,
@@ -193,6 +205,7 @@ class _MyProfilePage2 extends State<MyProfilePage2> {
             )));
   }
 
+
   getuserProfile() async {
     Response? response = null;
     try {
@@ -204,5 +217,17 @@ class _MyProfilePage2 extends State<MyProfilePage2> {
     } catch (e, s) {
       print(e.toString() + s.toString());
     }
+
+    try {
+      if (response!.data['status']){
+        firstNameCon.text = response.data['result'][0]['firstName'];
+      }
+    }
+    catch (e, s) {
+      Log.i(e.toString() + s.toString());
+    }
   }
+
+
+
 }

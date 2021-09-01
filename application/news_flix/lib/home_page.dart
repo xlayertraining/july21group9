@@ -459,7 +459,7 @@ class _HomePageState extends State<HomePage> {
       }
     }
     catch (e, s) {
-      print(e.toString() + s.toString());
+      Log.i(e.toString() + s.toString());
     }
   }
 
@@ -752,7 +752,9 @@ class _HomePageState extends State<HomePage> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => CommentPage()));
+                                builder: (context) => CommentPage(
+                                  newsId: item!['_id'],
+                                )));
                       },
                       icon: Icon(
                         Icons.comment_outlined,
