@@ -11,9 +11,9 @@ import 'package:untitled2/util/log_util.dart';
 import 'package:untitled2/util/toast_util.dart';
 
 import 'about_us.dart';
-import 'all_posts_page.dart';
+import 'all_news_page.dart';
 import 'comment_page.dart';
-import 'create_post.dart';
+import 'create_news.dart';
 import 'dislikers.dart';
 import 'favourite_page.dart';
 import 'full_view.dart';
@@ -21,7 +21,7 @@ import 'likers.dart';
 import 'profile2.dart';
 
 import 'sign_in_page.dart';
-import 'my_post.dart';
+import 'my_news.dart';
 import 'search_page.dart';
 import 'share.dart';
 

@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:untitled2/create_post.dart';
+import 'package:untitled2/create_news.dart';
 class FadeRouteBuilder<T> extends PageRouteBuilder<T> {
   final Widget child;
 

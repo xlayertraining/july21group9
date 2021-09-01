@@ -4,7 +4,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:untitled2/page_transition.dart';
 import 'package:rect_getter/rect_getter.dart';
 
-import 'create_post.dart';
+import 'create_news.dart';
 
 class MyPost extends StatefulWidget {
   const MyPost({Key? key}) : super(key: key);
@@ -35,7 +35,7 @@ class _MyPostState extends State<MyPost> {
     Scaffold(
       appBar: AppBar(
         toolbarHeight: 60,
-        title: Text('My Posts',
+        title: Text('My News',
           style: TextStyle(
             color: Colors.deepPurple,
             fontSize: 24.0,

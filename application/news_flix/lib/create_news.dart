@@ -63,7 +63,7 @@ var newsCategoryIndex;
       appBar: AppBar(
         backgroundColor: Colors.white,
         title: Text(
-          "Create Post",
+          "Create News",
           style: TextStyle(
             color: Colors.deepPurple,
             fontSize: 24.0,

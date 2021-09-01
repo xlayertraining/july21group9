@@ -11,7 +11,7 @@ class PostLIstview extends StatelessWidget{
         appBar: AppBar(
           toolbarHeight: 60,
           title: Text(
-            'All posts',
+            'All news',
             style: TextStyle(
               color: Colors.deepPurple,
               fontSize: 24.0,
@@ -38,7 +38,7 @@ class PostLIstview extends StatelessWidget{
                 padding: EdgeInsets.all(4),
                 color: Colors.white60,
                 margin: EdgeInsets.all(20.0),
-                child: Text("Posts :",style: TextStyle(fontSize: 25,color: Colors.deepPurple),)),
+                child: Text("News:",style: TextStyle(fontSize: 25,color: Colors.deepPurple),)),
             Container(
               color: Colors.white,
               margin: EdgeInsets.only(left: 8,right: 8),
