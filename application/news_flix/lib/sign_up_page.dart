@@ -1,4 +1,3 @@
-
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
@@ -227,8 +226,10 @@ class _MyWidgetState extends State<MyWidget> {
                             // createAlbum("test string");
                             child: Text(
                               "Submit",
-                              style: TextStyle(color: Colors.white,fontSize: 20,),
-
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                              ),
                             ),
                           ),
                           style: ElevatedButton.styleFrom(
@@ -279,8 +280,8 @@ class _MyWidgetState extends State<MyWidget> {
     // Navigator.pushReplacement(
     //     context, MaterialPageRoute(builder: (context) => HomePage()));
     var response;
-    Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => HomePage()));
+    // Navigator.pushReplacement(
+    //     context, MaterialPageRoute(builder: (context) => HomePage()));
     try {
       response = await Dio().post(
         Configuration.serverUrl + "/sign_up",
@@ -299,10 +300,12 @@ class _MyWidgetState extends State<MyWidget> {
       print(response);
       SharedPreferences prefs = await SharedPreferences.getInstance();
       if (response.data['status']) {
-     await prefs.setString(Configuration.signedInKey,response.data['result'][0]['Authorization']);
-     Configuration.authToken= response.data['result'][0]['Authorization'];
-     ToastUtil.info(_context!, message: response.data['message']);
-
+        await prefs.setString(Configuration.signedInKey,
+            response.data['result'][0]['Authorization']);
+        Configuration.authToken = response.data['result'][0]['Authorization'];
+        ToastUtil.info(_context!, message: response.data['message']);
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => HomePage()));
       } else {
         ToastUtil.error(_context!, message: response.data['message']);
       }

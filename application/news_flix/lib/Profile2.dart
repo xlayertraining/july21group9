@@ -1,5 +1,7 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:untitled2/config/configuration.dart';
 
 class MyProfilePage2 extends StatefulWidget {
   MyProfilePage2();
@@ -54,7 +56,10 @@ class _MyProfilePage2 extends State<MyProfilePage2> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(bottom: 10,left: 120,),
+                    padding: EdgeInsets.only(
+                      bottom: 10,
+                      left: 120,
+                    ),
                     child: CircleAvatar(
                       backgroundColor: Colors.deepPurple,
                       child: IconButton(
@@ -66,7 +71,9 @@ class _MyProfilePage2 extends State<MyProfilePage2> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(
+                    height: 10,
+                  ),
                   TextField(
                     decoration: InputDecoration(
                       border: InputBorder.none,
@@ -163,10 +170,13 @@ class _MyProfilePage2 extends State<MyProfilePage2> {
                     height: 55,
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: () {},
-                      style:
-                          ElevatedButton.styleFrom(primary: Colors.deepPurple,),
-
+                      onPressed: () async
+                      {
+                        getuserProfile();
+                      },
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.deepPurple,
+                      ),
                       child: Center(
                         child: Text(
                           "Update",
@@ -181,5 +191,18 @@ class _MyProfilePage2 extends State<MyProfilePage2> {
                 ],
               ),
             )));
+  }
+
+  getuserProfile() async {
+    Response? response = null;
+    try {
+      response = await Dio().get(Configuration.serverUrl + "/profile",
+          options: Options(headers: {
+            'Authorization': ' Bearer ' + Configuration.authToken
+          }));
+      print(response);
+    } catch (e, s) {
+      print(e.toString() + s.toString());
+    }
   }
 }

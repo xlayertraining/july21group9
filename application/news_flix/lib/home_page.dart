@@ -5,7 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:untitled2/list_widget.dart';
+
 import 'package:untitled2/config/configuration.dart';
 import 'package:untitled2/util/log_util.dart';
 import 'package:untitled2/util/toast_util.dart';
@@ -39,12 +39,18 @@ class _HomePageState extends State<HomePage> {
   var listTiles4 = [];
   var listTiles5 = [];
   var listTiles6 = [];
+  var userName;
+  var userEmailAddress;
+  var userPhoneNumber;
+
   BuildContext? _context;
   bool liked = false;
   @override
   Widget build(BuildContext context) {
     if (_context == null) {
       _context = context;
+
+      getuserProfile();
       getNewsCategory1();
       getNewsCategory2();
       getNewsCategory3();
@@ -255,8 +261,8 @@ class _HomePageState extends State<HomePage> {
               // Important: Remove any padding from the ListView.
               children: [
                 UserAccountsDrawerHeader(
-                  accountName: Text('Samyadeep'),
-                  accountEmail: Text('sahasamyadeep@gmail.com'),
+                  accountName: Text((userName != null? userName:'abc')),
+                  accountEmail: Text((userEmailAddress !=null? userEmailAddress:'abc@gmail.com')),
                   currentAccountPicture: CircleAvatar(
                     child: ClipOval(
                       child: Image.network(
@@ -295,7 +301,8 @@ class _HomePageState extends State<HomePage> {
                 const SizedBox(height: 10),
 
                 ListTile(
-                  leading: Icon(Icons.favorite, size: 25, color: Colors.blueGrey),
+                  leading:
+                      Icon(Icons.favorite, size: 25, color: Colors.blueGrey),
                   title: const Text(
                     'Favourites',
                     style: TextStyle(
@@ -311,7 +318,8 @@ class _HomePageState extends State<HomePage> {
                 const SizedBox(height: 10),
 
                 ListTile(
-                  leading: Icon(Icons.all_inbox, size: 25, color: Colors.blueGrey),
+                  leading:
+                      Icon(Icons.all_inbox, size: 25, color: Colors.blueGrey),
                   title: const Text(
                     'All posts',
                     style: TextStyle(
@@ -320,13 +328,16 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) =>PostLIstview()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => PostLIstview()));
                   },
                 ),
                 const SizedBox(height: 10),
                 ListTile(
-                  leading: Icon(Icons.post_add, size: 25, color: Colors.blueGrey),
+                  leading:
+                      Icon(Icons.post_add, size: 25, color: Colors.blueGrey),
                   title: const Text(
                     'My Post',
                     style: TextStyle(
@@ -378,7 +389,7 @@ class _HomePageState extends State<HomePage> {
                 // const SizedBox(height: 10),
 
                 ListTile(
-                      leading:
+                  leading:
                       Icon(Icons.settings_power, size: 25, color: Colors.red),
                   title: const Text(
                     'Sign out',
@@ -425,6 +436,31 @@ class _HomePageState extends State<HomePage> {
         setState(() {});
       },
     );
+  }
+
+  getuserProfile() async {
+    var response;
+    try {
+      response = await Dio().get(Configuration.serverUrl + "/profile",
+          options: Options(headers: {
+            'Authorization': ' Bearer ' + Configuration.authToken
+          }));
+      print(response);
+
+    } catch (e, s) {
+      print(e.toString() + s.toString());
+    }
+    try {
+      if (response.data['status']){
+        userName = response.data['result'][0]['userName'];
+        userEmailAddress = response.data['result'][0]['emailAddress'];
+        userPhoneNumber = response.data['result'][0]['phoneNumber'];
+
+      }
+    }
+    catch (e, s) {
+      print(e.toString() + s.toString());
+    }
   }
 
   getNewsCategory2() async {
@@ -644,7 +680,10 @@ class _HomePageState extends State<HomePage> {
                             icon: Icon(
                               Icons.thumb_up_outlined,
                             ),
-                            color: (liked==true)?Configuration.favIconColor1=Colors.deepPurple:  Configuration.favIconColor1 = Colors.grey,
+                            color: (liked == true)
+                                ? Configuration.favIconColor1 =
+                                    Colors.deepPurple
+                                : Configuration.favIconColor1 = Colors.grey,
                             onPressed: () async {
                               var likes = item['_id'];
                               newsLike(likes);
@@ -653,7 +692,7 @@ class _HomePageState extends State<HomePage> {
                                     Colors.grey) {
                                   Configuration.favIconColor1 =
                                       Colors.deepPurple;
-                                  liked=true;
+                                  liked = true;
                                   Configuration.favIconColor2 = Colors.grey;
                                 } else {
                                   Configuration.favIconColor1 = Colors.grey;
@@ -727,11 +766,12 @@ class _HomePageState extends State<HomePage> {
                         child: Column(
                       children: [
                         IconButton(
-
                           icon: Icon(
                             Icons.favorite,
                           ),
-                          color: (item!['fav_user']==true)?Configuration.favIconColor3=Colors.pink:  Configuration.favIconColor3 = Colors.grey,
+                          color: (item!['fav_user'] == true)
+                              ? Configuration.favIconColor3 = Colors.pink
+                              : Configuration.favIconColor3 = Colors.grey,
                           onPressed: () async {
                             var favId = item!['_id'];
                             newsFav(favId);
@@ -744,10 +784,8 @@ class _HomePageState extends State<HomePage> {
                             });
                           },
                         ),
-
                       ],
-                    )
-                    ),
+                    )),
                   ],
                 ),
               ),

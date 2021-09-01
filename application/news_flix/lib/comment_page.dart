@@ -121,14 +121,6 @@ class _CommentPage extends State<CommentPage> {
           },
 
           formKey: formKey,
-          // title: Form(
-          //  key: formKey, child: TextFormField(
-          //   decoration: InputDecoration(
-          //   border: !withBorder
-          //      ? InputBorder.none
-          //      : UnderlineInputBorder(
-          //    borderSide: BorderSide(color: Colors.),
-          //  ),
           commentController: commentController,
           backgroundColor: Colors.white,
           textColor: Colors.black,
