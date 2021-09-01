@@ -24,8 +24,7 @@ class ProfileHandler(tornado.web.RequestHandler):
                 })
                 if account_find:
                     account_find["_id"] = str(account_find["_id"])
-                    del [account_find["role"], account_find["password"],
-                         account_find["firstName"], account_find["lastName"]]
+                    del [account_find["role"]]
                     result.append(account_find)
 
                 code = 2000
