@@ -10,7 +10,7 @@ class signInHandler(tornado.web.RequestHandler):
         try:
             try:
                 jsonbody = json.loads(self.request.body)
-                
+
             except:
                 code = 4000
                 status = False
@@ -66,8 +66,8 @@ class signInHandler(tornado.web.RequestHandler):
                     message = "Invalid email or password!"
                     raise Exception
                 else:
-                    account_id= str(findUser.get('_id'))
-                    
+                    account_id = str(findUser.get('_id'))
+
                     encoded_jwt = jwt.encode(
                         {"key": account_id}, "icfai", algorithm="HS256")
 
@@ -84,11 +84,10 @@ class signInHandler(tornado.web.RequestHandler):
                             'role': roleText
                         }
                     )
-                   
+
                     code = 200
                     status = True
                     message = "Successfully logged in."
-                   
 
                 response = {
                     'code': code,
@@ -100,27 +99,39 @@ class signInHandler(tornado.web.RequestHandler):
                     self.write(response)
                     self.finish()
                     return
-                except:
-                    code = 5011
-                    status = False
-                    message = "Internal Error, Please contact the support team!"
+                except Exception as e:
+                    template = 'Exception: {0}. Argument: {1!r}'
+                    iMessage = template.format(type(e).__name__, e.args)
+                    exc_type, exc_obj, exc_tb = sys.exc_info()
+                    message="Internal error occured!"
+                    fname = exc_tb.tb_frame.f_code.co_filename
+                    print('EXC', iMessage)
+                    print('EX2', 'FILE: ' + str(fname) + ' LINE: ' +
+                        str(exc_tb.tb_lineno) + ' TYPE: ' + str(exc_type))
                     response = {
                         'code': code,
                         'status': status,
                         'message': message,
-                        'result': result
+                        "result": result
                     }
                     self.write(response)
                     self.finish()
                     return
             except:
                 raise Exception
-        except:
+        except Exception as e:
+            template = 'Exception: {0}. Argument: {1!r}'
+            iMessage = template.format(type(e).__name__, e.args)
+            exc_type, exc_obj, exc_tb = sys.exc_info()
+            fname = exc_tb.tb_frame.f_code.co_filename
+            print('EXC', iMessage)
+            print('EX2', 'FILE: ' + str(fname) + ' LINE: ' +
+                  str(exc_tb.tb_lineno) + ' TYPE: ' + str(exc_type))
             response = {
                 'code': code,
                 'status': status,
                 'message': message,
-                'result': result
+                "result": result
             }
             self.write(response)
             self.finish()

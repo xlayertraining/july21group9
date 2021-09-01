@@ -14,6 +14,7 @@ from news_image_get import NewsImageGetHandler
 from post_news_info import NewsInfoHandler
 
 
+
 def app():
     return tornado.web.Application(
         [
@@ -25,7 +26,7 @@ def app():
             (r'/julygroup9_web/api/news/search', SearchNewsHandler),
             (r'/julygroup9_web/api/news/comment', PostCommentHandler),
             (r'/julygroup9_web/api/news/favourites', Postfavouriteshandler),
-            (r'/julygroup9_web/api/profile', ProfileHandler),
+            (r'/julygroup9_web/api/user/profile', ProfileHandler),
             (r'/julygroup9_web/api/post/user', UserSharedPostHandler),
             (r'/julygroup9_web/api/news/approve', NewsApproveHandler),
             (r'/julygroup9_web/api/news/info', NewsInfoHandler),

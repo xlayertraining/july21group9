@@ -27,7 +27,7 @@ class PostCommentHandler(tornado.web.RequestHandler):
                 # provide postId to insert comment on that post
                 post_Id = ObjectId(
                     self.request.arguments['newsId'][0].decode())
-                print("Hi")
+                
             except:
                 code = 4356
                 status = False
@@ -38,7 +38,7 @@ class PostCommentHandler(tornado.web.RequestHandler):
                 comment = self.request.arguments["comment"][0].decode()
             except:
                 raise Exception
-            print("hi")  
+            
             # inserting all the fields to the database named "comments"
 
             commentInsert = await user_comment_folder.insert_one({
@@ -57,14 +57,14 @@ class PostCommentHandler(tornado.web.RequestHandler):
             }
             self.write(response)
         except Exception as e:
-            # template = 'Exception: {0}. Argument: {1!r}'
-            # code = 5011
-            # iMessage = template.format(type(e).__name__, e.args)
-            # message = 'Internal Error, Please Contact the Support Team.'
-            # exc_type, exc_obj, exc_tb = sys.exc_info()
-            # fname = exc_tb.tb_frame.f_code.co_filename
-            # print('EXC', iMessage)
-            # print('EX2', 'FILE: ' + str(fname) + ' LINE: ' + str(exc_tb.tb_lineno) + ' TYPE: ' + str(exc_type))
+            template = 'Exception: {0}. Argument: {1!r}'
+            code = 5011
+            iMessage = template.format(type(e).__name__, e.args)
+            message = 'Internal Error, Please Contact the Support Team.'
+            exc_type, exc_obj, exc_tb = sys.exc_info()
+            fname = exc_tb.tb_frame.f_code.co_filename
+            print('EXC', iMessage)
+            print('EX2', 'FILE: ' + str(fname) + ' LINE: ' + str(exc_tb.tb_lineno) + ' TYPE: ' + str(exc_type))
 
             response = {
                 "code": code,
@@ -72,6 +72,8 @@ class PostCommentHandler(tornado.web.RequestHandler):
                 "message": message
             }
             self.write(response)
+            self.finish()
+            return
 # /
 
     async def get(self):

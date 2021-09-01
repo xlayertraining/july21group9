@@ -20,28 +20,28 @@ class NewsApproveHandler(tornado.web.RequestHandler):
                 status = False
                 message = "You're not authorized"
                 raise Exception
-            accountfind=await user_sign_up.find_one({"_id":ObjectId(account_id)})
-            
+            accountfind = await user_sign_up.find_one({"_id": ObjectId(account_id)})
+
             try:
-                if accountfind.get("role")!=1:
+                if accountfind.get("role") != 1:
                     raise Exception
             except:
                 code = 8765
                 status = False
                 message = "You're not authorized"
-                raise Exception      
+                raise Exception
             # Title
             try:
                 newsid = ObjectId(self.request.arguments["newsId"][0].decode())
             except:
                 message = " invalid news id."
                 raise Exception
-            
-            newsupdate=await user_news_folder.update_one({
-                "_id":newsid
+
+            newsupdate = await user_news_folder.update_one({
+                "_id": newsid
             },
-            {
-                "$set":{"approve":True,"approvedBy":account_id,"approvedAt":timeNow()}
+                {
+                "$set": {"approve": True, "approvedBy": account_id, "approvedAt": timeNow()}
             })
             code = 2000
             status = True
@@ -79,49 +79,48 @@ class NewsApproveHandler(tornado.web.RequestHandler):
                 status = False
                 message = "You're not authorized"
                 raise Exception
-            accountfind=await user_sign_up.find_one({"_id":ObjectId(account_id)})
-            
             try:
-                if accountfind.get("role")!=1:
-                    raise Exception
-            except:
-                code = 8765
-                status = False
-                message = "You're not authorized"
-                raise Exception
-                
-           
-            try:
-                imageList = user_news_folder.find({"approve":False})
-                async for i in imageList:
-                    # del[i["image"]]
-                    i["image"]=str(i["image"])
+                post_List = user_news_folder.find({"approve": False})
+
+                async for i in post_List:
+                    del[i["createdBy"], i["description"], i["favourites"], i["like"], i["likers"], i["dislike"],
+                        i["dislikers"], i["tags"], i["category"], i["approve"], i["approvedBy"], i["approvedAt"]]
                     i['_id'] = str(i['_id'])
-                    i["fav_user"] = False
-                    if account_id in i["favourites"]:
-                        i["fav_user"] = True
-                    account_find = await user_sign_up.find_one({"_id": ObjectId(i["AccountId"])})
-                    if account_find:
-                        i["author"] = account_find["userName"]
+                    i["accountId"] = str(i["accountId"])
+                    i['imageUrl'] = None
+                    if len(i['attachments']) > 0:
+                        i['imageUrl'] = serverUrl + '/news/image/' + \
+                            i['attachments'][0]['fileName']
+                        del i['attachments']
+
                     result.append(i)
-                code=2000
-                status=True
-                message="list of news"
-                response = {
-                    'code': code,
-                    'status': status,
-                    'message': message,
-                    "result": result
-                }
-                self.write(response)
-                self.finish()
-                return
+
+                code = 2000
+                status = True
+                message = "Pending News"
+
             except:
                 code = 5623
                 status = False
                 message = 'Internal Error, Please Contact the Support Team.'
                 raise Exception
-        except:
+            response = {
+                'code': code,
+                'status': status,
+                'message': message,
+                'result': result
+            }
+            self.write(response)
+            await self.finish()
+            return
+        except Exception as e:
+            template = 'Exception: {0}. Argument: {1!r}'
+            iMessage = template.format(type(e).__name__, e.args)
+            exc_type, exc_obj, exc_tb = sys.exc_info()
+            fname = exc_tb.tb_frame.f_code.co_filename
+            print('EXC', iMessage)
+            print('EX2', 'FILE: ' + str(fname) + ' LINE: ' +
+                  str(exc_tb.tb_lineno) + ' TYPE: ' + str(exc_type))
             response = {
                 'code': code,
                 'status': status,
@@ -161,10 +160,22 @@ class NewsApproveHandler(tornado.web.RequestHandler):
             code = 2000
             status = True
             message = "news has been removed"
-        except:
-            code = 6754
-            status = False
-            message = 'Internal Error, Please Contact the Support Team.'
+        except Exception as e:
+            template = 'Exception: {0}. Argument: {1!r}'
+            iMessage = template.format(type(e).__name__, e.args)
+            exc_type, exc_obj, exc_tb = sys.exc_info()
+            fname = exc_tb.tb_frame.f_code.co_filename
+            print('EXC', iMessage)
+            print('EX2', 'FILE: ' + str(fname) + ' LINE: ' +
+                  str(exc_tb.tb_lineno) + ' TYPE: ' + str(exc_type))
+            response = {
+                'code': code,
+                'status': status,
+                'message': message,
+                "result": result
+            }
+            self.write(response)
+            self.finish()
 
         try:
             response = {
@@ -174,12 +185,16 @@ class NewsApproveHandler(tornado.web.RequestHandler):
                 "result": result
             }
             self.write(response)
-            self.finish()
+            await self.finish()
             return
-        except:
-            status = False
-            code = 5011
-            message = 'Internal Error, Please Contact the Support Team.'
+        except Exception as e:
+            template = 'Exception: {0}. Argument: {1!r}'
+            iMessage = template.format(type(e).__name__, e.args)
+            exc_type, exc_obj, exc_tb = sys.exc_info()
+            fname = exc_tb.tb_frame.f_code.co_filename
+            print('EXC', iMessage)
+            print('EX2', 'FILE: ' + str(fname) + ' LINE: ' +
+                  str(exc_tb.tb_lineno) + ' TYPE: ' + str(exc_type))
             response = {
                 'code': code,
                 'status': status,

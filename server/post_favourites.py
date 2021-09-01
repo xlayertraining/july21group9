@@ -61,12 +61,19 @@ class Postfavouriteshandler(tornado.web.RequestHandler):
             self.write(response)
             self.finish()
             return
-        except:
+        except Exception as e:
+            template = 'Exception: {0}. Argument: {1!r}'
+            iMessage = template.format(type(e).__name__, e.args)
+            exc_type, exc_obj, exc_tb = sys.exc_info()
+            fname = exc_tb.tb_frame.f_code.co_filename
+            print('EXC', iMessage)
+            print('EX2', 'FILE: ' + str(fname) + ' LINE: ' +
+                  str(exc_tb.tb_lineno) + ' TYPE: ' + str(exc_type))
             response = {
-                "code": code,
-                "status": status,
-                "message": message,
-                "result":result
+                'code': code,
+                'status': status,
+                'message': message,
+                "result": result
             }
             self.write(response)
             self.finish()

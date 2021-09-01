@@ -69,19 +69,21 @@ class PostLikeHandler(tornado.web.RequestHandler):
                 message = 'News is liked'
                 result = []
 
-        except:
-            status = False
-            code = 4003
-            message = 'Internal Error.'
-            result = []
-
-        response = {
-            "code": code,
-            "status": status,
-            "message": message,
-            'result': result
-        }
-        self.write(response)
-        await self.finish()
-        return
+        except Exception as e:
+            template = 'Exception: {0}. Argument: {1!r}'
+            iMessage = template.format(type(e).__name__, e.args)
+            exc_type, exc_obj, exc_tb = sys.exc_info()
+            fname = exc_tb.tb_frame.f_code.co_filename
+            print('EXC', iMessage)
+            print('EX2', 'FILE: ' + str(fname) + ' LINE: ' +
+                  str(exc_tb.tb_lineno) + ' TYPE: ' + str(exc_type))
+            response = {
+                'code': code,
+                'status': status,
+                'message': message,
+                "result": result
+            }
+            self.write(response)
+            self.finish()
+            return
 # /

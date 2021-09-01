@@ -226,10 +226,8 @@ class NewsHandler(tornado.web.RequestHandler):
             except Exception as e:
                 code = 5623
                 status = False
-                message = 'Internal Error, Please Contact the Support Team.'
                 template = 'Exception: {0}. Argument: {1!r}'
                 iMessage = template.format(type(e).__name__, e.args)
-                message = 'Internal Error, Please Contact the Support Team.'
                 exc_type, exc_obj, exc_tb = sys.exc_info()
                 fname = exc_tb.tb_frame.f_code.co_filename
                 print('EXC', iMessage)
