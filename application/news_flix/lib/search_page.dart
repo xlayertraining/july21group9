@@ -15,7 +15,7 @@ class SearchPage extends StatefulWidget {
 class _SearchPageState extends State<SearchPage> {
   TextEditingController searchKeyWord = new TextEditingController();
   var newstile = [];
-
+ bool searchResult=true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,7 +57,7 @@ class _SearchPageState extends State<SearchPage> {
               ),
             ),
           )),
-      body: Container(
+      body:(searchResult==true)? Container(
         child: ListView(children: [
           ListTile(
             contentPadding: EdgeInsets.fromLTRB(25, 20, 10, 0),
@@ -105,7 +105,7 @@ class _SearchPageState extends State<SearchPage> {
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
           ),
         ]),
-      ),
+      ):buildCard(0),
     );
   }
 
@@ -119,6 +119,7 @@ class _SearchPageState extends State<SearchPage> {
     try {
       newstile = resp.data['result'];
       print(resp);
+      searchResult= true;
       Log.i('0_length', newstile.length.toString());
     } catch (e, s) {
       print(e.toString() + s.toString());
@@ -132,7 +133,7 @@ class _SearchPageState extends State<SearchPage> {
     );
   }
 
-  Widget buildCard(item, {catId, position}) {
+  Widget buildCard(item) {
     return Card(
       elevation: 5,
       margin: EdgeInsets.only(bottom: 20, top: 10, left: 10, right: 10),
@@ -146,6 +147,28 @@ class _SearchPageState extends State<SearchPage> {
                   padding: EdgeInsets.fromLTRB(15, 10, 10, 5),
                   child: Text(
                     item!['title'],
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.deepPurple,
+                      // fontStyle: FontStyle.italic,
+                      decorationStyle: TextDecorationStyle.double,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 5),
+            Divider(
+              color: Colors.deepPurple,
+              indent: 10,
+              endIndent: 10,
+            ),
+            Row(
+              children: [
+                Padding(
+                  padding: EdgeInsets.fromLTRB(15, 10, 10, 5),
+                  child: Text(
+                    item!['description'],
                     style: TextStyle(
                       fontSize: 16,
                       color: Colors.deepPurple,
