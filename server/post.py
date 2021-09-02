@@ -188,10 +188,14 @@ class NewsHandler(tornado.web.RequestHandler):
                 message = "Invalid category"
                 raise Exception
             try:
-                imageList = user_news_folder.find(
+                newsList = user_news_folder.find(
                         {"category": category_id,"approve":True},
                     )
-                async for i in imageList:
+                async for i in newsList:
+                    i['liked'] = False
+                    if account_id in i['likers']:
+                        i['liked'] = True
+
                     del[i['likers'], i['dislikers'], i['category'], i['description'],i['createdBy'],i['approvedAt']]
                     i['_id'] = str(i['_id'])
                     i["fav_user"] = False
@@ -202,7 +206,6 @@ class NewsHandler(tornado.web.RequestHandler):
                     account_find = await user_sign_up.find_one({"_id": ObjectId(i["accountId"])})
                     if account_find:
                         i["author"] = account_find["userName"]
-                   
                     
                     # adding image url
                     i['imageUrl'] = None
@@ -221,7 +224,7 @@ class NewsHandler(tornado.web.RequestHandler):
                     "result": result
                 }
                 self.write(response)
-                self.finish()
+                await self.finish()
                 return
             except Exception as e:
                 code = 5623

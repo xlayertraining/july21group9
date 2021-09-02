@@ -43,60 +43,60 @@ class _MyProfilePage2 extends State<MyProfilePage2> {
             ),
           ),
           backgroundColor: Colors.white,
-          elevation: 0.0,
+          elevation: 5,
           leading: IconButton(
             icon: Icon(Icons.arrow_back_ios_outlined,
-                color: Colors.deepPurple), // set your color here
+                color: Configuration.primaryColor), // set your color here
             onPressed: () {
               Navigator.pop(context);
             },
           ),
+          actions: [
+            IconButton(
+                onPressed: getuserProfile,
+              icon: Icon(
+                  Icons.refresh,
+                color: Configuration.primaryColor,
+              )
+              ,
+            )
+          ],
         ),
         body: Container(
-            padding: EdgeInsets.all(10),
+            padding: EdgeInsets.only(
+              top: 10,
+              left: 40,
+              right: 40
+            ),
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  Container(
-                    width: MediaQuery.of(context).size.width / 3,
-                    height: MediaQuery.of(context).size.width / 3,
+                  (firstNameCon.text.isNotEmpty)? Container(
+                    width: MediaQuery.of(context).size.width / 5,
+                    height: MediaQuery.of(context).size.width / 5,
                     decoration: BoxDecoration(
-                      border: Border.all(color: Colors.white, width: 5),
+                      border: Border.all(color: Colors.blueGrey, width: 2),
                       shape: BoxShape.circle,
-                      color: Colors.black26,
-                      image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: NetworkImage(
-                            'https://www.seekpng.com/png/detail/138-1387681_clip-art-black-and-white-stock-clip-art.png'),
+                      color: Colors.white,
+                    ),
+                    alignment: Alignment.center,
+                    child: Text(
+                        firstNameCon.text.split('')[0].toUpperCase(),
+                      style: TextStyle(
+                        fontSize: 50,
+                        color: Colors.green.shade800
                       ),
                     ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(
-                      bottom: 5,
-                      left: 90,
-                    ),
-                    child: CircleAvatar(
-                      backgroundColor: Colors.deepPurple,
-                      child: IconButton(
-                        icon: Icon(
-                          Icons.edit,
-                          color: Colors.white,
-                          size: 20,
-                        ),
-                        onPressed: () {},
-                      ),
-                    ),
-                  ),
+                  ): Container(),
                   SizedBox(
                     height: 10,
                   ),
                   TextField(
                     decoration: InputDecoration(
                       border: InputBorder.none,
-                      labelText: firstNameCon.text,
+                      labelText: 'First name',
                       labelStyle: TextStyle(color: Colors.deepPurple),
-                      suffixIcon: Icon(Icons.edit, color: Colors.black),
+                      prefixIcon: Icon(Icons.person, color: Colors.grey),
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.deepPurple),
                         borderRadius: BorderRadius.circular(25.0),
@@ -114,9 +114,9 @@ class _MyProfilePage2 extends State<MyProfilePage2> {
                   TextField(
                     decoration: InputDecoration(
                       border: InputBorder.none,
-                      labelText: lastName.text,
+                      labelText: 'Last name',
                       labelStyle: TextStyle(color: Colors.deepPurple),
-                      suffixIcon: Icon(Icons.edit, color: Colors.black),
+                      prefixIcon: Icon(Icons.edit, color: Colors.black),
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.deepPurple),
                         borderRadius: BorderRadius.circular(25.0),
@@ -134,9 +134,9 @@ class _MyProfilePage2 extends State<MyProfilePage2> {
                   TextField(
                     decoration: InputDecoration(
                       border: InputBorder.none,
-                      labelText: phoneNumber.text,
+                      labelText: 'Phone number',
                       labelStyle: TextStyle(color: Colors.deepPurple),
-                      suffixIcon: Icon(Icons.edit, color: Colors.black),
+                      prefixIcon: Icon(Icons.phone, color: Colors.grey),
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.deepPurple),
                         borderRadius: BorderRadius.circular(25.0),
@@ -154,9 +154,9 @@ class _MyProfilePage2 extends State<MyProfilePage2> {
                   TextField(
                     decoration: InputDecoration(
                       border: InputBorder.none,
-                      labelText: emailAddress.text,
+                      labelText: 'Email',
                       labelStyle: TextStyle(color: Colors.deepPurple),
-                      suffixIcon: Icon(Icons.edit, color: Colors.black),
+                      suffixIcon: Icon(Icons.email, color: Colors.grey),
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.deepPurple),
                         borderRadius: BorderRadius.circular(25.0),
@@ -203,8 +203,7 @@ class _MyProfilePage2 extends State<MyProfilePage2> {
                     height: 20,
                   ),
                   Container(
-                    height: 55,
-                    width: double.infinity,
+                    width: 200,
                     child: ElevatedButton(
                       onPressed: () async
                       {
@@ -218,7 +217,7 @@ class _MyProfilePage2 extends State<MyProfilePage2> {
                         child: Text(
                           "Update",
                           style: TextStyle(
-                            fontSize: 23,
+                            fontSize: 18,
                             color: Colors.white,
                           ),
                         ),
@@ -234,7 +233,7 @@ class _MyProfilePage2 extends State<MyProfilePage2> {
   getuserProfile() async {
     Response? response = null;
     try {
-      response = await Dio().get(Configuration.serverUrl + "/profile",
+      response = await Dio().get(Configuration.serverUrl + "/user/profile",
           options: Options(headers: {
             'Authorization': ' Bearer ' + Configuration.authToken
           }));
@@ -283,20 +282,22 @@ class _MyProfilePage2 extends State<MyProfilePage2> {
     catch (e, s) {
       Log.i(e.toString() + s.toString());
     }
+    setState(() {
+    });
   }
 
 updateUserProfile() async {
   Response? response = null;
-  var userData = FormData.fromMap({
+  var userData = {
     "firstName": firstNameCon.text,
     "lastName": lastName.text,
     "phoneNumber": phoneNumber.text,
     "emailAddress": emailAddress.text,
     "password": passwordController.text,
-  });
+  };
 
   try {
-    response = await Dio().post(Configuration.serverUrl + "/user/profile",
+    response = await Dio().put(Configuration.serverUrl + "/user/profile",
         data: userData,
         options: Options(headers: {
           'Authorization': ' Bearer ' + Configuration.authToken

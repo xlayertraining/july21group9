@@ -66,7 +66,7 @@ class PostLikeHandler(tornado.web.RequestHandler):
                 })
                 status = True
                 code = 2000
-                message = 'News is liked'
+                message = 'News is liked.'
                 result = []
 
         except Exception as e:
@@ -77,13 +77,13 @@ class PostLikeHandler(tornado.web.RequestHandler):
             print('EXC', iMessage)
             print('EX2', 'FILE: ' + str(fname) + ' LINE: ' +
                   str(exc_tb.tb_lineno) + ' TYPE: ' + str(exc_type))
-            response = {
-                'code': code,
-                'status': status,
-                'message': message,
-                "result": result
-            }
-            self.write(response)
-            self.finish()
-            return
+
+        response = {
+            'code': code,
+            'status': status,
+            'message': message,
+            "result": result
+        }
+        self.write(response)
+        await self.finish()
 # /

@@ -1,10 +1,12 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:custom_searchable_dropdown/custom_searchable_dropdown.dart';
 import 'package:dio/dio.dart';
 import 'package:dropdown_plus/dropdown_plus.dart';
 import 'package:flutter/material.dart';
 
 import 'package:image_picker/image_picker.dart';
+import 'package:multiselect/multiselect.dart';
 import 'package:untitled2/util/log_util.dart';
 import 'package:untitled2/util/toast_util.dart';
 
@@ -21,35 +23,15 @@ class _AppImagePickerState extends State<AppImagePicker> {
   TextEditingController titleController = new TextEditingController();
   TextEditingController descriptionController = new TextEditingController();
 
-  final List<Map<String, dynamic>> _roles = [
-    {"name": "Super Admin", "desc": "Having full access rights", "role": 1},
-    {
-      "name": "Admin",
-      "desc": "Having full access rights of a Organization",
-      "role": 2
-    },
-    {
-      "name": "Manager",
-      "desc": "Having Magenent access rights of a Organization",
-      "role": 3
-    },
-    {
-      "name": "Technician",
-      "desc": "Having Technician Support access rights",
-      "role": 4
-    },
-    {
-      "name": "Customer Support",
-      "desc": "Having Customer Support access rights",
-      "role": 5
-    },
-    {"name": "User", "desc": "Having End User access rights", "role": 6},
+  List<Map> categories = [
+    { 'value': 0, 'title': 'Latest' },
+    { 'value': 1, 'title': 'National' },
   ];
 
   String? _value;
   BuildContext? _context;
   File newsImage = new File('');
-var newsCategoryIndex;
+  List<int>? newsCategoryData;
   get picker => null;
   // int selectedValue = 1;
 
@@ -120,42 +102,62 @@ var newsCategoryIndex;
                 maxLines: 8,
                 maxLength: 2000,
               ),
-              DropdownFormField<Map<String, dynamic>>(
-                onEmptyActionPressed: () async {},
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    suffixIcon: Icon(Icons.arrow_drop_down),
-                    labelText: "Access"),
-                onSaved: (dynamic str) {},
-                onChanged: (dynamic str) {},
-                validator: (dynamic str) {},
-                displayItemFn: (dynamic item) {
-                  Log.i(item);
-                  if (item == null) {
-                    return Text(
-                      'N/A',
-                      style: TextStyle(fontSize: 16),
-                    );
-                  }
-                  return Text(
-                    item['name'] ?? '',
-                    style: TextStyle(fontSize: 16),
-                  );
-                },
-                findFn: (dynamic str) async => _roles,
-                filterFn: (dynamic item, str) =>
-                item['name'].toLowerCase().indexOf(str.toLowerCase()) >= 0,
-                dropdownItemFn: (dynamic item, position, focused,
-                    dynamic lastSelectedItem, onTap) =>
-                    ListTile(
-                      title: Text(item['name']),
-                      subtitle: Text(
-                        item['desc'] ?? '',
+              Padding(
+                padding: const EdgeInsets.only(
+                  left: 10,
+                  top: 20
+                ),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Select Categories*',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        color: Configuration.primaryColor,
                       ),
-                      tileColor:
-                      focused ? Color.fromARGB(20, 0, 0, 0) : Colors.transparent,
-                      onTap: onTap,
                     ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: CustomSearchableDropDown(
+                  items: categories,
+                  label: 'Select Categories',
+                  multiSelectTag: 'Categories',
+                  dropdownLabelStyle: TextStyle(
+                    color: Configuration.primaryColor,
+                  ),
+                  multiSelectValuesAsWidget: true,
+                  primaryColor: Configuration.primaryColor,
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                          color: Configuration.primaryColor,
+                      ),
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  multiSelect: true,
+                  prefixIcon:  Padding(
+                    padding: const EdgeInsets.all(0.0),
+                    child: Icon(Icons.search),
+                  ),
+                  dropDownMenuItems: categories.map((item) {
+                    return item['title'];
+                  }).toList(),
+                  onChanged: (selectedData){
+                    Log.i(json.decode(selectedData));
+                    if (selectedData.length > 0) {
+                      selectedData = json.decode(selectedData);
+                      newsCategoryData = [];
+                      for (int i =0; i < selectedData.length; i++) {
+                        newsCategoryData!.add(
+                            selectedData[i]['value']
+                        );
+                      }
+                      Log.i('selected_categories', newsCategoryData);
+                    }
+                  },
+                ),
               ),
               (newsImage.path.isNotEmpty)
                   ? Image.file(newsImage)
@@ -195,7 +197,7 @@ var newsCategoryIndex;
                 height: 30,
               ),
               SizedBox(
-                width: 120,
+                width: 200,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     primary: Colors.deepPurple,
@@ -209,7 +211,13 @@ var newsCategoryIndex;
                   },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: [Text("Upload")],
+                    children: [
+                      Icon(Icons.post_add, size: 20,),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Text("Submit news"),
+                    ],
                   ),
                 ),
               ),
@@ -245,17 +253,22 @@ var newsCategoryIndex;
       return;
     }
 
+    if (newsCategoryData!.isEmpty) {
+      ToastUtil.error(_context!, message: 'Please select news categories.');
+      return;
+    }
+
     if (newsImage.path.isEmpty) {
       postFormData = FormData.fromMap({
         'title': titleController.text,
         'description': descriptionController.text,
-        'category': json.encode([1,2,3]),
+        'category': json.encode(newsCategoryData),
       });
     } else {
       postFormData = FormData.fromMap({
         'title': titleController.text,
         'description': descriptionController.text,
-        'category': [1,2,3],
+        'category': json.encode(newsCategoryData),
         'image': await MultipartFile.fromFile(newsImage.path,
             filename: newsImage.path
                 .split('/')[newsImage.path.split('/').length - 1]),
@@ -280,6 +293,7 @@ var newsCategoryIndex;
     try {
       if (response!.data['status']) {
         ToastUtil.success(_context!, message: response.data['message']);
+        Navigator.of(_context!).pop(true);
       } else {
         ToastUtil.error(_context!, message: response.data['message']);
       }

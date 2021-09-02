@@ -42,6 +42,7 @@ class _HomePageState extends State<HomePage> {
   var userName;
   var userEmailAddress;
   var userPhoneNumber;
+  int userRole = 0;
 
   BuildContext? _context;
   bool liked = false;
@@ -93,17 +94,8 @@ class _HomePageState extends State<HomePage> {
               ),
               IconButton(
                 icon: Icon(
-                  Icons.notifications_active,
-                  color: Colors.redAccent.shade400,
-                ),
-                onPressed: () {
-                  // do something
-                },
-              ),
-              IconButton(
-                icon: Icon(
                   Icons.refresh,
-                  color: Colors.redAccent.shade400,
+                  color: Configuration.primaryColor,
                 ),
                 onPressed: () {
                   getNewsCategory1();
@@ -164,7 +156,11 @@ class _HomePageState extends State<HomePage> {
                 itemBuilder: (context, index) {
                   return InkWell(
                     onTap: () {},
-                    child: buildCard(listTiles1[index]),
+                    child: buildCard(
+                      listTiles1[index],
+                      catId: 0,
+                      position: index,
+                    ),
                   );
                 },
               ),
@@ -317,25 +313,28 @@ class _HomePageState extends State<HomePage> {
                         MaterialPageRoute(builder: (context) => Favourite()));
                   },
                 ),
-                const SizedBox(height: 10),
-
-                ListTile(
-                  leading:
-                      Icon(Icons.all_inbox, size: 25, color: Colors.blueGrey),
-                  title: const Text(
-                    'All news',
-                    style: TextStyle(
-                      // fontWeight: FontWeight.bold,
-                      fontSize: 15,
-                    ),
+                (userRole == 1)? Container(
+                  margin: EdgeInsets.only(
+                    top: 10
                   ),
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => PostLIstview()));
-                  },
-                ),
+                  child: ListTile(
+                    leading:
+                        Icon(Icons.all_inbox, size: 25, color: Colors.blueGrey),
+                    title: const Text(
+                      'All news',
+                      style: TextStyle(
+                        // fontWeight: FontWeight.bold,
+                        fontSize: 15,
+                      ),
+                    ),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => PostLIstview()));
+                    },
+                  ),
+                ) : Container(),
                 const SizedBox(height: 10),
                 ListTile(
                   leading:
@@ -368,14 +367,13 @@ class _HomePageState extends State<HomePage> {
                     MaterialPageRoute(builder: (context) => Share());
                   },
                 ),
-
                 const SizedBox(height: 10),
                 // Divider(color: Colors.black),
                 // const SizedBox(height: 10),
                 ListTile(
                   leading: Icon(Icons.info, size: 25, color: Colors.blueGrey),
                   title: const Text(
-                    'About us',
+                    'About Us',
                     style: TextStyle(
                       // fontWeight: FontWeight.bold,
                       fontSize: 15,
@@ -386,10 +384,8 @@ class _HomePageState extends State<HomePage> {
                         MaterialPageRoute(builder: (context) => AboutUs()));
                   },
                 ),
-                const SizedBox(height: 85),
+                const SizedBox(height: 10),
                 Divider(color: Colors.black),
-                // const SizedBox(height: 10),
-
                 ListTile(
                   leading:
                       Icon(Icons.settings_power, size: 25, color: Colors.red),
@@ -443,7 +439,7 @@ class _HomePageState extends State<HomePage> {
   getuserProfile() async {
     var response;
     try {
-      response = await Dio().get(Configuration.serverUrl + "/profile",
+      response = await Dio().get(Configuration.serverUrl + "/user/profile",
           options: Options(headers: {
             'Authorization': ' Bearer ' + Configuration.authToken
           }));
@@ -454,15 +450,17 @@ class _HomePageState extends State<HomePage> {
     }
     try {
       if (response.data['status']){
-        userName = response.data['result'][0]['userName'];
+        userName = response.data['result'][0]['firstName'] + ' ' + response.data['result'][0]['lastName'];
         userEmailAddress = response.data['result'][0]['emailAddress'];
         userPhoneNumber = response.data['result'][0]['phoneNumber'];
-
+        userRole = response.data['result'][0]['role'];
       }
     }
     catch (e, s) {
       Log.i(e.toString() + s.toString());
     }
+    setState(() {
+    });
   }
 
   getNewsCategory2() async {
@@ -570,15 +568,37 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  newsLike(var id) async {
+  newsLike(item, {int? catId, position}) async {
     Response? resp = null;
-    var newsIdData = FormData.fromMap({"newsId": id.toString()});
+    var newsIdData = FormData.fromMap({"newsId": item['_id'].toString()});
     resp = await Dio().post(
       Configuration.serverUrl + '/news/like',
       data: newsIdData,
       options: Options(
-          headers: {'Authorization': ' Bearer ' + Configuration.authToken}),
+            headers: {'Authorization': ' Bearer ' + Configuration.authToken}
+          ),
     );
+    try {
+      Log.i('like_resp', resp.data);
+      if (resp.data['status']) {
+        switch(catId) {
+          case 0:
+            if (listTiles1[position]['liked']) {
+              listTiles1[position]['like']--;
+            } else {
+              listTiles1[position]['like']++;
+            }
+            listTiles1[position]['liked'] = !listTiles1[position]['liked'];
+            break;
+          default:
+            break;
+        }
+      }
+    } catch (e, s) {
+      Log.e(e, s);
+    }
+    setState(() {
+    });
   }
 
   newsDislike(var id) async {
@@ -603,7 +623,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget buildCard(var item) {
+  Widget buildCard(item, {catId, position}) {
     return Card(
         elevation: 5,
         margin: EdgeInsets.only(bottom: 20, top: 10, left: 10, right: 10),
@@ -676,31 +696,18 @@ class _HomePageState extends State<HomePage> {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) => Likers()));
                       },
-                      child: Column(
+                      child: Row(
                         children: [
                           IconButton(
                             icon: Icon(
                               Icons.thumb_up_outlined,
                             ),
-                            color: (liked == true)
+                            color: (item!['liked'] == true)
                                 ? Configuration.favIconColor1 =
                                     Colors.deepPurple
                                 : Configuration.favIconColor1 = Colors.grey,
                             onPressed: () async {
-                              var likes = item['_id'];
-                              newsLike(likes);
-                              setState(() {
-                                if (Configuration.favIconColor1 ==
-                                    Colors.grey) {
-                                  Configuration.favIconColor1 =
-                                      Colors.deepPurple;
-                                  liked = true;
-                                  Configuration.favIconColor2 = Colors.grey;
-                                } else {
-                                  Configuration.favIconColor1 = Colors.grey;
-                                  liked = false;
-                                }
-                              });
+                              newsLike(item, catId: catId, position: position);
                             },
                           ),
                           (item!['like'] > 0)

@@ -24,7 +24,9 @@ class ProfileHandler(tornado.web.RequestHandler):
                 })
                 if account_find:
                     account_find["_id"] = str(account_find["_id"])
-                    del [account_find["role"]]
+                    account_find["firstName"] = (account_find["firstName"]).title()
+                    account_find["lastName"] = (account_find["lastName"]).title()
+                    account_find["phoneNumber"] = int(account_find["phoneNumber"])
                     result.append(account_find)
 
                 code = 2000
@@ -85,7 +87,7 @@ class ProfileHandler(tornado.web.RequestHandler):
                 message = "Invalid JSON Body"
                 raise Exception
 
-                # Getting Fields Named firstName,lastname,phoneNumber,emailAddress,password
+            # Getting Fields Named firstName,lastname,phoneNumber,emailAddress,password
             # firstName
             try:
                 firstName = jsonBody.get('firstName')
@@ -144,8 +146,8 @@ class ProfileHandler(tornado.web.RequestHandler):
                         "firstName": firstName,
                         "lastName": lastName,
                         "userName": firstName+" "+lastName,
-                        "password":password,
-                        "emailAddress":emailAddress
+                        "password": password,
+                        "emailAddress": emailAddress
                     }
                 }
                 )
@@ -156,7 +158,7 @@ class ProfileHandler(tornado.web.RequestHandler):
                 raise Exception
             code = 2000
             status = True
-            message = "Profile has been updated"
+            message = "Profile details has been updated."
             response = {
                 'code': code,
                 'status': status,
@@ -165,7 +167,7 @@ class ProfileHandler(tornado.web.RequestHandler):
 
             }
             self.write(response)
-            self.finish()
+            await self.finish()
             return
 
         except Exception as e:
@@ -183,5 +185,5 @@ class ProfileHandler(tornado.web.RequestHandler):
                 "result": result
             }
             self.write(response)
-            self.finish()
+            await self.finish()
             return

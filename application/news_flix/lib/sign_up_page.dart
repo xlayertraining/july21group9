@@ -83,7 +83,7 @@ class _MyWidgetState extends State<MyWidget> {
                   children: [
                     Container(
                       width: width,
-                      height: height * 0.25,
+                      height: height * 0.10,
                       child: Lottie.asset(
                         "assets/Sign Up.json",
                         fit: BoxFit.contain,
@@ -142,9 +142,9 @@ class _MyWidgetState extends State<MyWidget> {
                         TextField(
                             controller: phoneController,
                             decoration: InputDecoration(
-                              labelText: "Contact No.",
+                              labelText: "Phone number",
                               labelStyle: TextStyle(
-                                  color: Colors.deepPurpleAccent.shade100),
+                                  color: Configuration.primaryColor),
                               prefixIcon:
                                   Icon(Icons.phone, color: Colors.black),
                               enabledBorder: OutlineInputBorder(
@@ -234,6 +234,9 @@ class _MyWidgetState extends State<MyWidget> {
                           ),
                           style: ElevatedButton.styleFrom(
                               primary: Colors.deepPurple),
+                        ),
+                        SizedBox(
+                          height: 50,
                         ),
                       ],
                     ),
