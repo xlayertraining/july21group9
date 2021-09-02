@@ -16,8 +16,8 @@ from bson import ObjectId
 def timeNow():
     return int(time.time())
 
-serverUrl = 'http://10.0.2.2:8009/julygroup9_web/api'
-# serverUrl = 'http://192.168.43.14:8009/julygroup9_web/api'
+# serverUrl = 'http://10.0.2.2:8009/julygroup9_web/api'
+serverUrl = 'http://192.168.43.129:8009/julygroup9_web/api'
 # serverUrl = 'https://api.xlayer.in/julygroup9_web/api'
 # serverUrl = 'http://localhost:8009/julygroup9_web/api'
 

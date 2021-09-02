@@ -2,11 +2,11 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:custom_searchable_dropdown/custom_searchable_dropdown.dart';
 import 'package:dio/dio.dart';
-import 'package:dropdown_plus/dropdown_plus.dart';
+
 import 'package:flutter/material.dart';
 
 import 'package:image_picker/image_picker.dart';
-import 'package:multiselect/multiselect.dart';
+
 import 'package:untitled2/util/log_util.dart';
 import 'package:untitled2/util/toast_util.dart';
 
@@ -26,6 +26,10 @@ class _AppImagePickerState extends State<AppImagePicker> {
   List<Map> categories = [
     { 'value': 0, 'title': 'Latest' },
     { 'value': 1, 'title': 'National' },
+    { 'value': 2, 'title': 'International' },
+    { 'value': 3, 'title': 'Sports' },
+    { 'value': 4, 'title': 'Tech' },
+    { 'value': 5, 'title': 'Business' },
   ];
 
   String? _value;

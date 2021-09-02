@@ -233,7 +233,9 @@ class _MyWidgetState extends State<MyWidget> {
                             ),
                           ),
                           style: ElevatedButton.styleFrom(
-                              primary: Colors.deepPurple),
+                              primary: Colors.deepPurple,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30)),),
                         ),
                         SizedBox(
                           height: 50,

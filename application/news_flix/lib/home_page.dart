@@ -43,6 +43,7 @@ class _HomePageState extends State<HomePage> {
   var userEmailAddress;
   var userPhoneNumber;
   int userRole = 0;
+  TextEditingController firstNameCon = new TextEditingController();
 
   BuildContext? _context;
   bool liked = false;
@@ -257,7 +258,6 @@ class _HomePageState extends State<HomePage> {
             elevation: 18,
             child: ListView(
               padding: EdgeInsets.zero,
-              // Important: Remove any padding from the ListView.
               children: [
                 UserAccountsDrawerHeader(
                   accountName: Text((userName != null? userName:'abc'),
@@ -274,13 +274,18 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage(
-                          "assets/anime wallpaper1.jpg"),
-                      fit: BoxFit.cover,
-                    ),
+                      gradient: LinearGradient(
+                          begin: Alignment.topRight,
+                          end: Alignment.bottomLeft,
+                          colors: [Colors.red, Colors.deepPurple])
+                  )
+                    // color: Colors.deepPurple
+                  //   image: DecorationImage(
+                  //     image: AssetImage(
+                  //         "assets/road-wall paper.webp"),
+                  //     fit: BoxFit.cover,
+                  //   ),
                   ),
-                ),
                 ListTile(
                   leading: Icon(Icons.person, size: 25, color: Colors.blueGrey),
                   title: const Text(
@@ -742,7 +747,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     SizedBox(
-                      width: 20,
+                      width: 15,
                     ),
                     Row(
                       children: [
@@ -777,7 +782,7 @@ class _HomePageState extends State<HomePage> {
                       ],
                     ),
                     SizedBox(
-                      width: 30,
+                      width: 15,
                     ),
                     IconButton(
                       onPressed: () {
@@ -794,7 +799,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     SizedBox(
-                      width: 30,
+                      width: 15,
                     ),
                     InkWell(
                         child: Column(
@@ -820,6 +825,18 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ],
                     )),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        validate();
+                      },
+                      icon: Icon(
+                        Icons.share_outlined,
+                        color: Colors.grey,
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -847,5 +864,13 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ]));
+  }
+
+   validate() async {
+    ToastUtil.error(
+      _context!,
+      message: "This option will come soon",
+    );
+    return;
   }
 }

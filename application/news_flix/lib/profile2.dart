@@ -116,7 +116,7 @@ class _MyProfilePage2 extends State<MyProfilePage2> {
                       border: InputBorder.none,
                       labelText: 'Last name',
                       labelStyle: TextStyle(color: Colors.deepPurple),
-                      prefixIcon: Icon(Icons.edit, color: Colors.black),
+                      prefixIcon: Icon(Icons.person_sharp, color: Colors.grey),
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.deepPurple),
                         borderRadius: BorderRadius.circular(25.0),
@@ -156,7 +156,7 @@ class _MyProfilePage2 extends State<MyProfilePage2> {
                       border: InputBorder.none,
                       labelText: 'Email',
                       labelStyle: TextStyle(color: Colors.deepPurple),
-                      suffixIcon: Icon(Icons.email, color: Colors.grey),
+                      prefixIcon: Icon(Icons.email, color: Colors.grey),
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.deepPurple),
                         borderRadius: BorderRadius.circular(25.0),
@@ -179,15 +179,15 @@ class _MyProfilePage2 extends State<MyProfilePage2> {
                       labelText: passwordController.text,
                       labelStyle: TextStyle(color: Colors.deepPurple),
                       hintText: 'Enter Your password',
-                      suffixIcon: IconButton(
+                      prefixIcon: IconButton(
                         onPressed: () {
                           setState(() {
                             passShow = !passShow;
                           });
                         },
                         icon: (passShow == true)
-                            ? Icon(Icons.visibility, color: Colors.black)
-                            : Icon(Icons.visibility_off, color: Colors.black),
+                            ? Icon(Icons.visibility, color: Colors.grey)
+                            : Icon(Icons.visibility_off, color: Colors.grey),
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.deepPurple),

@@ -219,6 +219,19 @@ class _ListWidgetState extends State<ListWidget> {
                       },
                     ),
                   ),
+                  SizedBox(
+                    width: 30,
+                  ),
+                  IconButton(
+                    onPressed: () {
+                    },
+                    icon: Icon(
+                      Icons.share,
+                      color: (item!['liked'] == null || item!['liked'] == false)
+                          ? Colors.grey
+                          : Colors.grey,
+                    ),
+                  ),
                 ],
               ),
             ),

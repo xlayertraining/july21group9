@@ -25,14 +25,20 @@ class SearchPage extends StatelessWidget {
             child: Center(
               child: TextField(
                 decoration: InputDecoration(
-                    prefixIcon: Icon(Icons.search),
-                    suffixIcon: IconButton(
-                      icon: Icon(Icons.clear),
-                      onPressed: () {
-                        /* Clear the search field */
-                      },
+                    suffixIcon: Padding(
+                      padding: const EdgeInsets.all(0.0),
+                      child: IconButton(
+                        icon: Icon(
+                          Icons.search,
+                          color: Colors.deepPurple,
+                        ),
+                        onPressed: () {
+                          /* Clear the search field */
+                        },
+                      ),
                     ),
                     hintText: 'Search...',
+                    contentPadding: EdgeInsets.all(10),
                     border: InputBorder.none),
               ),
             ),
@@ -43,43 +49,46 @@ class SearchPage extends StatelessWidget {
             contentPadding: EdgeInsets.fromLTRB(25, 20, 10, 0),
             title: Text(
               " Just for you",
-              style: TextStyle(fontWeight: FontWeight.bold,
-              fontSize: 25
-              ),
-
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
             ),
           ),
           ListTile(
-            leading: Icon(Icons.search, color: Colors.grey, size: 30,),
-            title: Text(" Posts you have seen ", style: TextStyle(
+            leading: Icon(
+              Icons.search,
+              color: Colors.grey,
+              size: 30,
+            ),
+            title: Text(
+              " Posts you have seen ",
+              style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 15,
+              ),
             ),
-               ),
           ),
           ListTile(
-            leading: Icon(Icons.search, color: Colors.grey,size: 30,),
-            title: Text(" News you may like ", style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 15)),
+            leading: Icon(
+              Icons.search,
+              color: Colors.grey,
+              size: 30,
+            ),
+            title: Text(" News you may like ",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
           ),
           ListTile(
-            leading: Icon(Icons.search, color: Colors.grey,size: 30),
-            title: Text(" News you want to know ", style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 15)),
+            leading: Icon(Icons.search, color: Colors.grey, size: 30),
+            title: Text(" News you want to know ",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
           ),
           ListTile(
-            leading: Icon(Icons.search, color: Colors.grey,size: 30),
-            title: Text("Videos you may like ", style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 15)),
+            leading: Icon(Icons.search, color: Colors.grey, size: 30),
+            title: Text("Videos you may like ",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
           ),
           ListTile(
-            leading: Icon(Icons.search, color: Colors.grey,size: 30),
-            title: Text(" Events you may like ", style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 15)),
+            leading: Icon(Icons.search, color: Colors.grey, size: 30),
+            title: Text(" Events you may like ",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
           ),
         ]),
       ),

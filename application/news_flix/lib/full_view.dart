@@ -32,23 +32,23 @@ class _FullViewState extends State<FullView> {
       ),
       body: SingleChildScrollView(
         child: Container(
+            color: Colors.white,
+            margin: EdgeInsets.only(left: 8,right: 8),
+            height: 700,
             padding: EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 80),
             child: Column(mainAxisSize: MainAxisSize.min, children: [
-              TextField(
-                decoration: InputDecoration(
-                  labelText: "Title :",
-                  labelStyle: TextStyle(color: Colors.deepPurple,fontSize: 20),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.deepPurple),
-                    borderRadius: BorderRadius.circular(25.0),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.black87),
-                    borderRadius: BorderRadius.circular(25.0),
-                  ),
-                ),
-                maxLength: 200,
-                maxLines: 3,
+              Text(
+                'Title :',
+            textDirection: TextDirection.ltr,
+              textAlign: TextAlign.start,
+              style: TextStyle(
+                  fontSize: 20.0,
+                  color: Colors.deepPurple,
+                  fontWeight: FontWeight.bold,
+                  fontStyle: FontStyle.italic),
+            ),
+              SizedBox(
+                width: 10,
               ),
               Container(
                 width: MediaQuery.of(context).size.width,
@@ -61,21 +61,15 @@ class _FullViewState extends State<FullView> {
               SizedBox(
                 width: 10,
               ),
-              TextField(
-                decoration: InputDecoration(
-                  labelText: "Description :",
-                  labelStyle: TextStyle(color: Colors.deepPurple,fontSize: 20),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.deepPurple),
-                    borderRadius: BorderRadius.circular(25.0),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.black87),
-                    borderRadius: BorderRadius.circular(25.0),
-                  ),
-                ),
-                maxLines: 8,
-                maxLength: 2000,
+              Text(
+                'description :',
+                textDirection: TextDirection.ltr,
+                textAlign: TextAlign.start,
+                style: TextStyle(
+                    fontSize: 20.0,
+                    color: Colors.deepPurple,
+                    fontWeight: FontWeight.bold,
+                    fontStyle: FontStyle.italic),
               ),
             ])),
       ),

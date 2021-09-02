@@ -152,6 +152,8 @@ class _MyappState extends State<Myapp> {
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   primary: Colors.deepPurple.shade400,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30)),
                 ),
                 onPressed: () {
                   validate();

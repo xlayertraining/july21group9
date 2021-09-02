@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:untitled2/full_view.dart';
 
 class Favourite extends StatefulWidget {
   const Favourite({Key? key}) : super(key: key);
@@ -52,15 +53,17 @@ class _FavouriteState extends State<Favourite> {
                       leading: CircleAvatar(
                         backgroundImage: AssetImage(images[index]),
                       ),
-
-                      // title: Text("This is Post Title"),
-                      // subtitle: Text("This is Post Description"),
                       title: Text(
                         'abc',
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       subtitle: Text('abc'),
-
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => FullView()));
+                      },
                       trailing: IconButton(
                         icon: Icon(
                           Icons.delete,
