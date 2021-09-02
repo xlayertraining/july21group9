@@ -212,6 +212,8 @@ class _MyProfilePage2 extends State<MyProfilePage2> {
                       },
                       style: ElevatedButton.styleFrom(
                         primary: Colors.deepPurple,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30)),
                       ),
                       child: Center(
                         child: Text(
