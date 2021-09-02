@@ -1,7 +1,20 @@
-import 'package:flutter/material.dart';
+import 'dart:async';
 
-class SearchPage extends StatelessWidget {
+import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
+import 'package:untitled2/util/log_util.dart';
+
+import 'config/configuration.dart';
+class SearchPage extends StatefulWidget {
   const SearchPage({Key? key}) : super(key: key);
+
+  @override
+  _SearchPageState createState() => _SearchPageState();
+}
+
+class _SearchPageState extends State<SearchPage> {
+  TextEditingController searchKeyWord = new TextEditingController();
+  var newstile = [];
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +37,7 @@ class SearchPage extends StatelessWidget {
                 color: Colors.white, borderRadius: BorderRadius.circular(5)),
             child: Center(
               child: TextField(
+                controller: searchKeyWord,
                 decoration: InputDecoration(
                     suffixIcon: Padding(
                       padding: const EdgeInsets.all(0.0),
@@ -33,7 +47,7 @@ class SearchPage extends StatelessWidget {
                           color: Colors.deepPurple,
                         ),
                         onPressed: () {
-                          /* Clear the search field */
+                          searchNews();
                         },
                       ),
                     ),
@@ -48,7 +62,7 @@ class SearchPage extends StatelessWidget {
           ListTile(
             contentPadding: EdgeInsets.fromLTRB(25, 20, 10, 0),
             title: Text(
-              " Just for you",
+              "Just for you",
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
             ),
           ),
@@ -91,6 +105,83 @@ class SearchPage extends StatelessWidget {
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
           ),
         ]),
+      ),
+    );
+  }
+
+  searchNews() async {
+    Response? resp = null;
+    resp = await Dio().get(
+        Configuration.serverUrl + '/news/search?keyword=' + searchKeyWord.text,
+        options: Options(
+            headers: {'Authorization': ' Bearer ' + Configuration.authToken}));
+
+    try {
+      newstile = resp.data['result'];
+      print(resp);
+      Log.i('0_length', newstile.length.toString());
+    } catch (e, s) {
+      print(e.toString() + s.toString());
+    }
+
+    Timer(
+      Duration(seconds: 1),
+          () {
+        setState(() {});
+      },
+    );
+  }
+
+  Widget buildCard(item, {catId, position}) {
+    return Card(
+      elevation: 5,
+      margin: EdgeInsets.only(bottom: 20, top: 10, left: 10, right: 10),
+      child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Padding(
+                  padding: EdgeInsets.fromLTRB(15, 10, 10, 5),
+                  child: Text(
+                    item!['title'],
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.deepPurple,
+                      // fontStyle: FontStyle.italic,
+                      decorationStyle: TextDecorationStyle.double,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 5),
+            Divider(
+              color: Colors.deepPurple,
+              indent: 10,
+              endIndent: 10,
+            ),
+            (item!['imageUrl'] != null)
+                ? Container(
+              width: MediaQuery
+                  .of(context)
+                  .size
+                  .width,
+              height: MediaQuery
+                  .of(context)
+                  .size
+                  .width / 2,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: NetworkImage(item!['imageUrl']),
+                  fit: BoxFit.cover,
+                ),
+                borderRadius: BorderRadius.circular(3),
+              ),
+            )
+                : Container(),
+          ]
       ),
     );
   }

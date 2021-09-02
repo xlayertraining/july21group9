@@ -5,6 +5,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:untitled2/page_transition.dart';
 import 'package:rect_getter/rect_getter.dart';
 import 'package:untitled2/util/log_util.dart';
+import 'package:untitled2/util/toast_util.dart';
 
 import 'config/configuration.dart';
 import 'create_news.dart';
@@ -24,13 +25,12 @@ class _MyPostState extends State<MyPost> {
   // late Rect rect;
 
   // void _onTap() async {
-    // setState(() => rect = RectGetter.getRectFromKey(rectGetterKey)!); //<--onTap, update rect
+  // setState(() => rect = RectGetter.getRectFromKey(rectGetterKey)!); //<--onTap, update rect
 
   // }
 
   @override
   Widget build(BuildContext context) {
-
     return
         // Stack( //<-- Wrap Scaffold with a Stack
         //   children: <Widget>[
@@ -102,14 +102,19 @@ class _MyPostBodyState extends State<MyPostBody> {
               userNews[index]['title'].toString(),
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
-                subtitle: Text(userNews[index]['description'].toString(),),
-                 trailing: IconButton(
+            subtitle: Text(
+              userNews[index]['description'].toString(),
+            ),
+            trailing: IconButton(
               icon: Icon(
                 Icons.delete,
                 color: Colors.red,
                 size: 22,
               ),
-              onPressed: () {},
+              onPressed: () async {
+                deluserNews(index);
+                getuserNews();
+              },
             ),
           ));
         },
@@ -128,11 +133,10 @@ class _MyPostBodyState extends State<MyPostBody> {
             headers: {'Authorization': ' Bearer ' + Configuration.authToken}));
     print(resp);
     try {
-      if (resp.data['status']){
+      if (resp.data['status']) {
         userNews = resp.data['result'];
         Log.i('0_length', userNews.length.toString());
       }
-
     } catch (e, s) {
       print(e.toString() + s.toString());
     }
@@ -144,26 +148,25 @@ class _MyPostBodyState extends State<MyPostBody> {
       },
     );
   }
-  // this delete post is not functional.....
-  deluserNews() async {
+  deluserNews(var delIndex) async {
     Response? resp = null;
-    resp = await Dio().get(Configuration.serverUrl + '/delete',
+    var deleteNews = userNews[delIndex]['_id'].toString();
+    print(deleteNews);
+    resp = await Dio().delete(Configuration.serverUrl + '/news?newsId='+deleteNews,
         options: Options(
             headers: {'Authorization': ' Bearer ' + Configuration.authToken}));
     print(resp);
     try {
-      if (resp.data['status']){
-        userNews = resp.data['result'];
-        Log.i('0_length', userNews.length.toString());
+      if (resp.data['status']) {
+        ToastUtil.success(_context!, message: resp.data['message']);
       }
-
     } catch (e, s) {
       print(e.toString() + s.toString());
     }
 
     Timer(
       Duration(seconds: 1),
-          () {
+      () {
         setState(() {});
       },
     );

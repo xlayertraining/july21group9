@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'package:custom_searchable_dropdown/custom_searchable_dropdown.dart';
@@ -293,11 +294,11 @@ class _AppImagePickerState extends State<AppImagePicker> {
       response = null;
     }
 
-
     try {
       if (response!.data['status']) {
         ToastUtil.success(_context!, message: response.data['message']);
         Navigator.of(_context!).pop(true);
+
       } else {
         ToastUtil.error(_context!, message: response.data['message']);
       }
@@ -306,4 +307,5 @@ class _AppImagePickerState extends State<AppImagePicker> {
     }
 
   }
+
 }
