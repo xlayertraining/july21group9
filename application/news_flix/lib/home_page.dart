@@ -173,7 +173,9 @@ class _HomePageState extends State<HomePage> {
                     itemBuilder: (context, index) {
                       return InkWell(
                         onTap: () {},
-                        child: buildCard(listTiles2[index]),
+                        child: buildCard(listTiles2[index],
+                        catId: 1,
+                        position: index),
                       );
                     },
                   ),
@@ -601,15 +603,38 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  newsDislike(var id) async {
+  newsDislike(item,{int?catId,position}) async {
     Response? resp = null;
-    var newsIdData = FormData.fromMap({"newsId": id.toString()});
+    var newsIdData = FormData.fromMap({"newsId": item['_id'].toString()});
     resp = await Dio().post(
       Configuration.serverUrl + '/news/dislike',
       data: newsIdData,
       options: Options(
           headers: {'Authorization': ' Bearer ' + Configuration.authToken}),
     );
+    try {
+      Log.i('dislike_response',resp.data);
+      if (resp.data['status']){
+        switch(catId) {
+          case 0:
+            if (listTiles1[position]['disliked']) {
+              listTiles1[position]['dislike']--;
+            } else {
+              listTiles1[position]['dislike']++;
+            }
+            listTiles1[position]['disliked'] = !listTiles1[position]['disliked'];
+            break;
+          default:
+            break;
+        }
+      }
+    }
+    catch(e,s){
+      Log.e(e,s);
+    }
+    setState(() {
+
+    });
   }
 
   newsFav(var id) async {
@@ -719,39 +744,37 @@ class _HomePageState extends State<HomePage> {
                     SizedBox(
                       width: 20,
                     ),
-                    InkWell(
-                      onLongPress: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => Dislikers()));
-                      },
-                      child: Column(
-                        children: [
-                          IconButton(
-                            icon: Icon(
-                              Icons.thumb_down_outlined,
-                            ),
-                            color: Configuration.favIconColor2,
-                            onPressed: () async {
-                              var dislikes = item!['_id'];
-                              newsDislike(dislikes);
-                              setState(() {
-                                if (Configuration.favIconColor2 ==
-                                    Colors.grey) {
-                                  Configuration.favIconColor2 = Colors.red;
-                                  Configuration.favIconColor1 = Colors.grey;
-                                } else {
-                                  Configuration.favIconColor2 = Colors.grey;
-                                }
-                              });
-                            },
+                    Row(
+                      children: [
+                        InkWell(
+                          onLongPress: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Dislikers()));
+                          },
+                          child: Row(
+                            children: [
+                              IconButton(
+                                icon: Icon(
+                                  Icons.thumb_down_outlined,
+                                ),
+                                color: (item!['disliked'] == true)
+                                    ? Configuration.favIconColor1 =
+                                    Colors.red
+                                    : Configuration.favIconColor1 = Colors.grey,
+                                onPressed: () async {
+                                  newsDislike(item,catId:catId,position:position);
+
+                                },
+                              ),
+                              (item!['dislike'] > 0)
+                                  ? Text(item!['dislike'].toString())
+                                  : Container(),
+                            ],
                           ),
-                          (item!['dislike'] > 0)
-                              ? Text(item!['dislike'].toString())
-                              : Container(),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                     SizedBox(
                       width: 30,
