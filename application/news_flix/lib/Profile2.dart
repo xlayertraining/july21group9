@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:untitled2/config/configuration.dart';
 import 'package:untitled2/util/log_util.dart';
+import 'package:untitled2/util/toast_util.dart';
 
 class MyProfilePage2 extends StatefulWidget {
   MyProfilePage2();
@@ -20,6 +21,7 @@ class _MyProfilePage2 extends State<MyProfilePage2> {
   TextEditingController passwordController = new TextEditingController();
 
   BuildContext? _context;
+
 
   @override
   Widget build(BuildContext context) {
@@ -92,9 +94,9 @@ class _MyProfilePage2 extends State<MyProfilePage2> {
                   TextField(
                     decoration: InputDecoration(
                       border: InputBorder.none,
-                      labelText: 'Enter your first name :',
+                      labelText: firstNameCon.text,
                       labelStyle: TextStyle(color: Colors.deepPurple),
-                      suffixIcon: Icon(Icons.person_add, color: Colors.black),
+                      suffixIcon: Icon(Icons.edit, color: Colors.black),
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.deepPurple),
                         borderRadius: BorderRadius.circular(25.0),
@@ -112,9 +114,9 @@ class _MyProfilePage2 extends State<MyProfilePage2> {
                   TextField(
                     decoration: InputDecoration(
                       border: InputBorder.none,
-                      labelText: 'Enter your last name :',
+                      labelText: lastName.text,
                       labelStyle: TextStyle(color: Colors.deepPurple),
-                      suffixIcon: Icon(Icons.person_add, color: Colors.black),
+                      suffixIcon: Icon(Icons.edit, color: Colors.black),
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.deepPurple),
                         borderRadius: BorderRadius.circular(25.0),
@@ -132,9 +134,9 @@ class _MyProfilePage2 extends State<MyProfilePage2> {
                   TextField(
                     decoration: InputDecoration(
                       border: InputBorder.none,
-                      labelText: 'Enter your phone number :',
+                      labelText: phoneNumber.text,
                       labelStyle: TextStyle(color: Colors.deepPurple),
-                      suffixIcon: Icon(Icons.phone_android_sharp, color: Colors.black),
+                      suffixIcon: Icon(Icons.edit, color: Colors.black),
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.deepPurple),
                         borderRadius: BorderRadius.circular(25.0),
@@ -152,9 +154,9 @@ class _MyProfilePage2 extends State<MyProfilePage2> {
                   TextField(
                     decoration: InputDecoration(
                       border: InputBorder.none,
-                      labelText: 'Enter your email :',
+                      labelText: emailAddress.text,
                       labelStyle: TextStyle(color: Colors.deepPurple),
-                      suffixIcon: Icon(Icons.attach_email_outlined, color: Colors.black),
+                      suffixIcon: Icon(Icons.edit, color: Colors.black),
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.deepPurple),
                         borderRadius: BorderRadius.circular(25.0),
@@ -174,7 +176,7 @@ class _MyProfilePage2 extends State<MyProfilePage2> {
                     obscureText: !passShow,
                     decoration: InputDecoration(
                       border: InputBorder.none,
-                      labelText: 'Enter  your Password :',
+                      labelText: passwordController.text,
                       labelStyle: TextStyle(color: Colors.deepPurple),
                       hintText: 'Enter Your password',
                       suffixIcon: IconButton(
@@ -206,7 +208,8 @@ class _MyProfilePage2 extends State<MyProfilePage2> {
                     child: ElevatedButton(
                       onPressed: () async
                       {
-                        getuserProfile();
+                        updateUserProfile();
+
                       },
                       style: ElevatedButton.styleFrom(
                         primary: Colors.deepPurple,
@@ -258,7 +261,7 @@ class _MyProfilePage2 extends State<MyProfilePage2> {
     }
     try {
       if (response!.data['status']){
-        phoneNumber.text = response.data['result'][0]['phoneNumber'];
+        phoneNumber.text = (response.data['result'][0]['phoneNumber']).toString();
       }
     }
     catch (e, s) {
@@ -282,6 +285,34 @@ class _MyProfilePage2 extends State<MyProfilePage2> {
     }
   }
 
+updateUserProfile() async {
+  Response? response = null;
+  var userData = FormData.fromMap({
+    "firstName": firstNameCon.text,
+    "lastName": lastName.text,
+    "phoneNumber": phoneNumber.text,
+    "emailAddress": emailAddress.text,
+    "password": passwordController.text,
+  });
 
+  try {
+    response = await Dio().post(Configuration.serverUrl + "/user/profile",
+        data: userData,
+        options: Options(headers: {
+          'Authorization': ' Bearer ' + Configuration.authToken
+        }));
+    print(response);
+  } catch (e, s) {
+    print(e.toString() + s.toString());
+  }
+  try {
+    if (response!.data['status']){
+      ToastUtil.success(context,message: response.data['message']);
+    }
+  }
+  catch (e, s) {
+    Log.i(e.toString() + s.toString());
+  }
+}
 
 }
