@@ -6,7 +6,6 @@ import 'package:untitled2/util/toast_util.dart';
 import 'config/configuration.dart';
 
 class CommentPage extends StatefulWidget {
-
   String newsId;
   CommentPage({required this.newsId});
 
@@ -76,8 +75,13 @@ class _CommentPage extends State<CommentPage> {
     );
   }
 
+  BuildContext? _context;
   @override
   Widget build(BuildContext context) {
+    if (_context == null) {
+      getComment();
+      _context = context;
+    }
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 70,
@@ -123,7 +127,6 @@ class _CommentPage extends State<CommentPage> {
               print("Not validated");
             }
           },
-
           formKey: formKey,
           commentController: commentController,
           backgroundColor: Colors.white,
@@ -142,7 +145,7 @@ class _CommentPage extends State<CommentPage> {
     Response? response = null;
     try {
       var comments = FormData.fromMap({
-        "newsId": "612cee5ecc3c4096ca4b7f92",
+        "newsId": widget.newsId.toString(),
         "comment": commentController.text
       });
       response = await Dio().post(
@@ -152,7 +155,8 @@ class _CommentPage extends State<CommentPage> {
             headers: {'Authorization': ' Bearer ' + Configuration.authToken}),
       );
       print(response);
-      if(response==null)
+      print(widget.newsId.toString());
+      if (response == null)
         ToastUtil.info(context, message: 'Failed please try again later');
       try {
         if (response.data['status'])
@@ -164,6 +168,46 @@ class _CommentPage extends State<CommentPage> {
       }
     } catch (e) {
       print(e);
+    }
+  }
+
+  getComment() async {
+    Response? response = null;
+    try {
+      response = await Dio().get(
+        Configuration.serverUrl +
+            "/news/comment?newsId=" +
+            widget.newsId.toString(),
+        options: Options(
+            headers: {'Authorization': ' Bearer ' + Configuration.authToken}),
+      );
+      print(response);
+      print(widget.newsId.toString());
+      if (response == null)
+        ToastUtil.info(context, message: 'Failed please try again later');
+      try {
+        if (response.data['status'])
+          ToastUtil.info(context, message: response.data['message']);
+        else
+          ToastUtil.error(context, message: response.data['message']);
+      } catch (e, s) {
+        print(e.toString() + s.toString());
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  getuserProfile() async {
+    Response? response = null;
+    try {
+      response = await Dio().get(Configuration.serverUrl + "/user/profile",
+          options: Options(headers: {
+            'Authorization': ' Bearer ' + Configuration.authToken
+          }));
+      print(response);
+    } catch (e, s) {
+      print(e.toString() + s.toString());
     }
   }
 }
