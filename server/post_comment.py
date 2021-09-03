@@ -39,12 +39,12 @@ class PostCommentHandler(tornado.web.RequestHandler):
             except:
                 raise Exception
             
-            # inserting all the fields to the database named "comments"
+                      # inserting all the fields to the database named "comments"
 
             commentInsert = await user_comment_folder.insert_one({
                 "newsId": post_Id,
                 "comment": comment,
-                "createdBy":  ObjectId(account_id),
+                "creatorId":  ObjectId(account_id),
                 "createdAt": timeNow()
             })
             code = 200
@@ -99,6 +99,7 @@ class PostCommentHandler(tornado.web.RequestHandler):
                 message="Invalid Post Id"
                 raise Exception
 
+            
             # Getting all the available comments on tht post
             commentList = user_comment_folder.find({
                 "newsId": post_Id,
@@ -107,9 +108,11 @@ class PostCommentHandler(tornado.web.RequestHandler):
             async for i in commentList:
                 i["_id"] = str(i["_id"])
                 i["newsId"] = str(i["newsId"])
-                i["createdBy"]=str(i["createdBy"])
+                i["creatorId"]=str(i["creatorId"])
+                account_find=await user_sign_up.find_one({"_id":ObjectId(account_id)})
+                if account_find:
+                    i["createdBy"]=account_find["userName"]
                 result.append(i)
-                
             code = 200
             status = True
             message = "All available comments:"
@@ -122,12 +125,20 @@ class PostCommentHandler(tornado.web.RequestHandler):
             self.write(response)
             self.finish()
             return
-        except:
+        except Exception as e:
+            template = 'Exception: {0}. Argument: {1!r}'
+            code = 5011
+            iMessage = template.format(type(e).__name__, e.args)
+            message = 'Internal Error, Please Contact the Support Team.'
+            exc_type, exc_obj, exc_tb = sys.exc_info()
+            fname = exc_tb.tb_frame.f_code.co_filename
+            print('EXC', iMessage)
+            print('EX2', 'FILE: ' + str(fname) + ' LINE: ' + str(exc_tb.tb_lineno) + ' TYPE: ' + str(exc_type))
+
             response = {
                 "code": code,
                 "status": status,
-                "message": message,
-                "result": result
+                "message": message
             }
             self.write(response)
             self.finish()
