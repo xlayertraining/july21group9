@@ -40,6 +40,7 @@ class _CommentPage extends State<CommentPage> {
   ];
 
   bool get withBorder => true;
+  var userComment=[];
 
   Widget commentChild(data) {
     return ListView(
@@ -48,26 +49,26 @@ class _CommentPage extends State<CommentPage> {
           Padding(
             padding: const EdgeInsets.fromLTRB(2.0, 8.0, 2.0, 0.0),
             child: ListTile(
-              leading: GestureDetector(
-                onTap: () async {
-                  // Display the image in large form.
-                  print("Comment Clicked");
-                },
-                child: Container(
-                  height: 50.0,
-                  width: 50.0,
-                  decoration: new BoxDecoration(
-                      borderRadius: new BorderRadius.all(Radius.circular(50))),
-                  child: CircleAvatar(
-                      radius: 50,
-                      backgroundImage: NetworkImage(data[i]['pic'] + "$i")),
-                ),
-              ),
+            //   leading: GestureDetector(
+            //     onTap: () async {
+            //       // Display the image in large form.
+            //       print("Comment Clicked");
+            //     },
+            //     child: Container(
+            //       height: 50.0,
+            //       width: 50.0,
+            //       decoration: new BoxDecoration(
+            //           borderRadius: new BorderRadius.all(Radius.circular(50))),
+            //       child: CircleAvatar(
+            //           radius: 50,
+            //           backgroundImage: NetworkImage(data[i]['pic'] + "$i")),
+            //     ),
+            //   ),
               title: Text(
-                data[i]['name'],
+                data[i]['createdBy'].toString(),
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
-              subtitle: Text(data[i]['message']),
+              subtitle: Text(data[i]['comment'].toString()),
             ),
           )
       ],
@@ -81,6 +82,7 @@ class _CommentPage extends State<CommentPage> {
     if (_context == null) {
       getComment();
       _context = context;
+
     }
     return Scaffold(
       appBar: AppBar(
@@ -106,7 +108,7 @@ class _CommentPage extends State<CommentPage> {
         child: CommentBox(
           userImage:
               "https://images.wallpapersden.com/image/download/itachi-uchiha-anime_a2xuZmiUmZqaraWkpJRnbmhnrWduaGc.jpg",
-          child: commentChild(filedata),
+          child: commentChild(userComment),
           labelText: 'Write a comment...',
           errorText: 'Comment cannot be blank',
           sendButtonMethod: () async {
@@ -114,12 +116,7 @@ class _CommentPage extends State<CommentPage> {
               print(commentController.text);
               postComment();
               setState(() {
-                var value = {
-                  'name': 'Samyadeep Saha',
-                  'pic': 'https://picsum.photos/300/30',
-                  'message': commentController.text
-                };
-                filedata.insert(0, value);
+
               });
               commentController.clear();
               FocusScope.of(context).unfocus();
@@ -154,8 +151,6 @@ class _CommentPage extends State<CommentPage> {
         options: Options(
             headers: {'Authorization': ' Bearer ' + Configuration.authToken}),
       );
-      print(response);
-      print(widget.newsId.toString());
       if (response == null)
         ToastUtil.info(context, message: 'Failed please try again later');
       try {
@@ -182,13 +177,14 @@ class _CommentPage extends State<CommentPage> {
             headers: {'Authorization': ' Bearer ' + Configuration.authToken}),
       );
       print(response);
-      print(widget.newsId.toString());
       if (response == null)
         ToastUtil.info(context, message: 'Failed please try again later');
       try {
-        if (response.data['status'])
+        if (response.data['status']) {
+          userComment = response.data['result'];
+
           ToastUtil.info(context, message: response.data['message']);
-        else
+        }else
           ToastUtil.error(context, message: response.data['message']);
       } catch (e, s) {
         print(e.toString() + s.toString());
