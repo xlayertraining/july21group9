@@ -99,8 +99,6 @@ class Postfavouriteshandler(tornado.web.RequestHandler):
                 "favourites": account_id
             })
             async for i in post_List:
-                # del[i["image"]]
-                i["image"]=str(i["image"])
                 i['_id'] = str(i['_id'])
                 i["fav_user"] = False
                 if account_id in i["favourites"]:
@@ -108,6 +106,12 @@ class Postfavouriteshandler(tornado.web.RequestHandler):
                 account_find = await user_sign_up.find_one({"_id": ObjectId(i["accountId"])})
                 if account_find:
                     i["author"] = account_find["userName"]
+                    
+                # adding image url
+                    i['imageUrl'] = None
+                    if len(i['attachments']) > 0:
+                        i['imageUrl'] = serverUrl + '/news/image/' + i['attachments'][0]['fileName']
+                        del i['attachments']
                 result.append(i)
             code=200
             status=True
