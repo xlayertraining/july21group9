@@ -109,7 +109,7 @@ class PostCommentHandler(tornado.web.RequestHandler):
                 i["_id"] = str(i["_id"])
                 i["newsId"] = str(i["newsId"])
                 i["creatorId"]=str(i["creatorId"])
-                account_find=await user_sign_up.find_one({"_id":ObjectId(account_id)})
+                account_find=await user_sign_up.find_one({"_id":ObjectId(i["creatorId"])})
                 if account_find:
                     i["createdBy"]=account_find["userName"]
                 result.append(i)

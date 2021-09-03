@@ -88,7 +88,7 @@ class _CommentPage extends State<CommentPage> {
       appBar: AppBar(
         toolbarHeight: 70,
         title: Text(
-          "Comments" + widget.newsId.toString(),
+          "Comments" ,
           style: TextStyle(
             color: Colors.deepPurple,
             fontSize: 24.0,
