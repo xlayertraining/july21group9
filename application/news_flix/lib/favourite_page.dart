@@ -1,6 +1,10 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:untitled2/full_view.dart';
+import 'package:untitled2/util/log_util.dart';
+
+import 'config/configuration.dart';
 
 class Favourite extends StatefulWidget {
   const Favourite({Key? key}) : super(key: key);
@@ -10,17 +14,24 @@ class Favourite extends StatefulWidget {
 }
 
 class _FavouriteState extends State<Favourite> {
-  List<String> images = [
-    "assets/default-avatar.jpg",
-    "assets/default-avatar.jpg",
-    "assets/default-avatar.jpg",
-    "assets/default-avatar.jpg",
-    "assets/default-avatar.jpg",
-    "assets/default-avatar.jpg",
-  ];
+  // List<String> images = [
+  //   "assets/default-avatar.jpg",
+  //   "assets/default-avatar.jpg",
+  //   "assets/default-avatar.jpg",
+  //   "assets/default-avatar.jpg",
+  //   "assets/default-avatar.jpg",
+  //   "assets/default-avatar.jpg",
+  // ];
+  var usrFav=[];
+  BuildContext? _context;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    if (_context == null) {
+      _context = context;
+
+    }
+    getuserFavourites();
+      return Scaffold(
       appBar: AppBar(
         elevation: 3,
         backgroundColor: Colors.white,
@@ -50,27 +61,15 @@ class _FavouriteState extends State<Favourite> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     ListTile(
-                      leading: CircleAvatar(
-                        backgroundImage: AssetImage(images[index]),
-
-                      // child: ConstrainedBox(
-                      //   constraints: BoxConstraints(
-                      //     minWidth: 44,
-                      //     minHeight: 44,
-                      //     maxWidth: 64,
-                      //     maxHeight: 64,
-                      //   ),
-                      //   child: Image.asset(
-                      //   " assets/anime wallpaper1.jpg",
-                      //   fit: BoxFit.cover),
-                      // )
-            ),
-
+                     //  leading: CircleAvatar(
+                     //    backgroundImage: AssetImage(images[index]),
+                     // ),
                       title: Text(
-                        'abc',
+                        usrFav[index]['title'].toString(),
                         style: TextStyle(fontWeight: FontWeight.bold,color: Colors.deepPurple),
                       ),
-                      subtitle: Text('abc',
+                      subtitle: Text(
+                      usrFav[index]['description'].toString(),
                         style: TextStyle(color: Colors.black),),
                       onTap: () {
                         Navigator.push(
@@ -84,18 +83,41 @@ class _FavouriteState extends State<Favourite> {
                           color: Colors.red,
                           size: 22,
                         ),
-                        onPressed: () {},
+                        onPressed: ()  {
+
+                        },
                       ),
                       selected: true,
                       tileColor: Colors.deepPurple,
                     )
                   ]));
         },
-        itemCount: images.length,
+        itemCount: usrFav.length,
         shrinkWrap: true,
         padding: EdgeInsets.all(5),
         scrollDirection: Axis.vertical,
       ),
     );
+  }
+  getuserFavourites() async {
+    Response? response = null;
+    try {
+      response = await Dio().get(Configuration.serverUrl + "/news/favourites",
+          options: Options(headers: {
+            'Authorization': ' Bearer ' + Configuration.authToken
+          }));
+      print(response);
+    } catch (e, s) {
+      print(e.toString() + s.toString());
+    }
+
+    try {
+      if (response!.data['status']) {
+        usrFav = response.data['result'];
+      }
+    }
+    catch (e, s) {
+      Log.i(e.toString() + s.toString());
+    }
   }
 }

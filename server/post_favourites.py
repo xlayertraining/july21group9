@@ -56,7 +56,7 @@ class Postfavouriteshandler(tornado.web.RequestHandler):
                 "code": code,
                 "status": status,
                 "message": message,
-                "result":result
+                "result": result
             }
             self.write(response)
             self.finish()
@@ -103,19 +103,21 @@ class Postfavouriteshandler(tornado.web.RequestHandler):
                 i["fav_user"] = False
                 if account_id in i["favourites"]:
                     i["fav_user"] = True
+                del[i['dislike'], i['like'], i['likers'], i['dislikers'], i['tags'],
+                    i['approve'], i['createdAt'], i['approvedBy'], i['approvedAt'], i['category']]
                 account_find = await user_sign_up.find_one({"_id": ObjectId(i["accountId"])})
                 if account_find:
                     i["author"] = account_find["userName"]
-                    
                 # adding image url
                     i['imageUrl'] = None
                     if len(i['attachments']) > 0:
-                        i['imageUrl'] = serverUrl + '/news/image/' + i['attachments'][0]['fileName']
+                        i['imageUrl'] = serverUrl + '/news/image/' + \
+                            i['attachments'][0]['fileName']
                         del i['attachments']
                 result.append(i)
-            code=200
-            status=True
-            message="All Favourites news"
+            code = 200
+            status = True
+            message = "All Favourites news"
             response = {
                 "code": code,
                 "status": status,

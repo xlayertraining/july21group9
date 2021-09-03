@@ -17,11 +17,11 @@ class _SearchPageState extends State<SearchPage> {
   TextEditingController searchKeyWord = new TextEditingController();
   var newstile = [];
   bool searchResult = true;
-  final titles = ["Title 1", "List 2", "List 3"];
+  final titles = ["Title 1", "Title 2", "Title 3"];
   final subtitles = [
-    "Here is title 1 subtitle",
-    "Here is list 2 subtitle",
-    "Here is list 3 subtitle"
+    "Here is Title 1 subtitle",
+    "Here is Title 2 subtitle",
+    "Here is Title 3 subtitle"
   ];
 
   @override
@@ -65,66 +65,32 @@ class _SearchPageState extends State<SearchPage> {
                 ),
               ),
             )),
-        body:
-            // (searchResult == true) ?
-            ListView(children: <Widget>[
-          Container(
-            margin: EdgeInsets.all(8.0),
-            child: Card(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(8.0))),
-              child: InkWell(
-                onTap: () => print("ciao"),
-                child: Column(
-                  children: <Widget>[
-                    ClipRRect(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(8.0),
-                        topRight: Radius.circular(8.0),
-                      ),
-                      child: Image.asset("assets/anime wallpaper1.jpg",
-                          width: 300, height: 150, fit: BoxFit.fill),
-                    ),
-                    ListTile(
-                      title: Text('Title 1'),
-                      subtitle: Text('Description 1'),
-                    ),
-                  ],
+        body: ListView.builder(
+            itemCount: titles.length,
+            itemBuilder: (context, index) {
+              return Card(
+                child: ListTile(
+                  onTap: () {
+                    Scaffold.of(context).showSnackBar(SnackBar(
+                      content: Text(titles[index] + ' pressed!'),
+                    ));
+                  },
+                  title: Text(titles[index],
+                  style: TextStyle(color: Colors.deepPurple),),
+                  subtitle: Text(subtitles[index],
+                    style: TextStyle(color: Colors.black),),
+                leading: CircleAvatar(
+                      backgroundImage: NetworkImage(
+                          "https://images.unsplash.com/photo-1547721064-da6cfb341d50")),
+                  selected: true,
                 ),
-              ),
-            ),
-          ),
-          Container(
-              margin: EdgeInsets.all(8.0),
-              child: Card(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(8.0))),
-                  child: InkWell(
-                    onTap: () => print("ciao"),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: <Widget>[
-                        ClipRRect(
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(8.0),
-                            topRight: Radius.circular(8.0),
-                          ),
-                          child:
-                              Image.network('https://placeimg.com/640/480/any',
-                                  // width: 300,
-                                  height: 150,
-                                  fit: BoxFit.fill),
-                        ),
-                        ListTile(
-                          title: Text('Title 2'),
-                          subtitle: Text('Description 2'),
-                        ),
-                      ],
-                    ),
-                  )))
-        ]));
+              );
+            }
+            )
+    );
   }
 
+  // (searchResult == true) ?
   searchNews() async {
     Response? resp = null;
     resp = await Dio().get(
