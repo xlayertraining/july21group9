@@ -1,8 +1,11 @@
+import 'dart:async';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:untitled2/full_view.dart';
 import 'package:untitled2/util/log_util.dart';
+import 'package:untitled2/util/toast_util.dart';
 
 import 'config/configuration.dart';
 
@@ -27,10 +30,11 @@ class _FavouriteState extends State<Favourite> {
   @override
   Widget build(BuildContext context) {
     if (_context == null) {
-      _context = context;
 
+      _context = context;
+      getuserFavourites();
     }
-    getuserFavourites();
+
       return Scaffold(
       appBar: AppBar(
         elevation: 3,
@@ -83,8 +87,9 @@ class _FavouriteState extends State<Favourite> {
                           color: Colors.red,
                           size: 22,
                         ),
-                        onPressed: ()  {
-
+                        onPressed: () async {
+                       delUserFav(index);
+                       getuserFavourites();
                         },
                       ),
                       selected: true,
@@ -119,5 +124,40 @@ class _FavouriteState extends State<Favourite> {
     catch (e, s) {
       Log.i(e.toString() + s.toString());
     }
+    Timer(
+      Duration(seconds: 1),
+          () {
+        setState(() {});
+      },
+    );
   }
+  delUserFav(var id) async {
+    Response? resp = null;
+    var newsIdData = FormData.fromMap({"newsId": usrFav[id]['_id'].toString()});
+    resp = await Dio().post(
+      Configuration.serverUrl + '/news/favourites',
+      data: newsIdData,
+      options: Options(
+          headers: {'Authorization': ' Bearer ' + Configuration.authToken}),
+    );
+    try {
+      if (resp.data['status']) {
+        ToastUtil.success(
+          _context!,
+          message: "The news is deleted from favourites",
+        );
+
+      }
+    }
+    catch (e, s) {
+      Log.i(e.toString() + s.toString());
+    }
+    Timer(
+      Duration(seconds: 1),
+          () {
+        setState(() {});
+      },
+    );
+  }
+
 }
