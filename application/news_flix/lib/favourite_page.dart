@@ -52,12 +52,26 @@ class _FavouriteState extends State<Favourite> {
                     ListTile(
                       leading: CircleAvatar(
                         backgroundImage: AssetImage(images[index]),
-                      ),
+
+                      // child: ConstrainedBox(
+                      //   constraints: BoxConstraints(
+                      //     minWidth: 44,
+                      //     minHeight: 44,
+                      //     maxWidth: 64,
+                      //     maxHeight: 64,
+                      //   ),
+                      //   child: Image.asset(
+                      //   " assets/anime wallpaper1.jpg",
+                      //   fit: BoxFit.cover),
+                      // )
+            ),
+
                       title: Text(
                         'abc',
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                        style: TextStyle(fontWeight: FontWeight.bold,color: Colors.deepPurple),
                       ),
-                      subtitle: Text('abc'),
+                      subtitle: Text('abc',
+                        style: TextStyle(color: Colors.black),),
                       onTap: () {
                         Navigator.push(
                             context,
@@ -72,6 +86,8 @@ class _FavouriteState extends State<Favourite> {
                         ),
                         onPressed: () {},
                       ),
+                      selected: true,
+                      tileColor: Colors.deepPurple,
                     )
                   ]));
         },
