@@ -144,7 +144,7 @@ class _FavouriteState extends State<Favourite> {
       if (resp.data['status']) {
         ToastUtil.success(
           _context!,
-          message: "The news is deleted from favourites",
+          message: resp.data['message'],
         );
 
       }

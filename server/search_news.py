@@ -28,7 +28,7 @@ class SearchNewsHandler(tornado.web.RequestHandler):
                 message = "Enter Valid keyword"
                 raise Exception
 
-            news_List =user_news_folder.find({
+            news_List = user_news_folder.find({
                 "approve": True,
                 "$or": [
                     {
@@ -45,11 +45,11 @@ class SearchNewsHandler(tornado.web.RequestHandler):
                     }
                 ]
             })
-            
-            
+
             try:
                 async for i in news_List:
-                    del[i['likers'], i['dislikers'], i['category'],i['createdBy'],i['approvedAt']]
+                    del[i['likers'], i['tags'], i['approvedBy'],
+                        i['dislikers'], i['category'], i['createdBy'], i['approvedAt']]
                     i['_id'] = str(i['_id'])
                     i["fav_user"] = False
                     if account_id in i["favourites"]:
@@ -59,22 +59,23 @@ class SearchNewsHandler(tornado.web.RequestHandler):
                     account_find = await user_sign_up.find_one({"_id": ObjectId(i["accountId"])})
                     if account_find:
                         i["author"] = account_find["userName"]
-                    
+
                     # adding image url
                     i['imageUrl'] = None
                     if len(i['attachments']) > 0:
-                        i['imageUrl'] = serverUrl + '/news/image/' + i['attachments'][0]['fileName']
+                        i['imageUrl'] = serverUrl + '/news/image/' + \
+                            i['attachments'][0]['fileName']
                         del i['attachments']
 
                     result.append(i)
-                    
-                code=2000
-                status=True
-                message="Found this topics"
+
+                code = 2000
+                status = True
+                message = "Found this topics"
             except:
-                code=4000
-                status=False
-                message="unexpected error occured!"
+                code = 4000
+                status = False
+                message = "unexpected error occured!"
                 raise Exception
 
             response = {

@@ -867,9 +867,9 @@ class _HomePageState extends State<HomePage> {
   }
 
    validate() async {
-    ToastUtil.error(
+    ToastUtil.info(
       _context!,
-      message: "This option will come soon",
+      message: "This feature will come soon",
     );
     return;
   }

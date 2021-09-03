@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:untitled2/util/log_util.dart';
+import 'package:untitled2/util/toast_util.dart';
 
 import 'config/configuration.dart';
 
@@ -16,14 +17,7 @@ class SearchPage extends StatefulWidget {
 class _SearchPageState extends State<SearchPage> {
   TextEditingController searchKeyWord = new TextEditingController();
   var newstile = [];
-  bool searchResult = true;
-  final titles = ["Title 1", "Title 2", "Title 3"];
-  final subtitles = [
-    "Here is Title 1 subtitle",
-    "Here is Title 2 subtitle",
-    "Here is Title 3 subtitle"
-  ];
-
+  bool searchResult = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,32 +59,35 @@ class _SearchPageState extends State<SearchPage> {
                 ),
               ),
             )),
-        body: ListView.builder(
-            itemCount: titles.length,
+        body:  (searchResult == true) ?
+        ListView.builder(
+            itemCount: newstile.length,
             itemBuilder: (context, index) {
               return Card(
                 child: ListTile(
                   onTap: () {
-                    Scaffold.of(context).showSnackBar(SnackBar(
-                      content: Text(titles[index] + ' pressed!'),
-                    ));
+                    ToastUtil.info(
+                      context,
+                      message: 'This feature is comming soon.',
+                    );
+                    // Scaffold.of(context).showSnackBar(SnackBar(
+                    //   content: Text(titles[index] + ' pressed!'),
+                    // ));
                   },
-                  title: Text(titles[index],
+                  title: Text(newstile[index]['title'].toString(),
                   style: TextStyle(color: Colors.deepPurple),),
-                  subtitle: Text(subtitles[index],
+                  subtitle: Text(newstile[index]['description'].toString(),
                     style: TextStyle(color: Colors.black),),
                 leading: CircleAvatar(
                       backgroundImage: NetworkImage(
-                          "https://images.unsplash.com/photo-1547721064-da6cfb341d50")),
+                          "https://blog.online.colostate.edu/wp-content/uploads/2013/10/Focus.jpg")),
                   selected: true,
                 ),
               );
             }
-            )
+            ):Container(),
     );
   }
-
-  // (searchResult == true) ?
   searchNews() async {
     Response? resp = null;
     resp = await Dio().get(
@@ -99,10 +96,22 @@ class _SearchPageState extends State<SearchPage> {
             headers: {'Authorization': ' Bearer ' + Configuration.authToken}));
 
     try {
-      newstile = resp.data['result'];
-      print(resp);
-      searchResult = true;
-      Log.i('0_length', newstile.length.toString());
+      if (resp.data['status']){
+        newstile = resp.data['result'];
+        print(resp);
+        searchResult = true;
+        Log.i('0_length', newstile.length.toString());
+        ToastUtil.success(
+          context,
+          message: resp.data['message'],
+        );
+      }
+      else{
+        ToastUtil.error(
+          context,
+          message: resp.data['message'],
+        );
+      }
     } catch (e, s) {
       print(e.toString() + s.toString());
     }
@@ -115,79 +124,3 @@ class _SearchPageState extends State<SearchPage> {
     );
   }
 }
-
-//   Widget buildCard(item) {
-//     return Card(
-//       elevation: 5,
-//       margin: EdgeInsets.only(bottom: 20, top: 10, left: 10, right: 10),
-//       child: Column(
-//           crossAxisAlignment: CrossAxisAlignment.start,
-//           mainAxisAlignment: MainAxisAlignment.start,
-//           children: [
-//             Row(
-//               children: [
-//                 Padding(
-//                   padding: EdgeInsets.fromLTRB(15, 10, 10, 5),
-//                   child: Text(
-//                     item!['title'],
-//                     style: TextStyle(
-//                       fontSize: 16,
-//                       color: Colors.deepPurple,
-//                       // fontStyle: FontStyle.italic,
-//                       decorationStyle: TextDecorationStyle.double,
-//                     ),
-//                   ),
-//                 ),
-//               ],
-//             ),
-//             const SizedBox(height: 5),
-//             Divider(
-//               color: Colors.deepPurple,
-//               indent: 10,
-//               endIndent: 10,
-//             ),
-//             Row(
-//               children: [
-//                 Padding(
-//                   padding: EdgeInsets.fromLTRB(15, 10, 10, 5),
-//                   child: Text(
-//                     item!['description'],
-//                     style: TextStyle(
-//                       fontSize: 16,
-//                       color: Colors.deepPurple,
-//                       // fontStyle: FontStyle.italic,
-//                       decorationStyle: TextDecorationStyle.double,
-//                     ),
-//                   ),
-//                 ),
-//               ],
-//             ),
-//             const SizedBox(height: 5),
-//             Divider(
-//               color: Colors.deepPurple,
-//               indent: 10,
-//               endIndent: 10,
-//             ),
-//             (item!['imageUrl'] != null)
-//                 ? Container(
-//               width: MediaQuery
-//                   .of(context)
-//                   .size
-//                   .width,
-//               height: MediaQuery
-//                   .of(context)
-//                   .size
-//                   .width / 2,
-//               decoration: BoxDecoration(
-//                 image: DecorationImage(
-//                   image: NetworkImage(item!['imageUrl']),
-//                   fit: BoxFit.cover,
-//                 ),
-//                 borderRadius: BorderRadius.circular(3),
-//               ),
-//             )
-//                 : Container(),
-//           ]
-//       ),
-//     );
-//   }
