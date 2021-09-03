@@ -27,48 +27,47 @@ class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-          toolbarHeight: 70,
-          backgroundColor: Colors.deepPurple,
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back_ios_outlined,
-                color: Colors.white), // set your color here
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
-          // The search area here
-          title: Container(
-            width: double.infinity,
-            height: 40,
-            decoration: BoxDecoration(
-                color: Colors.white, borderRadius: BorderRadius.circular(5)),
-            child: Center(
-              child: TextField(
-                controller: searchKeyWord,
-                decoration: InputDecoration(
-                    suffixIcon: Padding(
-                      padding: const EdgeInsets.all(0.0),
-                      child: IconButton(
-                        icon: Icon(
-                          Icons.search,
-                          color: Colors.deepPurple,
-                        ),
-                        onPressed: () {
-                          searchNews();
-                        },
-                      ),
-                    ),
-                    hintText: 'Search...',
-                    contentPadding: EdgeInsets.all(10),
-                    border: InputBorder.none),
-              ),
+        appBar: AppBar(
+            toolbarHeight: 70,
+            backgroundColor: Colors.deepPurple,
+            leading: IconButton(
+              icon: Icon(Icons.arrow_back_ios_outlined,
+                  color: Colors.white), // set your color here
+              onPressed: () {
+                Navigator.pop(context);
+              },
             ),
-          )),
-      body:
-          // (searchResult == true) ?
-          ListView(
-        children: <Widget>[
+            // The search area here
+            title: Container(
+              width: double.infinity,
+              height: 40,
+              decoration: BoxDecoration(
+                  color: Colors.white, borderRadius: BorderRadius.circular(5)),
+              child: Center(
+                child: TextField(
+                  controller: searchKeyWord,
+                  decoration: InputDecoration(
+                      suffixIcon: Padding(
+                        padding: const EdgeInsets.all(0.0),
+                        child: IconButton(
+                          icon: Icon(
+                            Icons.search,
+                            color: Colors.deepPurple,
+                          ),
+                          onPressed: () {
+                            searchNews();
+                          },
+                        ),
+                      ),
+                      hintText: 'Search...',
+                      contentPadding: EdgeInsets.all(10),
+                      border: InputBorder.none),
+                ),
+              ),
+            )),
+        body:
+            // (searchResult == true) ?
+            ListView(children: <Widget>[
           Container(
             margin: EdgeInsets.all(8.0),
             child: Card(
@@ -95,9 +94,35 @@ class _SearchPageState extends State<SearchPage> {
               ),
             ),
           ),
-        ],
-      ),
-    );
+          Container(
+              margin: EdgeInsets.all(8.0),
+              child: Card(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(8.0))),
+                  child: InkWell(
+                    onTap: () => print("ciao"),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: <Widget>[
+                        ClipRRect(
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(8.0),
+                            topRight: Radius.circular(8.0),
+                          ),
+                          child:
+                              Image.network('https://placeimg.com/640/480/any',
+                                  // width: 300,
+                                  height: 150,
+                                  fit: BoxFit.fill),
+                        ),
+                        ListTile(
+                          title: Text('Title 2'),
+                          subtitle: Text('Description 2'),
+                        ),
+                      ],
+                    ),
+                  )))
+        ]));
   }
 
   searchNews() async {
