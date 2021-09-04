@@ -63,25 +63,46 @@ class _MyPostState extends State<MyPost> {
           return Card(
             child: Column(
               children: [
+                ListTile(
+                  title: Text(
+                    userNewsList[index]['title'].toString(),
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.deepPurple,
+                      decorationStyle: TextDecorationStyle.double,
+                    ),
+                  ),
+                  subtitle: Text(
+                    userNewsList[index]['description'].toString(),
+                  ),
+                ),
+                Divider(
+                  color: Colors.deepPurple,
+                  indent: 10,
+                  endIndent: 10,
+                ),
                 (userNewsList[index]['imageUrl'] != null)? Container(
                   child: Image.network(
                     userNewsList[index]['imageUrl'],
                   ),
                 ) : Container(),
-                ListTile(
-                  title: Text(
-                    userNewsList[index]['title'].toString(),
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  subtitle: Text(
-                    userNewsList[index]['description'].toString(),
-                  ),
+
+                Divider(
+                  color: Colors.deepPurple,
+                  indent: 10,
+                  endIndent: 10,
                 ),
                 ElevatedButton(
                   onPressed: () {
                     deluserNews(index);
                     getuserNews();
                   },
+                  style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                          borderRadius:
+                          BorderRadius.circular(30)),
+                      primary: Colors.deepPurple),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
@@ -90,7 +111,7 @@ class _MyPostState extends State<MyPost> {
                         color: Colors.red,
                         size: 22,
                       ),
-                      Text('Delete')
+                      Text('DELETE')
                     ],
                   ),
                 )
@@ -113,7 +134,13 @@ class _MyPostState extends State<MyPost> {
             Text(
               'List is empty.',
               style: TextStyle(
-                  color: Configuration.primaryColor, fontSize: 20),
+                  color: Configuration.primaryColor, fontSize: 24),
+            ),
+            SizedBox(height: 30,),
+            Text(
+              'Enter refresh to get news.',
+              style: TextStyle(
+                  color: Configuration.primaryColor, fontSize: 24),
             )
           ],
         ),

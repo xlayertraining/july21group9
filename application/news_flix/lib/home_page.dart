@@ -889,6 +889,7 @@ class _HomePageState extends State<HomePage> {
                   item!['title'],
                   style: TextStyle(
                     fontSize: 18,
+                    fontWeight: FontWeight.bold,
                     color: Colors.deepPurple,
                     // fontStyle: FontStyle.italic,
                     decorationStyle: TextDecorationStyle.double,
