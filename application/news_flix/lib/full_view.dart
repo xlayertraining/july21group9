@@ -32,7 +32,7 @@ class _FullViewState extends State<FullView> {
       item = widget.newDetails!;
     }
     Log.i(item);
-    Log.i('pub_time', TimeUtil.convertTimeStamp(item!['publisedTime']));
+    Log.i('pub_time', TimeUtil.convertTimeStamp(item!['createdAt']));
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -82,7 +82,7 @@ class _FullViewState extends State<FullView> {
                     ),
                   ),
                   Text(
-                    TimeUtil.convertTimeStamp(item!['publisedTime']),
+                    TimeUtil.convertTimeStamp(item!['createdAt']),
                     style: TextStyle(
                         fontSize: 12,
                         color: Configuration.primaryColor
@@ -258,39 +258,5 @@ class _FullViewState extends State<FullView> {
       ),
     );
   }
-  // getApproveNews() async {
-  //   Response? resp = null;
-  //   resp = await Dio().get(
-  //       Configuration.serverUrl + '/news/approve',
-  //       options: Options(
-  //           headers: {'Authorization': ' Bearer ' + Configuration.authToken}));
-  //
-  //   try {
-  //     if (resp.data['status']){
-  //       newstile = resp.data['result'];
-  //       print(resp);
-  //       searchResult = true;
-  //       Log.i('0_length', newstile.length.toString());
-  //       ToastUtil.success(
-  //         context,
-  //         message: resp.data['message'],
-  //       );
-  //     }
-  //     else{
-  //       ToastUtil.error(
-  //         context,
-  //         message: resp.data['message'],
-  //       );
-  //     }
-  //   } catch (e, s) {
-  //     print(e.toString() + s.toString());
-  //   }
-  //
-  //   Timer(
-  //     Duration(seconds: 1),
-  //         () {
-  //       setState(() {});
-  //     },
-  //   );
-  // }
+
 }

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:dio/dio.dart';
@@ -1087,17 +1088,25 @@ class _HomePageState extends State<HomePage> {
                   indent: 10,
                   endIndent: 10,
                 ),
-                Container(
-                  alignment: Alignment.center,
-                  padding: EdgeInsets.only(bottom: 20, top: 10),
-                  child: Text(
-                    'Click to see more details.',
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontStyle: FontStyle.italic,
-                      color: Colors.grey,
+                InkWell(
+                  child: Container(
+                    alignment: Alignment.center,
+                    padding: EdgeInsets.only(bottom: 20, top: 10),
+                    child: Text(
+                      'Click to see more details.',
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontStyle: FontStyle.italic,
+                        color: Colors.grey,
+                      ),
                     ),
                   ),
+                  // onTap: () async{
+                  //   Navigator.push(context, MaterialPageRoute(
+                  //       builder: (context) => FullView(
+                  //         newDetails: Map(item![catId]['_id']),
+                  //       )) );
+                  // },
                 )
               ]),
         ));
