@@ -661,15 +661,39 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  newsFav(var id) async {
+  newsFav(item,{int?catId,position}) async {
     Response? resp = null;
-    var newsIdData = FormData.fromMap({"newsId": id.toString()});
+    var newsIdData = FormData.fromMap({"newsId": item['_id'].toString()});
     resp = await Dio().post(
       Configuration.serverUrl + '/news/favourites',
       data: newsIdData,
       options: Options(
           headers: {'Authorization': ' Bearer ' + Configuration.authToken}),
     );
+    try{
+      if(resp.data['status'] ){
+        switch(catId){
+          case 0 :
+            listTiles1[position]['fav_user'] = !listTiles1[position]['fav_user'];
+
+          // if (listTiles1[position]['fav_user'] == true  ){
+          //   listTiles1[position]['fav_user'] = false;
+          //
+          // } else {
+          //
+          // }
+          break;
+          default:
+            break;
+        }
+      }
+    }
+    catch(e,s){
+
+    }
+    setState(() {
+      
+    });
   }
 
   Widget buildCard(item, {catId, position}) {
@@ -706,7 +730,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     Text(
-                      TimeUtil.convertTimeStamp(item!['publisedTime']),
+                      TimeUtil.convertTimeStamp(item!['createdAt']),
                       style: TextStyle(
                           fontSize: 12,
                           color: Configuration.primaryColor
@@ -860,15 +884,9 @@ class _HomePageState extends State<HomePage> {
                                 ? Configuration.favIconColor3 = Colors.pink
                                 : Configuration.favIconColor3 = Colors.grey,
                             onPressed: () async {
-                              var favId = item!['_id'];
-                              newsFav(favId);
-                              setState(() {
-                                if (Configuration.favIconColor3 == Colors.grey) {
-                                  Configuration.favIconColor3 = Colors.pink;
-                                } else {
-                                  Configuration.favIconColor3 = Colors.grey;
-                                }
-                              });
+
+                              newsFav(item,catId: catId,position: position);
+
                             },
                           ),
                         ],
