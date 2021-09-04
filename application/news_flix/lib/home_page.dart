@@ -34,12 +34,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  var listTiles0 = [];
   var listTiles1 = [];
   var listTiles2 = [];
   var listTiles3 = [];
   var listTiles4 = [];
   var listTiles5 = [];
-  var listTiles6 = [];
   var userName;
   var userEmailAddress;
   var userPhoneNumber;
@@ -154,12 +154,12 @@ class _HomePageState extends State<HomePage> {
             children: <Widget>[
               ListView.builder(
                 // scrollDirection: Axis.horizontal,
-                itemCount: listTiles1.length,
+                itemCount: listTiles0.length,
                 itemBuilder: (context, index) {
                   return InkWell(
                     onTap: () {},
                     child: buildCard(
-                      listTiles1[index],
+                      listTiles0[index],
                       catId: 0,
                       position: index,
                     ),
@@ -171,13 +171,12 @@ class _HomePageState extends State<HomePage> {
                 child: Container(
                   // color: Colors.lightBlueAccent,
                   child: ListView.builder(
-                    itemCount: listTiles2.length,
+                    itemCount: listTiles1.length,
                     itemBuilder: (context, index) {
                       return InkWell(
                         onTap: () {},
-                        child: buildCard(listTiles2[index],
-                        catId: 1,
-                        position: index),
+                        child: buildCard(listTiles1[index],
+                            catId: 1, position: index),
                       );
                     },
                   ),
@@ -188,23 +187,24 @@ class _HomePageState extends State<HomePage> {
                 child: Container(
                   // color: Colors.greenAccent,
                   child: ListView.builder(
-                    itemCount: listTiles3.length,
+                    itemCount: listTiles2.length,
                     itemBuilder: (context, index) {
                       return InkWell(
-                        onTap: () {},
-                        child: buildCard(listTiles3[index]),
-                      );
+                          onTap: () {},
+                          child: buildCard(listTiles2[index],
+                              catId: 2, position: index));
                     },
                   ),
                 ),
               ),
               Container(
                 child: ListView.builder(
-                  itemCount: listTiles4.length,
+                  itemCount: listTiles3.length,
                   itemBuilder: (context, index) {
                     return InkWell(
                       onTap: () {},
-                      child: buildCard(listTiles4[index]),
+                      child: buildCard(listTiles3[index],
+                          catId: 3, position: index),
                     );
                   },
                 ),
@@ -213,11 +213,12 @@ class _HomePageState extends State<HomePage> {
                 padding: EdgeInsets.all(8),
                 child: Container(
                   child: ListView.builder(
-                    itemCount: listTiles5.length,
+                    itemCount: listTiles4.length,
                     itemBuilder: (context, index) {
                       return InkWell(
                         onTap: () {},
-                        child: buildCard(listTiles5[index]),
+                        child: buildCard(listTiles4[index],
+                            catId: 4, position: index),
                       );
                     },
                   ),
@@ -228,11 +229,12 @@ class _HomePageState extends State<HomePage> {
                 child: Container(
                   color: Colors.white,
                   child: ListView.builder(
-                    itemCount: listTiles6.length,
+                    itemCount: listTiles5.length,
                     itemBuilder: (context, index) {
                       return InkWell(
                         onTap: () {},
-                        child: buildCard(listTiles6[index]),
+                        child: buildCard(listTiles5[index],
+                            catId: 5, position: index),
                       );
                     },
                   ),
@@ -261,32 +263,33 @@ class _HomePageState extends State<HomePage> {
               padding: EdgeInsets.zero,
               children: [
                 UserAccountsDrawerHeader(
-                  accountName: Text((userName != null? userName:'abc'),
-                  style:TextStyle(fontSize: 20)
-                  ),
-                  accountEmail: Text((userEmailAddress !=null? userEmailAddress:'abc@gmail.com')),
-                  currentAccountPicture: CircleAvatar(
-                    child: ClipOval(
-                      child: Image.asset("assets/default-avatar.jpg",
-                        width: 120,
-                        height: 120,
-                        fit: BoxFit.cover,
+                    accountName: Text((userName != null ? userName : 'abc'),
+                        style: TextStyle(fontSize: 20)),
+                    accountEmail: Text((userEmailAddress != null
+                        ? userEmailAddress
+                        : 'abc@gmail.com')),
+                    currentAccountPicture: CircleAvatar(
+                      child: ClipOval(
+                        child: Image.asset(
+                          "assets/default-avatar.jpg",
+                          width: 120,
+                          height: 120,
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
-                  ),
-                  decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                          begin: Alignment.topRight,
-                          end: Alignment.bottomLeft,
-                          colors: [Colors.red, Colors.deepPurple])
-                  )
+                    decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                            begin: Alignment.topRight,
+                            end: Alignment.bottomLeft,
+                            colors: [Colors.red, Colors.deepPurple]))
                     // color: Colors.deepPurple
-                  //   image: DecorationImage(
-                  //     image: AssetImage(
-                  //         "assets/road-wall paper.webp"),
-                  //     fit: BoxFit.cover,
-                  //   ),
-                  ),
+                    //   image: DecorationImage(
+                    //     image: AssetImage(
+                    //         "assets/road-wall paper.webp"),
+                    //     fit: BoxFit.cover,
+                    //   ),
+                    ),
                 ListTile(
                   leading: Icon(Icons.person, size: 25, color: Colors.blueGrey),
                   title: const Text(
@@ -321,28 +324,28 @@ class _HomePageState extends State<HomePage> {
                         MaterialPageRoute(builder: (context) => Favourite()));
                   },
                 ),
-                (userRole == 1)? Container(
-                  margin: EdgeInsets.only(
-                    top: 10
-                  ),
-                  child: ListTile(
-                    leading:
-                        Icon(Icons.all_inbox, size: 25, color: Colors.blueGrey),
-                    title: const Text(
-                      'All news',
-                      style: TextStyle(
-                        // fontWeight: FontWeight.bold,
-                        fontSize: 15,
-                      ),
-                    ),
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => AllNewsPage()));
-                    },
-                  ),
-                ) : Container(),
+                (userRole == 1)
+                    ? Container(
+                        margin: EdgeInsets.only(top: 10),
+                        child: ListTile(
+                          leading: Icon(Icons.all_inbox,
+                              size: 25, color: Colors.blueGrey),
+                          title: const Text(
+                            'All news',
+                            style: TextStyle(
+                              // fontWeight: FontWeight.bold,
+                              fontSize: 15,
+                            ),
+                          ),
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => AllNewsPage()));
+                          },
+                        ),
+                      )
+                    : Container(),
                 const SizedBox(height: 10),
                 ListTile(
                   leading:
@@ -429,9 +432,10 @@ class _HomePageState extends State<HomePage> {
             headers: {'Authorization': ' Bearer ' + Configuration.authToken}));
 
     try {
-      listTiles1 = resp.data['result'];
-      Log.i('0_length', listTiles1.length.toString());
-      print(listTiles1);
+      listTiles0 = resp.data['result'];
+      Log.i('0_length', listTiles0.length.toString());
+      print(listTiles0);
+
     } catch (e, s) {
       print(e.toString() + s.toString());
     }
@@ -452,23 +456,22 @@ class _HomePageState extends State<HomePage> {
             'Authorization': ' Bearer ' + Configuration.authToken
           }));
       print(response);
-
     } catch (e, s) {
       print(e.toString() + s.toString());
     }
     try {
-      if (response.data['status']){
-        userName = response.data['result'][0]['firstName'] + ' ' + response.data['result'][0]['lastName'];
+      if (response.data['status']) {
+        userName = response.data['result'][0]['firstName'] +
+            ' ' +
+            response.data['result'][0]['lastName'];
         userEmailAddress = response.data['result'][0]['emailAddress'];
         userPhoneNumber = response.data['result'][0]['phoneNumber'];
         userRole = response.data['result'][0]['role'];
       }
-    }
-    catch (e, s) {
+    } catch (e, s) {
       Log.i(e.toString() + s.toString());
     }
-    setState(() {
-    });
+    setState(() {});
   }
 
   getNewsCategory2() async {
@@ -478,8 +481,8 @@ class _HomePageState extends State<HomePage> {
             headers: {'Authorization': ' Bearer ' + Configuration.authToken}));
 
     try {
-      listTiles2 = resp.data['result'];
-      Log.i('0_length', listTiles2.length.toString());
+      listTiles1 = resp.data['result'];
+      Log.i('0_length', listTiles1.length.toString());
     } catch (e, s) {
       print(e.toString() + s.toString());
     }
@@ -499,8 +502,8 @@ class _HomePageState extends State<HomePage> {
             headers: {'Authorization': ' Bearer ' + Configuration.authToken}));
 
     try {
-      listTiles3 = resp.data['result'];
-      Log.i('0_length', listTiles3.length.toString());
+      listTiles2 = resp.data['result'];
+      Log.i('0_length', listTiles2.length.toString());
     } catch (e, s) {
       print(e.toString() + s.toString());
     }
@@ -520,8 +523,8 @@ class _HomePageState extends State<HomePage> {
             headers: {'Authorization': ' Bearer ' + Configuration.authToken}));
 
     try {
-      listTiles4 = resp.data['result'];
-      Log.i('0_length', listTiles4.length.toString());
+      listTiles3 = resp.data['result'];
+      Log.i('0_length', listTiles3.length.toString());
     } catch (e, s) {
       print(e.toString() + s.toString());
     }
@@ -541,8 +544,8 @@ class _HomePageState extends State<HomePage> {
             headers: {'Authorization': ' Bearer ' + Configuration.authToken}));
 
     try {
-      listTiles5 = resp.data['result'];
-      Log.i('0_length', listTiles5.length.toString());
+      listTiles4 = resp.data['result'];
+      Log.i('0_length', listTiles4.length.toString());
     } catch (e, s) {
       print(e.toString() + s.toString());
     }
@@ -562,8 +565,8 @@ class _HomePageState extends State<HomePage> {
             headers: {'Authorization': ' Bearer ' + Configuration.authToken}));
 
     try {
-      listTiles6 = resp.data['result'];
-      Log.i('0_length', listTiles6.length.toString());
+      listTiles5 = resp.data['result'];
+      Log.i('0_length', listTiles5.length.toString());
     } catch (e, s) {
       print(e.toString() + s.toString());
     }
@@ -583,29 +586,26 @@ class _HomePageState extends State<HomePage> {
       Configuration.serverUrl + '/news/like',
       data: newsIdData,
       options: Options(
-            headers: {'Authorization': ' Bearer ' + Configuration.authToken}
-          ),
+          headers: {'Authorization': ' Bearer ' + Configuration.authToken}),
     );
     try {
       Log.i('like_resp', resp.data);
       if (resp.data['status']) {
-        switch(catId) {
+        switch (catId) {
           case 0:
-            if (listTiles1[position]['liked']) {
-              listTiles1[position]['like']--;
+            if (listTiles0[position]['liked']) {
+              listTiles0[position]['like']--;
             } else {
-              listTiles1[position]['like']++;
+              listTiles0[position]['like']++;
             }
-            listTiles1[position]['liked'] = !listTiles1[position]['liked'];
+            listTiles0[position]['liked'] = !listTiles0[position]['liked'];
 
-            if (listTiles1[position]['disliked'] == null) {
-
-            } else if (listTiles1[position]['disliked'] == true && listTiles1[position]['liked'] == true) {
-              listTiles1[position]['disliked'] = false;
-              listTiles1[position]['dislike']--;
-            } else {
-
-            }
+            if (listTiles0[position]['disliked'] == null) {
+            } else if (listTiles0[position]['disliked'] == true &&
+                listTiles0[position]['liked'] == true) {
+              listTiles0[position]['disliked'] = false;
+              listTiles0[position]['dislike']--;
+            } else {}
             break;
           default:
             break;
@@ -614,11 +614,10 @@ class _HomePageState extends State<HomePage> {
     } catch (e, s) {
       Log.e(e, s);
     }
-    setState(() {
-    });
+    setState(() {});
   }
 
-  newsDislike(item,{int?catId,position}) async {
+  newsDislike(item, {int? catId, position}) async {
     Response? resp = null;
     var newsIdData = FormData.fromMap({"newsId": item['_id'].toString()});
     resp = await Dio().post(
@@ -628,40 +627,36 @@ class _HomePageState extends State<HomePage> {
           headers: {'Authorization': ' Bearer ' + Configuration.authToken}),
     );
     try {
-      Log.i('dislike_response',resp.data);
-      if (resp.data['status']){
-        switch(catId) {
+      Log.i('dislike_response', resp.data);
+      if (resp.data['status']) {
+        switch (catId) {
           case 0:
-            if (listTiles1[position]['disliked']) {
-              listTiles1[position]['dislike']--;
+            if (listTiles0[position]['disliked']) {
+              listTiles0[position]['dislike']--;
             } else {
-              listTiles1[position]['dislike']++;
+              listTiles0[position]['dislike']++;
             }
-            listTiles1[position]['disliked'] = !listTiles1[position]['disliked'];
+            listTiles0[position]['disliked'] =
+                !listTiles0[position]['disliked'];
 
-            if (listTiles1[position]['liked'] == null) {
-
-            } else if (listTiles1[position]['liked'] == true && listTiles1[position]['disliked'] == true) {
-              listTiles1[position]['liked'] = false;
-              listTiles1[position]['like']--;
-            } else {
-
-            }
+            if (listTiles0[position]['liked'] == null) {
+            } else if (listTiles0[position]['liked'] == true &&
+                listTiles0[position]['disliked'] == true) {
+              listTiles0[position]['liked'] = false;
+              listTiles0[position]['like']--;
+            } else {}
             break;
           default:
             break;
         }
       }
+    } catch (e, s) {
+      Log.e(e, s);
     }
-    catch(e,s){
-      Log.e(e,s);
-    }
-    setState(() {
-
-    });
+    setState(() {});
   }
 
-  newsFav(item,{int?catId,position}) async {
+  newsFav(item, {int? catId, position}) async {
     Response? resp = null;
     var newsIdData = FormData.fromMap({"newsId": item['_id'].toString()});
     resp = await Dio().post(
@@ -670,30 +665,54 @@ class _HomePageState extends State<HomePage> {
       options: Options(
           headers: {'Authorization': ' Bearer ' + Configuration.authToken}),
     );
-    try{
-      if(resp.data['status'] ){
-        switch(catId){
-          case 0 :
-            listTiles1[position]['fav_user'] = !listTiles1[position]['fav_user'];
+    try {
+      if (resp.data['status']) {
+        var newsTab="listTiles"+catId.toString();
+        switch (catId) {
+          case 0:
+            listTiles0[position]['fav_user'] =
+                !listTiles0[position]['fav_user'];
 
-          // if (listTiles1[position]['fav_user'] == true  ){
-          //   listTiles1[position]['fav_user'] = false;
-          //
-          // } else {
-          //
-          // }
-          break;
+            break;
+          case 1:
+            listTiles1[position]['fav_user'] =
+                !listTiles1[position]['fav_user'];
+
+            break;
+          case 2:
+            listTiles2[position]['fav_user'] =
+                !listTiles2[position]['fav_user'];
+
+            break;
+          case 3:
+            listTiles3[position]['fav_user'] =
+                !listTiles3[position]['fav_user'];
+
+            break;
+          case 4:
+            listTiles4[position]['fav_user'] =
+                !listTiles4[position]['fav_user'];
+
+            break;
+          case 5:
+            listTiles5[position]['fav_user'] =
+                !listTiles5[position]['fav_user'];
+
+            break;
+
+            // if (listTiles0[position]['fav_user'] == true  ){
+            //   listTiles0[position]['fav_user'] = false;
+            //
+            // } else {
+            //
+            // }
+            break;
           default:
             break;
         }
       }
-    }
-    catch(e,s){
-
-    }
-    setState(() {
-      
-    });
+    } catch (e, s) {}
+    setState(() {});
   }
 
   Widget buildCard(item, {catId, position}) {
@@ -725,16 +744,12 @@ class _HomePageState extends State<HomePage> {
                     Text(
                       'Published On : \t',
                       style: TextStyle(
-                          fontSize: 12,
-                          color: Configuration.primaryColor
-                      ),
+                          fontSize: 12, color: Configuration.primaryColor),
                     ),
                     Text(
                       TimeUtil.convertTimeStamp(item!['createdAt']),
                       style: TextStyle(
-                          fontSize: 12,
-                          color: Configuration.primaryColor
-                      ),
+                          fontSize: 12, color: Configuration.primaryColor),
                     ),
                   ],
                 ),
@@ -756,16 +771,15 @@ class _HomePageState extends State<HomePage> {
                 // ),
                 (item!['imageUrl'] != null)
                     ? InkWell(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => FullView(
-                              newDetails: item
-                          ),
-                          ),
-                        );
-                      },
-                      child: Container(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => FullView(newDetails: item),
+                            ),
+                          );
+                        },
+                        child: Container(
                           width: MediaQuery.of(_context!).size.width,
                           height: MediaQuery.of(_context!).size.width / 2,
                           decoration: BoxDecoration(
@@ -776,7 +790,7 @@ class _HomePageState extends State<HomePage> {
                             borderRadius: BorderRadius.circular(3),
                           ),
                         ),
-                    )
+                      )
                     : Container(),
                 Divider(
                   color: Colors.deepPurple,
@@ -795,8 +809,10 @@ class _HomePageState extends State<HomePage> {
                     children: [
                       InkWell(
                         onLongPress: () {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) => Likers()));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Likers()));
                         },
                         child: Row(
                           children: [
@@ -809,7 +825,8 @@ class _HomePageState extends State<HomePage> {
                                       Colors.deepPurple
                                   : Configuration.favIconColor1 = Colors.grey,
                               onPressed: () async {
-                                newsLike(item, catId: catId, position: position);
+                                newsLike(item,
+                                    catId: catId, position: position);
                               },
                             ),
                             (item!['like'] > 0)
@@ -834,15 +851,17 @@ class _HomePageState extends State<HomePage> {
                               children: [
                                 IconButton(
                                   icon: Icon(
-                                    (item!['disliked'] == true)? Icons.thumb_down : Icons.thumb_down_outlined,
+                                    (item!['disliked'] == true)
+                                        ? Icons.thumb_down
+                                        : Icons.thumb_down_outlined,
                                   ),
                                   color: (item!['disliked'] == true)
-                                      ? Configuration.favIconColor1 =
-                                      Colors.red
-                                      : Configuration.favIconColor1 = Colors.grey,
+                                      ? Configuration.favIconColor1 = Colors.red
+                                      : Configuration.favIconColor1 =
+                                          Colors.grey,
                                   onPressed: () async {
-                                    newsDislike(item,catId:catId,position:position);
-
+                                    newsDislike(item,
+                                        catId: catId, position: position);
                                   },
                                 ),
                                 (item!['dislike'] > 0)
@@ -862,8 +881,8 @@ class _HomePageState extends State<HomePage> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => CommentPage(
-                                    newsId: item!['_id'],
-                                  )));
+                                        newsId: item!['_id'],
+                                      )));
                         },
                         icon: Icon(
                           Icons.comment_outlined,
@@ -878,15 +897,15 @@ class _HomePageState extends State<HomePage> {
                         children: [
                           IconButton(
                             icon: Icon(
-                              ((item!['fav_user'] == true))? Icons.favorite : Icons.favorite_border,
+                              ((item!['fav_user'] == true))
+                                  ? Icons.favorite
+                                  : Icons.favorite_border,
                             ),
                             color: (item!['fav_user'] == true)
                                 ? Configuration.favIconColor3 = Colors.pink
                                 : Configuration.favIconColor3 = Colors.grey,
                             onPressed: () async {
-
-                              newsFav(item,catId: catId,position: position);
-
+                              newsFav(item, catId: catId, position: position);
                             },
                           ),
                         ],
@@ -913,10 +932,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 Container(
                   alignment: Alignment.center,
-                  padding: EdgeInsets.only(
-                    bottom: 20,
-                    top: 10
-                  ),
+                  padding: EdgeInsets.only(bottom: 20, top: 10),
                   child: Text(
                     'Click to see more details.',
                     style: TextStyle(
@@ -930,7 +946,7 @@ class _HomePageState extends State<HomePage> {
         ));
   }
 
-   validate() async {
+  validate() async {
     ToastUtil.info(
       _context!,
       message: "This feature will come soon",
