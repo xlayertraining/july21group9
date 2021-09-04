@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:untitled2/config/configuration.dart';
 import 'package:untitled2/home_page.dart';
@@ -115,6 +116,11 @@ class SplashScreen extends StatelessWidget {
   }
 
   void initTimer() async {
+
+    // You can request multiple permissions at once.
+    var camera = await Permission.camera.request();
+    var storage = await Permission.storage.request();
+
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     var signedInValue = await prefs.getString(Configuration.signedInKey);

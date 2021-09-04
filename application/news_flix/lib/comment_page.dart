@@ -154,9 +154,10 @@ class _CommentPage extends State<CommentPage> {
       if (response == null)
         ToastUtil.info(context, message: 'Failed please try again later');
       try {
-        if (response.data['status'])
+        if (response.data['status']) {
           ToastUtil.info(context, message: response.data['message']);
-        else
+          getComment();
+        } else
           ToastUtil.error(context, message: response.data['message']);
       } catch (e, s) {
         print(e.toString() + s.toString());
@@ -182,8 +183,6 @@ class _CommentPage extends State<CommentPage> {
       try {
         if (response.data['status']) {
           userComment = response.data['result'];
-
-          ToastUtil.info(context, message: response.data['message']);
         }else
           ToastUtil.error(context, message: response.data['message']);
       } catch (e, s) {
@@ -192,6 +191,8 @@ class _CommentPage extends State<CommentPage> {
     } catch (e) {
       print(e);
     }
+    setState(() {
+    });
   }
 
   getuserProfile() async {

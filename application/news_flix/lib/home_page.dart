@@ -8,12 +8,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:untitled2/config/configuration.dart';
 import 'package:untitled2/util/log_util.dart';
+import 'package:untitled2/util/time_util.dart';
 import 'package:untitled2/util/toast_util.dart';
 
 import 'about_us.dart';
 import 'all_news_page.dart';
 import 'comment_page.dart';
-import 'create_news.dart';
+import 'my_news/submit_news.dart';
 import 'dislikers.dart';
 import 'favourite_page.dart';
 import 'full_view.dart';
@@ -21,7 +22,7 @@ import 'likers.dart';
 import 'profile2.dart';
 
 import 'sign_in_page.dart';
-import 'my_news.dart';
+import 'my_news/my_news.dart';
 import 'search_page.dart';
 import 'share.dart';
 
@@ -249,7 +250,7 @@ class _HomePageState extends State<HomePage> {
             onTap: (index) {
               if (index == 1) {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => AppImagePicker()));
+                    MaterialPageRoute(builder: (context) => SubmitNews()));
               }
               //Handle button tap
             },
@@ -338,7 +339,7 @@ class _HomePageState extends State<HomePage> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => PostLIstview()));
+                              builder: (context) => AllNewsPage()));
                     },
                   ),
                 ) : Container(),
@@ -596,6 +597,15 @@ class _HomePageState extends State<HomePage> {
               listTiles1[position]['like']++;
             }
             listTiles1[position]['liked'] = !listTiles1[position]['liked'];
+
+            if (listTiles1[position]['disliked'] == null) {
+
+            } else if (listTiles1[position]['disliked'] == true && listTiles1[position]['liked'] == true) {
+              listTiles1[position]['disliked'] = false;
+              listTiles1[position]['dislike']--;
+            } else {
+
+            }
             break;
           default:
             break;
@@ -628,6 +638,15 @@ class _HomePageState extends State<HomePage> {
               listTiles1[position]['dislike']++;
             }
             listTiles1[position]['disliked'] = !listTiles1[position]['disliked'];
+
+            if (listTiles1[position]['liked'] == null) {
+
+            } else if (listTiles1[position]['liked'] == true && listTiles1[position]['disliked'] == true) {
+              listTiles1[position]['liked'] = false;
+              listTiles1[position]['like']--;
+            } else {
+
+            }
             break;
           default:
             break;
@@ -657,213 +676,240 @@ class _HomePageState extends State<HomePage> {
     return Card(
         elevation: 5,
         margin: EdgeInsets.only(bottom: 20, top: 10, left: 10, right: 10),
-        child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(15, 10, 10, 5),
-                    child: Text(
-                      item!['title'],
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.deepPurple,
-                        // fontStyle: FontStyle.italic,
-                        decorationStyle: TextDecorationStyle.double,
-                      ),
-                    ),
+        child: Container(
+          padding: EdgeInsets.only(
+            left: 10,
+            right: 10,
+            top: 10,
+          ),
+          child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text(
+                  item!['title'],
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.deepPurple,
+                    // fontStyle: FontStyle.italic,
+                    decorationStyle: TextDecorationStyle.double,
                   ),
-                ],
-              ),
-              const SizedBox(height: 5),
-              Divider(
-                color: Colors.deepPurple,
-                indent: 10,
-                endIndent: 10,
-              ),
-              // const SizedBox(height: 5),
-              // Padding(
-              // padding: EdgeInsets.fromLTRB(15, 5, 10, 10),
-              // child: Text(
-              //   item!['description'],
-              //   style: TextStyle(
-              //     fontSize: 16,
-              //     decorationStyle: TextDecorationStyle.double,
-              //   ),
-              // ),
-              // ),
-              (item!['imageUrl'] != null)
-                  ? Container(
-                      width: MediaQuery.of(_context!).size.width,
-                      height: MediaQuery.of(_context!).size.width / 2,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: NetworkImage(item!['imageUrl']),
-                          fit: BoxFit.cover,
-                        ),
-                        borderRadius: BorderRadius.circular(3),
-                      ),
-                    )
-                  : Container(),
-              Divider(
-                color: Colors.deepPurple,
-                indent: 10,
-                endIndent: 10,
-              ),
-              Container(
-                padding: EdgeInsets.only(
-                  left: 5,
-                  //   bottom: 0,
-                  //   top: 0,
-                  //   right: 4,
                 ),
-                child: Row(
+                SizedBox(height: 5),
+                Row(
                   children: [
-                    InkWell(
-                      onLongPress: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => Likers()));
-                      },
-                      child: Row(
-                        children: [
-                          IconButton(
-                            icon: Icon(
-                              Icons.thumb_up_outlined,
-                            ),
-                            color: (item!['liked'] == true)
-                                ? Configuration.favIconColor1 =
-                                    Colors.deepPurple
-                                : Configuration.favIconColor1 = Colors.grey,
-                            onPressed: () async {
-                              newsLike(item, catId: catId, position: position);
-                            },
-                          ),
-                          (item!['like'] > 0)
-                              ? Text(item!['like'].toString())
-                              : Container(),
-                        ],
+                    Text(
+                      'Published On : \t',
+                      style: TextStyle(
+                          fontSize: 12,
+                          color: Configuration.primaryColor
                       ),
                     ),
-                    SizedBox(
-                      width: 15,
-                    ),
-                    Row(
-                      children: [
-                        InkWell(
-                          onLongPress: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Dislikers()));
-                          },
-                          child: Row(
-                            children: [
-                              IconButton(
-                                icon: Icon(
-                                  Icons.thumb_down_outlined,
-                                ),
-                                color: (item!['disliked'] == true)
-                                    ? Configuration.favIconColor1 =
-                                    Colors.red
-                                    : Configuration.favIconColor1 = Colors.grey,
-                                onPressed: () async {
-                                  newsDislike(item,catId:catId,position:position);
-
-                                },
-                              ),
-                              (item!['dislike'] > 0)
-                                  ? Text(item!['dislike'].toString())
-                                  : Container(),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      width: 15,
-                    ),
-                    IconButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => CommentPage(
-                                  newsId: item!['_id'],
-                                )));
-                      },
-                      icon: Icon(
-                        Icons.comment_outlined,
-                        color: Colors.grey,
-                      ),
-                    ),
-                    SizedBox(
-                      width: 15,
-                    ),
-                    InkWell(
-                        child: Column(
-                      children: [
-                        IconButton(
-                          icon: Icon(
-                            Icons.favorite,
-                          ),
-                          color: (item!['fav_user'] == true)
-                              ? Configuration.favIconColor3 = Colors.pink
-                              : Configuration.favIconColor3 = Colors.grey,
-                          onPressed: () async {
-                            var favId = item!['_id'];
-                            newsFav(favId);
-                            setState(() {
-                              if (Configuration.favIconColor3 == Colors.grey) {
-                                Configuration.favIconColor3 = Colors.pink;
-                              } else {
-                                Configuration.favIconColor3 = Colors.grey;
-                              }
-                            });
-                          },
-                        ),
-                      ],
-                    )),
-                    SizedBox(
-                      width: 5,
-                    ),
-                    IconButton(
-                      onPressed: () {
-                        validate();
-                      },
-                      icon: Icon(
-                        Icons.share_outlined,
-                        color: Colors.grey,
+                    Text(
+                      TimeUtil.convertTimeStamp(item!['publisedTime']),
+                      style: TextStyle(
+                          fontSize: 12,
+                          color: Configuration.primaryColor
                       ),
                     ),
                   ],
                 ),
-              ),
-              Divider(
-                color: Colors.deepPurple,
-                indent: 10,
-                endIndent: 10,
-              ),
-              Container(
-                padding: EdgeInsets.only(left: 10, bottom: 8),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.deepPurple,
-                    shape: RoundedRectangleBorder(
-                        //to set border radius to button
-                        borderRadius: BorderRadius.circular(30)),
-                  ),
-                  child: Text('View full news'),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => FullView()),
-                    );
-                  },
+                Divider(
+                  color: Colors.deepPurple,
+                  indent: 10,
+                  endIndent: 10,
                 ),
-              ),
-            ]));
+                // const SizedBox(height: 5),
+                // Padding(
+                // padding: EdgeInsets.fromLTRB(15, 5, 10, 10),
+                // child: Text(
+                //   item!['description'],
+                //   style: TextStyle(
+                //     fontSize: 16,
+                //     decorationStyle: TextDecorationStyle.double,
+                //   ),
+                // ),
+                // ),
+                (item!['imageUrl'] != null)
+                    ? InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => FullView(
+                              newDetails: item
+                          ),
+                          ),
+                        );
+                      },
+                      child: Container(
+                          width: MediaQuery.of(_context!).size.width,
+                          height: MediaQuery.of(_context!).size.width / 2,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: NetworkImage(item!['imageUrl']),
+                              fit: BoxFit.cover,
+                            ),
+                            borderRadius: BorderRadius.circular(3),
+                          ),
+                        ),
+                    )
+                    : Container(),
+                Divider(
+                  color: Colors.deepPurple,
+                  indent: 10,
+                  endIndent: 10,
+                ),
+                Container(
+                  padding: EdgeInsets.only(
+                    left: 5,
+                    //   bottom: 0,
+                    //   top: 0,
+                    //   right: 4,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      InkWell(
+                        onLongPress: () {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) => Likers()));
+                        },
+                        child: Row(
+                          children: [
+                            IconButton(
+                              icon: Icon(
+                                Icons.thumb_up_outlined,
+                              ),
+                              color: (item!['liked'] == true)
+                                  ? Configuration.favIconColor1 =
+                                      Colors.deepPurple
+                                  : Configuration.favIconColor1 = Colors.grey,
+                              onPressed: () async {
+                                newsLike(item, catId: catId, position: position);
+                              },
+                            ),
+                            (item!['like'] > 0)
+                                ? Text(item!['like'].toString())
+                                : Container(),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        width: 15,
+                      ),
+                      Row(
+                        children: [
+                          InkWell(
+                            onLongPress: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Dislikers()));
+                            },
+                            child: Row(
+                              children: [
+                                IconButton(
+                                  icon: Icon(
+                                    (item!['disliked'] == true)? Icons.thumb_down : Icons.thumb_down_outlined,
+                                  ),
+                                  color: (item!['disliked'] == true)
+                                      ? Configuration.favIconColor1 =
+                                      Colors.red
+                                      : Configuration.favIconColor1 = Colors.grey,
+                                  onPressed: () async {
+                                    newsDislike(item,catId:catId,position:position);
+
+                                  },
+                                ),
+                                (item!['dislike'] > 0)
+                                    ? Text(item!['dislike'].toString())
+                                    : Container(),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        width: 15,
+                      ),
+                      IconButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => CommentPage(
+                                    newsId: item!['_id'],
+                                  )));
+                        },
+                        icon: Icon(
+                          Icons.comment_outlined,
+                          color: Colors.grey,
+                        ),
+                      ),
+                      SizedBox(
+                        width: 15,
+                      ),
+                      InkWell(
+                          child: Column(
+                        children: [
+                          IconButton(
+                            icon: Icon(
+                              ((item!['fav_user'] == true))? Icons.favorite : Icons.favorite_border,
+                            ),
+                            color: (item!['fav_user'] == true)
+                                ? Configuration.favIconColor3 = Colors.pink
+                                : Configuration.favIconColor3 = Colors.grey,
+                            onPressed: () async {
+                              var favId = item!['_id'];
+                              newsFav(favId);
+                              setState(() {
+                                if (Configuration.favIconColor3 == Colors.grey) {
+                                  Configuration.favIconColor3 = Colors.pink;
+                                } else {
+                                  Configuration.favIconColor3 = Colors.grey;
+                                }
+                              });
+                            },
+                          ),
+                        ],
+                      )),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      IconButton(
+                        onPressed: () {
+                          validate();
+                        },
+                        icon: Icon(
+                          Icons.share_outlined,
+                          color: Colors.grey,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Divider(
+                  color: Colors.deepPurple,
+                  indent: 10,
+                  endIndent: 10,
+                ),
+                Container(
+                  alignment: Alignment.center,
+                  padding: EdgeInsets.only(
+                    bottom: 20,
+                    top: 10
+                  ),
+                  child: Text(
+                    'Click to see more details.',
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontStyle: FontStyle.italic,
+                      color: Colors.grey,
+                    ),
+                  ),
+                )
+              ]),
+        ));
   }
 
    validate() async {

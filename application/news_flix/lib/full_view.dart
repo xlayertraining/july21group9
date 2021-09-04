@@ -1,19 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:untitled2/comment_page.dart';
+import 'package:untitled2/config/configuration.dart';
+import 'package:untitled2/dislikers.dart';
+import 'package:untitled2/likers.dart';
+import 'package:untitled2/util/log_util.dart';
+import 'package:untitled2/util/time_util.dart';
 
 class FullView extends StatefulWidget {
-  const FullView({Key? key}) : super(key: key);
+
+  Map? newDetails;
+
+  FullView({this.newDetails});
 
   @override
   _FullViewState createState() => _FullViewState();
 }
 
 class _FullViewState extends State<FullView> {
+
+  Map? item;
+  BuildContext? _context;
+
   @override
   Widget build(BuildContext context) {
+
+    if (_context == null) {
+      _context = context;
+      item = widget.newDetails!;
+    }
+    Log.i(item);
+    Log.i('pub_time', TimeUtil.convertTimeStamp(item!['publisedTime']));
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Full View',
+          item!['title'],
           style: TextStyle(
             color: Colors.deepPurple,
             fontSize: 24.0,
@@ -30,93 +50,209 @@ class _FullViewState extends State<FullView> {
         backgroundColor: Colors.white,
         toolbarHeight: 70,
       ),
-      body:
-      ListView(children: <Widget>[
-      Container(
-      margin: EdgeInsets.all(8.0),
-      child: Card(
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(8.0))),
-        child: InkWell(
-          onTap: () => print("ciao"),
-          child: Column(
-            children: <Widget>[
-              ClipRRect(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(8.0),
-                  topRight: Radius.circular(8.0),
-                ),
-                child: Image.asset("assets/anime wallpaper1.jpg",
-                    width: 300, height: 150, fit: BoxFit.fill),
-              ),
-              ListTile(
-                title: Text('Title 1 :',
-                  style: TextStyle(
-                  fontSize: 18.0,
-                  color: Colors.deepPurple,
-                  fontWeight: FontWeight.bold,
-                  fontStyle: FontStyle.italic),
-                ),
-                subtitle: Text('Description 1 :',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 15.0,
-                  ),),
-                selected: true,
-              ),
-            ],
-          ),
+      body: Container(
+        padding: EdgeInsets.only(
+          left: 10,
+          right: 10,
+          top: 10,
         ),
+        child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Text(
+                item!['title'],
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.deepPurple,
+                  // fontStyle: FontStyle.italic,
+                  decorationStyle: TextDecorationStyle.double,
+                ),
+              ),
+              Row(
+                children: [
+                  Text(
+                    'Published On : \t',
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Configuration.primaryColor
+                    ),
+                  ),
+                  Text(
+                    TimeUtil.convertTimeStamp(item!['publisedTime']),
+                    style: TextStyle(
+                        fontSize: 12,
+                        color: Configuration.primaryColor
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 5),
+              Divider(
+                color: Colors.deepPurple,
+                indent: 10,
+                endIndent: 10,
+              ),
+              (item!['imageUrl'] != null)
+                  ? Container(
+                width: MediaQuery.of(_context!).size.width,
+                height: MediaQuery.of(_context!).size.width / 2,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: NetworkImage(item!['imageUrl']),
+                    fit: BoxFit.cover,
+                  ),
+                  borderRadius: BorderRadius.circular(3),
+                ),
+              )
+                  : Container(),
+              Divider(
+                color: Colors.deepPurple,
+                indent: 10,
+                endIndent: 10,
+              ),
+              Container(
+                padding: EdgeInsets.only(
+                  left: 5,
+                  //   bottom: 0,
+                  //   top: 0,
+                  //   right: 4,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Flexible(
+                      flex: 1,
+                      child: InkWell(
+                        onLongPress: () {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) => Likers()));
+                        },
+                        child: Row(
+                          children: [
+                            IconButton(
+                              icon: Icon(
+                                Icons.thumb_up_outlined,
+                              ),
+                              color: (item!['liked'] == true)
+                                  ? Configuration.favIconColor1 =
+                                  Colors.deepPurple
+                                  : Configuration.favIconColor1 = Colors.grey,
+                              onPressed: () async {
+                                // newsLike(item, catId: catId, position: position);
+                              },
+                            ),
+                            (item!['like'] > 0)
+                                ? Text(item!['like'].toString())
+                                : Container(),
+                          ],
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Flexible(
+                      flex: 1,
+                      child: InkWell(
+                        onLongPress: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Dislikers()));
+                        },
+                        child: Row(
+                          children: [
+                            IconButton(
+                              icon: Icon(
+                                Icons.thumb_down_outlined,
+                              ),
+                              color: (item!['disliked'] == true)
+                                  ? Configuration.favIconColor1 =
+                                  Colors.red
+                                  : Configuration.favIconColor1 = Colors.grey,
+                              onPressed: () async {
+                                // newsDislike(item,catId:catId,position:position);
+
+                              },
+                            ),
+                            (item!['dislike'] > 0)
+                                ? Text(item!['dislike'].toString())
+                                : Container(),
+                          ],
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Flexible(
+                      flex: 1,
+                      child: IconButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => CommentPage(
+                                    newsId: item!['_id'],
+                                  )));
+                        },
+                        icon: Icon(
+                          Icons.comment_outlined,
+                          color: Colors.grey,
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Flexible(
+                      flex: 1,
+                      child: IconButton(
+                        icon: Icon(
+                          Icons.favorite,
+                        ),
+                        color: (item!['fav_user'] == true)
+                            ? Configuration.favIconColor3 = Colors.pink
+                            : Configuration.favIconColor3 = Colors.grey,
+                        onPressed: () async {
+                          var favId = item!['_id'];
+                          // newsFav(favId);
+                          setState(() {
+                            if (Configuration.favIconColor3 == Colors.grey) {
+                              Configuration.favIconColor3 = Colors.pink;
+                            } else {
+                              Configuration.favIconColor3 = Colors.grey;
+                            }
+                          });
+                        },
+                      ),
+                    ),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Flexible(
+                      flex: 1,
+                      child: IconButton(
+                        onPressed: () {
+                          // validate();
+                        },
+                        icon: Icon(
+                          Icons.share_outlined,
+                          color: Colors.grey,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Divider(
+                color: Colors.deepPurple,
+                indent: 10,
+                endIndent: 10,
+              ),
+            ]),
       ),
-    ),
-    ]
-    )
     );
   }
 }
-
-//       SingleChildScrollView(
-//         child: Container(
-//             color: Colors.white,
-//             margin: EdgeInsets.only(left: 8,right: 8),
-//             height: 700,
-//             padding: EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 80),
-//             child: Column(mainAxisSize: MainAxisSize.min, children: [
-//               Text(
-//                 'Title :',
-//             textDirection: TextDirection.ltr,
-//               textAlign: TextAlign.start,
-//               style: TextStyle(
-//                   fontSize: 20.0,
-//                   color: Colors.deepPurple,
-//                   fontWeight: FontWeight.bold,
-//                   fontStyle: FontStyle.italic),
-//             ),
-//               SizedBox(
-//                 width: 10,
-//               ),
-//               Container(
-//                 width: MediaQuery.of(context).size.width,
-//                 height: MediaQuery.of(context).size.width / 2,
-//                 child: Image.network(
-//                   'https://png.pngtree.com/thumb_back/fh260/background/20200714/pngtree-old-paper-texture-parchment-background-image_354980.jpg',
-//                   fit: BoxFit.fitWidth,
-//                 ),
-//               ),
-//               SizedBox(
-//                 width: 10,
-//               ),
-//               Text(
-//                 'description :',
-//                 textDirection: TextDirection.ltr,
-//                 textAlign: TextAlign.start,
-//                 style: TextStyle(
-//                     fontSize: 20.0,
-//                     color: Colors.deepPurple,
-//                     fontWeight: FontWeight.bold,
-//                     fontStyle: FontStyle.italic),
-//               ),
-//             ])),
-//       ),
-//     );
-

@@ -1,35 +1,39 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class PostLIstview extends StatelessWidget{
+class AllNewsPage extends StatefulWidget {
+  const AllNewsPage({Key? key}) : super(key: key);
+
+  @override
+  _AllNewsPageState createState() => _AllNewsPageState();
+}
+
+class _AllNewsPageState extends State<AllNewsPage> {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        appBar: AppBar(
-          toolbarHeight: 60,
-          title: Text(
-            'All news',
-            style: TextStyle(
-              color: Colors.deepPurple,
-              fontSize: 24.0,
-              fontStyle: FontStyle.italic,
-            ),
-          ),
-          backgroundColor: Colors.white,
-          elevation: 0.0,
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back_ios_outlined,
-                color: Colors.deepPurple), // set your color here
-            onPressed: () {
-              Navigator.pop(context);
-            },
+    return Scaffold(
+      appBar: AppBar(
+        toolbarHeight: 60,
+        title: Text(
+          'All news',
+          style: TextStyle(
+            color: Colors.deepPurple,
+            fontSize: 24.0,
+            fontStyle: FontStyle.italic,
           ),
         ),
         backgroundColor: Colors.white,
-        body:Center(
+        elevation: 0.0,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios_outlined,
+              color: Colors.deepPurple), // set your color here
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
+      backgroundColor: Colors.white,
+      body:Center(
         child: ListView(
           shrinkWrap: true,
           children: [
@@ -58,22 +62,22 @@ class PostLIstview extends StatelessWidget{
                             Image.network("https://powerbacks.com/wp-content/uploads/2019/09/google-slides-icon.png",
                               width: 300,height: 300,),
                             Container(
-                                width: double.infinity,
-                                color: Colors.grey[200],
-                                 child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                   child: ElevatedButton(
-                                     style: ElevatedButton.styleFrom(
-                                     shape:  RoundedRectangleBorder(
-                                         borderRadius: BorderRadius.circular(30)),
-                                         primary: Colors.white),
-                                     child: Text('Approve',
-                                       style: TextStyle(color: Colors.deepPurple, fontSize: 15),
-                                     ),
-                                     onPressed: () {
-                                     },
+                              width: double.infinity,
+                              color: Colors.grey[200],
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                      shape:  RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(30)),
+                                      primary: Colors.white),
+                                  child: Text('Approve',
+                                    style: TextStyle(color: Colors.deepPurple, fontSize: 15),
+                                  ),
+                                  onPressed: () {
+                                  },
                                 ),
-                            ),),
+                              ),),
                             Container(
                               width: double.infinity,
                               color: Colors.grey[200],
@@ -81,9 +85,9 @@ class PostLIstview extends StatelessWidget{
                                 padding: const EdgeInsets.all(8.0),
                                 child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(
-                                    shape:  RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(30)),
-                                    primary: Colors.deepPurple
+                                      shape:  RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(30)),
+                                      primary: Colors.deepPurple
                                   ),
                                   child: Text('Deny'),
                                   onPressed: () {
@@ -96,10 +100,9 @@ class PostLIstview extends StatelessWidget{
                     );
                   }),
             ),
-                          ],
-                        ),
-                      ),
-      )
-                    );
-                  }
+          ],
+        ),
+      ),
+    );
   }
+}

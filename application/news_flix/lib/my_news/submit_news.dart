@@ -11,16 +11,19 @@ import 'package:image_picker/image_picker.dart';
 import 'package:untitled2/util/log_util.dart';
 import 'package:untitled2/util/toast_util.dart';
 
-import 'config/configuration.dart';
+import '../config/configuration.dart';
 
-class AppImagePicker extends StatefulWidget {
-  const AppImagePicker();
+class SubmitNews extends StatefulWidget {
+
+  Function? callBack;
+
+  SubmitNews({this.callBack});
 
   @override
-  _AppImagePickerState createState() => _AppImagePickerState();
+  _SubmitNewsState createState() => _SubmitNewsState();
 }
 
-class _AppImagePickerState extends State<AppImagePicker> {
+class _SubmitNewsState extends State<SubmitNews> {
   TextEditingController titleController = new TextEditingController();
   TextEditingController descriptionController = new TextEditingController();
 
@@ -50,7 +53,7 @@ class _AppImagePickerState extends State<AppImagePicker> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         title: Text(
-          "Create News",
+          "Submit News",
           style: TextStyle(
             color: Colors.deepPurple,
             fontSize: 24.0,
@@ -221,7 +224,7 @@ class _AppImagePickerState extends State<AppImagePicker> {
                       SizedBox(
                         width: 5,
                       ),
-                      Text("Submit news"),
+                      Text("Submit"),
                     ],
                   ),
                 ),
@@ -297,8 +300,12 @@ class _AppImagePickerState extends State<AppImagePicker> {
     try {
       if (response!.data['status']) {
         ToastUtil.success(_context!, message: response.data['message']);
-        Navigator.of(_context!).pop(true);
-
+        if (widget.callBack != null) {
+          widget.callBack!.call();
+        }
+        Timer(Duration(milliseconds: 500), () {
+          Navigator.of(_context!).pop(true);
+        });
       } else {
         ToastUtil.error(_context!, message: response.data['message']);
       }

@@ -21,6 +21,10 @@ environment:
   sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
+
+  intl: 0.17.0
+  permission_handler: 8.1.4+2
+
   #for viewing the loading process
   flutter_easyloading: ^3.0.0
 
