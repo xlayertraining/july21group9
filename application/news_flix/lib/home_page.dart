@@ -607,6 +607,81 @@ class _HomePageState extends State<HomePage> {
               listTiles0[position]['dislike']--;
             } else {}
             break;
+          case 1:
+            if (listTiles1[position]['liked']) {
+              listTiles1[position]['like']--;
+            } else {
+              listTiles1[position]['like']++;
+            }
+            listTiles1[position]['liked'] = !listTiles1[position]['liked'];
+
+            if (listTiles1[position]['disliked'] == null) {
+            } else if (listTiles1[position]['disliked'] == true &&
+                listTiles1[position]['liked'] == true) {
+              listTiles1[position]['disliked'] = false;
+              listTiles1[position]['dislike']--;
+            } else {}
+            break;
+          case 2:
+            if (listTiles2[position]['liked']) {
+              listTiles2[position]['like']--;
+            } else {
+              listTiles2[position]['like']++;
+            }
+            listTiles2[position]['liked'] = !listTiles2[position]['liked'];
+
+            if (listTiles2[position]['disliked'] == null) {
+            } else if (listTiles2[position]['disliked'] == true &&
+                listTiles2[position]['liked'] == true) {
+              listTiles2[position]['disliked'] = false;
+              listTiles2[position]['dislike']--;
+            } else {}
+            break;
+          case 3:
+            if (listTiles3[position]['liked']) {
+              listTiles3[position]['like']--;
+            } else {
+              listTiles3[position]['like']++;
+            }
+            listTiles3[position]['liked'] = !listTiles3[position]['liked'];
+
+            if (listTiles3[position]['disliked'] == null) {
+            } else if (listTiles3[position]['disliked'] == true &&
+                listTiles3[position]['liked'] == true) {
+              listTiles3[position]['disliked'] = false;
+              listTiles3[position]['dislike']--;
+            } else {}
+            break;
+          case 4:
+            if (listTiles4[position]['liked']) {
+              listTiles4[position]['like']--;
+            } else {
+              listTiles4[position]['like']++;
+            }
+            listTiles4[position]['liked'] = !listTiles4[position]['liked'];
+
+            if (listTiles4[position]['disliked'] == null) {
+            } else if (listTiles4[position]['disliked'] == true &&
+                listTiles4[position]['liked'] == true) {
+              listTiles4[position]['disliked'] = false;
+              listTiles4[position]['dislike']--;
+            } else {}
+            break;
+          case 5:
+            if (listTiles5[position]['liked']) {
+              listTiles5[position]['like']--;
+            } else {
+              listTiles5[position]['like']++;
+            }
+            listTiles5[position]['liked'] = !listTiles5[position]['liked'];
+
+            if (listTiles5[position]['disliked'] == null) {
+            } else if (listTiles5[position]['disliked'] == true &&
+                listTiles5[position]['liked'] == true) {
+              listTiles5[position]['disliked'] = false;
+              listTiles5[position]['dislike']--;
+            } else {}
+            break;
           default:
             break;
         }
@@ -646,6 +721,87 @@ class _HomePageState extends State<HomePage> {
               listTiles0[position]['like']--;
             } else {}
             break;
+          case 1:
+            if (listTiles1[position]['disliked']) {
+              listTiles1[position]['dislike']--;
+            } else {
+              listTiles1[position]['dislike']++;
+            }
+            listTiles1[position]['disliked'] =
+            !listTiles1[position]['disliked'];
+
+            if (listTiles1[position]['liked'] == null) {
+            } else if (listTiles1[position]['liked'] == true &&
+                listTiles1[position]['disliked'] == true) {
+              listTiles1[position]['liked'] = false;
+              listTiles1[position]['like']--;
+            } else {}
+            break;
+          case 2:
+            if (listTiles2[position]['disliked']) {
+              listTiles2[position]['dislike']--;
+            } else {
+              listTiles2[position]['dislike']++;
+            }
+            listTiles2[position]['disliked'] =
+            !listTiles2[position]['disliked'];
+
+            if (listTiles2[position]['liked'] == null) {
+            } else if (listTiles2[position]['liked'] == true &&
+                listTiles2[position]['disliked'] == true) {
+              listTiles2[position]['liked'] = false;
+              listTiles2[position]['like']--;
+            } else {}
+            break;
+          case 3:
+            if (listTiles3[position]['disliked']) {
+              listTiles3[position]['dislike']--;
+            } else {
+              listTiles3[position]['dislike']++;
+            }
+            listTiles3[position]['disliked'] =
+            !listTiles3[position]['disliked'];
+
+            if (listTiles3[position]['liked'] == null) {
+            } else if (listTiles3[position]['liked'] == true &&
+                listTiles3[position]['disliked'] == true) {
+              listTiles3[position]['liked'] = false;
+              listTiles3[position]['like']--;
+            } else {}
+            break;
+          case 4:
+            if (listTiles4[position]['disliked']) {
+              listTiles4[position]['dislike']--;
+            } else {
+              listTiles4[position]['dislike']++;
+            }
+            listTiles4[position]['disliked'] =
+            !listTiles4[position]['disliked'];
+
+            if (listTiles4[position]['liked'] == null) {
+            } else if (listTiles4[position]['liked'] == true &&
+                listTiles4[position]['disliked'] == true) {
+              listTiles4[position]['liked'] = false;
+              listTiles4[position]['like']--;
+            } else {}
+            break;
+          case 5:
+            if (listTiles5[position]['disliked']) {
+              listTiles5[position]['dislike']--;
+            } else {
+              listTiles5[position]['dislike']++;
+            }
+            listTiles5[position]['disliked'] =
+            !listTiles5[position]['disliked'];
+
+            if (listTiles5[position]['liked'] == null) {
+            } else if (listTiles5[position]['liked'] == true &&
+                listTiles5[position]['disliked'] == true) {
+              listTiles5[position]['liked'] = false;
+              listTiles5[position]['like']--;
+            } else {}
+            break;
+
           default:
             break;
         }
