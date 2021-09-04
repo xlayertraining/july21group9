@@ -94,9 +94,8 @@ class _MyPostState extends State<MyPost> {
                   endIndent: 10,
                 ),
                 ElevatedButton(
-                  onPressed: () {
+                  onPressed: () async {
                     deluserNews(index);
-                    getuserNews();
                   },
                   style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(
@@ -180,7 +179,7 @@ class _MyPostState extends State<MyPost> {
     }
 
     Timer(
-      Duration(seconds: 1),
+      Duration(milliseconds: 150),
       () {
         setState(() {});
       },
@@ -207,9 +206,9 @@ class _MyPostState extends State<MyPost> {
     }
 
     Timer(
-      Duration(seconds: 1),
+      Duration(milliseconds: 150),
       () {
-        setState(() {});
+        setState(() { getuserNews();});
       },
     );
   }

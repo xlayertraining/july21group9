@@ -25,17 +25,16 @@ class _FavouriteState extends State<Favourite> {
   //   "assets/default-avatar.jpg",
   //   "assets/default-avatar.jpg",
   // ];
-  var usrFav=[];
+  var usrFav = [];
   BuildContext? _context;
   @override
   Widget build(BuildContext context) {
     if (_context == null) {
-
       _context = context;
       getuserFavourites();
     }
 
-      return Scaffold(
+    return Scaffold(
       appBar: AppBar(
         elevation: 3,
         backgroundColor: Colors.white,
@@ -58,44 +57,62 @@ class _FavouriteState extends State<Favourite> {
       body: ListView.builder(
         itemBuilder: (BuildContext, index) {
           return Card(
-              elevation: 5,
-              margin: EdgeInsets.only(bottom: 20, top: 10, left: 10, right: 10),
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    ListTile(
-                     //  leading: CircleAvatar(
-                     //    backgroundImage: AssetImage(images[index]),
-                     // ),
-                      title: Text(
-                        usrFav[index]['title'].toString(),
-                        style: TextStyle(fontWeight: FontWeight.bold,color: Colors.deepPurple),
-                      ),
-                      subtitle: Text(
-                      usrFav[index]['description'].toString(),
-                        style: TextStyle(color: Colors.black),),
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => FullView()));
-                      },
-                      trailing: IconButton(
-                        icon: Icon(
-                          Icons.delete,
-                          color: Colors.red,
-                          size: 22,
+            child: Column(
+              children: [
+                ListTile(
+                  title: Text(
+                    usrFav[index]['title'].toString(),
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.deepPurple,
+                      decorationStyle: TextDecorationStyle.double,
+                    ),
+                  ),
+                  subtitle: Text(
+                    usrFav[index]['description'].toString(),
+                  ),
+                ),
+                Divider(
+                  color: Colors.deepPurple,
+                  indent: 10,
+                  endIndent: 10,
+                ),
+                (usrFav[index]['imageUrl'] != null)
+                    ? Container(
+                        child: Image.network(
+                          usrFav[index]['imageUrl'],
                         ),
-                        onPressed: () async {
-                       delUserFav(index);
-                       getuserFavourites();
-                        },
+                      )
+                    : Container(),
+                Divider(
+                  color: Colors.deepPurple,
+                  indent: 10,
+                  endIndent: 10,
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    delUserFav(index);
+                  },
+                  style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30)),
+                      primary: Colors.deepPurple),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(
+                        Icons.delete,
+                        color: Colors.red,
+                        size: 22,
                       ),
-                      selected: true,
-                      tileColor: Colors.deepPurple,
-                    )
-                  ]));
+                      Text('DELETE')
+                    ],
+                  ),
+                )
+              ],
+            ),
+          );
         },
         itemCount: usrFav.length,
         shrinkWrap: true,
@@ -120,17 +137,17 @@ class _FavouriteState extends State<Favourite> {
       if (response!.data['status']) {
         usrFav = response.data['result'];
       }
-    }
-    catch (e, s) {
+    } catch (e, s) {
       Log.i(e.toString() + s.toString());
     }
     Timer(
-      Duration(seconds: 1),
-          () {
+      Duration(milliseconds: 150),
+      () {
         setState(() {});
       },
     );
   }
+
   delUserFav(var id) async {
     Response? resp = null;
     var newsIdData = FormData.fromMap({"newsId": usrFav[id]['_id'].toString()});
@@ -146,18 +163,15 @@ class _FavouriteState extends State<Favourite> {
           _context!,
           message: resp.data['message'],
         );
-
       }
-    }
-    catch (e, s) {
+    } catch (e, s) {
       Log.i(e.toString() + s.toString());
     }
     Timer(
-      Duration(seconds: 1),
-          () {
-        setState(() {});
+      Duration(milliseconds: 150),
+      () {
+        setState(() { getuserFavourites();});
       },
     );
   }
-
 }

@@ -45,101 +45,94 @@ class _AllNewsPageState extends State<AllNewsPage> {
         ),
       ),
       backgroundColor: Colors.white,
-      body: Center(
-        child: ListView(
-          shrinkWrap: true,
-          children: [
-            Container(
-                width: double.infinity,
-                padding: EdgeInsets.all(4),
-                color: Colors.white60,
-                margin: EdgeInsets.all(20.0),
-                child: Text(
-                  "News:",
-                  style: TextStyle(fontSize: 25, color: Colors.deepPurple),
-                )),
-            Container(
-              color: Colors.white,
-              margin: EdgeInsets.only(left: 8, right: 8),
-              height: 500,
-              child: ListView.builder(
-                  physics: ClampingScrollPhysics(),
-                  scrollDirection: Axis.vertical,
-                  shrinkWrap: true,
-                  itemCount: newstile.length,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.all(2.0),
-                      child: Card(
-                        child: Column(
-                          children: [
-                            (newstile[index]['imageUrl'] != null)
-                                ? Container(
-                                    child: Image.network(
-                                      newstile[index]['imageUrl'],
-                                      width: 300,
-                                      height: 300,
-                                    ),
-                                  )
-                                : Container(
-                                    width: 300,
-                                    height: 300,
-                                    alignment: Alignment.center,
-                                    child: Text(
-                                      " No image is provided.",
+      body: Column(
+        children: [
+          Center(
+            child: ListView(
+              shrinkWrap: true,
+              children: [
+                Container(
+                  color: Colors.white,
+                  margin: EdgeInsets.only(left: 8, right: 8),
+                  height: 643,
+                  child: ListView.builder(
+                      physics: ClampingScrollPhysics(),
+                      scrollDirection: Axis.vertical,
+                      shrinkWrap: true,
+                      itemCount: newstile.length,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.all(2.0),
+                          child: Card(
+                            child: Column(
+                              children: [
+                                (newstile[index]['imageUrl'] != null)
+                                    ? Container(
+                                        child: Image.network(
+                                          newstile[index]['imageUrl'],
+                                          width: 300,
+                                          height: 300,
+                                        ),
+                                      )
+                                    : Container(
+                                        width: 300,
+                                        height: 300,
+                                        alignment: Alignment.center,
+                                        child: Text(
+                                          " No image is provided.",
+                                        ),
+                                      ),
+                                Container(
+                                  width: double.infinity,
+                                  color: Colors.grey[200],
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(30)),
+                                          primary: Colors.white),
+                                      child: Text(
+                                        'Approve',
+                                        style: TextStyle(
+                                            color: Colors.deepPurple, fontSize: 15),
+                                      ),
+                                      onPressed: () {
+                                        postApproveNews(
+                                            newstile[index]['_id'].toString());
+                                      },
                                     ),
                                   ),
-                            Container(
-                              width: double.infinity,
-                              color: Colors.grey[200],
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(30)),
-                                      primary: Colors.white),
-                                  child: Text(
-                                    'Approve',
-                                    style: TextStyle(
-                                        color: Colors.deepPurple, fontSize: 15),
+                                ),
+                                Container(
+                                  width: double.infinity,
+                                  color: Colors.grey[200],
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(30)),
+                                          primary: Colors.deepPurple),
+                                      child: Text('Delete'),
+                                      onPressed: () async {
+                                        delApproveNews(newstile[index]['_id'].toString());
+                                      },
+                                    ),
                                   ),
-                                  onPressed: () {
-                                    postApproveNews(
-                                        newstile[index]['_id'].toString());
-                                    getApproveNews();
-                                  },
                                 ),
-                              ),
+                              ],
                             ),
-                            Container(
-                              width: double.infinity,
-                              color: Colors.grey[200],
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(30)),
-                                      primary: Colors.deepPurple),
-                                  child: Text('Delete'),
-                                  onPressed: () async {
-                                    delApproveNews(newstile[index]['_id'].toString());
-                                    getApproveNews();
-                                  },
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  }),
+                          ),
+                        );
+                      }),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -164,9 +157,9 @@ class _AllNewsPageState extends State<AllNewsPage> {
     }
 
     Timer(
-      Duration(seconds: 1),
+      Duration(milliseconds: 150),
       () {
-        setState(() {});
+        setState(() { });
       },
     );
   }
@@ -196,9 +189,9 @@ class _AllNewsPageState extends State<AllNewsPage> {
     }
 
     Timer(
-      Duration(seconds: 1),
+      Duration(milliseconds: 150),
       () {
-        setState(() {});
+        setState(() { getApproveNews();});
       },
     );
   }
@@ -225,9 +218,9 @@ class _AllNewsPageState extends State<AllNewsPage> {
     }
 
     Timer(
-      Duration(seconds: 1),
+      Duration(milliseconds: 150),
           () {
-        setState(() {});
+        setState(() { getApproveNews();});
       },
     );
   }
