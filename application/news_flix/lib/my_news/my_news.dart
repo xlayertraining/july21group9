@@ -19,9 +19,13 @@ class MyPost extends StatefulWidget {
 
 class _MyPostState extends State<MyPost> {
   var controller;
-
+  var userNewsList = [];
   @override
   Widget build(BuildContext context) {
+    if (context == null) {
+      context = context;
+      getuserNews();
+    }
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 60,
@@ -34,6 +38,17 @@ class _MyPostState extends State<MyPost> {
           ),
         ),
         backgroundColor: Colors.white,
+        actions: [
+          IconButton(
+            icon: Icon(
+              Icons.refresh,
+              color: Configuration.primaryColor,
+            ),
+            onPressed: () {
+              getuserNews();
+            },
+          ),
+        ],
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios_outlined,
               color: Colors.deepPurple), // set your color here
@@ -42,89 +57,67 @@ class _MyPostState extends State<MyPost> {
           },
         ),
       ),
-      body: MyPostBody(),
-    );
-  }
-}
-
-class MyPostBody extends StatefulWidget {
-  const MyPostBody({Key? key}) : super(key: key);
-
-  @override
-  _MyPostBodyState createState() => _MyPostBodyState();
-}
-
-class _MyPostBodyState extends State<MyPostBody> {
-  var userNewsList = [];
-  BuildContext? _context;
-  @override
-  Widget build(BuildContext context) {
-    if (_context == null) {
-      _context = context;
-      getuserNews();
-    }
-    return Scaffold(
       body: (userNewsList.isNotEmpty)
           ? ListView.builder(
-              itemBuilder: (BuildContext, index) {
-                return Card(
-                  child: Column(
+        itemBuilder: (BuildContext, index) {
+          return Card(
+            child: Column(
+              children: [
+                (userNewsList[index]['imageUrl'] != null)? Container(
+                  child: Image.network(
+                    userNewsList[index]['imageUrl'],
+                  ),
+                ) : Container(),
+                ListTile(
+                  title: Text(
+                    userNewsList[index]['title'].toString(),
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  subtitle: Text(
+                    userNewsList[index]['description'].toString(),
+                  ),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    deluserNews(index);
+                    getuserNews();
+                  },
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
-                      (userNewsList[index]['imageUrl'] != null)? Container(
-                        child: Image.network(
-                          userNewsList[index]['imageUrl'],
-                        ),
-                      ) : Container(),
-                      ListTile(
-                        title: Text(
-                          userNewsList[index]['title'].toString(),
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                        subtitle: Text(
-                          userNewsList[index]['description'].toString(),
-                        ),
+                      Icon(
+                        Icons.delete,
+                        color: Colors.red,
+                        size: 22,
                       ),
-                      ElevatedButton(
-                        onPressed: () {
-                          deluserNews(index);
-                          getuserNews();
-                        },
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Icon(
-                              Icons.delete,
-                              color: Colors.red,
-                              size: 22,
-                            ),
-                            Text('Delete')
-                          ],
-                        ),
-                      )
+                      Text('Delete')
                     ],
                   ),
-                );
-              },
-              itemCount: userNewsList.length,
-              shrinkWrap: true,
-              padding: EdgeInsets.all(5),
-              scrollDirection: Axis.vertical,
-            )
-          : Container(
-              height: MediaQuery.of(context).size.width,
-              alignment: Alignment.center,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'List is empty.',
-                    style: TextStyle(
-                        color: Configuration.primaryColor, fontSize: 20),
-                  )
-                ],
-              ),
+                )
+              ],
             ),
+          );
+        },
+        itemCount: userNewsList.length,
+        shrinkWrap: true,
+        padding: EdgeInsets.all(5),
+        scrollDirection: Axis.vertical,
+      )
+          : Container(
+        height: MediaQuery.of(context).size.width,
+        alignment: Alignment.center,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'List is empty.',
+              style: TextStyle(
+                  color: Configuration.primaryColor, fontSize: 20),
+            )
+          ],
+        ),
+      ),
       floatingActionButton:
       // RectGetter(           //<-- Wrap Fab with RectGetter
       // key: rectGetterKey,                       //<-- Passing the key
@@ -135,16 +128,15 @@ class _MyPostBodyState extends State<MyPostBody> {
         onPressed: () {
           // _onTap();
           Navigator.of(context).push(FadeRouteBuilder(
-              child: SubmitNews(
+            child: SubmitNews(
                 callBack: callBackFromPostNews
-              ),
             ),
+          ),
           );
         },
       ),
     );
   }
-
   getuserNews() async {
     Response? resp = null;
     resp = await Dio().get(Configuration.serverUrl + '/post/user',
@@ -179,7 +171,7 @@ class _MyPostBodyState extends State<MyPostBody> {
     print(resp);
     try {
       if (resp.data['status']) {
-        ToastUtil.success(_context!, message: resp.data['message']);
+        ToastUtil.success(context, message: resp.data['message']);
         userNewsList.removeAt(delIndex);
         setState(() {});
       }

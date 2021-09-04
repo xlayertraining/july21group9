@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:untitled2/comment_page.dart';
 import 'package:untitled2/config/configuration.dart';
@@ -5,6 +6,7 @@ import 'package:untitled2/dislikers.dart';
 import 'package:untitled2/likers.dart';
 import 'package:untitled2/util/log_util.dart';
 import 'package:untitled2/util/time_util.dart';
+import 'package:untitled2/util/toast_util.dart';
 
 class FullView extends StatefulWidget {
 
@@ -20,6 +22,7 @@ class _FullViewState extends State<FullView> {
 
   Map? item;
   BuildContext? _context;
+
 
   @override
   Widget build(BuildContext context) {
@@ -255,4 +258,39 @@ class _FullViewState extends State<FullView> {
       ),
     );
   }
+  // getApproveNews() async {
+  //   Response? resp = null;
+  //   resp = await Dio().get(
+  //       Configuration.serverUrl + '/news/approve',
+  //       options: Options(
+  //           headers: {'Authorization': ' Bearer ' + Configuration.authToken}));
+  //
+  //   try {
+  //     if (resp.data['status']){
+  //       newstile = resp.data['result'];
+  //       print(resp);
+  //       searchResult = true;
+  //       Log.i('0_length', newstile.length.toString());
+  //       ToastUtil.success(
+  //         context,
+  //         message: resp.data['message'],
+  //       );
+  //     }
+  //     else{
+  //       ToastUtil.error(
+  //         context,
+  //         message: resp.data['message'],
+  //       );
+  //     }
+  //   } catch (e, s) {
+  //     print(e.toString() + s.toString());
+  //   }
+  //
+  //   Timer(
+  //     Duration(seconds: 1),
+  //         () {
+  //       setState(() {});
+  //     },
+  //   );
+  // }
 }

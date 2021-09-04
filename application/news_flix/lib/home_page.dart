@@ -888,7 +888,7 @@ class _HomePageState extends State<HomePage> {
                 Text(
                   item!['title'],
                   style: TextStyle(
-                    fontSize: 16,
+                    fontSize: 18,
                     color: Colors.deepPurple,
                     // fontStyle: FontStyle.italic,
                     decorationStyle: TextDecorationStyle.double,
@@ -900,12 +900,12 @@ class _HomePageState extends State<HomePage> {
                     Text(
                       'Published On : \t',
                       style: TextStyle(
-                          fontSize: 12, color: Configuration.primaryColor),
+                          fontSize: 12, color:Colors.black),
                     ),
                     Text(
                       TimeUtil.convertTimeStamp(item!['createdAt']),
                       style: TextStyle(
-                          fontSize: 12, color: Configuration.primaryColor),
+                          fontSize: 12, color: Colors.black),
                     ),
                   ],
                 ),
