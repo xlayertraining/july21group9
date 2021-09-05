@@ -63,40 +63,6 @@ class _FullViewState extends State<FullView> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Text(
-                item!['title'],
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.deepPurple,
-                  // fontStyle: FontStyle.italic,
-                  decorationStyle: TextDecorationStyle.double,
-                ),
-              ),
-              Row(
-                children: [
-                  Text(
-                    'Published On : \t',
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: Configuration.primaryColor
-                    ),
-                  ),
-                  Text(
-                    TimeUtil.convertTimeStamp(item!['createdAt']),
-                    style: TextStyle(
-                        fontSize: 12,
-                        color: Colors.black
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 5),
-              Divider(
-                color: Colors.deepPurple,
-                indent: 10,
-                endIndent: 10,
-              ),
               (item!['imageUrl'] != null)
                   ? Container(
                 width: MediaQuery.of(_context!).size.width,
@@ -110,6 +76,64 @@ class _FullViewState extends State<FullView> {
                 ),
               )
                   : Container(),
+              SizedBox(height: 5),
+              Divider(
+                color: Colors.deepPurple,
+                indent: 10,
+                endIndent: 10,
+              ),
+              Row(
+                children: [
+                  CircleAvatar(backgroundImage: AssetImage("assets/news icon3.jpg"), radius: 17),
+                  SizedBox(width: 5,),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                     child: Text(
+                      item!['title'],
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.deepPurple,
+                        // fontStyle: FontStyle.italic,
+                        decorationStyle: TextDecorationStyle.double,
+                      ),
+                    ),
+                  ),
+                   SizedBox(width: 12,),
+                  Icon(Icons.circle,
+                  size: 12,
+                  color: Colors.black,),
+                  SizedBox(width: 5,),
+                  Text(
+                    TimeUtil.convertTimeStamp(item!['createdAt']),
+                    style: TextStyle(
+                        fontSize: 12,
+                        color: Colors.black
+                    ),
+                  ),
+                  SizedBox(width: 5,),
+                  Icon(Icons.date_range_rounded,
+                    size: 15,
+                    color: Colors.deepPurple,),
+                ],
+              ),
+              Divider(
+                color: Colors.deepPurple,
+                indent: 10,
+                endIndent: 10,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  item!['title'],
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.black,
+                    // fontStyle: FontStyle.italic,
+                    decorationStyle: TextDecorationStyle.double,
+                  ),
+                ),
+              ),
               Divider(
                 color: Colors.deepPurple,
                 indent: 10,

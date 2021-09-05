@@ -886,6 +886,10 @@ class _HomePageState extends State<HomePage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
+                Row(
+                  children: [
+                    CircleAvatar(backgroundImage: AssetImage("assets/news icon3.jpg"), radius: 17),
+                SizedBox(width: 5,),
                 Text(
                   item!['title'],
                   style: TextStyle(
@@ -896,9 +900,15 @@ class _HomePageState extends State<HomePage> {
                     decorationStyle: TextDecorationStyle.double,
                   ),
                 ),
+                  ],
+                ),
                 SizedBox(height: 5),
                 Row(
                   children: [
+                    Icon(Icons.circle,
+                      size: 12,
+                      color: Colors.black,),
+                    SizedBox(width: 5,),
                     Text(
                       'Published On : \t',
                       style: TextStyle(
@@ -909,6 +919,10 @@ class _HomePageState extends State<HomePage> {
                       style: TextStyle(
                           fontSize: 12, color: Colors.black),
                     ),
+                    SizedBox(width: 5,),
+                    Icon(Icons.date_range_rounded,
+                      size: 15,
+                      color: Colors.deepPurple,),
                   ],
                 ),
                 Divider(
