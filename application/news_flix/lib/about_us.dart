@@ -18,7 +18,7 @@ class AboutUs extends StatelessWidget {
             Navigator.pop(context);
           },
         ),
-       
+
         backgroundColor: Colors.white,
         iconTheme: IconThemeData(color: Colors.white),
         title: Text(
@@ -59,7 +59,7 @@ class AboutUs extends StatelessWidget {
                 Text('FrontEnd Team :',style: TextStyle(fontSize: 20,
                     fontWeight:FontWeight.bold,
                 color: Colors.deepPurple)),
-                SizedBox(height: 40),
+                SizedBox(height: 30),
                 Row(
                   children: [
                     Column(
@@ -102,10 +102,10 @@ class AboutUs extends StatelessWidget {
                   ],
                 ),
 
-                SizedBox(height: 60),
+                SizedBox(height: 10),
                 Text('BackEnd Team :',style: TextStyle(fontSize: 20,
                     fontWeight:FontWeight.bold)),
-                SizedBox(height: 40),
+                SizedBox(height: 30),
                 Row(
                   children: [
                     Padding(
@@ -147,7 +147,15 @@ class AboutUs extends StatelessWidget {
                     ),
                   ],
                 ),
-
+                Text(" Special thanks to :", style: TextStyle(fontStyle: FontStyle.normal,
+                    fontSize: 20)),
+                Divider(color: Colors.deepPurple,
+                  indent: 4,
+                  endIndent: 4,),
+                Text(" Mr.Soumik Debnath.", style: TextStyle(fontStyle: FontStyle.italic,
+                    fontSize: 18)),
+                Text(" Mr.Prithviraj Amin.", style: TextStyle(fontStyle: FontStyle.italic,
+                    fontSize: 18)),
               ],
             ),
         ),

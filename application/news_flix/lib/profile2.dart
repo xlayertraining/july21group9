@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -208,7 +210,6 @@ class _MyProfilePage2 extends State<MyProfilePage2> {
                       onPressed: () async
                       {
                         updateUserProfile();
-
                       },
                       style: ElevatedButton.styleFrom(
                         primary: Colors.deepPurple,
@@ -284,8 +285,13 @@ class _MyProfilePage2 extends State<MyProfilePage2> {
     catch (e, s) {
       Log.i(e.toString() + s.toString());
     }
-    setState(() {
-    });
+
+    Timer(
+      Duration(milliseconds: 150),
+          () {
+        setState(() {});
+      },
+    );
   }
 
 updateUserProfile() async {
@@ -310,12 +316,19 @@ updateUserProfile() async {
   }
   try {
     if (response!.data['status']){
+
       ToastUtil.success(context,message: response.data['message']);
     }
   }
   catch (e, s) {
     Log.i(e.toString() + s.toString());
   }
+  Timer(
+    Duration(milliseconds: 150),
+        () {
+      setState(() { getuserProfile();});
+    },
+  );
 }
 
 }

@@ -141,10 +141,16 @@ class _MyappState extends State<Myapp> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      'Forget password?',
-                      style:
-                          TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                    InkWell(
+                      child: Text(
+                        'Forget password?',
+                        style:
+                            TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+
+                      ),
+                      onTap: () {
+                        forgotValidate();
+                      },
                     ),
                   ],
                 ),
@@ -247,5 +253,12 @@ class _MyappState extends State<Myapp> {
     } catch (e, s) {
       print(e.toString() + s.toString());
     }
+  }
+  forgotValidate() async {
+    ToastUtil.info(
+      _context!,
+      message: "This feature is coming soon.",
+    );
+    return;
   }
 }

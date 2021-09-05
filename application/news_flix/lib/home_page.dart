@@ -114,7 +114,9 @@ class _HomePageState extends State<HomePage> {
               builder: (context) => IconButton(
                 icon: Icon(Icons.arrow_forward_ios_rounded,
                     color: Colors.deepPurple), // set your color here
-                onPressed: () => Scaffold.of(context).openDrawer(),
+                onPressed: () { Scaffold.of(context).openDrawer();
+                getuserProfile();},
+
               ),
             ),
 
@@ -248,12 +250,20 @@ class _HomePageState extends State<HomePage> {
             items: <Widget>[
               Icon(Icons.home, size: 30),
               Icon(Icons.add, size: 30),
-              Icon(Icons.compare_arrows, size: 30),
+              Icon(Icons.person, size: 30),
             ],
             onTap: (index) {
+              if (index == 0) {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => HomePage()));
+              }
               if (index == 1) {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => SubmitNews()));
+              }
+              if (index == 2) {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => MyProfilePage2()));
               }
               //Handle button tap
             },
@@ -263,6 +273,7 @@ class _HomePageState extends State<HomePage> {
             child: ListView(
               padding: EdgeInsets.zero,
               children: [
+
                 UserAccountsDrawerHeader(
                     accountName: Text((userName != null ? userName : 'abc'),
                         style: TextStyle(fontSize: 20)),
@@ -284,12 +295,6 @@ class _HomePageState extends State<HomePage> {
                             begin: Alignment.topRight,
                             end: Alignment.bottomLeft,
                             colors: [Colors.red, Colors.deepPurple]))
-                    // color: Colors.deepPurple
-                    //   image: DecorationImage(
-                    //     image: AssetImage(
-                    //         "assets/road-wall paper.webp"),
-                    //     fit: BoxFit.cover,
-                    //   ),
                     ),
                 ListTile(
                   leading: Icon(Icons.person, size: 25, color: Colors.blueGrey),
@@ -472,7 +477,12 @@ class _HomePageState extends State<HomePage> {
     } catch (e, s) {
       Log.i(e.toString() + s.toString());
     }
-    setState(() {});
+    Timer(
+      Duration(milliseconds: 150),
+          () {
+        setState(() {});
+      },
+    );
   }
 
   getNewsCategory2() async {
@@ -489,7 +499,7 @@ class _HomePageState extends State<HomePage> {
     }
 
     Timer(
-      Duration(seconds: 1),
+      Duration(milliseconds: 150),
       () {
         setState(() {});
       },
@@ -510,7 +520,7 @@ class _HomePageState extends State<HomePage> {
     }
 
     Timer(
-      Duration(seconds: 1),
+      Duration(milliseconds: 150),
       () {
         setState(() {});
       },
@@ -531,7 +541,7 @@ class _HomePageState extends State<HomePage> {
     }
 
     Timer(
-      Duration(seconds: 1),
+      Duration(milliseconds: 150),
       () {
         setState(() {});
       },
@@ -552,7 +562,7 @@ class _HomePageState extends State<HomePage> {
     }
 
     Timer(
-      Duration(seconds: 1),
+      Duration(milliseconds: 150),
       () {
         setState(() {});
       },

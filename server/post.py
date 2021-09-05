@@ -90,7 +90,7 @@ class NewsHandler(tornado.web.RequestHandler):
                 try:
                     fileType = str(mimetypes.guess_extension(
                         image['content_type'], strict=True))
-                    if fileType not in[".jpeg", ".jpg", ".png",".tiff",".gif",".svg",".heic",".raw",".bin"]:
+                    if fileType not in[".jpeg", ".jpg", ".png",".bin"]:
                         raise Exception
                     imageRaw = image['body']
                 except:

@@ -68,7 +68,7 @@ class _SearchPageState extends State<SearchPage> {
                   onTap: () {
                     ToastUtil.info(
                       context,
-                      message: 'This feature is comming soon.',
+                      message: 'This feature is coming soon.',
                     );
                     // Scaffold.of(context).showSnackBar(SnackBar(
                     //   content: Text(titles[index] + ' pressed!'),
