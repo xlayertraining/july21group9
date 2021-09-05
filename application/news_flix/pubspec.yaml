@@ -103,6 +103,9 @@ flutter:
       - assets/road-wall paper.webp
       - assets/news icon3.jpg
       - assets/news icon 5.png
+      - assets/nabanit.jpg
+      - assets/aniket.jpg
+      - assets/samyadeep.jpg
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 #  fonts:
