@@ -125,7 +125,7 @@ class _FullViewState extends State<FullView> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  item!['title'],
+                  item!['description'].toString(),
                   style: TextStyle(
                     fontSize: 18,
                     color: Colors.black,

@@ -198,7 +198,7 @@ class NewsHandler(tornado.web.RequestHandler):
                         i['liked'] = True
                     if account_id in i['dislikers']:
                         i['disliked'] = True
-                    del[i['likers'], i['dislikers'], i['category'], i['description'],i['createdBy'],i['approvedAt']]
+                    del[i['likers'], i['dislikers'], i['category'],i['createdBy'],i['approvedAt']]
                     i['_id'] = str(i['_id'])
                     i["fav_user"] = False
                     if account_id in i["favourites"]:
