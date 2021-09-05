@@ -1101,12 +1101,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                   ),
-                  // onTap: () async{
-                  //   Navigator.push(context, MaterialPageRoute(
-                  //       builder: (context) => FullView(
-                  //         newDetails: Map(item![catId]['_id']),
-                  //       )) );
-                  // },
+
                 )
               ]),
         ));
