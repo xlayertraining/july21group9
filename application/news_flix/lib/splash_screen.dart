@@ -80,7 +80,7 @@ class SplashScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Image.asset("assets/News Flix.png",
+            Image.asset("assets/News Flix2.png",
               height: 150,
               width: 150,
               fit: BoxFit.cover,
