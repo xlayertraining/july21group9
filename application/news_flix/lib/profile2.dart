@@ -99,6 +99,7 @@ class _MyProfilePage2 extends State<MyProfilePage2> {
                       labelText: 'First name',
                       labelStyle: TextStyle(color: Colors.deepPurple),
                       prefixIcon: Icon(Icons.person, color: Colors.grey),
+                      suffixIcon: Icon(Icons.edit,color: Colors.grey),
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.deepPurple),
                         borderRadius: BorderRadius.circular(25.0),
@@ -119,6 +120,7 @@ class _MyProfilePage2 extends State<MyProfilePage2> {
                       labelText: 'Last name',
                       labelStyle: TextStyle(color: Colors.deepPurple),
                       prefixIcon: Icon(Icons.person_sharp, color: Colors.grey),
+                      suffixIcon: Icon(Icons.edit,color: Colors.grey),
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.deepPurple),
                         borderRadius: BorderRadius.circular(25.0),
@@ -139,6 +141,7 @@ class _MyProfilePage2 extends State<MyProfilePage2> {
                       labelText: 'Phone number',
                       labelStyle: TextStyle(color: Colors.deepPurple),
                       prefixIcon: Icon(Icons.phone, color: Colors.grey),
+                      suffixIcon: Icon(Icons.edit,color: Colors.grey),
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.deepPurple),
                         borderRadius: BorderRadius.circular(25.0),
@@ -159,6 +162,7 @@ class _MyProfilePage2 extends State<MyProfilePage2> {
                       labelText: 'Email',
                       labelStyle: TextStyle(color: Colors.deepPurple),
                       prefixIcon: Icon(Icons.email, color: Colors.grey),
+                      suffixIcon: Icon(Icons.edit,color: Colors.grey),
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.deepPurple),
                         borderRadius: BorderRadius.circular(25.0),
@@ -191,6 +195,7 @@ class _MyProfilePage2 extends State<MyProfilePage2> {
                             ? Icon(Icons.visibility, color: Colors.grey)
                             : Icon(Icons.visibility_off, color: Colors.grey),
                       ),
+                      suffixIcon: Icon(Icons.edit,color: Colors.grey),
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.deepPurple),
                         borderRadius: BorderRadius.circular(25.0),

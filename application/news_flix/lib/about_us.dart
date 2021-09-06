@@ -59,7 +59,7 @@ class AboutUs extends StatelessWidget {
                 Text('FrontEnd Team :',style: TextStyle(fontSize: 20,
                     fontWeight:FontWeight.bold,
                 color: Colors.deepPurple)),
-                SizedBox(height: 30),
+                SizedBox(height: 20),
                 Row(
                   children: [
                     Column(
@@ -105,7 +105,7 @@ class AboutUs extends StatelessWidget {
                 SizedBox(height: 10),
                 Text('BackEnd Team :',style: TextStyle(fontSize: 20,
                     fontWeight:FontWeight.bold)),
-                SizedBox(height: 30),
+                SizedBox(height: 20),
                 Row(
                   children: [
                     Padding(

@@ -48,6 +48,9 @@ dependencies:
   #customizable indicators for page view:
   page_view_indicators: ^2.0.0
 
+  #scroll component dropdown refresh and pull up to load:
+  pull_to_refresh: ^2.0.0
+
   flutter:
     sdk: flutter
 
@@ -96,7 +99,6 @@ flutter:
 
       - assets/news animation.json
       - assets/boy.png
-      - assets/News Flix2.png
       - assets/Sign Up.json
       - assets/anime wallpaper1.jpg
       - assets/default-avatar.jpg

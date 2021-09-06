@@ -25,7 +25,8 @@ import 'profile2.dart';
 import 'sign_in_page.dart';
 import 'my_news/my_news.dart';
 import 'search_page.dart';
-import 'share.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
+
 
 // import 'package:flutter_easyloading/flutter_easyloading.dart';
 
@@ -49,6 +50,28 @@ class _HomePageState extends State<HomePage> {
 
   BuildContext? _context;
   bool liked = false;
+  List<String> items = ["1", "2", "3", "4", "5", "6", "7", "8"];
+  RefreshController _refreshController =
+  RefreshController(initialRefresh: false);
+
+  void _onRefresh() async{
+    // monitor network fetch
+    await Future.delayed(Duration(milliseconds: 1000));
+    // if failed,use refreshFailed()
+    _refreshController.refreshCompleted();
+  }
+
+  void _onLoading() async{
+    // monitor network fetch
+    await Future.delayed(Duration(milliseconds: 1000));
+    // if failed,use loadFailed(),if no data return,use LoadNodata()
+    items.add((items.length+1).toString());
+    if(mounted)
+      setState(() {
+
+      });
+    _refreshController.loadComplete();
+  }
   @override
   Widget build(BuildContext context) {
     if (_context == null) {
@@ -381,7 +404,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   onTap: () {
-                    MaterialPageRoute(builder: (context) => Share());
+                    validate();
                   },
                 ),
                 const SizedBox(height: 10),

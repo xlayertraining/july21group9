@@ -59,110 +59,112 @@ class _MyPostState extends State<MyPost> {
       ),
       body: (userNewsList.isNotEmpty)
           ? ListView.builder(
-        itemBuilder: (BuildContext, index) {
-          return Card(
-            child: Column(
-              children: [
-                ListTile(
-                  title: Text(
-                    userNewsList[index]['title'].toString(),
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.deepPurple,
-                      decorationStyle: TextDecorationStyle.double,
-                    ),
-                  ),
-                  subtitle: Text(
-                    userNewsList[index]['description'].toString(),
-                  ),
-                ),
-                Divider(
-                  color: Colors.deepPurple,
-                  indent: 10,
-                  endIndent: 10,
-                ),
-                (userNewsList[index]['imageUrl'] != null)? Container(
-                  child: Image.network(
-                    userNewsList[index]['imageUrl'],
-                  ),
-                ) : Container(),
-
-                Divider(
-                  color: Colors.deepPurple,
-                  indent: 10,
-                  endIndent: 10,
-                ),
-                ElevatedButton(
-                  onPressed: () async {
-                    deluserNews(index);
-                  },
-                  style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                          borderRadius:
-                          BorderRadius.circular(30)),
-                      primary: Colors.deepPurple),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
+              itemBuilder: (BuildContext, index) {
+                return Card(
+                  child: Column(
                     children: [
-                      Icon(
-                        Icons.delete,
-                        color: Colors.red,
-                        size: 22,
+                      ListTile(
+                        title: Text(
+                          userNewsList[index]['title'].toString(),
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.deepPurple,
+                            decorationStyle: TextDecorationStyle.double,
+                          ),
+                        ),
+                        subtitle: Text(
+                          userNewsList[index]['description'].toString(),
+                        ),
                       ),
-                      Text('DELETE')
+                      Divider(
+                        color: Colors.deepPurple,
+                        indent: 10,
+                        endIndent: 10,
+                      ),
+                      (userNewsList[index]['imageUrl'] != null)
+                          ? Container(
+                              child: Image.network(
+                                userNewsList[index]['imageUrl'],
+                              ),
+                            )
+                          : Container(),
+                      Divider(
+                        color: Colors.deepPurple,
+                        indent: 10,
+                        endIndent: 10,
+                      ),
+                      ElevatedButton(
+                        onPressed: () async {
+                          deluserNews(index);
+                        },
+                        style: ElevatedButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30)),
+                            primary: Colors.deepPurple),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(
+                              Icons.delete,
+                              color: Colors.red,
+                              size: 22,
+                            ),
+                            Text('DELETE')
+                          ],
+                        ),
+                      )
                     ],
                   ),
-                )
-              ],
-            ),
-          );
-        },
-        itemCount: userNewsList.length,
-        shrinkWrap: true,
-        padding: EdgeInsets.all(5),
-        scrollDirection: Axis.vertical,
-      )
-          : Container(
-        height: MediaQuery.of(context).size.width,
-        alignment: Alignment.center,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'List is empty.',
-              style: TextStyle(
-                  color: Configuration.primaryColor, fontSize: 24),
-            ),
-            SizedBox(height: 30,),
-            Text(
-              'Enter refresh to get news.',
-              style: TextStyle(
-                  color: Configuration.primaryColor, fontSize: 24),
+                );
+              },
+              itemCount: userNewsList.length,
+              shrinkWrap: true,
+              padding: EdgeInsets.all(5),
+              scrollDirection: Axis.vertical,
             )
-          ],
-        ),
-      ),
+          : Container(
+              height: MediaQuery.of(context).size.width,
+              alignment: Alignment.center,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'List is empty.',
+                    style: TextStyle(
+                        color: Configuration.primaryColor, fontSize: 24),
+                  ),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  Text(
+                    'Enter refresh to get news.',
+                    style: TextStyle(
+                        color: Configuration.primaryColor, fontSize: 24),
+                  )
+                ],
+              ),
+            ),
       floatingActionButton:
-      // RectGetter(           //<-- Wrap Fab with RectGetter
-      // key: rectGetterKey,                       //<-- Passing the key
-      // child:
-      FloatingActionButton(
+          // RectGetter(           //<-- Wrap Fab with RectGetter
+          // key: rectGetterKey,                       //<-- Passing the key
+          // child:
+          FloatingActionButton(
         backgroundColor: Colors.deepPurple,
         child: Icon(Icons.create_outlined),
         onPressed: () {
           // _onTap();
-          Navigator.of(context).push(FadeRouteBuilder(
-            child: SubmitNews(
-                callBack: callBackFromPostNews
+          Navigator.of(context).push(
+            FadeRouteBuilder(
+              child: SubmitNews(callBack: callBackFromPostNews),
             ),
-          ),
           );
         },
       ),
     );
   }
+
   getuserNews() async {
     Response? resp = null;
     resp = await Dio().get(Configuration.serverUrl + '/post/user',
@@ -208,7 +210,9 @@ class _MyPostState extends State<MyPost> {
     Timer(
       Duration(milliseconds: 150),
       () {
-        setState(() { getuserNews();});
+        setState(() {
+          getuserNews();
+        });
       },
     );
   }
@@ -217,7 +221,6 @@ class _MyPostState extends State<MyPost> {
     Log.i("calling_get_news_from_submit_news_page");
     getuserNews();
   }
-
 }
 
 class FadeRouteBuilder<T> extends PageRouteBuilder<T> {
